@@ -1,6 +1,7 @@
 import { useInView } from "@/hooks/use-in-view";
 import { Check, Arrow, CalendarIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
+import { useDemoModal } from "@/hooks/use-demo-modal";
 
 export function ForShippers() {
   const { ref, visible } = useInView();

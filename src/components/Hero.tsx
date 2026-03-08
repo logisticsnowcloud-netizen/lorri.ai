@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
+import { useDemoModal } from "@/hooks/use-demo-modal";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo-transparent.png";
 
