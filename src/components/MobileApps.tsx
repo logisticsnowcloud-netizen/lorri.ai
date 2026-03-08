@@ -12,7 +12,8 @@ const apps = [
     description:
       "Predictive analytics & benchmarking for multi-mode transportation. Manage operations and optimise costs.",
     icon: lorriBizIcon,
-    link: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri_biz&hl=en_IN",
+    playLink: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri_biz&hl=en_IN",
+    iosLink: "https://apps.apple.com/in/app/lorri-biz/id6480331865",
     features: ["Analytics Dashboard", "Benchmark Reports", "Company Profile", "Easy Registration"],
     accent: "#393185",
     accentLight: "rgba(57,49,133,0.12)",
@@ -24,7 +25,8 @@ const apps = [
     description:
       "Handle spot enquiries, view analytics, and build a stronger logistics business — on the go.",
     icon: mylorriIcon,
-    link: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri&hl=en_IN",
+    playLink: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri&hl=en_IN",
+    iosLink: "https://apps.apple.com/us/app/mylorri/id6480161330",
     features: ["Spot Enquiries", "Live Tracking", "Enquiry Details", "Smart Matching"],
     accent: "#54AF3A",
     accentLight: "rgba(84,175,58,0.10)",
@@ -110,11 +112,8 @@ export default function MobileApps() {
           }}
         >
           {apps.map((app, i) => (
-            <motion.a
+            <motion.div
               key={app.name}
-              href={app.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -126,10 +125,8 @@ export default function MobileApps() {
                 border: `1px solid var(--borderSm)`,
                 borderRadius: 14,
                 padding: 24,
-                textDecoration: "none",
                 position: "relative",
                 overflow: "hidden",
-                cursor: "pointer",
               }}
             >
               {/* Glow */}
@@ -231,20 +228,24 @@ export default function MobileApps() {
 
                   {/* Store badges */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                    <img
-                      src={googlePlayBadge}
-                      alt="Get it on Google Play"
-                      style={{ height: 54, margin: "-7px 0" }}
-                    />
-                    <img
-                      src={appStoreBadge}
-                      alt="Download on the App Store"
-                      style={{ height: 40, borderRadius: 6 }}
-                    />
+                    <a href={app.playLink} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={googlePlayBadge}
+                        alt="Get it on Google Play"
+                        style={{ height: 54, margin: "-7px 0" }}
+                      />
+                    </a>
+                    <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={appStoreBadge}
+                        alt="Download on the App Store"
+                        style={{ height: 40, borderRadius: 6 }}
+                      />
+                    </a>
                   </div>
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
       </div>
