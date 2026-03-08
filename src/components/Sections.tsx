@@ -78,53 +78,73 @@ export function ForTransporters() {
     <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "40px 32px" }} className="max-md:py-8 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
-          {/* Route Map Visual - desktop */}
+          {/* Global Route Map Visual - desktop */}
           <div className="hidden md:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
             <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 20, padding: 26, position: "relative", overflow: "hidden" }}>
-              <div style={{ fontSize: 11, color: "var(--text2)", fontWeight: 700, marginBottom: 14, letterSpacing: ".06em", textTransform: "uppercase" }}>Nationwide Route Coverage</div>
-              {/* Stylized India map outline via SVG */}
-              <svg viewBox="0 0 300 360" style={{ width: "100%", maxHeight: 280 }}>
-                {/* Map silhouette */}
-                <path d="M150 10 C100 10,60 40,50 80 C40 110,55 130,45 160 C35 190,50 220,60 250 C70 280,100 310,130 340 C140 350,150 355,160 340 C180 310,200 280,210 250 C220 220,240 190,235 160 C230 130,245 110,230 80 C220 40,190 10,150 10Z" fill="none" stroke="var(--border)" strokeWidth="2" />
-                {/* Gradient fill */}
+              <div style={{ fontSize: 11, color: "var(--text2)", fontWeight: 700, marginBottom: 14, letterSpacing: ".06em", textTransform: "uppercase" }}>Global Route Coverage</div>
+              <svg viewBox="0 0 500 260" style={{ width: "100%", maxHeight: 260 }}>
                 <defs>
-                  <radialGradient id="mapGlow" cx="50%" cy="45%" r="50%">
-                    <stop offset="0%" stopColor="#54AF3A" stopOpacity="0.15" />
+                  <radialGradient id="globeGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#54AF3A" stopOpacity="0.12" />
                     <stop offset="100%" stopColor="transparent" stopOpacity="0" />
                   </radialGradient>
                 </defs>
-                <path d="M150 10 C100 10,60 40,50 80 C40 110,55 130,45 160 C35 190,50 220,60 250 C70 280,100 310,130 340 C140 350,150 355,160 340 C180 310,200 280,210 250 C220 220,240 190,235 160 C230 130,245 110,230 80 C220 40,190 10,150 10Z" fill="url(#mapGlow)" />
-                {/* Route dots - major cities */}
+                <rect width="500" height="260" fill="url(#globeGlow)" rx="8" />
+                {/* Simplified continent outlines */}
+                {/* North America */}
+                <path d="M60 60 C70 45,100 35,120 40 C135 43,140 55,130 65 C125 72,110 80,95 90 C85 95,70 100,65 90 C58 80,55 70,60 60Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+                {/* South America */}
+                <path d="M110 130 C115 120,125 118,130 125 C135 135,138 155,130 175 C125 190,115 200,110 195 C105 185,100 160,105 145 C107 138,108 133,110 130Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+                {/* Europe */}
+                <path d="M230 45 C240 38,260 35,270 42 C278 48,275 58,268 62 C260 66,248 65,240 60 C235 56,230 50,230 45Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+                {/* Africa */}
+                <path d="M245 85 C255 78,270 80,275 90 C280 105,278 130,270 150 C265 162,255 168,248 160 C240 148,238 120,240 100 C241 92,243 88,245 85Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+                {/* Asia / India */}
+                <path d="M300 40 C320 32,360 35,390 45 C410 52,420 65,415 80 C410 95,395 105,375 110 C360 114,340 112,325 105 C310 98,300 85,305 70 C308 58,300 48,300 40Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+                {/* India sub */}
+                <path d="M340 100 C345 95,355 95,358 102 C362 112,358 130,352 140 C348 148,342 148,338 140 C334 130,335 112,340 100Z" fill="#54AF3A" fillOpacity="0.15" stroke="#54AF3A" strokeWidth="1.5" />
+                {/* SE Asia */}
+                <path d="M380 95 C390 90,405 92,410 100 C415 110,410 120,400 118 C392 116,382 108,380 100Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+                {/* Australia */}
+                <path d="M400 170 C415 162,440 165,448 175 C455 185,450 200,438 205 C425 210,408 205,402 195 C396 185,395 175,400 170Z" fill="none" stroke="var(--border)" strokeWidth="1.5" />
+
+                {/* City nodes with pulse */}
                 {[
-                  { cx: 90, cy: 80, label: "Delhi" },
-                  { cx: 80, cy: 160, label: "Mumbai" },
-                  { cx: 130, cy: 240, label: "Bangalore" },
-                  { cx: 170, cy: 200, label: "Chennai" },
-                  { cx: 180, cy: 100, label: "Kolkata" },
-                  { cx: 110, cy: 130, label: "Ahmedabad" },
-                  { cx: 140, cy: 170, label: "Hyderabad" },
-                  { cx: 100, cy: 110, label: "Jaipur" },
+                  { cx: 90, cy: 65, label: "New York" },
+                  { cx: 115, cy: 155, label: "São Paulo" },
+                  { cx: 255, cy: 50, label: "London" },
+                  { cx: 260, cy: 110, label: "Lagos" },
+                  { cx: 310, cy: 55, label: "Dubai" },
+                  { cx: 348, cy: 115, label: "Mumbai" },
+                  { cx: 370, cy: 60, label: "Delhi" },
+                  { cx: 395, cy: 100, label: "Singapore" },
+                  { cx: 425, cy: 180, label: "Sydney" },
+                  { cx: 345, cy: 68, label: "Riyadh" },
                 ].map((city, i) => (
                   <g key={i}>
-                    {/* Pulse ring */}
-                    <circle cx={city.cx} cy={city.cy} r="8" fill="none" stroke="#54AF3A" strokeWidth="1" opacity="0.3">
-                      <animate attributeName="r" values="5;12;5" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0.4;0;0.4" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" />
+                    <circle cx={city.cx} cy={city.cy} r="6" fill="none" stroke="#54AF3A" strokeWidth="1" opacity="0.3">
+                      <animate attributeName="r" values="4;10;4" dur={`${2 + i * 0.25}s`} repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.4;0;0.4" dur={`${2 + i * 0.25}s`} repeatCount="indefinite" />
                     </circle>
-                    <circle cx={city.cx} cy={city.cy} r="4" fill="#54AF3A" opacity="0.9" />
-                    <text x={city.cx + 8} y={city.cy + 4} fontSize="8" fill="var(--text2)" fontFamily="Outfit,sans-serif">{city.label}</text>
+                    <circle cx={city.cx} cy={city.cy} r="3" fill="#54AF3A" opacity="0.9" />
+                    <text x={city.cx + 6} y={city.cy + 3} fontSize="7" fill="var(--text2)" fontFamily="Outfit,sans-serif">{city.label}</text>
                   </g>
                 ))}
-                {/* Route lines */}
+
+                {/* Route arcs */}
                 {[
-                  "M90 80 Q130 120 80 160",
-                  "M80 160 Q110 200 130 240",
-                  "M130 240 L170 200",
-                  "M170 200 Q190 150 180 100",
-                  "M180 100 Q140 85 90 80",
-                  "M110 130 L140 170",
+                  "M90 65 Q180 10 255 50",
+                  "M255 50 Q290 40 310 55",
+                  "M310 55 Q340 50 370 60",
+                  "M370 60 Q380 80 395 100",
+                  "M395 100 Q415 140 425 180",
+                  "M348 115 Q330 85 310 55",
+                  "M260 110 Q280 80 310 55",
+                  "M90 65 Q100 110 115 155",
+                  "M255 50 Q258 78 260 110",
+                  "M348 115 Q375 80 395 100",
                 ].map((d, i) => (
-                  <path key={i} d={d} fill="none" stroke="#54AF3A" strokeWidth="1.5" opacity="0.35" strokeDasharray="4 3" />
+                  <path key={i} d={d} fill="none" stroke="#54AF3A" strokeWidth="1" opacity="0.3" strokeDasharray="4 3" />
                 ))}
               </svg>
               {/* Stats row */}
@@ -132,7 +152,7 @@ export function ForTransporters() {
                 {[
                   { val: "80K+", label: "Lanes" },
                   { val: "2200+", label: "Carriers" },
-                  { val: "100+", label: "Truck Types" },
+                  { val: "15+", label: "Countries" },
                 ].map((s, i) => (
                   <div key={i} style={{ textAlign: "center" }}>
                     <div style={{ fontSize: 18, fontWeight: 900, color: "#54AF3A", fontFamily: "Outfit,sans-serif" }}>{s.val}</div>
