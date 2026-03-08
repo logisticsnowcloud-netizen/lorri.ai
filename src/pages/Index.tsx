@@ -39,9 +39,6 @@ const Index = () => {
         <ScrollReveal direction="right">
           <ForTransporters />
         </ScrollReveal>
-        <ScrollReveal>
-          <IntelStats />
-        </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <Testimonials />
         </ScrollReveal>
