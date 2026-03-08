@@ -7,9 +7,9 @@ const columns = [
     color: "#393185",
     gradient: "linear-gradient(135deg, #393185, #4D44A8)",
     points: [
-      { text: "LoRRI Benchmark integrated with Rapid procurement and Carrier Discovery" },
-      { text: "Enable up to ", bold: "20% in Savings", after: ", with access to national networks & synergy at scale" },
-      { text: "Major industries covered, discover the best fit Carriers for your lanes locally, regionally and nationally" },
+      { text: "LoRRI Benchmark with Rapid procurement & Carrier Discovery" },
+      { text: "Up to ", bold: "20% Savings", after: " via national networks & synergy" },
+      { text: "Best fit Carriers for your lanes — locally, regionally & nationally" },
     ],
   },
   {
@@ -18,9 +18,9 @@ const columns = [
     color: "#1AA6DF",
     gradient: "linear-gradient(135deg, #1AA6DF, #0D8ECF)",
     points: [
-      { text: "Leverage ", bold: "Synergies", after: " spanning back haul, scale and multi-hop/multi-drop opportunities and more!" },
-      { text: "", bold: "Internal synergy:", after: " across raw material, packaging material and finished goods", prefix: "a." },
-      { text: "", bold: "External synergy:", after: " horizontal collaboration across networks enabled by LoRRI as a neutral orchestrator", prefix: "b." },
+      { text: "", bold: "Synergies", after: " across back haul, multi-hop & multi-drop" },
+      { text: "", bold: "Internal:", after: " raw material, packaging & finished goods" },
+      { text: "", bold: "External:", after: " cross-network collaboration via LoRRI" },
     ],
   },
   {
@@ -30,9 +30,8 @@ const columns = [
     gradient: "linear-gradient(135deg, #54AF3A, #3D9228)",
     points: [
       { text: "Rapid freight procurement leveraging LoRRI" },
-      { text: "Industry first ", bold: "Mega RFQs (multi-company collaborative", after: " freight ~100 Mn procurement)" },
-      { text: "Immediate access to the national network: ", bold: "80,000+ lanes, 2200+ carriers", after: " and 100+ truck types" },
-      { text: "National, regional and local reach" },
+      { text: "Industry first ", bold: "Mega RFQs", after: " — multi-company collaborative" },
+      { text: "", bold: "80K+ lanes, 2200+ carriers", after: ", 100+ truck types" },
     ],
   },
   {
@@ -41,10 +40,9 @@ const columns = [
     color: "#E8A317",
     gradient: "linear-gradient(135deg, #E8A317, #D4920F)",
     points: [
-      { text: "LoRRI is world's only Transport Management System (TMS) integrated with intelligence and procurement" },
-      { text: "", bold: "Rapid Go-live", prefix: "a." },
-      { text: "Fastest SPOT and Procurement engines, integrated with 2200+ Carriers (", bold: "95%+ response rate!", after: ")", prefix: "b." },
-      { text: "100% cloud based, can be ", bold: "integrated", after: " with existing portfolio of systems / system of record", prefix: "c." },
+      { text: "World's only TMS integrated with intelligence & procurement" },
+      { text: "", bold: "Rapid Go-live", after: " with fastest SPOT engines" },
+      { text: "", bold: "95%+ response rate", after: " — cloud based & fully integrable" },
     ],
   },
 ];
