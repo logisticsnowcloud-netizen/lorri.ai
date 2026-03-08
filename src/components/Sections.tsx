@@ -48,10 +48,7 @@ export function ForShippers() {
                   </div>
                   <div style={{ textAlign: "right" }}>
                     <div style={{ fontSize: 10, color: "var(--text3)", marginBottom: 2 }}>LoRRI</div>
-                    <div className="font-mono" style={{ fontSize: 13, color: "var(--text)", fontWeight: 700 }}>{row.lorri}</div>
-                  </div>
-                  <div style={{ padding: "3px 10px", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", borderRadius: 20, textAlign: "center" }}>
-                    <span className="font-mono" style={{ fontSize: 12, color: "#54AF3A", fontWeight: 700 }}>-{row.s}</span>
+                    <div className="font-mono" style={{ fontSize: 13, color: "var(--text)", fontWeight: 700, filter: "blur(6px)", userSelect: "none" }}>{row.lorri}</div>
                   </div>
                 </div>
               ))}

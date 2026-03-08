@@ -86,21 +86,6 @@ export default function ClientLogos() {
           <MarqueeRow items={row3} direction="left" duration={28} />
         </div>
 
-        <div style={{ marginTop: 36, paddingTop: 24, borderTop: "1px solid var(--borderSm)" }}>
-          <div style={{ display: "flex", alignItems: "center", background: "var(--card)", borderRadius: 10, border: "1px solid var(--border)", overflow: "hidden" }}>
-            <div style={{ padding: "10px 18px", background: "var(--purpleLt)", borderRight: "1px solid var(--border)", flexShrink: 0, display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#54AF3A", animation: "pulse-dot 1.5s infinite" }} />
-              <span className="font-mono" style={{ color: "#393185", fontSize: 10, fontWeight: 700, letterSpacing: ".12em", whiteSpace: "nowrap" }}>LIVE FREIGHT</span>
-            </div>
-            <div style={{ flex: 1, overflow: "hidden", padding: "10px 0", maskImage: "linear-gradient(90deg,transparent,black 6%,black 94%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 6%,black 94%,transparent)" }}>
-              <div style={{ display: "inline-flex", gap: 56, animation: "ticker 40s linear infinite", whiteSpace: "nowrap" }}>
-                {[...lanes, ...lanes].map((l, i) => (
-                  <span key={i} className="font-mono" style={{ color: "var(--text2)", fontSize: 12 }}>{l}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
