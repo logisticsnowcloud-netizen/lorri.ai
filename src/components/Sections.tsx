@@ -48,11 +48,11 @@ export function ForShippers() {
                     <div style={{ fontSize: 10, color: "var(--text3)", marginBottom: 2 }}>Market</div>
                     <div className="font-mono" style={{ fontSize: 12, color: "var(--text2)", textDecoration: "line-through" }}>{row.market}</div>
                   </div>
-                  <div style={{ textAlign: "right", position: "relative" }}>
+                  <div style={{ textAlign: "right", position: "relative", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
                     <div style={{ fontSize: 10, color: "var(--text3)", marginBottom: 2 }}>LoRRI</div>
-                    <div className="font-mono" style={{ fontSize: 13, color: "var(--text)", fontWeight: 700, filter: "blur(6px)", userSelect: "none" }}>{row.lorri}</div>
-                    <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -20%)", opacity: 0.7 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <div style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 6 }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6, flexShrink: 0 }}><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      <span className="font-mono" style={{ fontSize: 13, color: "var(--text)", fontWeight: 700, filter: "blur(6px)", userSelect: "none" }}>{row.lorri}</span>
                     </div>
                   </div>
                 </div>
