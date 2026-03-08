@@ -42,12 +42,8 @@ export function ForShippers() {
                 { route: "Bangalore → Hyderabad", market: "₹44,100", lorri: "₹36,200", s: "18%" },
                 { route: "Delhi → Kolkata", market: "₹72,000", lorri: "₹59,400", s: "17%" },
               ].map((row, i) => (
-                <div key={i} style={{ padding: "12px 0", borderBottom: i < 3 ? "1px solid var(--borderSm)" : "none", display: "grid", gridTemplateColumns: "1fr auto auto auto", gap: 12, alignItems: "center" }}>
+                <div key={i} style={{ padding: "12px 0", borderBottom: i < 3 ? "1px solid var(--borderSm)" : "none", display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "center" }}>
                   <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)" }}>{row.route}</div>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: 10, color: "var(--text3)", marginBottom: 2 }}>Market</div>
-                    <div className="font-mono" style={{ fontSize: 12, color: "var(--text2)", textDecoration: "line-through" }}>{row.market}</div>
-                  </div>
                   <div style={{ textAlign: "right", position: "relative", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
                     <div style={{ fontSize: 10, color: "var(--text3)", marginBottom: 2 }}>LoRRI</div>
                     <div style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 6 }}>
