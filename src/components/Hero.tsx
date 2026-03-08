@@ -189,25 +189,6 @@ export default function Hero({ dark }: { dark: boolean }) {
           </div>
         </div>
       </div>
-      {/* CTAs */}
-      <div className="fu5" style={{ position: "relative", zIndex: 2, display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
-        <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
-          <CalendarIcon /> Schedule Demo
-        </button>
-
-        <button onClick={() => scrollTo("intelligence")} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
-          <GlobeNetIcon />
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
-            <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: ".05em" }}>Global Smart Logistics Grid</span>
-            <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 500, textTransform: "none" as const, letterSpacing: 0 }}>80K+ routes · 3 continents · live data</span>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5,6px)", gap: 2, marginLeft: 4 }}>
-            {Array.from({ length: 25 }, (_, i) => (
-              <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: gridDots.includes(i) ? "#1AA6DF" : "rgba(26,166,223,0.4)", animation: gridDots.includes(i) ? "pulse-dot 1.8s ease-in-out infinite" : undefined }} />
-            ))}
-          </div>
-        </button>
-      </div>
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,var(--bg))", pointerEvents: "none" }} />
     </section>
   );
