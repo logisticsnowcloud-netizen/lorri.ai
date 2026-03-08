@@ -52,10 +52,12 @@ export function ForShippers() {
                   </div>
                 </div>
               ))}
-              <div style={{ marginTop: 16, padding: "12px 14px", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.28)", borderRadius: 10 }}>
-                <div style={{ fontSize: 11, color: "#54AF3A", fontWeight: 700, marginBottom: 3 }}>💡 AI Recommendation</div>
-                <div style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.6 }}>Lock Mumbai → Delhi rates within 24h — demand index rising to 91/100. FastFreight Co. recommended at 98% reliability.</div>
-              </div>
+              <button onClick={() => scrollTo("cta")} style={{ marginTop: 16, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", background: "linear-gradient(135deg, #393185, #4D44A8)", border: "1px solid rgba(77,68,168,0.5)", borderRadius: 10, cursor: "pointer", transition: "all 0.3s ease" }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 24px rgba(57,49,133,0.4)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+              >
+                <span style={{ fontSize: 13, color: "#fff", fontWeight: 700, letterSpacing: ".04em" }}>🔓 Unlock Best Rates — Get Access</span>
+              </button>
             </div>
           </div>
         </div>
