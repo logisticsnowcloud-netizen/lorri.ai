@@ -1,8 +1,10 @@
 import { useInView } from "@/hooks/use-in-view";
 import { Check, Arrow, CalendarIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
+import { useDemoModal } from "@/hooks/use-demo-modal";
 
 export function ForShippers() {
+  const openDemoModal = useDemoModal();
   const { ref, visible } = useInView();
 
   return (
@@ -27,7 +29,7 @@ export function ForShippers() {
                 </div>
               ))}
             </div>
-            <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)" }}>
+            <button onClick={() => openDemoModal()} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)" }}>
               <CalendarIcon /> Schedule Demo for Shippers <Arrow />
             </button>
           </div>
@@ -52,7 +54,7 @@ export function ForShippers() {
                   </div>
                 </div>
               ))}
-              <button onClick={() => scrollTo("cta")} style={{ marginTop: 16, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", background: "linear-gradient(135deg, #393185, #4D44A8)", border: "1px solid rgba(77,68,168,0.5)", borderRadius: 10, cursor: "pointer", transition: "all 0.3s ease" }}
+              <button onClick={() => openDemoModal()} style={{ marginTop: 16, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", background: "linear-gradient(135deg, #393185, #4D44A8)", border: "1px solid rgba(77,68,168,0.5)", borderRadius: 10, cursor: "pointer", transition: "all 0.3s ease" }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 24px rgba(57,49,133,0.4)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
               >

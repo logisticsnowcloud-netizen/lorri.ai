@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
+import { useDemoModal } from "@/hooks/use-demo-modal";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo-transparent.png";
 
@@ -36,6 +37,7 @@ const suggestions = ["Mumbai → Delhi", "Bangalore → Chennai", "Pune → Ahme
 const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
 export default function Hero({ dark }: { dark: boolean }) {
+  const openDemoModal = useDemoModal();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [tab, setTab] = useState("Intelligence");
@@ -121,7 +123,7 @@ export default function Hero({ dark }: { dark: boolean }) {
 
           {/* CTAs */}
           <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap", alignItems: "stretch" }}>
-            <button onClick={() => scrollTo("cta")} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 12, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
+            <button onClick={() => openDemoModal()} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 12, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
               <CalendarIcon /> Schedule Demo
             </button>
 
