@@ -121,7 +121,7 @@ export default function Hero({ dark }: { dark: boolean }) {
 
           {/* CTAs */}
           <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap", alignItems: "stretch" }}>
-            <button onClick={() => scrollTo("cta")} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 12, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
+            <button onClick={() => openDemoModal()} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 12, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
               <CalendarIcon /> Schedule Demo
             </button>
 
