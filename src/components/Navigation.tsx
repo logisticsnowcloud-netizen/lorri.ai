@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MailIcon, PhoneIcon, MenuIcon, CloseIcon, CalendarIcon, SunIcon, MoonIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
+import logoImg from "@/assets/logisticsnow-logo.png";
 import { useDemoModal } from "@/hooks/use-demo-modal";
 
 interface TopBarProps {
