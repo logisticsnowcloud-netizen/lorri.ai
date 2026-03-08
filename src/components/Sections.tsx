@@ -78,38 +78,68 @@ export function ForTransporters() {
     <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "40px 32px" }} className="max-md:py-8 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
-          {/* Profile card - desktop */}
+          {/* Route Map Visual - desktop */}
           <div className="hidden md:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 20, padding: 26 }}>
-              <div style={{ fontSize: 11, color: "var(--text2)", fontWeight: 700, marginBottom: 14, letterSpacing: ".06em", textTransform: "uppercase" }}>Carrier Profile — LoRRI Score</div>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20, padding: 14, background: "var(--card2)", borderRadius: 12 }}>
-                <div style={{ width: 50, height: 50, borderRadius: "50%", background: "linear-gradient(135deg,#54AF3A,#1AA6DF)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 20, color: "white" }}>A+</div>
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: 15, color: "var(--text)" }}>FastFreight Logistics</div>
-                  <div style={{ fontSize: 12, color: "var(--text2)", marginTop: 2 }}>Mumbai · 48 Trucks · Since 2018</div>
-                  <div style={{ display: "flex", gap: 5, marginTop: 7 }}>
-                    {["Verified", "Top Rated", "On-Time"].map(t => (
-                      <span key={t} style={{ padding: "2px 7px", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", borderRadius: 20, fontSize: 10, color: "#54AF3A", fontWeight: 700 }}>{t}</span>
-                    ))}
+            <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 20, padding: 26, position: "relative", overflow: "hidden" }}>
+              <div style={{ fontSize: 11, color: "var(--text2)", fontWeight: 700, marginBottom: 14, letterSpacing: ".06em", textTransform: "uppercase" }}>Nationwide Route Coverage</div>
+              {/* Stylized India map outline via SVG */}
+              <svg viewBox="0 0 300 360" style={{ width: "100%", maxHeight: 280 }}>
+                {/* Map silhouette */}
+                <path d="M150 10 C100 10,60 40,50 80 C40 110,55 130,45 160 C35 190,50 220,60 250 C70 280,100 310,130 340 C140 350,150 355,160 340 C180 310,200 280,210 250 C220 220,240 190,235 160 C230 130,245 110,230 80 C220 40,190 10,150 10Z" fill="none" stroke="var(--border)" strokeWidth="2" />
+                {/* Gradient fill */}
+                <defs>
+                  <radialGradient id="mapGlow" cx="50%" cy="45%" r="50%">
+                    <stop offset="0%" stopColor="#54AF3A" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                <path d="M150 10 C100 10,60 40,50 80 C40 110,55 130,45 160 C35 190,50 220,60 250 C70 280,100 310,130 340 C140 350,150 355,160 340 C180 310,200 280,210 250 C220 220,240 190,235 160 C230 130,245 110,230 80 C220 40,190 10,150 10Z" fill="url(#mapGlow)" />
+                {/* Route dots - major cities */}
+                {[
+                  { cx: 90, cy: 80, label: "Delhi" },
+                  { cx: 80, cy: 160, label: "Mumbai" },
+                  { cx: 130, cy: 240, label: "Bangalore" },
+                  { cx: 170, cy: 200, label: "Chennai" },
+                  { cx: 180, cy: 100, label: "Kolkata" },
+                  { cx: 110, cy: 130, label: "Ahmedabad" },
+                  { cx: 140, cy: 170, label: "Hyderabad" },
+                  { cx: 100, cy: 110, label: "Jaipur" },
+                ].map((city, i) => (
+                  <g key={i}>
+                    {/* Pulse ring */}
+                    <circle cx={city.cx} cy={city.cy} r="8" fill="none" stroke="#54AF3A" strokeWidth="1" opacity="0.3">
+                      <animate attributeName="r" values="5;12;5" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.4;0;0.4" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" />
+                    </circle>
+                    <circle cx={city.cx} cy={city.cy} r="4" fill="#54AF3A" opacity="0.9" />
+                    <text x={city.cx + 8} y={city.cy + 4} fontSize="8" fill="var(--text2)" fontFamily="Outfit,sans-serif">{city.label}</text>
+                  </g>
+                ))}
+                {/* Route lines */}
+                {[
+                  "M90 80 Q130 120 80 160",
+                  "M80 160 Q110 200 130 240",
+                  "M130 240 L170 200",
+                  "M170 200 Q190 150 180 100",
+                  "M180 100 Q140 85 90 80",
+                  "M110 130 L140 170",
+                ].map((d, i) => (
+                  <path key={i} d={d} fill="none" stroke="#54AF3A" strokeWidth="1.5" opacity="0.35" strokeDasharray="4 3" />
+                ))}
+              </svg>
+              {/* Stats row */}
+              <div style={{ display: "flex", justifyContent: "space-around", marginTop: 16, padding: "12px 0", borderTop: "1px solid var(--border)" }}>
+                {[
+                  { val: "80K+", label: "Lanes" },
+                  { val: "2200+", label: "Carriers" },
+                  { val: "100+", label: "Truck Types" },
+                ].map((s, i) => (
+                  <div key={i} style={{ textAlign: "center" }}>
+                    <div style={{ fontSize: 18, fontWeight: 900, color: "#54AF3A", fontFamily: "Outfit,sans-serif" }}>{s.val}</div>
+                    <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 2 }}>{s.label}</div>
                   </div>
-                </div>
+                ))}
               </div>
-              {[
-                { l: "On-Time Delivery", v: 98, c: "#54AF3A" },
-                { l: "Customer Rating", v: 96, c: "#1AA6DF" },
-                { l: "Route Coverage", v: 84, c: "#393185" },
-                { l: "Response Rate", v: 92, c: "#54AF3A" },
-              ].map((m, i) => (
-                <div key={i} style={{ marginBottom: i < 3 ? 12 : 0 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
-                    <span style={{ fontSize: 13, color: "var(--text2)" }}>{m.l}</span>
-                    <span className="font-mono" style={{ fontSize: 13, fontWeight: 700, color: m.c }}>{m.v}%</span>
-                  </div>
-                  <div style={{ height: 6, background: "var(--card2)", borderRadius: 3, overflow: "hidden" }}>
-                    <div style={{ height: "100%", width: visible ? `${m.v}%` : "0%", background: `linear-gradient(90deg,${m.c},${m.c}88)`, borderRadius: 3, transition: `width 1.2s ${i * 0.2}s ease` }} />
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
           <div style={{ animation: visible ? "fadeUp .7s .2s ease both" : "none", opacity: visible ? undefined : 0 }}>
