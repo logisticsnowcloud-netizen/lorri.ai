@@ -62,13 +62,27 @@ export default function Hero({ dark }: { dark: boolean }) {
       <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", maxWidth: 780, width: "100%" }}>
         {/* LOGO */}
         <div className="fu" style={{ marginBottom: 8 }}>
-          {dark ? (
-            <img src={lorriLogo} alt="LoRRI Logo" style={{ height: 110, maxWidth: 380, objectFit: "contain", mixBlendMode: "screen", filter: "drop-shadow(0 2px 18px rgba(57,49,133,0.5))" }} />
-          ) : (
-            <div style={{ background: "#0A0918", borderRadius: 16, padding: "10px 24px", display: "inline-flex", alignItems: "center", boxShadow: "0 4px 24px rgba(57,49,133,0.25)" }}>
-              <img src={lorriLogo} alt="LoRRI Logo" style={{ height: 90, maxWidth: 340, objectFit: "contain", mixBlendMode: "screen" }} />
-            </div>
-          )}
+          <div style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 16,
+            padding: dark ? "0" : "10px 24px",
+            background: dark ? "transparent" : "transparent",
+          }}>
+            <img
+              src={lorriLogo}
+              alt="LoRRI Logo"
+              style={{
+                height: 110,
+                maxWidth: 380,
+                objectFit: "contain" as const,
+                filter: dark
+                  ? "brightness(0) invert(1) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
+                  : "none",
+              }}
+            />
+          </div>
         </div>
 
         <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 28px", borderRadius: 1 }} />
