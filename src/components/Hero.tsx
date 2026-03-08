@@ -118,6 +118,26 @@ export default function Hero({ dark }: { dark: boolean }) {
               </div>
             )}
           </div>
+
+          {/* CTAs */}
+          <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap", alignItems: "center" }}>
+            <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
+              <CalendarIcon /> Schedule Demo
+            </button>
+
+            <button onClick={() => scrollTo("intelligence")} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
+              <GlobeNetIcon />
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
+                <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: ".05em" }}>Global Smart Logistics Grid</span>
+                <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 500, textTransform: "none" as const, letterSpacing: 0 }}>80K+ routes · 3 continents · live data</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(5,6px)", gap: 2, marginLeft: 4 }}>
+                {Array.from({ length: 25 }, (_, i) => (
+                  <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: gridDots.includes(i) ? "#1AA6DF" : "rgba(26,166,223,0.4)", animation: gridDots.includes(i) ? "pulse-dot 1.8s ease-in-out infinite" : undefined }} />
+                ))}
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* RIGHT SIDE — Module Tabs */}
@@ -169,17 +189,6 @@ export default function Hero({ dark }: { dark: boolean }) {
           </div>
         </div>
       </div>
-
-      {/* STATS STRIP */}
-      <div className="fu4" style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", padding: "18px 36px", background: "var(--purpleLt)", border: "1px solid var(--border)", borderRadius: 14, gap: 0, flexWrap: "wrap", justifyContent: "center", marginTop: 32 }}>
-        {[{ v: "$500M+", l: "Procured", c: "#54AF3A" }, { v: "$21M+", l: "Saved", c: "#1AA6DF" }, { v: "80K+", l: "Routes", c: "#393185" }, { v: "2,200+", l: "Carriers", c: "#B1D0EF" }].map((s, i) => (
-          <div key={i} style={{ paddingLeft: i > 0 ? 28 : 0, paddingRight: i < 3 ? 28 : 0, borderLeft: i > 0 ? "1px solid var(--border)" : "none", textAlign: "center", minWidth: 100 }}>
-            <div className="font-mono" style={{ fontSize: 22, fontWeight: 700, color: s.c, lineHeight: 1 }}>{s.v}</div>
-            <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 5, letterSpacing: ".08em", textTransform: "uppercase" }}>{s.l}</div>
-          </div>
-        ))}
-      </div>
-
       {/* CTAs */}
       <div className="fu5" style={{ position: "relative", zIndex: 2, display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
         <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
