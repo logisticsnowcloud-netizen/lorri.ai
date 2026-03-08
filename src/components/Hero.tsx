@@ -59,66 +59,69 @@ export default function Hero({ dark }: { dark: boolean }) {
       <div style={{ position: "absolute", bottom: "15%", right: "10%", width: 240, height: 240, borderRadius: "50%", background: "radial-gradient(circle,rgba(84,175,58,0.06),transparent 70%)", pointerEvents: "none" }} />
       <NetworkBg />
 
-      <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", maxWidth: 780, width: "100%" }}>
-        {/* LOGO */}
-        <div className="fu" style={{ marginBottom: 8 }}>
-          <div style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 16,
-          }}>
-            <img
-              src={lorriLogo}
-              alt="LoRRI Logo"
-              style={{
-                height: 110,
-                maxWidth: 380,
-                objectFit: "contain" as const,
-                filter: dark
-                  ? "brightness(10) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
-                  : "none",
-              }}
-            />
-          </div>
-        </div>
-
-        <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 28px", borderRadius: 1 }} />
-
-        {/* SEARCH */}
-        <div className="fu2" style={{ width: "100%", maxWidth: 640, position: "relative" }}>
-          <div style={{ background: focused ? "var(--card2)" : "var(--purpleLt)", border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`, borderRadius: 14, padding: "14px 18px", display: "flex", alignItems: "center", gap: 12, transition: "all .3s", boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none" }}>
-            <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
-            <input
-              value={query} onChange={e => setQuery(e.target.value)}
-              onFocus={() => setFocused(true)} onBlur={() => setTimeout(() => setFocused(false), 200)}
-              placeholder="Search locations, connect the digital dots!"
-              style={{ flex: 1, background: "none", border: "none", outline: "none", color: "var(--text)", fontFamily: "Outfit,sans-serif", fontSize: 15, fontWeight: 400 }}
-            />
-            <PinIcon />
-            <button style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
-          </div>
-          {focused && (
-            <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)" }}>
-              <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
-                <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Popular Routes</span>
-              </div>
-              {suggestions.map((s, i) => (
-                <div key={i} onClick={() => { setQuery(s); setFocused(false); }}
-                  style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
-                  <span style={{ fontSize: 14 }}>{s}</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
-                </div>
-              ))}
+      <div style={{ position: "relative", zIndex: 2, display: "flex", gap: 40, maxWidth: 1200, width: "100%", alignItems: "flex-start", flexWrap: "wrap" }}>
+        {/* LEFT SIDE — Logo + Search */}
+        <div style={{ flex: 1, minWidth: 320, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+          {/* LOGO */}
+          <div className="fu" style={{ marginBottom: 8 }}>
+            <div style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 16,
+            }}>
+              <img
+                src={lorriLogo}
+                alt="LoRRI Logo"
+                style={{
+                  height: 110,
+                  maxWidth: 380,
+                  objectFit: "contain" as const,
+                  filter: dark
+                    ? "brightness(10) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
+                    : "none",
+                }}
+              />
             </div>
-          )}
+          </div>
+
+          <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 28px", borderRadius: 1 }} />
+
+          {/* SEARCH */}
+          <div className="fu2" style={{ width: "100%", maxWidth: 540, position: "relative" }}>
+            <div style={{ background: focused ? "var(--card2)" : "var(--purpleLt)", border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`, borderRadius: 14, padding: "14px 18px", display: "flex", alignItems: "center", gap: 12, transition: "all .3s", boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none" }}>
+              <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
+              <input
+                value={query} onChange={e => setQuery(e.target.value)}
+                onFocus={() => setFocused(true)} onBlur={() => setTimeout(() => setFocused(false), 200)}
+                placeholder="Search locations, connect the digital dots!"
+                style={{ flex: 1, background: "none", border: "none", outline: "none", color: "var(--text)", fontFamily: "Outfit,sans-serif", fontSize: 15, fontWeight: 400 }}
+              />
+              <PinIcon />
+              <button style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
+            </div>
+            {focused && (
+              <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)" }}>
+                <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
+                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Popular Routes</span>
+                </div>
+                {suggestions.map((s, i) => (
+                  <div key={i} onClick={() => { setQuery(s); setFocused(false); }}
+                    style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
+                    <span style={{ fontSize: 14 }}>{s}</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* MODULE TABS */}
-        <div className="fu3" style={{ marginTop: 24, display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: "100%", maxWidth: 640 }}>
+        {/* RIGHT SIDE — Module Tabs */}
+        <div className="fu3" style={{ flex: 1, minWidth: 320, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
           <div style={{ display: "flex", gap: 4, padding: 5, background: "var(--card2)", border: "1px solid var(--border)", borderRadius: 14 }}>
             {TABS.map(t => (
               <button key={t} onClick={() => pickTab(t)}
@@ -165,36 +168,36 @@ export default function Hero({ dark }: { dark: boolean }) {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* STATS STRIP */}
-        <div className="fu4" style={{ display: "flex", alignItems: "center", padding: "18px 36px", background: "var(--purpleLt)", border: "1px solid var(--border)", borderRadius: 14, gap: 0, flexWrap: "wrap", justifyContent: "center", marginTop: 24 }}>
-          {[{ v: "$500M+", l: "Procured", c: "#54AF3A" }, { v: "$21M+", l: "Saved", c: "#1AA6DF" }, { v: "80K+", l: "Routes", c: "#393185" }, { v: "2,200+", l: "Carriers", c: "#B1D0EF" }].map((s, i) => (
-            <div key={i} style={{ paddingLeft: i > 0 ? 28 : 0, paddingRight: i < 3 ? 28 : 0, borderLeft: i > 0 ? "1px solid var(--border)" : "none", textAlign: "center", minWidth: 100 }}>
-              <div className="font-mono" style={{ fontSize: 22, fontWeight: 700, color: s.c, lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 5, letterSpacing: ".08em", textTransform: "uppercase" }}>{s.l}</div>
-            </div>
-          ))}
-        </div>
+      {/* STATS STRIP */}
+      <div className="fu4" style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", padding: "18px 36px", background: "var(--purpleLt)", border: "1px solid var(--border)", borderRadius: 14, gap: 0, flexWrap: "wrap", justifyContent: "center", marginTop: 32 }}>
+        {[{ v: "$500M+", l: "Procured", c: "#54AF3A" }, { v: "$21M+", l: "Saved", c: "#1AA6DF" }, { v: "80K+", l: "Routes", c: "#393185" }, { v: "2,200+", l: "Carriers", c: "#B1D0EF" }].map((s, i) => (
+          <div key={i} style={{ paddingLeft: i > 0 ? 28 : 0, paddingRight: i < 3 ? 28 : 0, borderLeft: i > 0 ? "1px solid var(--border)" : "none", textAlign: "center", minWidth: 100 }}>
+            <div className="font-mono" style={{ fontSize: 22, fontWeight: 700, color: s.c, lineHeight: 1 }}>{s.v}</div>
+            <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 5, letterSpacing: ".08em", textTransform: "uppercase" }}>{s.l}</div>
+          </div>
+        ))}
+      </div>
 
-        {/* CTAs */}
-        <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
-          <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
-            <CalendarIcon /> Schedule Demo
-          </button>
+      {/* CTAs */}
+      <div className="fu5" style={{ position: "relative", zIndex: 2, display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
+        <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
+          <CalendarIcon /> Schedule Demo
+        </button>
 
-          <button onClick={() => scrollTo("intelligence")} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
-            <GlobeNetIcon />
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
-              <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: ".05em" }}>Global Smart Logistics Grid</span>
-              <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 500, textTransform: "none" as const, letterSpacing: 0 }}>80K+ routes · 3 continents · live data</span>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5,6px)", gap: 2, marginLeft: 4 }}>
-              {Array.from({ length: 25 }, (_, i) => (
-                <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: gridDots.includes(i) ? "#1AA6DF" : "rgba(26,166,223,0.4)", animation: gridDots.includes(i) ? "pulse-dot 1.8s ease-in-out infinite" : undefined }} />
-              ))}
-            </div>
-          </button>
-        </div>
+        <button onClick={() => scrollTo("intelligence")} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
+          <GlobeNetIcon />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
+            <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: ".05em" }}>Global Smart Logistics Grid</span>
+            <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 500, textTransform: "none" as const, letterSpacing: 0 }}>80K+ routes · 3 continents · live data</span>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5,6px)", gap: 2, marginLeft: 4 }}>
+            {Array.from({ length: 25 }, (_, i) => (
+              <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: gridDots.includes(i) ? "#1AA6DF" : "rgba(26,166,223,0.4)", animation: gridDots.includes(i) ? "pulse-dot 1.8s ease-in-out infinite" : undefined }} />
+            ))}
+          </div>
+        </button>
       </div>
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,var(--bg))", pointerEvents: "none" }} />
     </section>
