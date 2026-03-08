@@ -4,6 +4,7 @@ import { scrollTo } from "@/hooks/use-in-view";
 import { useDemoModal } from "@/hooks/use-demo-modal";
 
 export function ForShippers() {
+  const openDemoModal = useDemoModal();
   const { ref, visible } = useInView();
 
   return (

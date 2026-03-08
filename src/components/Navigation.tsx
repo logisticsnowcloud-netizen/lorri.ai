@@ -9,6 +9,7 @@ interface TopBarProps {
 }
 
 function TopBar({ dark, setDark }: TopBarProps) {
+  const openDemoModal = useDemoModal();
   return (
     <div style={{ background: "var(--topBar)", borderBottom: "1px solid var(--border)", padding: "7px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 22 }}>

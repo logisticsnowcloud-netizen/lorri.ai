@@ -37,6 +37,7 @@ const suggestions = ["Mumbai → Delhi", "Bangalore → Chennai", "Pune → Ahme
 const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
 export default function Hero({ dark }: { dark: boolean }) {
+  const openDemoModal = useDemoModal();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [tab, setTab] = useState("Intelligence");
