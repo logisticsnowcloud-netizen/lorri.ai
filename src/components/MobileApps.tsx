@@ -125,10 +125,8 @@ export default function MobileApps() {
                 border: `1px solid var(--borderSm)`,
                 borderRadius: 14,
                 padding: 24,
-                textDecoration: "none",
                 position: "relative",
                 overflow: "hidden",
-                cursor: "pointer",
               }}
             >
               {/* Glow */}
