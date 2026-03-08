@@ -13,7 +13,7 @@ export default function Testimonials() {
   useEffect(() => { const t = setInterval(() => setActive(a => (a + 1) % 4), 4500); return () => clearInterval(t); }, []);
 
   return (
-    <section style={{ background: "var(--bg)", padding: "60px 32px" }} className="max-md:py-10 max-md:px-4">
+    <section style={{ background: "var(--bg)", padding: "40px 32px" }} className="max-md:py-8 max-md:px-4">
       <div style={{ maxWidth: 840, margin: "0 auto", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 18 }}>Client Voices</div>
         <h2 style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 50 }} className="max-md:!text-[1.9rem]">What Industry Leaders Say</h2>
