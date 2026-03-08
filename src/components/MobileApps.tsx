@@ -3,6 +3,7 @@ import { Smartphone, ArrowRight } from "lucide-react";
 import lorriBizIcon from "@/assets/lorri-biz-icon.png";
 import mylorriIcon from "@/assets/mylorri-icon.png";
 import googlePlayBadge from "@/assets/google-play-badge.png";
+import appStoreBadge from "@/assets/app-store-badge.svg";
 
 const apps = [
   {
