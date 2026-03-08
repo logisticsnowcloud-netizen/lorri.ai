@@ -62,7 +62,7 @@ export default function Platform() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="platform" ref={ref as any} style={{ background: "var(--bg)", padding: "100px 32px" }} className="max-md:py-16 max-md:px-4">
+    <section id="platform" ref={ref as any} style={{ background: "var(--bg)", padding: "60px 32px" }} className="max-md:py-10 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 18 }}>Industry Use Cases & Innovations</div>
