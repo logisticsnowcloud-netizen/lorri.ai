@@ -25,7 +25,8 @@ const apps = [
     description:
       "Handle spot enquiries, view analytics, and build a stronger logistics business — on the go.",
     icon: mylorriIcon,
-    link: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri&hl=en_IN",
+    playLink: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri&hl=en_IN",
+    iosLink: "https://apps.apple.com/us/app/mylorri/id6480161330",
     features: ["Spot Enquiries", "Live Tracking", "Enquiry Details", "Smart Matching"],
     accent: "#54AF3A",
     accentLight: "rgba(84,175,58,0.10)",
