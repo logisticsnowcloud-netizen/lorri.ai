@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 import DemoModal from "@/components/DemoModal";
 import { DemoModalProvider } from "@/hooks/use-demo-modal";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => {
   const [dark, setDark] = useState(true);
@@ -26,13 +27,27 @@ const Index = () => {
         <TopBar dark={dark} setDark={setDark} />
         <Nav />
         <Hero dark={dark} />
-        <ClientLogos />
-        <Platform />
-        <ForShippers />
-        <ForTransporters />
-        <IntelStats />
-        <Testimonials />
-        <CTASection />
+        <ScrollReveal>
+          <ClientLogos />
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Platform />
+        </ScrollReveal>
+        <ScrollReveal direction="left">
+          <ForShippers />
+        </ScrollReveal>
+        <ScrollReveal direction="right">
+          <ForTransporters />
+        </ScrollReveal>
+        <ScrollReveal>
+          <IntelStats />
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
+          <Testimonials />
+        </ScrollReveal>
+        <ScrollReveal>
+          <CTASection />
+        </ScrollReveal>
         <Footer />
         <Chatbot />
         <DemoModal open={modalOpen} onClose={() => setModalOpen(false)} />
