@@ -44,6 +44,9 @@ const Index = () => {
           <Testimonials />
         </ScrollReveal>
         <ScrollReveal>
+          <MobileApps />
+        </ScrollReveal>
+        <ScrollReveal>
           <CTASection />
         </ScrollReveal>
         <Footer />
