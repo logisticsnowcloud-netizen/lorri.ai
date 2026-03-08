@@ -112,11 +112,8 @@ export default function MobileApps() {
           }}
         >
           {apps.map((app, i) => (
-            <motion.a
+            <motion.div
               key={app.name}
-              href={app.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
