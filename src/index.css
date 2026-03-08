@@ -118,8 +118,8 @@ body.dark {
 }
 
 body.dark .nav-logo {
-  filter: brightness(10) contrast(1.2);
-  mix-blend-mode: screen !important;
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: multiply !important;
 }
 
 body.light {
