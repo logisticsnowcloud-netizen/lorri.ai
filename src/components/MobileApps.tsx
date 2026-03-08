@@ -228,20 +228,24 @@ export default function MobileApps() {
 
                   {/* Store badges */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                    <img
-                      src={googlePlayBadge}
-                      alt="Get it on Google Play"
-                      style={{ height: 54, margin: "-7px 0" }}
-                    />
-                    <img
-                      src={appStoreBadge}
-                      alt="Download on the App Store"
-                      style={{ height: 40, borderRadius: 6 }}
-                    />
+                    <a href={app.playLink} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={googlePlayBadge}
+                        alt="Get it on Google Play"
+                        style={{ height: 54, margin: "-7px 0" }}
+                      />
+                    </a>
+                    <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={appStoreBadge}
+                        alt="Download on the App Store"
+                        style={{ height: 40, borderRadius: 6 }}
+                      />
+                    </a>
                   </div>
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
       </div>
