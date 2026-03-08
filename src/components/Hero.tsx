@@ -121,7 +121,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         </div>
 
         {/* RIGHT SIDE — Module Tabs */}
-        <div className="fu3" style={{ flex: 1, minWidth: 320, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+        <div className="fu3" style={{ flex: "1 1 280px", minWidth: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
           <div style={{ display: "flex", gap: 4, padding: 5, background: "var(--card2)", border: "1px solid var(--border)", borderRadius: 14 }}>
             {TABS.map(t => (
               <button key={t} onClick={() => pickTab(t)}
