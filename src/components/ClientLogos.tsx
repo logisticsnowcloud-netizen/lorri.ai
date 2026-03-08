@@ -1,26 +1,26 @@
 const row1 = [
-  { n: "APOLLO TYRES", c: "var(--text2)", b: false },
-  { n: "MAERSK", c: "#1AA6DF", b: true },
-  { n: "VREDESTEIN", c: "var(--text2)", b: false },
-  { n: "KUEHNE+NAGEL", c: "#1AA6DF", b: true },
-  { n: "KIMBERLY-CLARK", c: "var(--text2)", b: false },
+  { n: "Apollo Tyres", domain: "apollotyres.com" },
+  { n: "Maersk", domain: "maersk.com" },
+  { n: "Vredestein", domain: "vredestein.com" },
+  { n: "Kuehne+Nagel", domain: "kuehne-nagel.com" },
+  { n: "Kimberly-Clark", domain: "kimberly-clark.com" },
 ];
 
 const row2 = [
-  { n: "DSV", c: "var(--text)", b: true },
-  { n: "SHELL", c: "#F5C518", b: true },
-  { n: "FM LOGISTIC", c: "var(--text2)", b: false },
-  { n: "PEPSICO", c: "#5570CC", b: true },
-  { n: "BAJAJ", c: "var(--text2)", b: false },
-  { n: "TATA STEEL", c: "#1AA6DF", b: true },
+  { n: "DSV", domain: "dsv.com" },
+  { n: "Shell", domain: "shell.com" },
+  { n: "FM Logistic", domain: "fmlogistic.com" },
+  { n: "PepsiCo", domain: "pepsico.com" },
+  { n: "Bajaj", domain: "bajaj.com" },
+  { n: "Tata Steel", domain: "tatasteel.com" },
 ];
 
 const row3 = [
-  { n: "RELIANCE", c: "var(--text2)", b: false },
-  { n: "DELHIVERY", c: "#E53935", b: true },
-  { n: "MAHINDRA", c: "var(--text2)", b: false },
-  { n: "ULTRATECH", c: "#393185", b: true },
-  { n: "BLUE DART", c: "#1AA6DF", b: true },
+  { n: "Reliance", domain: "ril.com" },
+  { n: "Delhivery", domain: "delhivery.com" },
+  { n: "Mahindra", domain: "mahindra.com" },
+  { n: "UltraTech", domain: "ultratechcement.com" },
+  { n: "Blue Dart", domain: "bluedart.com" },
 ];
 
 const lanes = [
@@ -32,14 +32,19 @@ const lanes = [
   "🟢 Surat → Jaipur   ₹38,600   -8% vs Market",
 ];
 
-function LogoCard({ n, c, b }: { n: string; c: string; b: boolean }) {
+function LogoCard({ n, domain }: { n: string; domain: string }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "14px 32px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", whiteSpace: "nowrap" }}>
-      <span style={{ fontSize: b ? 14 : 12, fontWeight: b ? 800 : 700, color: c, letterSpacing: ".04em" }}>{n}</span>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 28px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", whiteSpace: "nowrap", minWidth: 160 }}>
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+        alt={n}
+        style={{ width: 24, height: 24, borderRadius: 4, objectFit: "contain" }}
+        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+      />
+      <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text2)", letterSpacing: ".04em" }}>{n}</span>
     </div>
   );
 }
-
 function MarqueeRow({ items, direction = "left", duration = 30 }: { items: typeof row1; direction?: "left" | "right"; duration?: number }) {
   const doubled = [...items, ...items];
   return (
