@@ -51,7 +51,7 @@ function Nav() {
     <nav style={{ position: "sticky", top: 0, zIndex: 100, background: "var(--navBg)", backdropFilter: "blur(22px)", borderBottom: `1px solid ${scrolled ? "var(--border)" : "var(--borderSm)"}`, transition: "all .3s" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={() => scrollTo("hero")}>
-          <img src={logoImg} alt="LogisticsNow" className="nav-logo" style={{ height: 36 }} />
+          <img src={logoImg} alt="LogisticsNow" className="nav-logo" style={{ height: 36, mixBlendMode: "multiply" }} />
         </div>
         <div className="hidden md:flex" style={{ alignItems: "center", gap: 28 }}>
           {links.map(l => (
