@@ -51,7 +51,7 @@ export default function Hero({ dark }: { dark: boolean }) {
   const td = TAB_DATA[tab];
 
   return (
-    <section id="hero" style={{ position: "relative", minHeight: "88vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "56px 24px 72px", overflow: "hidden", background: "var(--bg)" }}>
+    <section id="hero" style={{ position: "relative", minHeight: "88vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "56px 16px 72px", overflow: "hidden", background: "var(--bg)" }}>
       {/* Bg patterns */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(var(--gridLine) 1px,transparent 1px),linear-gradient(90deg,var(--gridLine) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 65% 55% at 50% 42%,rgba(57,49,133,0.18) 0%,transparent 65%)", pointerEvents: "none" }} />
@@ -59,9 +59,9 @@ export default function Hero({ dark }: { dark: boolean }) {
       <div style={{ position: "absolute", bottom: "15%", right: "10%", width: 240, height: 240, borderRadius: "50%", background: "radial-gradient(circle,rgba(84,175,58,0.06),transparent 70%)", pointerEvents: "none" }} />
       <NetworkBg />
 
-      <div style={{ position: "relative", zIndex: 2, display: "flex", gap: 40, maxWidth: 1200, width: "100%", alignItems: "flex-start", flexWrap: "wrap" }}>
+      <div style={{ position: "relative", zIndex: 2, display: "flex", gap: 32, maxWidth: 1200, width: "100%", alignItems: "flex-start", flexWrap: "wrap" }}>
         {/* LEFT SIDE — Logo + Search */}
-        <div style={{ flex: 1, minWidth: 320, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+        <div style={{ flex: "1 1 280px", minWidth: 0, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
           {/* LOGO */}
           <div className="fu" style={{ marginBottom: 8 }}>
             <div style={{
@@ -121,7 +121,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         </div>
 
         {/* RIGHT SIDE — Module Tabs */}
-        <div className="fu3" style={{ flex: 1, minWidth: 320, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+        <div className="fu3" style={{ flex: "1 1 280px", minWidth: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
           <div style={{ display: "flex", gap: 4, padding: 5, background: "var(--card2)", border: "1px solid var(--border)", borderRadius: 14 }}>
             {TABS.map(t => (
               <button key={t} onClick={() => pickTab(t)}
