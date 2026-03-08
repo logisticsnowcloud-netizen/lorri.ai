@@ -49,7 +49,7 @@ const columns = [
   },
 ];
 
-function RenderPoint({ point }: { point: typeof columns[0]["points"][0] }) {
+function RenderPoint({ point }: { point: { text: string; bold?: string; after?: string; prefix?: string } }) {
   return (
     <li style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.65, marginBottom: 6 }}>
       {point.prefix && <span style={{ fontWeight: 600, color: "var(--text)", marginRight: 4 }}>{point.prefix}</span>}
