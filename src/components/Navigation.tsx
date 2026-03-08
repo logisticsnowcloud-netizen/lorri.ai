@@ -1,17 +1,33 @@
 import { useState, useEffect } from "react";
-import { MailIcon, PhoneIcon, MenuIcon, CloseIcon } from "./Icons";
+import { MailIcon, PhoneIcon, MenuIcon, CloseIcon, CalendarIcon, SunIcon, MoonIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 
-function TopBar() {
+interface TopBarProps {
+  dark: boolean;
+  setDark: (fn: (d: boolean) => boolean) => void;
+}
+
+function TopBar({ dark, setDark }: TopBarProps) {
   return (
-    <div className="bg-bg-deep border-b border-border-subtle px-8 py-2 flex items-center justify-between flex-wrap gap-2">
-      <div className="flex items-center gap-6">
-        <span className="text-muted-foreground text-xs flex items-center gap-1.5"><MailIcon />lorri@logisticsnow.in</span>
-        <span className="text-muted-foreground text-xs flex items-center gap-1.5"><PhoneIcon />+91-9867773508</span>
+    <div style={{ background: "var(--topBar)", borderBottom: "1px solid var(--border)", padding: "7px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+        <span style={{ color: "var(--text2)", fontSize: 12, display: "flex", alignItems: "center", gap: 6 }}><MailIcon />lorri@logisticsnow.in</span>
+        <span style={{ color: "var(--text2)", fontSize: 12, display: "flex", alignItems: "center", gap: 6 }}><PhoneIcon />+91-9867773508</span>
       </div>
-      <button onClick={() => scrollTo("cta")} className="inline-flex items-center gap-2 bg-gradient-to-br from-primary to-primary-glow text-primary-foreground border-none px-4 py-1.5 rounded-lg font-outfit text-[11px] font-bold cursor-pointer tracking-wider uppercase shadow-[0_4px_20px_hsl(246_44%_36%/0.45)] hover:-translate-y-0.5 transition-all">
-        Schedule Meeting / Demo Now
-      </button>
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <button
+          onClick={() => setDark(d => !d)}
+          style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 20, border: "1px solid var(--border)", background: "var(--purpleLt)", cursor: "pointer", fontFamily: "Outfit,sans-serif", fontSize: 12, fontWeight: 700, color: "var(--text2)", transition: "all .2s" }}
+        >
+          {dark ? <><SunIcon /> Light Mode</> : <><MoonIcon /> Dark Mode</>}
+        </button>
+        <button
+          onClick={() => scrollTo("cta")}
+          style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "6px 16px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 11, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)" }}
+        >
+          <CalendarIcon /> Schedule Demo
+        </button>
+      </div>
     </div>
   );
 }
@@ -29,37 +45,30 @@ function Nav() {
   const links = ["About Us", "Manufacturer Login", "Transporter / LSP Login"];
 
   return (
-    <nav className={`sticky top-0 z-[100] backdrop-blur-[22px] border-b transition-all ${scrolled ? "bg-background/[0.97] border-border" : "bg-background/85 border-border-subtle"}`}>
-      <div className="max-w-[1280px] mx-auto px-8 h-[62px] flex items-center justify-between">
-        <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => scrollTo("hero")}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-success flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm font-outfit">LN</span>
+    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: "var(--navBg)", backdropFilter: "blur(22px)", borderBottom: `1px solid ${scrolled ? "var(--border)" : "var(--borderSm)"}`, transition: "all .3s" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => scrollTo("hero")}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,#393185,#54AF3A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ color: "white", fontWeight: 900, fontSize: 14, fontFamily: "Outfit,sans-serif" }}>LN</span>
           </div>
           <div>
-            <span className="font-extrabold text-base text-foreground">Logistics<span className="text-success">Now</span></span>
-            <div className="text-[8px] text-muted-foreground tracking-widest uppercase">powered by LoRRI</div>
+            <span style={{ fontWeight: 800, fontSize: 16, color: "var(--text)" }}>Logistics<span style={{ color: "#54AF3A" }}>Now</span></span>
+            <div style={{ fontSize: 8, color: "var(--text3)", letterSpacing: ".1em", textTransform: "uppercase" as const }}>powered by LoRRI</div>
           </div>
         </div>
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <button key={l} className="bg-transparent border-none text-muted-foreground font-outfit text-xs font-bold cursor-pointer tracking-wider uppercase hover:text-foreground transition-colors p-0">
-              {l}
-            </button>
+        <div className="hidden md:flex" style={{ alignItems: "center", gap: 28 }}>
+          {links.map(l => (
+            <button key={l} style={{ background: "none", border: "none", color: "var(--text2)", fontFamily: "Outfit,sans-serif", fontSize: 12, fontWeight: 700, cursor: "pointer", letterSpacing: ".07em", textTransform: "uppercase" as const, transition: "color .2s", padding: 0 }}>{l}</button>
           ))}
-          <button onClick={() => scrollTo("cta")} className="inline-flex items-center gap-2 bg-gradient-to-br from-primary to-primary-glow text-primary-foreground border-none px-5 py-2.5 rounded-lg font-outfit text-xs font-bold cursor-pointer tracking-wider uppercase shadow-[0_4px_20px_hsl(246_44%_36%/0.45)] hover:-translate-y-0.5 transition-all">
-            Schedule Demo
-          </button>
         </div>
-        <button onClick={() => setMobileOpen((m) => !m)} className="md:hidden bg-transparent border border-border rounded-lg text-muted-foreground cursor-pointer p-1.5">
+        <button onClick={() => setMobileOpen(m => !m)} className="md:hidden" style={{ background: "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text2)", cursor: "pointer", padding: "6px 8px" }}>
           {mobileOpen ? <CloseIcon /> : <MenuIcon />}
         </button>
       </div>
       {mobileOpen && (
-        <div className="bg-background/[0.98] backdrop-blur-[24px] border-t border-border px-6 py-5 flex flex-col gap-4 md:hidden">
-          {links.map((l) => (
-            <button key={l} className="bg-transparent border-none text-muted-foreground font-outfit text-[15px] font-bold cursor-pointer tracking-wider uppercase text-left hover:text-foreground transition-colors p-0" onClick={() => setMobileOpen(false)}>
-              {l}
-            </button>
+        <div style={{ background: "var(--navBg)", backdropFilter: "blur(24px)", borderTop: "1px solid var(--border)", padding: "18px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
+          {links.map(l => (
+            <button key={l} style={{ background: "none", border: "none", color: "var(--text2)", fontFamily: "Outfit,sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".07em", textTransform: "uppercase" as const, textAlign: "left" as const, padding: 0 }} onClick={() => setMobileOpen(false)}>{l}</button>
           ))}
         </div>
       )}

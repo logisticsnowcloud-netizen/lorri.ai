@@ -1,159 +1,190 @@
 import { useState, useEffect } from "react";
-import { SearchIcon, PinIcon, CalendarIcon, GlobeIcon, Arrow } from "./Icons";
+import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo.png";
 
-const routes = [
-  { from: "Mumbai", to: "Delhi", saving: "18%", time: "42h", status: "Optimised" },
-  { from: "Bangalore", to: "Chennai", saving: "12%", time: "8h", status: "Live" },
-  { from: "Pune", to: "Ahmedabad", saving: "21%", time: "14h", status: "Optimised" },
-  { from: "Hyderabad", to: "Kolkata", saving: "16%", time: "30h", status: "Analysing" },
-];
+const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; stats: { v: string; l: string }[]; pts: string[]; color: string }> = {
+  Intelligence: {
+    icon: "🧠",
+    headline: "National Freight Intelligence Engine",
+    sub: "Real-time benchmarks, lane analytics and market insights across 80,000+ routes.",
+    stats: [{ v: "80K+", l: "Routes Tracked" }, { v: "₹2.5B+", l: "Spend Analysed" }, { v: "3", l: "Continents" }],
+    pts: ["Live national freight benchmark", "Historical price trend analysis", "Demand index forecasting", "Lane-level market intelligence"],
+    color: "#393185",
+  },
+  Procurement: {
+    icon: "📊",
+    headline: "AI-Powered Procurement Engine",
+    sub: "Guaranteed savings through automated carrier matching, tenders and intelligent bidding.",
+    stats: [{ v: "$500M+", l: "Procured" }, { v: "$21M+", l: "Saved" }, { v: "2200+", l: "Carriers" }],
+    pts: ["Automated tender & bidding engine", "AI-matched carrier recommendations", "Real-time quote comparison", "Guaranteed cost reduction results"],
+    color: "#54AF3A",
+  },
+  TMS: {
+    icon: "🗺️",
+    headline: "Transport Management System",
+    sub: "End-to-end logistics optimisation — from route planning to multi-modal execution at scale.",
+    stats: [{ v: "99%", l: "On-Time Rate" }, { v: "24/7", l: "Live Tracking" }, { v: "Multi", l: "Modal Support" }],
+    pts: ["Real-time shipment tracking", "Route & load optimisation", "Multi-modal transport planning", "Performance dashboards & reporting"],
+    color: "#1AA6DF",
+  },
+};
 
+const TABS = Object.keys(TAB_DATA);
 const suggestions = ["Mumbai → Delhi", "Bangalore → Chennai", "Pune → Ahmedabad", "Delhi → Kolkata", "Hyderabad → Mumbai"];
+const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
-export default function Hero() {
+export default function Hero({ dark }: { dark: boolean }) {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
-  const [activeRoute, setActiveRoute] = useState(0);
+  const [tab, setTab] = useState("Intelligence");
+  const [userPicked, setUserPicked] = useState(false);
 
   useEffect(() => {
-    const t = setInterval(() => setActiveRoute((r) => (r + 1) % 4), 2400);
+    if (userPicked) return;
+    const t = setInterval(() => setTab(cur => TABS[(TABS.indexOf(cur) + 1) % TABS.length]), 1800);
     return () => clearInterval(t);
-  }, []);
+  }, [userPicked]);
 
-  const r = routes[activeRoute];
+  function pickTab(t: string) { setTab(t); setUserPicked(true); }
+  const td = TAB_DATA[tab];
 
   return (
-    <section id="hero" className="relative min-h-[88vh] flex flex-col items-center justify-center px-6 py-16 md:py-20 overflow-hidden bg-background">
-      {/* Grid bg */}
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(hsl(246 44% 36% / 0.06) 1px,transparent 1px),linear-gradient(90deg,hsl(246 44% 36% / 0.06) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 65% 55% at 50% 42%,hsl(246 44% 36% / 0.22) 0%,transparent 65%)" }} />
-      <div className="absolute top-[15%] left-[6%] w-[220px] h-[220px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle,hsl(196 77% 49% / 0.07),transparent 70%)" }} />
-      <div className="absolute bottom-[18%] right-[12%] w-[260px] h-[260px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle,hsl(105 50% 46% / 0.07),transparent 70%)" }} />
+    <section id="hero" style={{ position: "relative", minHeight: "88vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "56px 24px 72px", overflow: "hidden", background: "var(--bg)" }}>
+      {/* Bg patterns */}
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(var(--gridLine) 1px,transparent 1px),linear-gradient(90deg,var(--gridLine) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 65% 55% at 50% 42%,rgba(57,49,133,0.18) 0%,transparent 65%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: "12%", left: "5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(26,166,223,0.06),transparent 70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: "15%", right: "10%", width: 240, height: 240, borderRadius: "50%", background: "radial-gradient(circle,rgba(84,175,58,0.06),transparent 70%)", pointerEvents: "none" }} />
       <NetworkBg />
 
-      <div className="relative z-[2] flex flex-col items-center max-w-[760px] w-full">
-        {/* Logo */}
-        <div className="animate-fade-up mb-1">
-          <img src={lorriLogo} alt="LoRRI - Logistics Intelligence & Ratings Ecosystem" className="h-[90px] md:h-[110px] w-auto object-contain" />
+      <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", maxWidth: 780, width: "100%" }}>
+        {/* LOGO */}
+        <div className="fu" style={{ marginBottom: 8 }}>
+          {dark ? (
+            <img src={lorriLogo} alt="LoRRI Logo" style={{ height: 110, maxWidth: 380, objectFit: "contain", mixBlendMode: "screen", filter: "drop-shadow(0 2px 18px rgba(57,49,133,0.5))" }} />
+          ) : (
+            <div style={{ background: "#0A0918", borderRadius: 16, padding: "10px 24px", display: "inline-flex", alignItems: "center", boxShadow: "0 4px 24px rgba(57,49,133,0.25)" }}>
+              <img src={lorriLogo} alt="LoRRI Logo" style={{ height: 90, maxWidth: 340, objectFit: "contain", mixBlendMode: "screen" }} />
+            </div>
+          )}
         </div>
 
-        {/* Accent line */}
-        <div className="w-[140px] h-[1.5px] bg-gradient-to-r from-transparent via-primary to-accent rounded-sm mt-0.5 mb-8 animate-fade-up" style={{ animationDelay: "0.12s" }} />
+        <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 28px", borderRadius: 1 }} />
 
-        {/* Search bar */}
-        <div className="w-full max-w-[640px] relative animate-fade-up" style={{ animationDelay: "0.24s" }}>
-          <div className={`rounded-[14px] px-[18px] py-[15px] flex items-center gap-3 transition-all ${focused ? "bg-foreground/[0.07] border-primary shadow-[0_0_0_4px_hsl(246_44%_36%/0.12),0_12px_40px_hsl(246_44%_36%/0.2)]" : "bg-foreground/[0.04] shadow-[0_4px_24px_rgba(0,0,0,0.3)]"}`} style={{ border: `1.5px solid ${focused ? "hsl(246 44% 36%)" : "hsl(246 44% 36% / 0.45)"}`, animation: focused ? "none" : "searchGlow 4s ease-in-out infinite" }}>
-            <SearchIcon color={focused ? "#393185" : "#555570"} />
+        {/* SEARCH */}
+        <div className="fu2" style={{ width: "100%", maxWidth: 640, position: "relative" }}>
+          <div style={{ background: focused ? "var(--card2)" : "var(--purpleLt)", border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`, borderRadius: 14, padding: "14px 18px", display: "flex", alignItems: "center", gap: 12, transition: "all .3s", boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none" }}>
+            <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
             <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setTimeout(() => setFocused(false), 200)}
+              value={query} onChange={e => setQuery(e.target.value)}
+              onFocus={() => setFocused(true)} onBlur={() => setTimeout(() => setFocused(false), 200)}
               placeholder="Search locations, connect the digital dots!"
-              className="flex-1 bg-transparent border-none outline-none text-foreground font-outfit text-[15px] font-normal placeholder:text-muted-foreground"
+              style={{ flex: 1, background: "none", border: "none", outline: "none", color: "var(--text)", fontFamily: "Outfit,sans-serif", fontSize: 15, fontWeight: 400 }}
             />
             <PinIcon />
-            <button className="bg-gradient-to-br from-primary to-primary-glow border-none rounded-lg px-[22px] py-[9px] text-primary-foreground font-outfit text-[13px] font-bold cursor-pointer tracking-wider shrink-0 hover:opacity-85 transition-opacity">
-              Search
-            </button>
+            <button style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
           </div>
           {focused && (
-            <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-card-alt border border-border rounded-xl overflow-hidden z-20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-              <div className="px-[18px] py-2 border-b border-border-subtle">
-                <span className="text-[10px] text-muted-foreground font-bold tracking-wider uppercase">Popular Routes</span>
+            <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)" }}>
+              <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
+                <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Popular Routes</span>
               </div>
               {suggestions.map((s, i) => (
                 <div key={i} onClick={() => { setQuery(s); setFocused(false); }}
-                  className="px-[18px] py-3 flex items-center gap-3 cursor-pointer hover:bg-primary/[0.18] transition-colors"
-                  style={{ borderBottom: i < suggestions.length - 1 ? "1px solid hsl(246 44% 36% / 0.12)" : "none" }}>
+                  style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
-                  <span className="text-sm text-foreground">{s}</span>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555570" strokeWidth="2" strokeLinecap="round" className="ml-auto"><path d="M9 18l6-6-6-6" /></svg>
+                  <span style={{ fontSize: 14 }}>{s}</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
                 </div>
               ))}
             </div>
           )}
         </div>
 
-        {/* Module pills */}
-        <div className="flex items-center gap-2 mt-[22px] animate-fade-up" style={{ animationDelay: "0.36s" }}>
-          {[{ l: "Intelligence", a: false }, { l: "Procurement", a: true }, { l: "TMS", a: false }].map((m, i) => (
-            <span key={i} className="flex items-center gap-2">
-              <span className={`px-4 py-1.5 rounded-[20px] text-xs cursor-pointer transition-all ${m.a ? "bg-primary/20 border border-primary/70 text-accent font-bold" : "bg-transparent border border-muted-foreground/25 text-muted-foreground font-medium"}`}>
-                {m.l}
-              </span>
-              {i < 2 && <span className="text-muted-foreground/30 text-sm">•</span>}
-            </span>
-          ))}
+        {/* MODULE TABS */}
+        <div className="fu3" style={{ marginTop: 24, display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: "100%", maxWidth: 640 }}>
+          <div style={{ display: "flex", gap: 4, padding: 5, background: "var(--card2)", border: "1px solid var(--border)", borderRadius: 14 }}>
+            {TABS.map(t => (
+              <button key={t} onClick={() => pickTab(t)}
+                style={{
+                  padding: "10px 22px", borderRadius: 10, border: "none", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .25s", letterSpacing: ".03em",
+                  ...(tab === t
+                    ? { background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", boxShadow: "0 4px 16px rgba(57,49,133,0.35)" }
+                    : { color: "var(--text2)", background: "transparent" })
+                }}
+              >
+                {TAB_DATA[t].icon} {t}
+              </button>
+            ))}
+          </div>
+
+          {!userPicked && (
+            <div style={{ display: "flex", gap: 6, marginTop: -8 }}>
+              {TABS.map(t => (
+                <div key={t} style={{ height: 2, borderRadius: 1, background: tab === t ? "#393185" : "var(--border)", transition: "all .4s", width: tab === t ? 28 : 14 }} />
+              ))}
+            </div>
+          )}
+
+          {/* Tab content panel */}
+          <div key={tab} style={{ width: "100%", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: "20px 24px", display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap", animation: "tabSlide .18s ease both" }}>
+            <div style={{ flex: 1, minWidth: 200 }}>
+              <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)", marginBottom: 6 }}>{td.headline}</div>
+              <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>{td.sub}</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                {td.pts.map((p, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <Check color={td.color} size={12} /><span style={{ fontSize: 13, color: "var(--text2)" }}>{p}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, flexShrink: 0 }}>
+              {td.stats.map((s, i) => (
+                <div key={i} style={{ padding: "10px 18px", background: `${td.color}12`, border: `1px solid ${td.color}28`, borderRadius: 10, textAlign: "center", minWidth: 100 }}>
+                  <div className="font-mono" style={{ fontSize: 18, fontWeight: 700, color: td.color, lineHeight: 1 }}>{s.v}</div>
+                  <div style={{ fontSize: 10, color: "var(--text3)", marginTop: 4, letterSpacing: ".06em", textTransform: "uppercase" }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="flex items-center mt-7 px-9 py-[18px] bg-foreground/[0.03] border border-border-subtle rounded-[14px] backdrop-blur-[10px] flex-wrap justify-center animate-fade-up" style={{ animationDelay: "0.48s" }}>
-          {[
-            { v: "$500M+", l: "Procured", c: "text-success" },
-            { v: "$21M+", l: "Saved", c: "text-accent" },
-            { v: "80K+", l: "Routes", c: "text-primary" },
-            { v: "2,200+", l: "Carriers", c: "text-accent" },
-          ].map((s, i) => (
-            <div key={i} className={`text-center min-w-[100px] ${i > 0 ? "pl-7 border-l border-border-subtle" : ""} ${i < 3 ? "pr-7" : ""}`}>
-              <div className={`font-mono text-[22px] font-bold leading-none tracking-tight ${s.c}`}>{s.v}</div>
-              <div className="text-[10px] text-muted-foreground mt-1.5 tracking-wider uppercase">{s.l}</div>
+        {/* STATS STRIP */}
+        <div className="fu4" style={{ display: "flex", alignItems: "center", padding: "18px 36px", background: "var(--purpleLt)", border: "1px solid var(--border)", borderRadius: 14, gap: 0, flexWrap: "wrap", justifyContent: "center", marginTop: 24 }}>
+          {[{ v: "$500M+", l: "Procured", c: "#54AF3A" }, { v: "$21M+", l: "Saved", c: "#1AA6DF" }, { v: "80K+", l: "Routes", c: "#393185" }, { v: "2,200+", l: "Carriers", c: "#B1D0EF" }].map((s, i) => (
+            <div key={i} style={{ paddingLeft: i > 0 ? 28 : 0, paddingRight: i < 3 ? 28 : 0, borderLeft: i > 0 ? "1px solid var(--border)" : "none", textAlign: "center", minWidth: 100 }}>
+              <div className="font-mono" style={{ fontSize: 22, fontWeight: 700, color: s.c, lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 5, letterSpacing: ".08em", textTransform: "uppercase" }}>{s.l}</div>
             </div>
           ))}
         </div>
 
         {/* CTAs */}
-        <div className="flex gap-3.5 mt-[30px] flex-wrap justify-center animate-fade-up" style={{ animationDelay: "0.6s" }}>
-          <button onClick={() => scrollTo("cta")} className="inline-flex items-center gap-2 bg-gradient-to-br from-primary to-primary-glow text-primary-foreground border-none px-[30px] py-3.5 rounded-lg font-outfit text-[13px] font-bold cursor-pointer tracking-wider uppercase shadow-[0_4px_20px_hsl(246_44%_36%/0.45)] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_hsl(246_44%_36%/0.65)] transition-all">
-            <CalendarIcon /> Schedule Meeting / Demo Now
+        <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
+          <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
+            <CalendarIcon /> Schedule Demo
           </button>
-          <button className="inline-flex items-center gap-2 bg-transparent text-accent border-[1.5px] border-accent/50 px-[30px] py-[13px] rounded-lg font-outfit text-[13px] font-bold cursor-pointer tracking-wider uppercase hover:bg-accent/[0.08] hover:border-accent hover:-translate-y-0.5 transition-all">
-            <GlobeIcon /> Global Smart Logistics Grid
+
+          <button onClick={() => scrollTo("intelligence")} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
+            <GlobeNetIcon />
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
+              <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: ".05em" }}>Global Smart Logistics Grid</span>
+              <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 500, textTransform: "none" as const, letterSpacing: 0 }}>80K+ routes · 3 continents · live data</span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5,6px)", gap: 2, marginLeft: 4 }}>
+              {Array.from({ length: 25 }, (_, i) => (
+                <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: gridDots.includes(i) ? "#1AA6DF" : "rgba(26,166,223,0.4)", animation: gridDots.includes(i) ? "pulse-dot 1.8s ease-in-out infinite" : undefined }} />
+              ))}
+            </div>
           </button>
         </div>
       </div>
-
-      {/* Live route card - desktop */}
-      <div className="hidden lg:block absolute right-[3%] top-1/2 -translate-y-1/2 w-[280px] bg-card border-[1.5px] border-border rounded-2xl overflow-hidden shadow-[0_0_60px_hsl(246_44%_36%/0.2)] animate-float z-[3]">
-        <div className="px-4 py-3 bg-card-alt border-b border-border-subtle flex items-center justify-between">
-          <span className="font-bold text-xs text-foreground">Live Route Intelligence</span>
-          <div className="flex items-center gap-1.5 px-2 py-0.5 bg-success/[0.12] border border-success/30 rounded-[20px]">
-            <div className="w-[5px] h-[5px] rounded-full bg-success" style={{ animation: "pulse-dot 1.5s infinite" }} />
-            <span className="text-[9px] font-bold text-success tracking-wider">LIVE</span>
-          </div>
-        </div>
-        <div className="p-4">
-          <div className="text-[9px] text-muted-foreground tracking-widest uppercase mb-2.5">Current Optimisation</div>
-          <div className="flex items-center gap-2 mb-3.5">
-            <div className="flex-1 p-2.5 bg-primary/[0.15] border border-border rounded-lg text-center">
-              <div className="text-[9px] text-muted-foreground mb-0.5">FROM</div>
-              <div className="font-extrabold text-[15px] text-foreground">{r.from}</div>
-            </div>
-            <div className="text-primary text-lg font-light">→</div>
-            <div className="flex-1 p-2.5 bg-success/[0.1] border border-success/25 rounded-lg text-center">
-              <div className="text-[9px] text-muted-foreground mb-0.5">TO</div>
-              <div className="font-extrabold text-[15px] text-foreground">{r.to}</div>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-1.5">
-            {[
-              { l: "Saving", v: r.saving, c: "success" },
-              { l: "Transit", v: r.time, c: "accent" },
-              { l: "Status", v: r.status, c: "accent" },
-            ].map((m, i) => (
-              <div key={i} className={`p-2 rounded-md text-center border bg-${m.c}/[0.05] border-${m.c}/[0.15]`}>
-                <div className="text-[9px] text-muted-foreground mb-0.5">{m.l}</div>
-                <div className={`font-mono text-[11px] font-bold text-${m.c}`}>{m.v}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,var(--bg))", pointerEvents: "none" }} />
     </section>
   );
 }
