@@ -86,6 +86,53 @@
   }
 }
 
+/* Legacy CSS custom properties used by inline styles */
+:root {
+  --bg: #0a0a1a;
+  --text: #f0f0f8;
+  --text2: #b0b0cc;
+  --text3: #6a6a8a;
+  --card2: rgba(20, 18, 48, 0.85);
+  --purpleLt: rgba(57, 49, 133, 0.12);
+  --borderSm: rgba(57, 49, 133, 0.15);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --navBg: rgba(10, 10, 26, 0.95);
+  --topBar: #060612;
+  --blue: #1AA6DF;
+}
+
+body.dark {
+  --bg: #0a0a1a;
+  --text: #f0f0f8;
+  --text2: #b0b0cc;
+  --text3: #6a6a8a;
+  --card2: rgba(20, 18, 48, 0.85);
+  --purpleLt: rgba(57, 49, 133, 0.12);
+  --border: rgba(57, 49, 133, 0.35);
+  --borderSm: rgba(57, 49, 133, 0.15);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --navBg: rgba(10, 10, 26, 0.95);
+  --topBar: #060612;
+  --blue: #1AA6DF;
+  --card: rgba(18, 16, 42, 0.9);
+}
+
+body.light {
+  --bg: #f5f3ff;
+  --text: #1a1a2e;
+  --text2: #4a4a6a;
+  --text3: #8a8aaa;
+  --card: #ffffff;
+  --card2: rgba(255, 255, 255, 0.9);
+  --purpleLt: rgba(57, 49, 133, 0.06);
+  --border: rgba(57, 49, 133, 0.2);
+  --borderSm: rgba(57, 49, 133, 0.1);
+  --shadow: rgba(57, 49, 133, 0.1);
+  --navBg: rgba(245, 243, 255, 0.95);
+  --topBar: #ede9ff;
+  --blue: #1AA6DF;
+}
+
 @layer base {
   * {
     @apply border-border;
