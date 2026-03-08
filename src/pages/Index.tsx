@@ -14,7 +14,7 @@ import { DemoModalProvider } from "@/hooks/use-demo-modal";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
