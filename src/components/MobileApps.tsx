@@ -230,11 +230,11 @@ export default function MobileApps() {
                   </div>
 
                   {/* Store badges */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                     <img
                       src={googlePlayBadge}
                       alt="Get it on Google Play"
-                      style={{ height: 40 }}
+                      style={{ height: 54, margin: "-7px 0" }}
                     />
                     <img
                       src={appStoreBadge}
