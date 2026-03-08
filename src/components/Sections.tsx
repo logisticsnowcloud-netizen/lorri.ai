@@ -54,7 +54,7 @@ export function ForShippers() {
                   </div>
                 </div>
               ))}
-              <button onClick={() => scrollTo("cta")} style={{ marginTop: 16, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", background: "linear-gradient(135deg, #393185, #4D44A8)", border: "1px solid rgba(77,68,168,0.5)", borderRadius: 10, cursor: "pointer", transition: "all 0.3s ease" }}
+              <button onClick={() => openDemoModal()} style={{ marginTop: 16, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px", background: "linear-gradient(135deg, #393185, #4D44A8)", border: "1px solid rgba(77,68,168,0.5)", borderRadius: 10, cursor: "pointer", transition: "all 0.3s ease" }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 24px rgba(57,49,133,0.4)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
               >
