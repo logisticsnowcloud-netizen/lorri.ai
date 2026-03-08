@@ -75,9 +75,8 @@ export default function Hero({ dark }: { dark: boolean }) {
                 height: 110,
                 maxWidth: 380,
                 objectFit: "contain" as const,
-                mixBlendMode: dark ? "screen" : "normal",
                 filter: dark
-                  ? "drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
+                  ? "brightness(0) invert(1) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
                   : "none",
               }}
             />
