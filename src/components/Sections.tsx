@@ -8,7 +8,7 @@ export function ForShippers() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="shippers" ref={ref as any} style={{ background: "var(--bg2)", padding: "100px 32px" }} className="max-md:py-16 max-md:px-4">
+    <section id="shippers" ref={ref as any} style={{ background: "var(--bg2)", padding: "60px 32px" }} className="max-md:py-10 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
           <div style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
