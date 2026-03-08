@@ -229,25 +229,18 @@ export default function MobileApps() {
                     ))}
                   </div>
 
-                  {/* Play Store badge */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  {/* Store badges */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                     <img
                       src={googlePlayBadge}
                       alt="Get it on Google Play"
                       style={{ height: 40 }}
                     />
-                    <span
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 4,
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: app.accent,
-                      }}
-                    >
-                      Download <ArrowRight size={13} />
-                    </span>
+                    <img
+                      src={appStoreBadge}
+                      alt="Download on the App Store"
+                      style={{ height: 40, borderRadius: 6 }}
+                    />
                   </div>
                 </div>
               </div>
