@@ -8,6 +8,8 @@
   :root {
     --background: 240 30% 5%;
     --foreground: 0 0% 99%;
+    --bg2: 240 30% 7%;
+    --bg-deep: 240 43% 3%;
 
     --card: 243 38% 14%;
     --card-foreground: 0 0% 99%;
@@ -25,6 +27,7 @@
 
     --muted: 243 38% 14%;
     --muted-foreground: 240 10% 55%;
+    --muted-dim: 240 12% 38%;
 
     --accent: 196 77% 49%;
     --accent-foreground: 0 0% 100%;
@@ -39,11 +42,12 @@
     --border-subtle: 246 44% 36% / 0.18;
     --input: 244 33% 17%;
     --ring: 246 44% 36%;
-
     --radius: 0.5rem;
 
-    --bg-deep: 240 43% 3%;
-    --bg-alt: 240 30% 7%;
+    --nav-bg: 240 30% 5% / 0.95;
+    --top-bar: 240 43% 3%;
+    --grid-line: 246 44% 36% / 0.06;
+    --l-blue: 215 60% 82%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -54,18 +58,43 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .light {
+    --background: 246 100% 98%;
+    --foreground: 240 30% 15%;
+    --bg2: 246 50% 95%;
+    --bg-deep: 246 100% 96%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 30% 15%;
+    --card-alt: 246 100% 97%;
+
+    --muted-foreground: 240 12% 38%;
+    --muted-dim: 240 10% 55%;
+
+    --border: 246 44% 36% / 0.25;
+    --border-subtle: 246 44% 36% / 0.12;
+    --input: 0 0% 100%;
+
+    --nav-bg: 246 100% 98% / 0.95;
+    --top-bar: 246 100% 93%;
+    --grid-line: 246 44% 36% / 0.04;
+
+    --success: 105 55% 35%;
+    --accent: 196 87% 40%;
+    --l-blue: 222 40% 38%;
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground font-outfit;
     overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
   }
-
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: hsl(var(--background)); }
   ::-webkit-scrollbar-thumb { background: hsl(var(--primary)); border-radius: 2px; }
@@ -78,7 +107,7 @@
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulse-dot {
@@ -93,11 +122,15 @@
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
-@keyframes searchGlow {
-  0%, 100% { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
-  50% { box-shadow: 0 0 0 6px hsl(246 44% 36% / 0.12), 0 4px 24px hsl(246 44% 36% / 0.2); }
-}
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes tabSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes botPop {
+  from { opacity: 0; transform: scale(0.85) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
