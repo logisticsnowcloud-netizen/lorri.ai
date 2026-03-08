@@ -49,14 +49,8 @@ function Nav() {
   return (
     <nav style={{ position: "sticky", top: 0, zIndex: 100, background: "var(--navBg)", backdropFilter: "blur(22px)", borderBottom: `1px solid ${scrolled ? "var(--border)" : "var(--borderSm)"}`, transition: "all .3s" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", height: 62, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => scrollTo("hero")}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,#393185,#54AF3A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "white", fontWeight: 900, fontSize: 14, fontFamily: "Outfit,sans-serif" }}>LN</span>
-          </div>
-          <div>
-            <span style={{ fontWeight: 800, fontSize: 16, color: "var(--text)" }}>Logistics<span style={{ color: "#54AF3A" }}>Now</span></span>
-            <div style={{ fontSize: 8, color: "var(--text3)", letterSpacing: ".1em", textTransform: "uppercase" as const }}>powered by LoRRI</div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={() => scrollTo("hero")}>
+          <img src={logoImg} alt="LogisticsNow" style={{ height: 36 }} />
         </div>
         <div className="hidden md:flex" style={{ alignItems: "center", gap: 28 }}>
           {links.map(l => (
