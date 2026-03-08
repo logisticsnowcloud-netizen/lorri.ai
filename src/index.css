@@ -118,7 +118,8 @@ body.dark {
 }
 
 body.dark .nav-logo {
-  filter: brightness(1.8) contrast(0.9);
+  filter: brightness(10) contrast(1.2);
+  mix-blend-mode: screen !important;
 }
 
 body.light {
