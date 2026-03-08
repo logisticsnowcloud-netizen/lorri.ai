@@ -120,12 +120,12 @@ export default function Hero({ dark }: { dark: boolean }) {
           </div>
 
           {/* CTAs */}
-          <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap", alignItems: "center" }}>
-            <button onClick={() => scrollTo("cta")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
+          <div className="fu5" style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap", alignItems: "stretch" }}>
+            <button onClick={() => scrollTo("cta")} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 12, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const, boxShadow: "0 4px 20px rgba(57,49,133,0.4)", transition: "all .25s" }}>
               <CalendarIcon /> Schedule Demo
             </button>
 
-            <button onClick={() => scrollTo("intelligence")} style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
+            <button onClick={() => scrollTo("intelligence")} style={{ flex: 1, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "13px 28px", borderRadius: 12, border: "1.5px solid rgba(26,166,223,0.5)", background: "linear-gradient(135deg,rgba(26,166,223,0.08),rgba(57,49,133,0.08))", color: "var(--blue)", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "all .3s", letterSpacing: ".04em", textTransform: "uppercase" as const, position: "relative", overflow: "hidden" }}>
               <GlobeNetIcon />
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
                 <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: ".05em" }}>Global Smart Logistics Grid</span>
