@@ -59,9 +59,9 @@ export default function Hero({ dark }: { dark: boolean }) {
       <div style={{ position: "absolute", bottom: "15%", right: "10%", width: 240, height: 240, borderRadius: "50%", background: "radial-gradient(circle,rgba(84,175,58,0.06),transparent 70%)", pointerEvents: "none" }} />
       <NetworkBg />
 
-      <div style={{ position: "relative", zIndex: 2, display: "flex", gap: 40, maxWidth: 1200, width: "100%", alignItems: "flex-start", flexWrap: "wrap" }}>
+      <div style={{ position: "relative", zIndex: 2, display: "flex", gap: 32, maxWidth: 1200, width: "100%", alignItems: "flex-start", flexWrap: "wrap" }}>
         {/* LEFT SIDE — Logo + Search */}
-        <div style={{ flex: 1, minWidth: 320, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+        <div style={{ flex: "1 1 280px", minWidth: 0, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
           {/* LOGO */}
           <div className="fu" style={{ marginBottom: 8 }}>
             <div style={{
