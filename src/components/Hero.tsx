@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 import NetworkBg from "./NetworkBg";
-import lorriLogo from "@/assets/lorri-logo.png";
+import lorriLogo from "@/assets/lorri-logo-transparent.png";
 
 const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; stats: { v: string; l: string }[]; pts: string[]; color: string }> = {
   Intelligence: {
