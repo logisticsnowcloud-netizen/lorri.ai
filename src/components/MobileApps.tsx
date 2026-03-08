@@ -12,7 +12,8 @@ const apps = [
     description:
       "Predictive analytics & benchmarking for multi-mode transportation. Manage operations and optimise costs.",
     icon: lorriBizIcon,
-    link: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri_biz&hl=en_IN",
+    playLink: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri_biz&hl=en_IN",
+    iosLink: "https://apps.apple.com/in/app/lorri-biz/id6480331865",
     features: ["Analytics Dashboard", "Benchmark Reports", "Company Profile", "Easy Registration"],
     accent: "#393185",
     accentLight: "rgba(57,49,133,0.12)",
