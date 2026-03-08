@@ -76,7 +76,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                 maxWidth: 380,
                 objectFit: "contain" as const,
                 filter: dark
-                  ? "brightness(0) invert(1) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
+                  ? "brightness(10) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
                   : "none",
               }}
             />
