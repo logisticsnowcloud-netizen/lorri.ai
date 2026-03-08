@@ -1,13 +1,13 @@
 const clients = [
-  { n: "APOLLO TYRES LTD", c: "#D0D0E8" },
+  { n: "APOLLO TYRES", c: "var(--text2)", b: false },
   { n: "MAERSK", c: "#1AA6DF", b: true },
-  { n: "VREDESTEIN", c: "#D0D0E8" },
-  { n: "KUEHNE+NAGEL", c: "#1AA6DF" },
-  { n: "Kimberly-Clark", c: "#D0D0E8" },
-  { n: "DSV", c: "#FFFFFF", b: true },
-  { n: "Shell", c: "#F5C518", b: true },
-  { n: "FM>LOGISTIC", c: "#D0D0E8" },
-  { n: "PepsiCo", c: "#5570CC", b: true },
+  { n: "VREDESTEIN", c: "var(--text2)", b: false },
+  { n: "KUEHNE+NAGEL", c: "#1AA6DF", b: true },
+  { n: "KIMBERLY-CLARK", c: "var(--text2)", b: false },
+  { n: "DSV", c: "var(--text)", b: true },
+  { n: "SHELL", c: "#F5C518", b: true },
+  { n: "FM LOGISTIC", c: "var(--text2)", b: false },
+  { n: "PEPSICO", c: "#5570CC", b: true },
 ];
 
 const lanes = [
@@ -21,33 +21,33 @@ const lanes = [
 
 export default function ClientLogos() {
   return (
-    <section className="bg-bg-alt border-t border-border-subtle py-[52px] px-8">
-      <div className="max-w-[1280px] mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/[0.15] border border-border rounded-[20px] mb-4">
-            <div className="w-1.5 h-1.5 rounded-full bg-success" style={{ animation: "pulse-dot 2s infinite" }} />
-            <span className="text-accent text-[11px] font-bold tracking-wider uppercase">LoRRI Makes a Difference</span>
+    <section style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "52px 32px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", borderRadius: 20, marginBottom: 14 }}>
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#54AF3A", animation: "pulse-dot 2s infinite" }} />
+            <span style={{ color: "#54AF3A", fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase" }}>LoRRI Makes a Difference</span>
           </div>
-          <h2 className="text-[1.9rem] font-extrabold text-foreground tracking-tight mb-2">Trusted by Global Industry Leaders</h2>
-          <p className="text-sm text-muted-foreground">Fortune 500 companies and leading logistics players rely on LoRRI</p>
+          <h2 style={{ fontSize: "1.8rem", fontWeight: 800, color: "var(--text)", letterSpacing: "-0.02em", marginBottom: 6 }}>Trusted by Global Industry Leaders</h2>
+          <p style={{ fontSize: 14, color: "var(--text2)" }}>Fortune 500 companies and global logistics players rely on LoRRI</p>
         </div>
-        <div className="flex flex-wrap gap-3 justify-center items-center">
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", alignItems: "center" }}>
           {clients.map((cl, i) => (
-            <div key={i} className="flex items-center justify-center px-[26px] py-3.5 rounded-[10px] bg-foreground/[0.03] border border-foreground/[0.07] hover:bg-foreground/[0.07] hover:border-primary/50 hover:-translate-y-[3px] transition-all shrink-0">
-              <span style={{ fontSize: cl.b ? 15 : 13, fontWeight: cl.b ? 800 : 700, color: cl.c, letterSpacing: ".04em" }}>{cl.n}</span>
+            <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "14px 26px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", transition: "all .3s", flexShrink: 0, cursor: "pointer" }}>
+              <span style={{ fontSize: cl.b ? 14 : 12, fontWeight: cl.b ? 800 : 700, color: cl.c, letterSpacing: ".04em" }}>{cl.n}</span>
             </div>
           ))}
         </div>
-        <div className="mt-10 pt-7 border-t border-border-subtle">
-          <div className="flex items-center bg-card rounded-[10px] border border-border-subtle overflow-hidden">
-            <div className="px-[18px] py-2.5 bg-primary/[0.15] border-r border-border shrink-0 flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-success" style={{ animation: "pulse-dot 1.5s infinite" }} />
-              <span className="font-mono text-primary text-[10px] font-bold tracking-widest whitespace-nowrap">LIVE FREIGHT</span>
+        <div style={{ marginTop: 36, paddingTop: 24, borderTop: "1px solid var(--borderSm)" }}>
+          <div style={{ display: "flex", alignItems: "center", background: "var(--card)", borderRadius: 10, border: "1px solid var(--border)", overflow: "hidden" }}>
+            <div style={{ padding: "10px 18px", background: "var(--purpleLt)", borderRight: "1px solid var(--border)", flexShrink: 0, display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#54AF3A", animation: "pulse-dot 1.5s infinite" }} />
+              <span className="font-mono" style={{ color: "#393185", fontSize: 10, fontWeight: 700, letterSpacing: ".12em", whiteSpace: "nowrap" }}>LIVE FREIGHT</span>
             </div>
-            <div className="flex-1 overflow-hidden py-2.5" style={{ maskImage: "linear-gradient(90deg,transparent,black 6%,black 94%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 6%,black 94%,transparent)" }}>
-              <div className="inline-flex gap-14 whitespace-nowrap" style={{ animation: "ticker 40s linear infinite" }}>
+            <div style={{ flex: 1, overflow: "hidden", padding: "10px 0", maskImage: "linear-gradient(90deg,transparent,black 6%,black 94%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 6%,black 94%,transparent)" }}>
+              <div style={{ display: "inline-flex", gap: 56, animation: "ticker 40s linear infinite", whiteSpace: "nowrap" }}>
                 {[...lanes, ...lanes].map((l, i) => (
-                  <span key={i} className="font-mono text-muted-foreground text-xs">{l}</span>
+                  <span key={i} className="font-mono" style={{ color: "var(--text2)", fontSize: 12 }}>{l}</span>
                 ))}
               </div>
             </div>
