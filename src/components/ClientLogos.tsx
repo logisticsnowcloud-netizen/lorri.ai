@@ -55,7 +55,7 @@ function MarqueeRow({ items, direction = "left", duration = 30 }: { items: typeo
         animation: `${direction === "left" ? "ticker" : "tickerReverse"} ${duration}s linear infinite`,
         whiteSpace: "nowrap",
       }}>
-        {doubled.map((cl, i) => <LogoCard key={i} {...cl} />)}
+        {doubled.map((cl, i) => <LogoCard key={i} n={cl.n} domain={cl.domain} />)}
       </div>
     </div>
   );
