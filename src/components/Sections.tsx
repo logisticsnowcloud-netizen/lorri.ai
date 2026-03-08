@@ -80,46 +80,71 @@ export function ForTransporters() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
           {/* Global Route Map Visual - desktop */}
           <div className="hidden md:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 20, padding: 26, position: "relative", overflow: "hidden" }}>
-              <div style={{ fontSize: 11, color: "var(--text2)", fontWeight: 700, marginBottom: 20, letterSpacing: ".06em", textTransform: "uppercase" }}>Network Growth Timeline</div>
-              <div style={{ position: "relative", paddingLeft: 28 }}>
-                {/* Timeline line */}
-                <div style={{ position: "absolute", left: 9, top: 6, bottom: 6, width: 2, background: "linear-gradient(180deg, #54AF3A 0%, rgba(84,175,58,0.15) 100%)", borderRadius: 2 }} />
-                {[
-                  { year: "2021", title: "Platform Launch", desc: "LoRRI founded with 50+ initial carriers and first freight benchmark", icon: "🚀" },
-                  { year: "2022", title: "1,000+ Carriers Onboarded", desc: "AI load matching introduced, covering 20K+ lanes across India", icon: "📈" },
-                  { year: "2023", title: "₹2.5B+ Freight Analysed", desc: "National Price Benchmark launched for shippers & manufacturers", icon: "💰" },
-                  { year: "2024", title: "2,200+ Verified Carriers", desc: "80K+ lanes, 100+ truck types, reliability scoring system live", icon: "🏆" },
-                  { year: "2025", title: "Industry Leadership", desc: "India's most trusted freight intelligence platform for procurement", icon: "⭐" },
-                ].map((item, i) => (
-                  <div key={i} style={{ position: "relative", marginBottom: i < 4 ? 20 : 0, display: "flex", gap: 16, alignItems: "flex-start" }}>
-                    {/* Dot */}
-                    <div style={{ width: 20, height: 20, borderRadius: "50%", background: "var(--card)", border: "2.5px solid #54AF3A", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, flexShrink: 0, position: "relative", zIndex: 1 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              {[
+                {
+                  num: "01",
+                  title: "Get Discovered",
+                  desc: "Connect with new customers, including Fortune 500 companies and global leaders. Receive business inquiries from companies in your lanes, matching your preferred truck types.",
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  ),
+                },
+                {
+                  num: "02",
+                  title: "Track Your Performance",
+                  desc: "Get feedback from customers and grow your reputation on LoRRI – The Trusted Platform for Transporters. Use your ratings to attract more business and build a strong industry presence.",
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  ),
+                },
+                {
+                  num: "03",
+                  title: "Take Control of Your Brand Presence",
+                  desc: "Create a standout LoRRI profile with details about your branches, fleet, and lanes. Help customers make informed decisions, leading to more business opportunities for you.",
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  ),
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: "var(--card)",
+                    border: "1.5px solid var(--border)",
+                    borderRadius: 16,
+                    padding: "22px 24px",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = "rgba(84,175,58,0.5)";
+                    e.currentTarget.style.boxShadow = "0 8px 30px rgba(84,175,58,0.12)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = "var(--border)";
+                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  {/* Accent gradient bar */}
+                  <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "linear-gradient(90deg, #54AF3A, #3D8A28)", borderRadius: "16px 16px 0 0" }} />
+                  <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                    <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(84,175,58,0.1)", border: "1px solid rgba(84,175,58,0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       {item.icon}
                     </div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                        <span style={{ fontSize: 11, fontWeight: 800, color: "#54AF3A", fontFamily: "Outfit,sans-serif", letterSpacing: ".04em" }}>{item.year}</span>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text)" }}>{item.title}</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                        <span style={{ fontSize: 11, fontWeight: 800, color: "#54AF3A", fontFamily: "Outfit,sans-serif", letterSpacing: ".06em" }}>{item.num}</span>
+                        <span style={{ fontSize: 15, fontWeight: 800, color: "var(--text)", fontFamily: "Outfit,sans-serif" }}>{item.title}</span>
                       </div>
-                      <p style={{ fontSize: 11.5, color: "var(--text2)", lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
+                      <p style={{ fontSize: 12.5, color: "var(--text2)", lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-              {/* Stats row */}
-              <div style={{ display: "flex", justifyContent: "space-around", marginTop: 20, padding: "12px 0", borderTop: "1px solid var(--border)" }}>
-                {[
-                  { val: "80K+", label: "Lanes" },
-                  { val: "2200+", label: "Carriers" },
-                  { val: "100+", label: "Truck Types" },
-                ].map((s, i) => (
-                  <div key={i} style={{ textAlign: "center" }}>
-                    <div style={{ fontSize: 18, fontWeight: 900, color: "#54AF3A", fontFamily: "Outfit,sans-serif" }}>{s.val}</div>
-                    <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 2 }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
           <div style={{ animation: visible ? "fadeUp .7s .2s ease both" : "none", opacity: visible ? undefined : 0 }}>
