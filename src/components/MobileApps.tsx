@@ -226,40 +226,60 @@ export default function MobileApps() {
                     ))}
                   </div>
 
-                  {/* Store badges + QR codes */}
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 16, flexWrap: "wrap" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                  {/* Download section */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    {/* Store badges row */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       <a href={app.playLink} target="_blank" rel="noopener noreferrer">
                         <img
                           src={googlePlayBadge}
                           alt="Get it on Google Play"
-                          style={{ height: 54, margin: "-7px 0" }}
+                          style={{ height: 44, margin: "-5px 0" }}
                         />
                       </a>
                       <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
                         <img
                           src={appStoreBadge}
                           alt="Download on the App Store"
-                          style={{ height: 40, borderRadius: 6 }}
+                          style={{ height: 34, borderRadius: 6 }}
                         />
                       </a>
                     </div>
-                    <div className="hidden md:flex" style={{ gap: 10, alignItems: "center" }}>
-                      <div style={{ textAlign: "center" }}>
-                        <img
-                          src={`https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
-                          alt={`${app.name} Google Play QR`}
-                          style={{ width: 56, height: 56, borderRadius: 6, border: "1px solid var(--borderSm)" }}
-                        />
-                        <span style={{ fontSize: 8, color: "var(--text2)", display: "block", marginTop: 2 }}>Android</span>
-                      </div>
-                      <div style={{ textAlign: "center" }}>
-                        <img
-                          src={`https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
-                          alt={`${app.name} App Store QR`}
-                          style={{ width: 56, height: 56, borderRadius: 6, border: "1px solid var(--borderSm)" }}
-                        />
-                        <span style={{ fontSize: 8, color: "var(--text2)", display: "block", marginTop: 2 }}>iOS</span>
+
+                    {/* QR codes — desktop only, styled as a subtle row */}
+                    <div
+                      className="hidden md:flex"
+                      style={{
+                        alignItems: "center",
+                        gap: 16,
+                        padding: "8px 12px",
+                        borderRadius: 10,
+                        background: "var(--purpleLt)",
+                        border: "1px solid var(--borderSm)",
+                        width: "fit-content",
+                      }}
+                    >
+                      <span style={{ fontSize: 10, color: "var(--text2)", fontWeight: 600, letterSpacing: ".03em" }}>
+                        Scan to download
+                      </span>
+                      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                          <img
+                            src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
+                            alt={`${app.name} Google Play QR`}
+                            style={{ width: 40, height: 40, borderRadius: 4, background: "#fff", padding: 2 }}
+                          />
+                          <span style={{ fontSize: 9, color: "var(--text3)", fontWeight: 500 }}>Android</span>
+                        </div>
+                        <div style={{ width: 1, height: 28, background: "var(--borderSm)" }} />
+                        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                          <img
+                            src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
+                            alt={`${app.name} App Store QR`}
+                            style={{ width: 40, height: 40, borderRadius: 4, background: "#fff", padding: 2 }}
+                          />
+                          <span style={{ fontSize: 9, color: "var(--text3)", fontWeight: 500 }}>iOS</span>
+                        </div>
                       </div>
                     </div>
                   </div>
