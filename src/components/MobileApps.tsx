@@ -226,22 +226,42 @@ export default function MobileApps() {
                     ))}
                   </div>
 
-                  {/* Store badges */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                    <a href={app.playLink} target="_blank" rel="noopener noreferrer">
-                      <img
-                        src={googlePlayBadge}
-                        alt="Get it on Google Play"
-                        style={{ height: 54, margin: "-7px 0" }}
-                      />
-                    </a>
-                    <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
-                      <img
-                        src={appStoreBadge}
-                        alt="Download on the App Store"
-                        style={{ height: 40, borderRadius: 6 }}
-                      />
-                    </a>
+                  {/* Store badges + QR codes */}
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 16, flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                      <a href={app.playLink} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={googlePlayBadge}
+                          alt="Get it on Google Play"
+                          style={{ height: 54, margin: "-7px 0" }}
+                        />
+                      </a>
+                      <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={appStoreBadge}
+                          alt="Download on the App Store"
+                          style={{ height: 40, borderRadius: 6 }}
+                        />
+                      </a>
+                    </div>
+                    <div className="hidden md:flex" style={{ gap: 10, alignItems: "center" }}>
+                      <div style={{ textAlign: "center" }}>
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
+                          alt={`${app.name} Google Play QR`}
+                          style={{ width: 56, height: 56, borderRadius: 6, border: "1px solid var(--borderSm)" }}
+                        />
+                        <span style={{ fontSize: 8, color: "var(--text2)", display: "block", marginTop: 2 }}>Android</span>
+                      </div>
+                      <div style={{ textAlign: "center" }}>
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
+                          alt={`${app.name} App Store QR`}
+                          style={{ width: 56, height: 56, borderRadius: 6, border: "1px solid var(--borderSm)" }}
+                        />
+                        <span style={{ fontSize: 8, color: "var(--text2)", display: "block", marginTop: 2 }}>iOS</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
