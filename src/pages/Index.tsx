@@ -13,6 +13,7 @@ import Chatbot from "@/components/Chatbot";
 import DemoModal from "@/components/DemoModal";
 import { DemoModalProvider } from "@/hooks/use-demo-modal";
 import ScrollReveal from "@/components/ScrollReveal";
+import AIReadinessQuiz from "@/components/AIReadinessQuiz";
 
 const Index = () => {
   const [dark, setDark] = useState(false);
