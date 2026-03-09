@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDemoModal } from "@/hooks/use-demo-modal";
 
 const questions = [
   {
