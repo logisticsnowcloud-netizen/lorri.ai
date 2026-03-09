@@ -49,6 +49,9 @@ const Index = () => {
           <Testimonials />
         </ScrollReveal>
         <ScrollReveal>
+          <Newsroom />
+        </ScrollReveal>
+        <ScrollReveal>
           <MobileApps />
         </ScrollReveal>
         <ScrollReveal>
