@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDemoModal } from "@/hooks/use-demo-modal";
 
 const questions = [
   {
@@ -35,6 +36,7 @@ const getResult = (score: number) => {
 };
 
 export default function AIReadinessQuiz() {
+  const openDemoModal = useDemoModal();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -183,6 +185,7 @@ export default function AIReadinessQuiz() {
                 </p>
                 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                   <button
+                    onClick={() => openDemoModal()}
                     style={{
                       fontFamily: "Outfit, sans-serif", fontSize: 14, fontWeight: 700,
                       padding: "12px 28px", borderRadius: 10, border: "none",
