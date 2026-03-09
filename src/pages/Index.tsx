@@ -32,6 +32,9 @@ const Index = () => {
         <ScrollReveal>
           <ClientLogos />
         </ScrollReveal>
+        <ScrollReveal>
+          <AIReadinessQuiz />
+        </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <Platform />
         </ScrollReveal>
