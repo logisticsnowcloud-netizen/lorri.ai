@@ -236,18 +236,24 @@ export default function MobileApps() {
                     </a>
                     <div className="hidden md:flex" style={{ alignItems: "center", gap: 8, marginLeft: 6 }}>
                       <div style={{ width: 1, height: 28, background: "var(--borderSm)" }} />
-                      <img
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
-                        alt={`${app.name} Android QR`}
-                        title="Scan for Android"
-                        style={{ width: 36, height: 36, borderRadius: 4, background: "#fff", padding: 2, border: "1px solid var(--borderSm)" }}
-                      />
-                      <img
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
-                        alt={`${app.name} iOS QR`}
-                        title="Scan for iOS"
-                        style={{ width: 36, height: 36, borderRadius: 4, background: "#fff", padding: 2, border: "1px solid var(--borderSm)" }}
-                      />
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
+                          alt={`${app.name} Android QR`}
+                          title="Scan for Android"
+                          style={{ width: 36, height: 36, borderRadius: 4, background: "#fff", padding: 2, border: "1px solid var(--borderSm)" }}
+                        />
+                        <span style={{ fontSize: 8, color: "var(--text3)", fontWeight: 600 }}>Android</span>
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
+                          alt={`${app.name} iOS QR`}
+                          title="Scan for iOS"
+                          style={{ width: 36, height: 36, borderRadius: 4, background: "#fff", padding: 2, border: "1px solid var(--borderSm)" }}
+                        />
+                        <span style={{ fontSize: 8, color: "var(--text3)", fontWeight: 600 }}>iOS</span>
+                      </div>
                     </div>
                   </div>
                 </div>
