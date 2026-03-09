@@ -226,61 +226,28 @@ export default function MobileApps() {
                     ))}
                   </div>
 
-                  {/* Download section */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                    {/* Store badges row */}
-                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <a href={app.playLink} target="_blank" rel="noopener noreferrer">
-                        <img
-                          src={googlePlayBadge}
-                          alt="Get it on Google Play"
-                          style={{ height: 44, margin: "-5px 0" }}
-                        />
-                      </a>
-                      <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
-                        <img
-                          src={appStoreBadge}
-                          alt="Download on the App Store"
-                          style={{ height: 34, borderRadius: 6 }}
-                        />
-                      </a>
-                    </div>
-
-                    {/* QR codes — desktop only, styled as a subtle row */}
-                    <div
-                      className="hidden md:flex"
-                      style={{
-                        alignItems: "center",
-                        gap: 16,
-                        padding: "8px 12px",
-                        borderRadius: 10,
-                        background: "var(--purpleLt)",
-                        border: "1px solid var(--borderSm)",
-                        width: "fit-content",
-                      }}
-                    >
-                      <span style={{ fontSize: 10, color: "var(--text2)", fontWeight: 600, letterSpacing: ".03em" }}>
-                        Scan to download
-                      </span>
-                      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                          <img
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
-                            alt={`${app.name} Google Play QR`}
-                            style={{ width: 40, height: 40, borderRadius: 4, background: "#fff", padding: 2 }}
-                          />
-                          <span style={{ fontSize: 9, color: "var(--text3)", fontWeight: 500 }}>Android</span>
-                        </div>
-                        <div style={{ width: 1, height: 28, background: "var(--borderSm)" }} />
-                        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                          <img
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
-                            alt={`${app.name} App Store QR`}
-                            style={{ width: 40, height: 40, borderRadius: 4, background: "#fff", padding: 2 }}
-                          />
-                          <span style={{ fontSize: 9, color: "var(--text3)", fontWeight: 500 }}>iOS</span>
-                        </div>
-                      </div>
+                  {/* Store badges + QR codes inline */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                    <a href={app.playLink} target="_blank" rel="noopener noreferrer">
+                      <img src={googlePlayBadge} alt="Get it on Google Play" style={{ height: 44, margin: "-5px 0" }} />
+                    </a>
+                    <a href={app.iosLink} target="_blank" rel="noopener noreferrer">
+                      <img src={appStoreBadge} alt="Download on the App Store" style={{ height: 34, borderRadius: 6 }} />
+                    </a>
+                    <div className="hidden md:flex" style={{ alignItems: "center", gap: 8, marginLeft: 6 }}>
+                      <div style={{ width: 1, height: 28, background: "var(--borderSm)" }} />
+                      <img
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.playLink)}&color=333333&bgcolor=ffffff`}
+                        alt={`${app.name} Android QR`}
+                        title="Scan for Android"
+                        style={{ width: 36, height: 36, borderRadius: 4, background: "#fff", padding: 2, border: "1px solid var(--borderSm)" }}
+                      />
+                      <img
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(app.iosLink)}&color=333333&bgcolor=ffffff`}
+                        alt={`${app.name} iOS QR`}
+                        title="Scan for iOS"
+                        style={{ width: 36, height: 36, borderRadius: 4, background: "#fff", padding: 2, border: "1px solid var(--borderSm)" }}
+                      />
                     </div>
                   </div>
                 </div>
