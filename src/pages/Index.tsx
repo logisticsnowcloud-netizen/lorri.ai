@@ -9,6 +9,7 @@ import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import MobileApps from "@/components/MobileApps";
+import Newsroom from "@/components/Newsroom";
 import Chatbot from "@/components/Chatbot";
 import DemoModal from "@/components/DemoModal";
 import { DemoModalProvider } from "@/hooks/use-demo-modal";
