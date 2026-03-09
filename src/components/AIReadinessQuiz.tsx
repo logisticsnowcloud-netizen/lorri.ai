@@ -185,6 +185,7 @@ export default function AIReadinessQuiz() {
                 </p>
                 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                   <button
+                    onClick={() => openDemoModal()}
                     style={{
                       fontFamily: "Outfit, sans-serif", fontSize: 14, fontWeight: 700,
                       padding: "12px 28px", borderRadius: 10, border: "none",
