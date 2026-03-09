@@ -36,6 +36,7 @@ const getResult = (score: number) => {
 };
 
 export default function AIReadinessQuiz() {
+  const openDemoModal = useDemoModal();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
