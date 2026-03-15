@@ -441,22 +441,22 @@ export default function MapPage() {
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
           Inbound
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
           Outbound
         </div>
 
         {selectedLocation && apiData && (
-          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 20, marginLeft: 4, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
+          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 14, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
             {loading ? (
-              <span style={{ fontSize: "0.85rem" }}>Loading...</span>
+              <span style={{ fontSize: "0.7rem" }}>Loading...</span>
             ) : (
-              <span style={{ fontSize: "0.75rem" }}>
-                <strong>{locationLabel}</strong> — Transporters: {apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
+              <span style={{ fontSize: "0.7rem" }}>
+                <strong>{locationLabel}</strong> — Total Transporters: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
               </span>
             )}
           </div>
