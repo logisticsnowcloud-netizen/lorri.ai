@@ -256,7 +256,7 @@ export default function GlobalGridPage() {
         {/* Title */}
         <div style={{ minWidth: 200 }}>
           <h1 style={{ fontSize: 22, fontWeight: 800, fontFamily: "Outfit, sans-serif", color: "#1a1a2e", margin: 0, lineHeight: 1.2 }}>
-            LoRRI Network Grid
+            LoRRI Global Grid
           </h1>
           <p style={{ fontSize: 13, color: "#393185", fontFamily: "Outfit, sans-serif", margin: 0, fontWeight: 500 }}>
             Logistics Network Visualisation

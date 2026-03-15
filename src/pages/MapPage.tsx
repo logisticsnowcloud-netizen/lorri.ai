@@ -235,7 +235,7 @@ export default function MapPage() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
           <div>
             <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 2, fontFamily: "Outfit, sans-serif" }}>
-              LoRRI Network Grid
+              LoRRI Global Grid
             </h1>
             <p style={{ fontSize: "0.9rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
               Logistics Network Visualisation

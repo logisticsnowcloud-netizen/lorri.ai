@@ -1,0 +1,383 @@
+.Container {
+  display: flex;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.SearchContainer {
+  height: 100%;
+}
+
+.SearchBarContainer {
+  /* height: 6vh; */
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: flex;
+  /* justify-content: center; */
+  margin-left: 2%;
+}
+.goBackButton {
+  background-color: #393185;
+  color: white;
+  border: 2px solid #393185;
+  padding: 9px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  text-align: center;
+
+  margin: 5px 51px 5px 10px;
+}
+
+.goBackButton:hover {
+  background-color: white;
+  color: #393185;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.searched_text {
+  margin-left: 6%;
+  padding: 0.5%;
+  margin-right: 1%;
+  margin-top: 0.2%;
+  font-weight: 500;
+  font-size: large;
+}
+
+.no-access-container {
+  position: fixed;
+  background-color: white;
+  top: -1000px;
+  left: 30%;
+  padding: 6%;
+  width: 40%;
+  transition: 0.5s;
+  z-index: 999999;
+  border-radius: 10px;
+  box-shadow: 2px 10px 20px;
+}
+
+.no-access-container .header {
+  text-align: center;
+  margin: 0 0 10% 0;
+}
+
+.no-access-container .header h4 {
+  font-weight: 600;
+}
+
+.no-access-container .contact {
+  text-align: center;
+  font-size: 130%;
+}
+
+.no-access-container .close {
+  width: fit-content;
+  position: absolute;
+  top: 5%;
+  font-size: 162%;
+  right: 3%;
+  font-weight: 600;
+}
+
+.no-access-container .close i {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .searched_text {
+    font-weight: 500;
+    font-size: small;
+  }
+
+  .no-access-container {
+    position: fixed;
+    width: 98%;
+    background-color: white;
+    top: -75%;
+    left: 0;
+    padding: 6%;
+    margin: 0 1%;
+    transition: 0.5s;
+    z-index: 999999;
+    border-radius: 10px;
+    box-shadow: 2px 10px 20px;
+  }
+
+  .no-access-container .header h4 {
+    font-size: 120%;
+  }
+
+  .no-access-container .contact {
+    font-size: 100%;
+  }
+}
+
+/**** Home Module Inline Css changes by Smeet ***/
+.s-heading {
+  font-size: large;
+  font-weight: 500;
+}
+
+.s-title {
+  font-size: large;
+}
+
+.s-link {
+  font-size: medium;
+  text-align: center;
+}
+
+.s-link-title {
+  text-align: center;
+}
+
+.s-close {
+  font-weight: 600;
+}
+
+.s-stats {
+  font-size: large;
+  color: #393185;
+  margin-top: 5px;
+}
+
+.s-stats-line {
+  color: #4caf50;
+}
+
+.s-stats-cont {
+  font-size: 14px;
+  margin-bottom: 5%;
+}
+
+.s-event {
+  text-align: center;
+  display: grid;
+  width: 80%;
+}
+
+.s-pevents {
+  font-weight: bold;
+  background-color: #393185;
+}
+
+.s-modal1 {
+  max-height: 80%;
+}
+
+.s-modal-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.s-hrline {
+  margin: 0;
+  background-color: lightgrey;
+}
+
+.breadcrumbs {
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+  text-align: left;
+  padding: 8px 16px;
+}
+
+.breadcrumbHome {
+  color: #0d427a;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.breadcrumbHome:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbHome:active {
+  text-decoration: underline;
+  color: #0056b3;
+  /* slightly darker blue on click */
+}
+
+.breadcrumbs span {
+  vertical-align: middle;
+}
+
+.breadcrumbs span:first-child {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.breadcrumbs span:first-child:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span:last-child {
+  font-weight: 600;
+  color: #333;
+}
+
+@media only screen and (max-width: 600px) {
+  .s-event {
+    text-align: center;
+    display: grid;
+    width: 80%;
+  }
+  .goBackButton {
+    display: none;
+  }
+  .backspan {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .s-event {
+    margin-top: 0.75rem;
+  }
+
+  .SearchBarContainer {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+}
+
+.image-placeholder,
+.logo-placeholder {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-img {
+  object-fit: contain;
+}
+
+.showOnMobile {
+  display: none;
+}
+
+.showOnLargeScreen {
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .showOnMobile {
+    display: block;
+  }
+
+  .showOnLargeScreen {
+    display: none;
+  }
+}
+
+.gridButton {
+  background-color: #045dbf;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 11px 23px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 10px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.gridButton:hover {
+  background-color: #033d7e;
+
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.gridButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(4, 93, 191, 0.4);
+}
+
+.gridButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.heroButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.mobileGridBtn {
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 10px;
+  cursor: pointer;
+  padding-left: 16px;
+}
+
+.sidebarGridBtn {
+  background-color: #393185;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media only screen and (min-width: 220px) {
+  .mobileGridBtn {
+    gap: 0px;
+  }
+  /* .breadcrumbs{
+    margin-bottom: -25px;
+    margin-top: 65px;
+    font-size: 14px;
+    color: #555;
+    text-align: left;
+    padding: 8px 16px;
+  } */
+
+  .mobileGridBtn > b {
+    line-height: 1.1;
+  }
+}

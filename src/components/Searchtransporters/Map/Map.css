@@ -1,0 +1,158 @@
+/* [type="checkbox"]:checked + span:not(.lever):before {
+  top: -4px;
+  left: -5px;
+  width: 12px;
+  height: 22px;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid #393185;
+  border-bottom: 2px solid #393185;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+} */
+
+/* [type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+  background-color: #393185;
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+  border: 2px solid #393185;
+} */
+
+.map-container {
+  height: 70vh;
+  width: auto;
+  margin-left: 30px;
+  border: solid 1px #e5e4e2;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .map-container {
+    margin-left: 0;
+  }
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none !important;
+}
+
+.legend-box {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 14px 16px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.map-container .legend-title {
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.legend-box div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer !important;
+  gap: 4px;
+}
+
+.legend-box div input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  position: relative !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+
+.map-container div input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  position: relative !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+.legend-box label {
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .legend-box {
+    display: none;
+    top: 10px;
+    right: 6px;
+    bottom: unset;
+    padding: 12px 14px;
+  }
+
+  .map-container div label {
+    font-size: 12px;
+  }
+
+  .map-container .legend-title {
+    font-size: 12px;
+  }
+
+  .map-container .legend-popup-icon {
+    visibility: visible;
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 9999;
+    padding-left: 30px;
+    padding-bottom: 30px;
+  }
+
+  .legend-popup-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 12px;
+    border: 1px solid #888;
+    width: 200px;
+    border-radius: 4px;
+    position: absolute;
+    top: 8px;
+    right: 34px;
+    z-index: 10000;
+    display: none;
+  }
+
+
+  .legend-popup-icon:hover + .legend-popup-content,
+  .legend-popup-content:hover {
+    display: block;
+  }
+}
+
+.legend-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.map-container .legend-popup-icon {
+  display: block;
+  visibility: visible;
+}
