@@ -346,8 +346,9 @@ export default function MapPage() {
               <div style={{ position: "relative", width: "100%" }}>
                 <input
                   value={query}
-                  onChange={e => {
-                    setQuery(e.target.value);
+                   onChange={e => {
+                     userTypedRef.current = true;
+                     setQuery(e.target.value);
                     if (e.target.value.length === 0) {
                       handleClear();
                     }
