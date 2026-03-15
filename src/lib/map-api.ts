@@ -1,5 +1,5 @@
 const API_BASE = "https://production.lorri.in/api/apilorri/screen_zero";
-const NOMINATIM_BASE = "https://nominatim.openstreetmap.org";
+const AUTOCOMPLETE_BASE = "https://production.lorri.in/api/apiuser/autocomplete";
 
 export interface LocationSuggestion {
   name: string;
@@ -21,13 +21,13 @@ export interface ScreenZeroResponse {
 export async function searchLocations(query: string): Promise<LocationSuggestion[]> {
   if (!query || query.length < 2) return [];
   const res = await fetch(
-    `${NOMINATIM_BASE}/search?q=${encodeURIComponent(query)}&format=json&limit=8&countrycodes=in`
+    `${AUTOCOMPLETE_BASE}?suggest=${encodeURIComponent(query)}&limit=20&searchFields=new_locations`
   );
   const data = await res.json();
-  return data.map((item: any) => ({
-    name: item.display_name,
-    lat: parseFloat(item.lat),
-    lon: parseFloat(item.lon),
+  return (data.value || []).map((item: any) => ({
+    name: item.location_name || item.location?.label || "",
+    lat: item.location?.lat ?? item.coordinates?.[1] ?? 0,
+    lon: item.location?.lon ?? item.coordinates?.[0] ?? 0,
   }));
 }
 
