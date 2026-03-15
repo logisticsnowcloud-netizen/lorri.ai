@@ -39,10 +39,16 @@ const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
 export default function Hero({ dark }: { dark: boolean }) {
   const openDemoModal = useDemoModal();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [tab, setTab] = useState("Intelligence");
   const [userPicked, setUserPicked] = useState(false);
+
+  const handleSearch = (searchQuery?: string) => {
+    const q = (searchQuery || query).trim();
+    if (q) navigate(`/map?location=${encodeURIComponent(q)}`);
+  };
 
   useEffect(() => {
     if (userPicked) return;
