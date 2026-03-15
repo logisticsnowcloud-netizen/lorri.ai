@@ -1,32 +1,46 @@
 const row1 = [
   { n: "Apollo Tyres", logo: "/logos/apollo-tyres.png" },
   { n: "Ceat", logo: "/logos/ceat.png" },
-  { n: "Perfetti", logo: "/logos/perfetti.png" },
+  { n: "Bajaj Electricals", logo: "/logos/bajaj.png" },
+  { n: "Jyothy Labs", logo: "/logos/jyothy-labs.png" },
+  { n: "Hidromas", logo: "/logos/hidromas.png" },
+  { n: "Onida", logo: "/logos/mirc.png" },  
   { n: "Maersk", logo: "/logos/Maersk.png" },
-  { n: "Vredestein", logo: "/logos/vredestein.jpg" },
+  { n: "General Mills", logo: "/logos/general-mills.png" },
+  { n: "Kimbal", logo: "/logos/kimbal.png" },
   { n: "Kimberly-Clark", logo: "/logos/kimberly-clark.png" },
   { n: "DHL", logo: "/logos/dhl.png" },
+  { n: "Perfetti", logo: "/logos/perfetti.png" },
+  { n: "Pernod Ricard", logo: "/logos/pernod.png" },
+  { n: "Schreiber Foods", logo: "/logos/schreiber.png" },
+  { n: "Saint-Gobain", logo: "/logos/saint-gobain.png" },
+  { n: "Shell", logo: "/logos/shell.png" },
+  { n: "Vredestein", logo: "/logos/vredestein.jpg" },
+  { n: "Zydus Wellness", logo: "/logos/zydus.jpeg" },
 ];
 
 const row2 = [
-  { n: "DSV", logo: "/logos/dsv.png" },
-  { n: "Shell", logo: "/logos/shell.png" },
-  { n: "FM Logistic", logo: "/logos/fm.png" },
-  { n: "Bajaj", logo: "/logos/bajaj.png" },
-  { n: "Delhivery", logo: "/logos/delhivery.png" },
-  { n: "TCI", logo: "/logos/tci.png" },
-  { n: "Saint-Gobain", logo: "/logos/saint-gobain.png" },
+  { n: "CJ Darcl", logo: "/logos/cjdarcl.png" },
+    // { name: "CCI Group", logo: "/cci.png" },
+  { n: "CEVA Logistics", logo: "/logos/ceva.png" },
+  { n: "DHL", logo: "/logos/dhl.png" },
+  { n: "DSV ", logo: "/logos/dsv.png" },
+  // { name: "Delhivery", logo: "/delhivery.png" },
+  { n: "FM Logistics", logo: "/logos/fm.png" },
+  { n: "Fiege", logo: "/logos/fiege.png" },
+  { n: "Maersk", logo: "/logos/Maersk.png" },
+  { n: "RCI Logistics", logo: "/logos/rci.jpeg" },
+  { n: "Rhenus Logistics", logo: "/logos/rhenus.png" },
+  { n: "Sennder", logo: "/logos/sennder.png" },
+  { n: "SCC India", logo: "/logos/scc.jpeg" },
+  { n: "TCI Freight", logo: "/logos/tci.png" },
+  { n: "TOLL", logo: "/logos/toll.png" },
+  { n: "Western Carriers ", logo: "/logos/wc.png" },
+  { n: "Quehenberger", logo: "/logos/quehenberger.png" },
 ];
 
 const row3 = [
-  { n: "Flipkart", logo: "/logos/flipkart.jpeg" },
-  { n: "Pernod Ricard", logo: "/logos/pernod.png" },
-  { n: "Zydus", logo: "/logos/zydus.jpeg" },
-  { n: "CJ Darcl", logo: "/logos/cjdarcl.png" },
-  { n: "Rhenus", logo: "/logos/rhenus.png" },
-  { n: "CEVA", logo: "/logos/ceva.png" },
-  { n: "Schreiber", logo: "/logos/schreiber.png" },
-  { n: "Jyothy Labs", logo: "/logos/jyothy-labs.png" },
+  // { n: "Flipkart", logo: "/logos/flipkart.jpeg" },
 ];
 
 type ClientItem = { n: string; logo: string };
@@ -82,7 +96,7 @@ export default function ClientLogos() {
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           <MarqueeRow items={row1} direction="left" duration={25} />
           <MarqueeRow items={row2} direction="right" duration={30} />
-          <MarqueeRow items={row3} direction="left" duration={28} />
+          {/* <MarqueeRow items={row3} direction="left" duration={28} /> */}
         </div>
 
       </div>
