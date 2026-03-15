@@ -52,7 +52,7 @@ export default function MapPage() {
       zoomSnap: 1.5,
       zoomControl: false,
       zoomDelta: 0.5,
-      maxNativeZoom: 19,
+      
       maxBounds: worldBounds,
       maxBoundsViscosity: 1.0,
     });
