@@ -70,8 +70,8 @@ export default function MapPage() {
     const worldBounds = L.latLngBounds(L.latLng(-85.0511, -180), L.latLng(85.0511, 180));
 
     mapRef.current = L.map(containerRef.current, {
-      center: [24.5, 82.5],
-      zoom: 5,
+      center: [22, 82],
+      zoom: 4.5,
       maxZoom: 20,
       zoomSnap: 1.5,
       zoomControl: false,
@@ -168,7 +168,7 @@ export default function MapPage() {
 
     const centerLat = selectedLocation.lat;
     const centerLon = selectedLocation.lon;
-    mapRef.current.flyTo([centerLat, centerLon], 5, { animate: true, duration: 1.5 });
+    mapRef.current.flyTo([centerLat, centerLon], 4.5, { animate: true, duration: 1.5 });
 
     const marker = L.marker([centerLat, centerLon]);
     markersLayerRef.current?.addLayer(marker);
@@ -258,7 +258,7 @@ export default function MapPage() {
       markersLayerRef.current?.clearLayers();
       inflowLayersRef.current?.clearLayers();
       outflowLayersRef.current?.clearLayers();
-      mapRef.current.flyTo([24.5, 82.5], 5, { animate: true, duration: 1 });
+      mapRef.current.flyTo([22, 82], 4.5, { animate: true, duration: 1 });
     }
   }, []);
 
@@ -303,19 +303,19 @@ export default function MapPage() {
 
       {/* Floating Header */}
       <div style={{
-        position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)",
+        position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)",
         width: "calc(100% - 40px)", maxWidth: 1200, zIndex: 100,
         background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)", padding: "18px 28px", borderRadius: 16,
+        WebkitBackdropFilter: "blur(16px)", padding: "10px 24px", borderRadius: 12,
         boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
           <div>
-            <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 2, fontFamily: "Outfit, sans-serif" }}>
+            <h1 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 1, fontFamily: "Outfit, sans-serif" }}>
               LoRRI Network Grid
             </h1>
-            <p style={{ fontSize: "0.9rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
+            <p style={{ fontSize: "0.8rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
               Search another plant location here:
             </p>
           </div>
@@ -336,7 +336,7 @@ export default function MapPage() {
                   onKeyDown={e => { if (e.key === "Enter") handleSearchSubmit(); }}
                   placeholder="Search a city (e.g. Mumbai, Delhi)..."
                   style={{
-                    width: "100%", padding: "14px 40px 14px 20px", fontSize: "1rem", fontWeight: 500,
+                    width: "100%", padding: "10px 36px 10px 16px", fontSize: "0.9rem", fontWeight: 500,
                     fontFamily: "Outfit, sans-serif", color: "#0f172a", backgroundColor: "#ffffff",
                     border: "1px solid #cbd5e1", borderRadius: 12, outline: "none",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -361,8 +361,8 @@ export default function MapPage() {
                 onClick={handleSearchSubmit}
                 style={{
                   background: "linear-gradient(135deg, #393185, #4D44A8)", border: "none",
-                  borderRadius: 12, padding: "14px 24px", color: "white", fontFamily: "Outfit, sans-serif",
-                  fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
+                  borderRadius: 10, padding: "10px 20px", color: "white", fontFamily: "Outfit, sans-serif",
+                  fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
                   boxShadow: "0 4px 16px rgba(57,49,133,0.35)",
                 }}
               >
@@ -413,20 +413,20 @@ export default function MapPage() {
 
       {/* Floating Bottom Legend */}
       <div style={{
-        position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)", zIndex: 100,
-        display: "flex", justifyContent: "center", alignItems: "center", gap: 24,
-        padding: "12px 24px", background: "rgba(255, 255, 255, 0.85)",
+        position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 100,
+        display: "flex", justifyContent: "center", alignItems: "center", gap: 16,
+        padding: "8px 20px", background: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(16px)", borderRadius: 50,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.9rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 14, height: 14, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR, boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} />
-          Inbound Deliveries
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
+          Inbound
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.9rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 14, height: 14, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR, boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} />
-          Outbound Deliveries
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
+          Outbound
         </div>
 
         {selectedLocation && apiData && (
@@ -434,7 +434,7 @@ export default function MapPage() {
             {loading ? (
               <span style={{ fontSize: "0.85rem" }}>Loading...</span>
             ) : (
-              <span style={{ fontSize: "0.85rem" }}>
+              <span style={{ fontSize: "0.75rem" }}>
                 <strong>{locationLabel}</strong> — Transporters: {apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
               </span>
             )}
