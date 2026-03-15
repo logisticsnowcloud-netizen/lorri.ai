@@ -70,8 +70,8 @@ export default function MapPage() {
     const worldBounds = L.latLngBounds(L.latLng(-85.0511, -180), L.latLng(85.0511, 180));
 
     mapRef.current = L.map(containerRef.current, {
-      center: [24.5, 82.5],
-      zoom: 5,
+      center: [22, 82],
+      zoom: 4.5,
       maxZoom: 20,
       zoomSnap: 1.5,
       zoomControl: false,
