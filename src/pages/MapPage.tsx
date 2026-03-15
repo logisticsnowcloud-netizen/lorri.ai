@@ -185,7 +185,7 @@ export default function MapPage() {
         inflowLayersRef.current?.addLayer(line);
       } else if (coords && coords.length === 1) {
         // Single point — draw line from that point to center
-        const line = L.polyline([coords[0], [centerLat, centerLon]], { color: INBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline([coords[0], [centerLat, centerLon]], { color: INBOUND_COLOR, weight: 1, opacity: 0.5 });
         inflowLayersRef.current?.addLayer(line);
       }
     });
