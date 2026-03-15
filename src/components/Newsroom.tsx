@@ -58,7 +58,7 @@ export default function Newsroom() {
       className="max-md:py-10 max-md:px-4"
       style={{
         background: "hsl(var(--background))",
-        padding: "64px 32px",
+        padding: "32px 32px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -75,7 +75,7 @@ export default function Newsroom() {
 
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <div style={{ textAlign: "center", marginBottom: 24 }}>
           <div
             className="inline-flex items-center gap-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4"
             style={{

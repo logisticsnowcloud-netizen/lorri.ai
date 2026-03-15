@@ -38,7 +38,7 @@ export default function MobileApps() {
   return (
     <section
       style={{
-        padding: "80px 24px",
+        padding: "32px 24px",
         background: "var(--bg)",
         position: "relative",
         overflow: "hidden",
@@ -51,7 +51,7 @@ export default function MobileApps() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          style={{ textAlign: "center", marginBottom: 48 }}
+          style={{ textAlign: "center", marginBottom: 24 }}
         >
           <div
             style={{

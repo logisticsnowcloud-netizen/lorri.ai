@@ -72,7 +72,7 @@ export default function Hero({ dark }: { dark: boolean }) {
   const td = TAB_DATA[tab];
 
   return (
-    <section id="hero" style={{ position: "relative", minHeight: "70vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "20px 16px 72px", overflow: "hidden", background: "var(--bg)" }}>
+    <section id="hero" style={{ position: "relative", minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px 16px 36px", overflow: "hidden", background: "var(--bg)" }}>
       {/* Bg patterns */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(var(--gridLine) 1px,transparent 1px),linear-gradient(90deg,var(--gridLine) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 65% 55% at 50% 42%,rgba(57,49,133,0.18) 0%,transparent 65%)", pointerEvents: "none" }} />
