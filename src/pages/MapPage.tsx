@@ -193,6 +193,36 @@ export default function MapPage() {
         <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
       </main>
 
+      {/* Loading overlay */}
+      {loading && (
+        <div style={{
+          position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 50,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(255,255,255,0.4)", backdropFilter: "blur(2px)",
+          pointerEvents: "none",
+        }}>
+          <div style={{
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 16,
+            background: "rgba(255,255,255,0.9)", backdropFilter: "blur(16px)",
+            padding: "28px 40px", borderRadius: 16,
+            boxShadow: "0 10px 30px -10px rgba(0,0,0,0.15)",
+            border: "1px solid rgba(255,255,255,0.5)",
+            pointerEvents: "auto",
+          }}>
+            <div style={{
+              width: 40, height: 40, borderRadius: "50%",
+              border: "3px solid #e2e8f0", borderTopColor: "#393185",
+              animation: "spin 0.8s linear infinite",
+            }} />
+            <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 14, fontWeight: 600, color: "#334155" }}>
+              Loading routes for <strong>{selectedLocation}</strong>...
+            </span>
+          </div>
+        </div>
+      )}
+
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+
       {/* Floating Header */}
       <div style={{
         position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)",
