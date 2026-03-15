@@ -130,32 +130,7 @@ export default function GlobalGridPage() {
         const data = await res.json();
         setNetworkData(data);
 
-        // Calculate per-region inbound/outbound counts
-        if (data?.features) {
-          const counts: Record<string, { inbound: number; outbound: number }> = {};
-          Object.keys(regionBounds).forEach(r => { counts[r] = { inbound: 0, outbound: 0 }; });
-
-          data.features.forEach((f: any) => {
-            if (f.geometry?.type === "LineString" && f.geometry.coordinates?.length >= 2) {
-              const [originLon, originLat] = f.geometry.coordinates[0];
-              const [destLon, destLat] = f.geometry.coordinates[f.geometry.coordinates.length - 1];
-
-              Object.keys(regionBounds).forEach(regionKey => {
-                const originIn = isInRegion(originLon, originLat, regionKey);
-                const destIn = isInRegion(destLon, destLat, regionKey);
-
-                if (destIn && !originIn) counts[regionKey].inbound++;
-                if (originIn && !destIn) counts[regionKey].outbound++;
-                // If both origin & dest are in the region, count as both
-                if (originIn && destIn) {
-                  counts[regionKey].inbound++;
-                  counts[regionKey].outbound++;
-                }
-              });
-            }
-          });
-          setRegionLaneCounts(counts);
-        }
+        // Region counts are hardcoded based on manual calculation
       } catch (err) {
         console.warn("Network data fetch failed:", err);
       } finally {
