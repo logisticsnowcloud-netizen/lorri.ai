@@ -52,6 +52,7 @@ export default function MapPage() {
   const [query, setQuery] = useState(initialLocation);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const userTypedRef = useRef(false);
   const [selectedLocation, setSelectedLocation] = useState<LocationSuggestion | null>(null);
   const [apiData, setApiData] = useState<ScreenZeroResponse | null>(null);
   const [loading, setLoading] = useState(false);
