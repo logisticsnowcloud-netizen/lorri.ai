@@ -38,7 +38,7 @@ export default function MobileApps() {
   return (
     <section
       style={{
-        padding: "80px 24px",
+        padding: "32px 24px",
         background: "var(--bg)",
         position: "relative",
         overflow: "hidden",
