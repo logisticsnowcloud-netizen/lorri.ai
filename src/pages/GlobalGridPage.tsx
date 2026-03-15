@@ -23,6 +23,21 @@ const regionCenter: Record<string, { label: string; coordinates: [number, number
   united_states: { label: "United States", coordinates: [-98.5795, 39.8283] },
 };
 
+// Bounding boxes [minLon, minLat, maxLon, maxLat] for each region
+const regionBounds: Record<string, [number, number, number, number]> = {
+  india: [68, 6, 98, 38],
+  europe: [-25, 34, 45, 72],
+  china: [73, 15, 135, 55],
+  australia: [110, -50, 160, -10],
+  united_states: [-130, 24, -65, 50],
+};
+
+function isInRegion(lon: number, lat: number, regionKey: string): boolean {
+  const bounds = regionBounds[regionKey];
+  if (!bounds) return false;
+  return lon >= bounds[0] && lon <= bounds[2] && lat >= bounds[1] && lat <= bounds[3];
+}
+
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   const R = 6371;
   const dLat = (lat2 - lat1) * (Math.PI / 180);
