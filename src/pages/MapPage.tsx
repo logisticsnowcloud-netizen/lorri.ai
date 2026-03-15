@@ -258,7 +258,7 @@ export default function MapPage() {
       markersLayerRef.current?.clearLayers();
       inflowLayersRef.current?.clearLayers();
       outflowLayersRef.current?.clearLayers();
-      mapRef.current.flyTo([24.5, 82.5], 5, { animate: true, duration: 1 });
+      mapRef.current.flyTo([22, 82], 4.5, { animate: true, duration: 1 });
     }
   }, []);
 
