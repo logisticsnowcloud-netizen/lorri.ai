@@ -383,17 +383,20 @@ export default function GlobalGridPage() {
               padding: "12px 24px", borderTop: "1px solid #e5e7eb",
               fontFamily: "Outfit, sans-serif",
             }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ width: 12, height: 12, borderRadius: "50%", background: "#393185", display: "inline-block" }} />
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#333" }}>Inbound Deliveries</span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ width: 12, height: 12, borderRadius: "50%", background: "#22c55e", display: "inline-block" }} />
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#333" }}>Outbound Deliveries</span>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a2e" }}>
-                {regionCenter[currentRegionKey]?.label || currentRegionKey} — In: {regionLaneCounts[currentRegionKey]?.inbound ?? 0} | Out: {regionLaneCounts[currentRegionKey]?.outbound ?? 0}
-              </div>
+              {Object.keys(regionTotalCounts).map((key) => (
+                <div key={key} style={{
+                  display: "flex", alignItems: "center", gap: 6,
+                  padding: "4px 12px", borderRadius: 6,
+                  background: key === currentRegionKey ? "#393185" : "transparent",
+                  color: key === currentRegionKey ? "#fff" : "#1a1a2e",
+                  fontWeight: key === currentRegionKey ? 700 : 500,
+                  fontSize: 13, cursor: "pointer", transition: "all 0.2s",
+                }}
+                onClick={() => setSearchParams({ region: key })}
+                >
+                  {regionCenter[key]?.label} — <strong>{regionTotalCounts[key]}</strong> Lanes
+                </div>
+              ))}
             </div>
           </>
         )}
