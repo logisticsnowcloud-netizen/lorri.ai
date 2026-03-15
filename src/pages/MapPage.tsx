@@ -357,9 +357,9 @@ export default function MapPage() {
                   onKeyDown={e => { if (e.key === "Enter") handleSearchSubmit(); }}
                   placeholder="Search a city (e.g. Mumbai, Delhi)..."
                   style={{
-                    width: "100%", padding: "10px 36px 10px 16px", fontSize: "0.9rem", fontWeight: 500,
+                    width: "100%", padding: "7px 36px 7px 14px", fontSize: "0.85rem", fontWeight: 500,
                     fontFamily: "Outfit, sans-serif", color: "#0f172a", backgroundColor: "#ffffff",
-                    border: "1px solid #cbd5e1", borderRadius: 12, outline: "none",
+                    border: "1px solid #cbd5e1", borderRadius: 10, outline: "none",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
                   }}
