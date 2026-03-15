@@ -143,8 +143,8 @@ export default function MapPage() {
     getScreenZeroData(selectedLocation.lon, selectedLocation.lat)
       .then(data => {
         console.log("Screen zero response keys:", Object.keys(data));
-        console.log("Inflow count:", data.network?.inflow?.length);
-        console.log("Outflow count:", data.network?.outflow?.length);
+        console.log("inflow_dashboard:", JSON.stringify(data.inflow_dashboard));
+        console.log("outflow_dashboard:", JSON.stringify(data.outflow_dashboard));
         if (data.network?.inflow?.length > 0) {
           console.log("Sample inflow item:", JSON.stringify(data.network.inflow[0]).substring(0, 500));
         }
