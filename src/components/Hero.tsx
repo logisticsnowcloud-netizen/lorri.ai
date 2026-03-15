@@ -128,7 +128,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
                 </div>
                 {suggestions.map((s, i) => (
-                  <div key={i} onClick={() => { setQuery(s.name); setFocused(false); handleSearch(s.name); }}
+                  <div key={i} onClick={() => { setQuery(s.name); setFocused(false); navigate(`/map?location=${encodeURIComponent(s.name)}&lat=${s.lat}&lon=${s.lon}`); }}
                     style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
                     onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
