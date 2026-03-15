@@ -482,36 +482,36 @@ export default function MapPage() {
           <div>
             {transporters.map((t: any, i: number) => (
               <div key={t.transporter_id || i} style={{
-                padding: "14px 20px", borderBottom: "1px solid #f1f5f9",
-                display: "flex", alignItems: "center", gap: 12,
+                padding: "6px 14px", borderBottom: "1px solid #f1f5f9",
+                display: "flex", alignItems: "center", gap: 8,
                 cursor: "pointer", transition: "background 0.15s",
               }}
               onMouseEnter={e => (e.currentTarget.style.background = "#f8fafc")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
               >
                 <div style={{
-                  width: 40, height: 40, borderRadius: 8, background: "#f1f5f9",
+                  width: 30, height: 30, borderRadius: 6, background: "#f1f5f9",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, fontWeight: 700, color: "#393185", flexShrink: 0,
+                  fontSize: 13, fontWeight: 700, color: "#393185", flexShrink: 0,
                 }}>
                   {t.transporter_name?.charAt(0) || "T"}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{
-                    fontSize: "0.82rem", fontWeight: 600, color: "#1e40af",
+                    fontSize: "0.72rem", fontWeight: 600, color: "#1e40af",
                     whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
                   }}>
                     {t.transporter_name?.toUpperCase()}
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 2, marginTop: 1 }}>
                     {renderStars(t.overall_rating ?? 0)}
                     {t.number_of_ratings > 0 && (
-                      <span style={{ fontSize: "0.7rem", color: "#94a3b8", marginLeft: 4 }}>({t.number_of_ratings})</span>
+                      <span style={{ fontSize: "0.6rem", color: "#94a3b8", marginLeft: 2 }}>({t.number_of_ratings})</span>
+                    )}
+                    {t.account_type === "verified" && (
+                      <span style={{ fontSize: "0.6rem", color: "#16a34a", fontWeight: 600, marginLeft: 6 }}>✓ Verified</span>
                     )}
                   </div>
-                  {t.account_type === "verified" && (
-                    <span style={{ fontSize: "0.65rem", color: "#16a34a", fontWeight: 600 }}>✓ Verified</span>
-                  )}
                 </div>
               </div>
             ))}
