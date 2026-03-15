@@ -332,10 +332,10 @@ export default function MapPage() {
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
           <div>
-            <h1 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 1, fontFamily: "Outfit, sans-serif" }}>
+            <h1 style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 0, fontFamily: "Outfit, sans-serif", lineHeight: 1.2 }}>
               LoRRI Network Grid
             </h1>
-            <p style={{ fontSize: "0.8rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
+            <p style={{ fontSize: "0.7rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
               Search another plant location here:
             </p>
           </div>
