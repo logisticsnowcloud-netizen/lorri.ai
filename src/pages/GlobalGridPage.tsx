@@ -63,7 +63,9 @@ export default function GlobalGridPage() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [regionLaneCounts, setRegionLaneCounts] = useState<Record<string, { inbound: number; outbound: number }>>({});
+  const regionTotalCounts: Record<string, number> = {
+    india: 938, europe: 697, us: 1298, china: 91, australia: 914,
+  };
 
   const getRegionFromUrl = (): [number, number] => {
     const regionParam = searchParams.get("region");
