@@ -459,6 +459,62 @@ export default function MapPage() {
           </div>
         )}
       </div>
+      </div>
+
+      {/* Transporter Panel */}
+      {showPanel && (
+        <div style={{
+          width: 380, minWidth: 380, height: "100vh", overflowY: "auto",
+          background: "#fff", borderLeft: "1px solid #e2e8f0",
+          fontFamily: "Outfit, sans-serif", zIndex: 10,
+        }}>
+          <div style={{ padding: "16px 20px", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, background: "#fff", zIndex: 2 }}>
+            <h2 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
+              Transporters in {locationLabel}
+            </h2>
+            <p style={{ fontSize: "0.8rem", color: "#64748b", margin: "4px 0 0" }}>
+              Showing {transporters.length} of <strong>{apiData?.transporters_count ?? 0}</strong> transporters
+            </p>
+          </div>
+          <div>
+            {transporters.map((t: any, i: number) => (
+              <div key={t.transporter_id || i} style={{
+                padding: "14px 20px", borderBottom: "1px solid #f1f5f9",
+                display: "flex", alignItems: "center", gap: 12,
+                cursor: "pointer", transition: "background 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#f8fafc")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              >
+                <div style={{
+                  width: 40, height: 40, borderRadius: 8, background: "#f1f5f9",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 16, fontWeight: 700, color: "#393185", flexShrink: 0,
+                }}>
+                  {t.transporter_name?.charAt(0) || "T"}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{
+                    fontSize: "0.82rem", fontWeight: 600, color: "#1e40af",
+                    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                  }}>
+                    {t.transporter_name?.toUpperCase()}
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
+                    {renderStars(t.overall_rating ?? 0)}
+                    {t.number_of_ratings > 0 && (
+                      <span style={{ fontSize: "0.7rem", color: "#94a3b8", marginLeft: 4 }}>({t.number_of_ratings})</span>
+                    )}
+                  </div>
+                  {t.account_type === "verified" && (
+                    <span style={{ fontSize: "0.65rem", color: "#16a34a", fontWeight: 600 }}>✓ Verified</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
