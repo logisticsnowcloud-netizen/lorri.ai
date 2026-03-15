@@ -434,7 +434,7 @@ export default function MapPage() {
 
       {/* Floating Bottom Legend */}
       <div style={{
-        position: "absolute", bottom: 10, left: "50%", transform: "translateX(-50%)", zIndex: 100,
+        position: "absolute", bottom: 10, left: "45%", transform: "translateX(-50%)", zIndex: 100,
         display: "flex", justifyContent: "center", alignItems: "center", gap: 12,
         padding: "5px 16px", background: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(16px)", borderRadius: 50,
