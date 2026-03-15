@@ -121,6 +121,23 @@ export default function GlobalGridPage() {
       });
 
       mapRef.current.on("load", () => {
+        // Create arrow image programmatically
+        const size = 32;
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d")!;
+        ctx.fillStyle = "#045dbf";
+        ctx.beginPath();
+        ctx.moveTo(size * 0.2, size * 0.15);
+        ctx.lineTo(size * 0.85, size * 0.5);
+        ctx.lineTo(size * 0.2, size * 0.85);
+        ctx.closePath();
+        ctx.fill();
+
+        const imgData = ctx.getImageData(0, 0, size, size);
+        mapRef.current!.addImage("arrow-icon", imgData, { sdf: false });
+
         mapRef.current!.addSource("lanes-source", {
           type: "geojson",
           data: { type: "FeatureCollection", features: [] },
@@ -134,6 +151,24 @@ export default function GlobalGridPage() {
             "line-color": "#045dbf",
             "line-width": 1,
             "line-opacity": 0.3,
+          },
+        });
+
+        // Arrow symbol layer along lanes
+        mapRef.current!.addLayer({
+          id: "arrows-layer",
+          type: "symbol",
+          source: "lanes-source",
+          layout: {
+            "symbol-placement": "line",
+            "symbol-spacing": 250,
+            "icon-image": "arrow-icon",
+            "icon-size": 0.5,
+            "icon-rotation-alignment": "map",
+            "icon-offset": [0, 0],
+          },
+          paint: {
+            "icon-opacity": 0.5,
           },
         });
       });
