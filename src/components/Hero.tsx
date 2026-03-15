@@ -122,18 +122,18 @@ export default function Hero({ dark }: { dark: boolean }) {
                <PinIcon />
                <button onClick={() => handleSearch()} style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
             </div>
-            {focused && (
-              <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)" }}>
+            {focused && suggestions.length > 0 && (
+              <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)", maxHeight: 300, overflowY: "auto" }}>
                 <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
-                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Popular Routes</span>
+                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
                 </div>
                 {suggestions.map((s, i) => (
-                  <div key={i} onClick={() => { setQuery(s); setFocused(false); handleSearch(s); }}
+                  <div key={i} onClick={() => { setQuery(s.name); setFocused(false); handleSearch(s.name); }}
                     style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
                     onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
-                    <span style={{ fontSize: 14 }}>{s}</span>
+                    <span style={{ fontSize: 14 }}>{s.name}</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
                   </div>
                 ))}
