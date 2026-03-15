@@ -413,20 +413,20 @@ export default function MapPage() {
 
       {/* Floating Bottom Legend */}
       <div style={{
-        position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)", zIndex: 100,
-        display: "flex", justifyContent: "center", alignItems: "center", gap: 24,
-        padding: "12px 24px", background: "rgba(255, 255, 255, 0.85)",
+        position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 100,
+        display: "flex", justifyContent: "center", alignItems: "center", gap: 16,
+        padding: "8px 20px", background: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(16px)", borderRadius: 50,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.9rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 14, height: 14, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR, boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} />
-          Inbound Deliveries
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
+          Inbound
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.9rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 14, height: 14, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR, boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} />
-          Outbound Deliveries
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
+          Outbound
         </div>
 
         {selectedLocation && apiData && (
