@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 import { useDemoModal } from "@/hooks/use-demo-modal";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo-transparent.png";
+import { searchLocations, type LocationSuggestion } from "@/lib/map-api";
 
 const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; stats: { v: string; l: string }[]; pts: string[]; color: string }> = {
   Intelligence: {
