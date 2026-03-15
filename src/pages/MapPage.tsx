@@ -168,7 +168,7 @@ export default function MapPage() {
 
     const centerLat = selectedLocation.lat;
     const centerLon = selectedLocation.lon;
-    mapRef.current.flyTo([centerLat, centerLon], 5, { animate: true, duration: 1.5 });
+    mapRef.current.flyTo([centerLat, centerLon], 4.5, { animate: true, duration: 1.5 });
 
     const marker = L.marker([centerLat, centerLon]);
     markersLayerRef.current?.addLayer(marker);
