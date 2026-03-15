@@ -303,10 +303,10 @@ export default function MapPage() {
 
       {/* Floating Header */}
       <div style={{
-        position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)",
+        position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)",
         width: "calc(100% - 40px)", maxWidth: 1200, zIndex: 100,
         background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)", padding: "18px 28px", borderRadius: 16,
+        WebkitBackdropFilter: "blur(16px)", padding: "10px 24px", borderRadius: 12,
         boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
