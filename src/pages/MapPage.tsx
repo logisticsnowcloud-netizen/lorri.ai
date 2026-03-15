@@ -382,8 +382,8 @@ export default function MapPage() {
                 onClick={handleSearchSubmit}
                 style={{
                   background: "linear-gradient(135deg, #393185, #4D44A8)", border: "none",
-                  borderRadius: 10, padding: "10px 20px", color: "white", fontFamily: "Outfit, sans-serif",
-                  fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
+                  borderRadius: 8, padding: "7px 18px", color: "white", fontFamily: "Outfit, sans-serif",
+                  fontSize: 12, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
                   boxShadow: "0 4px 16px rgba(57,49,133,0.35)",
                 }}
               >
