@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet.motion/dist/leaflet.motion";
-import { searchLocations, getRoutes, type LocationSuggestion, type RouteData } from "@/lib/map-api";
+import { searchLocations, getScreenZeroData, type LocationSuggestion, type ScreenZeroResponse } from "@/lib/map-api";
 
-// Fix default marker icons for Vite bundling
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -20,6 +18,32 @@ L.Icon.Default.mergeOptions({
 const INBOUND_COLOR = "#393185";
 const OUTBOUND_COLOR = "#54AF3A";
 
+function extractCoords(item: any): [number, number][] | null {
+  // Handle GeoJSON LineString geometry
+  if (item?.geometry?.type === "LineString" && item.geometry.coordinates) {
+    return item.geometry.coordinates.map((c: number[]) => [c[1], c[0]] as [number, number]);
+  }
+  // Handle array of coordinate pairs [[lon,lat],[lon,lat]]
+  if (Array.isArray(item) && item.length >= 2 && Array.isArray(item[0])) {
+    return item.map((c: number[]) => [c[1], c[0]] as [number, number]);
+  }
+  // Handle object with origin/destination coordinates
+  if (item?.origin_coordinates) {
+    return [[item.origin_coordinates[1], item.origin_coordinates[0]]];
+  }
+  if (item?.destination_coordinates) {
+    return [[item.destination_coordinates[1], item.destination_coordinates[0]]];
+  }
+  // Handle object with lat/lon or coordinates
+  if (item?.coordinates) {
+    if (Array.isArray(item.coordinates[0])) {
+      return item.coordinates.map((c: number[]) => [c[1], c[0]] as [number, number]);
+    }
+    return [[item.coordinates[1], item.coordinates[0]]];
+  }
+  return null;
+}
+
 export default function MapPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -28,8 +52,9 @@ export default function MapPage() {
   const [query, setQuery] = useState(initialLocation);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(initialLocation || null);
-  const [routeData, setRouteData] = useState<RouteData | null>(null);
+  const userTypedRef = useRef(false);
+  const [selectedLocation, setSelectedLocation] = useState<LocationSuggestion | null>(null);
+  const [apiData, setApiData] = useState<ScreenZeroResponse | null>(null);
   const [loading, setLoading] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -46,13 +71,12 @@ export default function MapPage() {
     const worldBounds = L.latLngBounds(L.latLng(-85.0511, -180), L.latLng(85.0511, 180));
 
     mapRef.current = L.map(containerRef.current, {
-      center: [24.5, 82.5],
-      zoom: 5,
+      center: [22, 82],
+      zoom: 4.5,
       maxZoom: 20,
       zoomSnap: 1.5,
       zoomControl: false,
       zoomDelta: 0.5,
-      
       maxBounds: worldBounds,
       maxBoundsViscosity: 1.0,
     });
@@ -97,16 +121,39 @@ export default function MapPage() {
     };
   }, []);
 
-  // Fetch routes when location selected
+  // Auto-search initial location from URL
+  useEffect(() => {
+    if (initialLocation && !selectedLocation) {
+      searchLocations(initialLocation).then(results => {
+        if (results.length > 0) {
+          setSelectedLocation(results[0]);
+          setQuery(results[0].name);
+        }
+      });
+    }
+  }, []);
+
+  // Fetch screen_zero data when location selected
   useEffect(() => {
     if (!selectedLocation) {
-      setRouteData(null);
+      setApiData(null);
       return;
     }
     setLoading(true);
-    getRoutes(selectedLocation)
-      .then(data => setRouteData(data))
-      .catch(e => console.error("Error fetching route data:", e))
+    getScreenZeroData(selectedLocation.lon, selectedLocation.lat)
+      .then(data => {
+        console.log("Screen zero response keys:", Object.keys(data));
+        console.log("Inflow count:", data.network?.inflow?.length);
+        console.log("Outflow count:", data.network?.outflow?.length);
+        if (data.network?.inflow?.length > 0) {
+          console.log("Sample inflow item:", JSON.stringify(data.network.inflow[0]).substring(0, 500));
+        }
+        if (data.network?.outflow?.length > 0) {
+          console.log("Sample outflow item:", JSON.stringify(data.network.outflow[0]).substring(0, 500));
+        }
+        setApiData(data);
+      })
+      .catch(e => console.error("Error fetching screen_zero data:", e))
       .finally(() => setLoading(false));
   }, [selectedLocation]);
 
@@ -118,35 +165,47 @@ export default function MapPage() {
     inflowLayersRef.current?.clearLayers();
     outflowLayersRef.current?.clearLayers();
 
-    if (!routeData?.center || routeData.center.length < 2) return;
+    if (!selectedLocation) return;
 
-    const [lng, lat] = routeData.center;
-    mapRef.current.flyTo([lat, lng], 5, { animate: true, duration: 1.5 });
+    const centerLat = selectedLocation.lat;
+    const centerLon = selectedLocation.lon;
+    mapRef.current.flyTo([centerLat, centerLon], 4.5, { animate: true, duration: 1.5 });
 
-    const marker = L.marker([lat, lng]);
+    const marker = L.marker([centerLat, centerLon]);
     markersLayerRef.current?.addLayer(marker);
 
-    routeData.inflow.forEach((item) => {
-      if (!item.origin_coordinates) return;
-      const line = L.polyline(
-        [[item.origin_coordinates[1], item.origin_coordinates[0]], [lat, lng]],
-        { color: INBOUND_COLOR, weight: 2, opacity: 0.8 }
-      );
-      inflowLayersRef.current?.addLayer(line);
+    if (!apiData?.network) return;
+
+    // Draw inflow lines
+    apiData.network.inflow.forEach((item) => {
+      const coords = extractCoords(item);
+      if (coords && coords.length >= 2) {
+        // Multi-point line (GeoJSON LineString)
+        const line = L.polyline(coords, { color: INBOUND_COLOR, weight: 2, opacity: 0.8 });
+        inflowLayersRef.current?.addLayer(line);
+      } else if (coords && coords.length === 1) {
+        // Single point — draw line from that point to center
+        const line = L.polyline([coords[0], [centerLat, centerLon]], { color: INBOUND_COLOR, weight: 2, opacity: 0.8 });
+        inflowLayersRef.current?.addLayer(line);
+      }
     });
 
-    routeData.outflow.forEach((item) => {
-      if (!item.destination_coordinates) return;
-      const line = L.polyline(
-        [[lat, lng], [item.destination_coordinates[1], item.destination_coordinates[0]]],
-        { color: OUTBOUND_COLOR, weight: 2, opacity: 0.8 }
-      );
-      outflowLayersRef.current?.addLayer(line);
+    // Draw outflow lines
+    apiData.network.outflow.forEach((item) => {
+      const coords = extractCoords(item);
+      if (coords && coords.length >= 2) {
+        const line = L.polyline(coords, { color: OUTBOUND_COLOR, weight: 2, opacity: 0.8 });
+        outflowLayersRef.current?.addLayer(line);
+      } else if (coords && coords.length === 1) {
+        const line = L.polyline([[centerLat, centerLon], coords[0]], { color: OUTBOUND_COLOR, weight: 2, opacity: 0.8 });
+        outflowLayersRef.current?.addLayer(line);
+      }
     });
-  }, [routeData]);
+  }, [apiData, selectedLocation]);
 
   // Autocomplete search with debounce
   useEffect(() => {
+    if (!userTypedRef.current) return;
     if (query.length < 2) {
       setSuggestions([]);
       return;
@@ -176,22 +235,61 @@ export default function MapPage() {
   const handleSelect = useCallback((loc: LocationSuggestion) => {
     setQuery(loc.name);
     setShowSuggestions(false);
-    setSelectedLocation(loc.name);
+    setSelectedLocation(loc);
   }, []);
 
   const handleSearchSubmit = useCallback(() => {
     if (query.trim()) {
-      setSelectedLocation(query.trim());
+      searchLocations(query.trim()).then(results => {
+        if (results.length > 0) {
+          setSelectedLocation(results[0]);
+          setQuery(results[0].name);
+        }
+      });
       setShowSuggestions(false);
     }
   }, [query]);
 
+  const handleClear = useCallback(() => {
+    setQuery("");
+    setSuggestions([]);
+    setShowSuggestions(false);
+    setSelectedLocation(null);
+    setApiData(null);
+    if (mapRef.current) {
+      markersLayerRef.current?.clearLayers();
+      inflowLayersRef.current?.clearLayers();
+      outflowLayersRef.current?.clearLayers();
+      mapRef.current.flyTo([22, 82], 4.5, { animate: true, duration: 1 });
+    }
+  }, []);
+
+  const locationLabel = selectedLocation?.name?.split(",")[0] || "";
+  const transporters = apiData?.transporter_list ?? [];
+  const showPanel = selectedLocation && transporters.length > 0;
+
+  // Invalidate map size when panel toggles
+  useEffect(() => {
+    setTimeout(() => mapRef.current?.invalidateSize(), 350);
+  }, [showPanel]);
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <span key={i} style={{ color: i < Math.round(rating) ? "#f59e0b" : "#d1d5db", fontSize: 12 }}>★</span>
+      );
+    }
+    return stars;
+  };
+
   return (
-    <div style={{ height: "100vh", position: "relative", overflow: "hidden", backgroundColor: "#e2e8f0" }}>
-      {/* Full-screen map */}
-      <main style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 1 }}>
-        <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
-      </main>
+    <div style={{ height: "100vh", display: "flex", overflow: "hidden", backgroundColor: "#e2e8f0" }}>
+      {/* Map area */}
+      <div style={{ flex: 1, position: "relative", transition: "all 0.3s ease" }}>
+        <main style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+          <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
+        </main>
 
       {/* Loading overlay */}
       {loading && (
@@ -215,7 +313,7 @@ export default function MapPage() {
               animation: "spin 0.8s linear infinite",
             }} />
             <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 14, fontWeight: 600, color: "#334155" }}>
-              Loading routes for <strong>{selectedLocation}</strong>...
+              Loading routes for <strong>{locationLabel}</strong>...
             </span>
           </div>
         </div>
@@ -225,10 +323,10 @@ export default function MapPage() {
 
       {/* Floating Header */}
       <div style={{
-        position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)",
+        position: "absolute", top: 8, left: "50%", transform: "translateX(-50%)",
         width: "calc(100% - 40px)", maxWidth: 1200, zIndex: 100,
         background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)", padding: "18px 28px", borderRadius: 16,
+        WebkitBackdropFilter: "blur(16px)", padding: "6px 20px", borderRadius: 10,
         boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
@@ -237,41 +335,55 @@ export default function MapPage() {
             <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 2, fontFamily: "Outfit, sans-serif" }}>
               LoRRI Global Grid
             </h1>
-            <p style={{ fontSize: "0.9rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
-              Logistics Network Visualisation
+            <p style={{ fontSize: "0.7rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
+              Search another plant location here:
             </p>
           </div>
 
           {/* Search */}
           <div ref={wrapperRef} style={{ flexGrow: 1, maxWidth: 450, position: "relative" }}>
-            <div style={{ display: "flex", gap: 8 }}>
-              <input
-                value={query}
-                onChange={e => {
-                  setQuery(e.target.value);
-                  if (e.target.value.length === 0) {
-                    setSuggestions([]);
-                    setShowSuggestions(false);
-                    setSelectedLocation(null);
-                  }
-                }}
-                onFocus={() => { if (query.length > 0) setShowSuggestions(true); }}
-                onKeyDown={e => { if (e.key === "Enter") handleSearchSubmit(); }}
-                placeholder="Search a city (e.g. Mumbai, Delhi)..."
-                style={{
-                  width: "100%", padding: "14px 20px", fontSize: "1rem", fontWeight: 500,
-                  fontFamily: "Outfit, sans-serif", color: "#0f172a", backgroundColor: "#ffffff",
-                  border: "1px solid #cbd5e1", borderRadius: 12, outline: "none",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
-                }}
-              />
+            <div style={{ display: "flex", gap: 8, position: "relative" }}>
+              <div style={{ position: "relative", width: "100%" }}>
+                <input
+                  value={query}
+                   onChange={e => {
+                     userTypedRef.current = true;
+                     setQuery(e.target.value);
+                    if (e.target.value.length === 0) {
+                      handleClear();
+                    }
+                  }}
+                  onFocus={() => { if (query.length > 0 && suggestions.length > 0) setShowSuggestions(true); }}
+                  onKeyDown={e => { if (e.key === "Enter") handleSearchSubmit(); }}
+                  placeholder="Search a city (e.g. Mumbai, Delhi)..."
+                  style={{
+                    width: "100%", padding: "7px 36px 7px 14px", fontSize: "0.85rem", fontWeight: 500,
+                    fontFamily: "Outfit, sans-serif", color: "#0f172a", backgroundColor: "#ffffff",
+                    border: "1px solid #cbd5e1", borderRadius: 10, outline: "none",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
+                  }}
+                />
+                {query && (
+                  <button
+                    onClick={handleClear}
+                    style={{
+                      position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                      background: "none", border: "none", cursor: "pointer", fontSize: 18,
+                      color: "#94a3b8", padding: 4, lineHeight: 1,
+                    }}
+                    title="Clear"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
               <button
                 onClick={handleSearchSubmit}
                 style={{
                   background: "linear-gradient(135deg, #393185, #4D44A8)", border: "none",
-                  borderRadius: 12, padding: "14px 24px", color: "white", fontFamily: "Outfit, sans-serif",
-                  fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
+                  borderRadius: 8, padding: "7px 18px", color: "white", fontFamily: "Outfit, sans-serif",
+                  fontSize: 12, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
                   boxShadow: "0 4px 16px rgba(57,49,133,0.35)",
                 }}
               >
@@ -294,6 +406,7 @@ export default function MapPage() {
                     style={{
                       padding: "12px 20px", cursor: "pointer", color: "#334155",
                       fontWeight: 500, transition: "all 0.15s ease", fontFamily: "Outfit, sans-serif",
+                      fontSize: "0.9rem",
                     }}
                     onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f1f5f9")}
                     onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
@@ -309,9 +422,9 @@ export default function MapPage() {
           <button
             onClick={() => navigate("/")}
             style={{
-              background: "transparent", border: "1px solid #cbd5e1", borderRadius: 10,
-              padding: "10px 20px", color: "#334155", fontFamily: "Outfit, sans-serif",
-              fontSize: 13, fontWeight: 600, cursor: "pointer",
+              background: "transparent", border: "1px solid #cbd5e1", borderRadius: 8,
+              padding: "7px 16px", color: "#334155", fontFamily: "Outfit, sans-serif",
+              fontSize: 12, fontWeight: 600, cursor: "pointer",
             }}
           >
             ← Back to Home
@@ -321,34 +434,90 @@ export default function MapPage() {
 
       {/* Floating Bottom Legend */}
       <div style={{
-        position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)", zIndex: 100,
-        display: "flex", justifyContent: "center", alignItems: "center", gap: 24,
-        padding: "12px 24px", background: "rgba(255, 255, 255, 0.85)",
+        position: "absolute", bottom: 10, left: "50%", transform: "translateX(-50%)", zIndex: 100,
+        display: "flex", justifyContent: "center", alignItems: "center", gap: 12,
+        padding: "5px 16px", background: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(16px)", borderRadius: 50,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.9rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 14, height: 14, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR, boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} />
-          Inbound Deliveries
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
+          Inbound
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.9rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 14, height: 14, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR, boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} />
-          Outbound Deliveries
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
+          Outbound
         </div>
 
-        {selectedLocation && (
-          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 20, marginLeft: 4, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
+        {selectedLocation && apiData && (
+          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 14, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
             {loading ? (
-              <span style={{ fontSize: "0.85rem" }}>Loading...</span>
+              <span style={{ fontSize: "0.7rem" }}>Loading...</span>
             ) : (
-              <span style={{ fontSize: "0.85rem" }}>
-                <strong>{selectedLocation}</strong> — In: {routeData?.metrics?.inbound_count ?? 0} | Out: {routeData?.metrics?.outbound_count ?? 0}
+              <span style={{ fontSize: "0.7rem" }}>
+                <strong>{locationLabel}</strong> — Total Transporters: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
               </span>
             )}
           </div>
         )}
       </div>
+      </div>
+
+      {/* Transporter Panel */}
+      {showPanel && (
+        <div style={{
+          width: 380, minWidth: 380, height: "100vh", overflowY: "auto",
+          background: "#fff", borderLeft: "1px solid #e2e8f0",
+          fontFamily: "Outfit, sans-serif", zIndex: 10,
+        }}>
+          <div style={{ padding: "10px 16px", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, background: "#fff", zIndex: 2 }}>
+            <h2 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
+              Transporters in {locationLabel}
+            </h2>
+            <p style={{ fontSize: "0.7rem", color: "#64748b", margin: "2px 0 0" }}>
+              Showing {transporters.length} of <strong>{apiData?.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData?.transporters_count ?? 0}</strong> transporters
+            </p>
+          </div>
+          <div>
+            {transporters.map((t: any, i: number) => (
+              <div key={t.transporter_id || i} style={{
+                padding: "6px 14px", borderBottom: "1px solid #f1f5f9",
+                display: "flex", alignItems: "center", gap: 8,
+                cursor: "pointer", transition: "background 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#f8fafc")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              >
+                <div style={{
+                  width: 30, height: 30, borderRadius: 6, background: "#f1f5f9",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 13, fontWeight: 700, color: "#393185", flexShrink: 0,
+                }}>
+                  {t.transporter_name?.charAt(0) || "T"}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{
+                    fontSize: "0.72rem", fontWeight: 600, color: "#1e40af",
+                    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                  }}>
+                    {t.transporter_name?.toUpperCase()}
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 2, marginTop: 1 }}>
+                    {renderStars(t.overall_rating ?? 0)}
+                    {t.number_of_ratings > 0 && (
+                      <span style={{ fontSize: "0.6rem", color: "#94a3b8", marginLeft: 2 }}>({t.number_of_ratings})</span>
+                    )}
+                    {t.account_type === "verified" && (
+                      <span style={{ fontSize: "0.6rem", color: "#16a34a", fontWeight: 600, marginLeft: 6 }}>✓ Verified</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 import { useDemoModal } from "@/hooks/use-demo-modal";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo-transparent.png";
+import { searchLocations, type LocationSuggestion } from "@/lib/map-api";
 
 const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; stats: { v: string; l: string }[]; pts: string[]; color: string }> = {
   Intelligence: {
@@ -34,7 +35,6 @@ const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; st
 };
 
 const TABS = Object.keys(TAB_DATA);
-const suggestions = ["Mumbai → Delhi", "Bangalore → Chennai", "Pune → Ahmedabad", "Delhi → Kolkata", "Hyderabad → Mumbai"];
 const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
 export default function Hero({ dark }: { dark: boolean }) {
@@ -42,8 +42,20 @@ export default function Hero({ dark }: { dark: boolean }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [tab, setTab] = useState("Intelligence");
   const [userPicked, setUserPicked] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (query.trim().length < 2) { setSuggestions([]); return; }
+    debounceRef.current = setTimeout(async () => {
+      const results = await searchLocations(query.trim());
+      setSuggestions(results);
+    }, 300);
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [query]);
 
   const handleSearch = (searchQuery?: string) => {
     const q = (searchQuery || query).trim();
@@ -110,18 +122,19 @@ export default function Hero({ dark }: { dark: boolean }) {
                <PinIcon />
                <button onClick={() => handleSearch()} style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
             </div>
-            {focused && (
-              <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)" }}>
+            {focused && suggestions.length > 0 && (
+              <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)", maxHeight: 300, overflowY: "auto" }}>
                 <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
-                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Popular Routes</span>
+                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
                 </div>
                 {suggestions.map((s, i) => (
-                  <div key={i} onClick={() => { setQuery(s); setFocused(false); handleSearch(s); }}
+                  <div key={i}
+                    onMouseDown={e => { e.preventDefault(); setQuery(s.name); setFocused(false); navigate(`/map?location=${encodeURIComponent(s.name)}&lat=${s.lat}&lon=${s.lon}`); }}
                     style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
                     onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
-                    <span style={{ fontSize: 14 }}>{s}</span>
+                    <span style={{ fontSize: 14 }}>{s.name}</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
                   </div>
                 ))}
