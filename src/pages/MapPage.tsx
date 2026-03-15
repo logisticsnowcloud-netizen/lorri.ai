@@ -450,24 +450,19 @@ export default function MapPage() {
           Outbound
         </div>
 
-        {selectedLocation && apiData && (
-          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 14, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
-            {loading ? (
-              <span style={{ fontSize: "0.7rem" }}>Loading...</span>
-            ) : (
-              <>
-                <span style={{ fontSize: "0.7rem" }}>
-                  <strong>{locationLabel}</strong> — Total: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}
-                </span>
-                <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
-                  Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
-                </span>
-                <span style={{ fontSize: "0.7rem", color: OUTBOUND_COLOR, fontWeight: 700 }}>
-                  Outbound: {apiData.outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
-                </span>
-              </>
-            )}
-          </div>
+        {selectedLocation && apiData && !loading && (
+          <>
+            <div style={{ width: 1, height: 14, background: "#cbd5e1" }} />
+            <span style={{ fontSize: "0.7rem", color: "#0f172a", fontWeight: 600, fontFamily: "Outfit, sans-serif" }}>
+              {locationLabel} — Total: <strong>{apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}</strong>
+            </span>
+            <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
+              Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
+            </span>
+            <span style={{ fontSize: "0.7rem", color: OUTBOUND_COLOR, fontWeight: 700 }}>
+              Outbound: {apiData.outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
+            </span>
+          </>
         )}
       </div>
       </div>
