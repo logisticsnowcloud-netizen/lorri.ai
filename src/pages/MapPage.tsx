@@ -52,6 +52,7 @@ export default function MapPage() {
   const [query, setQuery] = useState(initialLocation);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const userTypedRef = useRef(false);
   const [selectedLocation, setSelectedLocation] = useState<LocationSuggestion | null>(null);
   const [apiData, setApiData] = useState<ScreenZeroResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -204,6 +205,7 @@ export default function MapPage() {
 
   // Autocomplete search with debounce
   useEffect(() => {
+    if (!userTypedRef.current) return;
     if (query.length < 2) {
       setSuggestions([]);
       return;
@@ -344,8 +346,9 @@ export default function MapPage() {
               <div style={{ position: "relative", width: "100%" }}>
                 <input
                   value={query}
-                  onChange={e => {
-                    setQuery(e.target.value);
+                   onChange={e => {
+                     userTypedRef.current = true;
+                     setQuery(e.target.value);
                     if (e.target.value.length === 0) {
                       handleClear();
                     }
