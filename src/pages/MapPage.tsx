@@ -197,7 +197,7 @@ export default function MapPage() {
         const line = L.polyline(coords, { color: OUTBOUND_COLOR, weight: 1, opacity: 0.5 });
         outflowLayersRef.current?.addLayer(line);
       } else if (coords && coords.length === 1) {
-        const line = L.polyline([[centerLat, centerLon], coords[0]], { color: OUTBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline([[centerLat, centerLon], coords[0]], { color: OUTBOUND_COLOR, weight: 1, opacity: 0.5 });
         outflowLayersRef.current?.addLayer(line);
       }
     });
