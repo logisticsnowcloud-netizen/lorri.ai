@@ -35,7 +35,6 @@ const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; st
 };
 
 const TABS = Object.keys(TAB_DATA);
-const suggestions = ["Mumbai → Delhi", "Bangalore → Chennai", "Pune → Ahmedabad", "Delhi → Kolkata", "Hyderabad → Mumbai"];
 const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
 export default function Hero({ dark }: { dark: boolean }) {
@@ -43,8 +42,20 @@ export default function Hero({ dark }: { dark: boolean }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [tab, setTab] = useState("Intelligence");
   const [userPicked, setUserPicked] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (query.trim().length < 2) { setSuggestions([]); return; }
+    debounceRef.current = setTimeout(async () => {
+      const results = await searchLocations(query.trim());
+      setSuggestions(results);
+    }, 300);
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [query]);
 
   const handleSearch = (searchQuery?: string) => {
     const q = (searchQuery || query).trim();
