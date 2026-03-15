@@ -110,8 +110,8 @@ export default function ClientLogos() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <MarqueeRow items={row1} direction="left" duration={45} tooltipPosition="top" />
-          <MarqueeRow items={row2} direction="right" duration={50} tooltipPosition="bottom" />
+          <MarqueeRow items={row1} direction="left" duration={30} tooltipPosition="top" />
+          <MarqueeRow items={row2} direction="right" duration={35} tooltipPosition="bottom" />
         </div>
 
       </div>
