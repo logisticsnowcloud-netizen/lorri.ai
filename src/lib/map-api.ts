@@ -12,10 +12,12 @@ export interface ScreenZeroResponse {
     inflow: any[];
     outflow: any[];
   };
-  searched_coordinates: [number, number]; // [lon, lat]
+  searched_coordinates: [number, number];
   transporters_count: number;
   transporter_list: any[];
   dashboard: Array<{ label: string; value: number; box_details: any[] }>;
+  inflow_dashboard: Array<{ label: string; value: number; box_details: any[] }>;
+  outflow_dashboard: Array<{ label: string; value: number; box_details: any[] }>;
 }
 
 export async function searchLocations(query: string): Promise<LocationSuggestion[]> {
