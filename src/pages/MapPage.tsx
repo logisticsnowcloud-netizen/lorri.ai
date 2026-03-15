@@ -277,7 +277,7 @@ export default function MapPage() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <span key={i} style={{ color: i < Math.round(rating) ? "#f59e0b" : "#d1d5db", fontSize: 16 }}>★</span>
+        <span key={i} style={{ color: i < Math.round(rating) ? "#f59e0b" : "#d1d5db", fontSize: 12 }}>★</span>
       );
     }
     return stars;
