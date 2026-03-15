@@ -181,7 +181,7 @@ export default function MapPage() {
       const coords = extractCoords(item);
       if (coords && coords.length >= 2) {
         // Multi-point line (GeoJSON LineString)
-        const line = L.polyline(coords, { color: INBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline(coords, { color: INBOUND_COLOR, weight: 1, opacity: 0.5 });
         inflowLayersRef.current?.addLayer(line);
       } else if (coords && coords.length === 1) {
         // Single point — draw line from that point to center
