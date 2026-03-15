@@ -1,5 +1,7 @@
 const row1 = [
   { n: "Apollo Tyres", domain: "apollotyres.com" },
+  { n: "Ceat", domain: "ceat.com" },
+  { n: "Perfetti Van Melle", domain: "https://www.perfettivanmelle.com/" },
   { n: "Maersk", domain: "maersk.com" },
   { n: "Vredestein", domain: "vredestein.com" },
   { n: "Kuehne+Nagel", domain: "kuehne-nagel.com" },
