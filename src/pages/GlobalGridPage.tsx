@@ -63,10 +63,7 @@ export default function GlobalGridPage() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [inboundCount, setInboundCount] = useState(0);
-  const [outboundCount, setOutboundCount] = useState(0);
-  const [showInbound, setShowInbound] = useState(true);
-  const [showOutbound, setShowOutbound] = useState(true);
+  const [regionLaneCounts, setRegionLaneCounts] = useState<Record<string, { inbound: number; outbound: number }>>({});
 
   const getRegionFromUrl = (): [number, number] => {
     const regionParam = searchParams.get("region");
