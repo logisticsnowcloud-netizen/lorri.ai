@@ -471,12 +471,12 @@ export default function MapPage() {
           background: "#fff", borderLeft: "1px solid #e2e8f0",
           fontFamily: "Outfit, sans-serif", zIndex: 10,
         }}>
-          <div style={{ padding: "16px 20px", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, background: "#fff", zIndex: 2 }}>
-            <h2 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
+          <div style={{ padding: "10px 16px", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, background: "#fff", zIndex: 2 }}>
+            <h2 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
               Transporters in {locationLabel}
             </h2>
-            <p style={{ fontSize: "0.8rem", color: "#64748b", margin: "4px 0 0" }}>
-              Showing {transporters.length} of <strong>{apiData?.transporters_count ?? 0}</strong> transporters
+            <p style={{ fontSize: "0.7rem", color: "#64748b", margin: "2px 0 0" }}>
+              Showing {transporters.length} of <strong>{apiData?.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData?.transporters_count ?? 0}</strong> transporters
             </p>
           </div>
           <div>
