@@ -45,7 +45,7 @@ function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPo
       <img
         src={logo}
         alt={n}
-        style={{ width: 48, height: 48, borderRadius: 4, objectFit: "contain" }}
+        style={{ width: 64, height: 64, borderRadius: 4, objectFit: "contain" }}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
       {/* Tooltip */}
@@ -110,8 +110,8 @@ export default function ClientLogos() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <MarqueeRow items={row1} direction="left" duration={45} tooltipPosition="top" />
-          <MarqueeRow items={row2} direction="right" duration={50} tooltipPosition="bottom" />
+          <MarqueeRow items={row1} direction="left" duration={30} tooltipPosition="top" />
+          <MarqueeRow items={row2} direction="right" duration={35} tooltipPosition="bottom" />
         </div>
 
       </div>
