@@ -422,9 +422,9 @@ export default function MapPage() {
           <button
             onClick={() => navigate("/")}
             style={{
-              background: "transparent", border: "1px solid #cbd5e1", borderRadius: 10,
-              padding: "10px 20px", color: "#334155", fontFamily: "Outfit, sans-serif",
-              fontSize: 13, fontWeight: 600, cursor: "pointer",
+              background: "transparent", border: "1px solid #cbd5e1", borderRadius: 8,
+              padding: "7px 16px", color: "#334155", fontFamily: "Outfit, sans-serif",
+              fontSize: 12, fontWeight: 600, cursor: "pointer",
             }}
           >
             ← Back to Home
