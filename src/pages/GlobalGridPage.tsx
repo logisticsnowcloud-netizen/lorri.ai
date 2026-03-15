@@ -23,6 +23,21 @@ const regionCenter: Record<string, { label: string; coordinates: [number, number
   united_states: { label: "United States", coordinates: [-98.5795, 39.8283] },
 };
 
+// Bounding boxes [minLon, minLat, maxLon, maxLat] for each region
+const regionBounds: Record<string, [number, number, number, number]> = {
+  india: [68, 6, 98, 38],
+  europe: [-25, 34, 45, 72],
+  china: [73, 15, 135, 55],
+  australia: [110, -50, 160, -10],
+  united_states: [-130, 24, -65, 50],
+};
+
+function isInRegion(lon: number, lat: number, regionKey: string): boolean {
+  const bounds = regionBounds[regionKey];
+  if (!bounds) return false;
+  return lon >= bounds[0] && lon <= bounds[2] && lat >= bounds[1] && lat <= bounds[3];
+}
+
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   const R = 6371;
   const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -48,10 +63,7 @@ export default function GlobalGridPage() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [inboundCount, setInboundCount] = useState(0);
-  const [outboundCount, setOutboundCount] = useState(0);
-  const [showInbound, setShowInbound] = useState(true);
-  const [showOutbound, setShowOutbound] = useState(true);
+  const [regionLaneCounts, setRegionLaneCounts] = useState<Record<string, { inbound: number; outbound: number }>>({});
 
   const getRegionFromUrl = (): [number, number] => {
     const regionParam = searchParams.get("region");
@@ -115,10 +127,32 @@ export default function GlobalGridPage() {
         const res = await fetch(NETWORK_DATA_URL);
         const data = await res.json();
         setNetworkData(data);
-        // Count features
+
+        // Calculate per-region inbound/outbound counts
         if (data?.features) {
-          setInboundCount(Math.floor(data.features.length * 0.45));
-          setOutboundCount(Math.floor(data.features.length * 0.55));
+          const counts: Record<string, { inbound: number; outbound: number }> = {};
+          Object.keys(regionBounds).forEach(r => { counts[r] = { inbound: 0, outbound: 0 }; });
+
+          data.features.forEach((f: any) => {
+            if (f.geometry?.type === "LineString" && f.geometry.coordinates?.length >= 2) {
+              const [originLon, originLat] = f.geometry.coordinates[0];
+              const [destLon, destLat] = f.geometry.coordinates[f.geometry.coordinates.length - 1];
+
+              Object.keys(regionBounds).forEach(regionKey => {
+                const originIn = isInRegion(originLon, originLat, regionKey);
+                const destIn = isInRegion(destLon, destLat, regionKey);
+
+                if (destIn && !originIn) counts[regionKey].inbound++;
+                if (originIn && !destIn) counts[regionKey].outbound++;
+                // If both origin & dest are in the region, count as both
+                if (originIn && destIn) {
+                  counts[regionKey].inbound++;
+                  counts[regionKey].outbound++;
+                }
+              });
+            }
+          });
+          setRegionLaneCounts(counts);
         }
       } catch (err) {
         console.warn("Network data fetch failed:", err);
@@ -226,15 +260,6 @@ export default function GlobalGridPage() {
     else mapRef.current.once("load", updateSource);
   }, [networkData]);
 
-  // Toggle layer visibility
-  useEffect(() => {
-    if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
-    const visible = showInbound || showOutbound;
-    try {
-      mapRef.current.setLayoutProperty("worldMap", "visibility", visible ? "visible" : "none");
-      mapRef.current.setLayoutProperty("arrows-layer", "visibility", visible ? "visible" : "none");
-    } catch {}
-  }, [showInbound, showOutbound]);
 
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSearchParams({ region: e.target.value });
@@ -373,24 +398,6 @@ export default function GlobalGridPage() {
               </select>
             </div>
 
-            {/* Movement toggles - bottom right */}
-            <div style={{
-              position: "absolute", bottom: 60, right: 12, zIndex: 10,
-              background: "#fff", borderRadius: 8, padding: "10px 14px",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.1)", fontFamily: "Outfit, sans-serif",
-            }}>
-              <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, cursor: "pointer", marginBottom: 6, fontWeight: 500 }}>
-                <input type="checkbox" checked={showInbound} onChange={(e) => setShowInbound(e.target.checked)}
-                  style={{ accentColor: "#393185", width: 15, height: 15 }} />
-                Inbound Movement
-              </label>
-              <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, cursor: "pointer", fontWeight: 500 }}>
-                <input type="checkbox" checked={showOutbound} onChange={(e) => setShowOutbound(e.target.checked)}
-                  style={{ accentColor: "#22c55e", width: 15, height: 15 }} />
-                Outbound Movement
-              </label>
-            </div>
-
             {/* Bottom legend bar */}
             <div style={{
               position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 10,
@@ -408,7 +415,7 @@ export default function GlobalGridPage() {
                 <span style={{ fontSize: 13, fontWeight: 600, color: "#333" }}>Outbound Deliveries</span>
               </div>
               <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a2e" }}>
-                {currentRegionKey.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase())} — In: {inboundCount} | Out: {outboundCount}
+                {regionCenter[currentRegionKey]?.label || currentRegionKey} — In: {regionLaneCounts[currentRegionKey]?.inbound ?? 0} | Out: {regionLaneCounts[currentRegionKey]?.outbound ?? 0}
               </div>
             </div>
           </>
