@@ -460,10 +460,10 @@ export default function MapPage() {
                   <strong>{locationLabel}</strong> — Total: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}
                 </span>
                 <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
-                  Inbound: {(apiData as any).inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
+                  Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
                 </span>
                 <span style={{ fontSize: "0.7rem", color: OUTBOUND_COLOR, fontWeight: 700 }}>
-                  Outbound: {(apiData as any).outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
+                  Outbound: {apiData.outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
                 </span>
               </>
             )}
