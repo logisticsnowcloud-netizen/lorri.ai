@@ -407,24 +407,6 @@ export default function GlobalGridPage() {
               </select>
             </div>
 
-            {/* Movement toggles - bottom right */}
-            <div style={{
-              position: "absolute", bottom: 60, right: 12, zIndex: 10,
-              background: "#fff", borderRadius: 8, padding: "10px 14px",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.1)", fontFamily: "Outfit, sans-serif",
-            }}>
-              <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, cursor: "pointer", marginBottom: 6, fontWeight: 500 }}>
-                <input type="checkbox" checked={showInbound} onChange={(e) => setShowInbound(e.target.checked)}
-                  style={{ accentColor: "#393185", width: 15, height: 15 }} />
-                Inbound Movement
-              </label>
-              <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, cursor: "pointer", fontWeight: 500 }}>
-                <input type="checkbox" checked={showOutbound} onChange={(e) => setShowOutbound(e.target.checked)}
-                  style={{ accentColor: "#22c55e", width: 15, height: 15 }} />
-                Outbound Movement
-              </label>
-            </div>
-
             {/* Bottom legend bar */}
             <div style={{
               position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 10,
@@ -442,7 +424,7 @@ export default function GlobalGridPage() {
                 <span style={{ fontSize: 13, fontWeight: 600, color: "#333" }}>Outbound Deliveries</span>
               </div>
               <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1a2e" }}>
-                {currentRegionKey.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase())} — In: {inboundCount} | Out: {outboundCount}
+                {regionCenter[currentRegionKey]?.label || currentRegionKey} — In: {regionLaneCounts[currentRegionKey]?.inbound ?? 0} | Out: {regionLaneCounts[currentRegionKey]?.outbound ?? 0}
               </div>
             </div>
           </>
