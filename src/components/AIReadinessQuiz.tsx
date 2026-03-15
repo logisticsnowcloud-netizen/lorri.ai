@@ -76,7 +76,7 @@ export default function AIReadinessQuiz() {
           Assess Your Logistics{" "}
           <span style={{ background: "linear-gradient(135deg, #393185, #4D44A8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Readiness</span>
         </h2>
-        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, color: "var(--text3)", marginBottom: 40, maxWidth: 520, margin: "0 auto 40px" }}>
+        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, color: "var(--text3)", marginBottom: 40, margin: "0 auto 40px" }}>
           Answer {totalSteps} questions. Get an instant benchmark and personalized recommendation.
         </p>
 

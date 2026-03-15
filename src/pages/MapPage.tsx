@@ -434,12 +434,12 @@ export default function MapPage() {
 
       {/* Floating Bottom Legend */}
       <div style={{
-        position: "absolute", bottom: 10, left: "45%", transform: "translateX(-50%)", zIndex: 100,
+        position: "absolute", bottom: 10, left: "35%", transform: "translateX(-50%)", zIndex: 100,
         display: "flex", justifyContent: "center", alignItems: "center", gap: 12,
         padding: "5px 16px", background: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(16px)", borderRadius: 50,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)",
-        border: "1px solid rgba(255, 255, 255, 0.5)",
+        border: "1px solid rgba(255, 255, 255, 0.5)", width: '50%'
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
@@ -451,13 +451,13 @@ export default function MapPage() {
         </div>
 
         {selectedLocation && apiData && (
-          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 14, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
+          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 10, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
             {loading ? (
               <span style={{ fontSize: "0.7rem" }}>Loading...</span>
             ) : (
               <>
                 <span style={{ fontSize: "0.7rem" }}>
-                  <strong>{locationLabel}</strong> — Total: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}
+                  <strong>{locationLabel}</strong> — Transporters: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}
                 </span>
                 <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
                   Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}

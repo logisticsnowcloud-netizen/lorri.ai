@@ -1,0 +1,30 @@
+.custom-input{
+    /* border-bottom: 1px solid #393185 !important;
+    margin-top: 0px !important; */
+    border: 1px solid #d9d9d9 !important;
+    border-radius: 11px !important;
+    padding-left: 1% !important;
+}
+.heading{
+    color: #393185;
+    font-size: 24px;
+    font-weight: bolder;
+    padding-bottom: 1%;
+    text-align: center;
+}
+.input-field{
+    position: relative;
+    margin-top: 1%;
+    /* margin-top: 1rem; */
+    margin-bottom: 1%;
+}
+
+@media only screen and (max-width: 600px) {
+    .heading{
+        color: #393185;
+        font-size: 22px;
+        font-weight: bolder;
+        padding-bottom: 1%;
+        text-align: center;
+    }
+}
