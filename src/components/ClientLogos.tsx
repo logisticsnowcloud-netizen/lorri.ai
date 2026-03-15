@@ -1,46 +1,43 @@
 const row1 = [
-  { n: "Apollo Tyres", domain: "apollotyres.com" },
-  { n: "Ceat", domain: "ceat.com" },
-  { n: "Perfetti Van Melle", domain: "https://www.perfettivanmelle.com/" },
-  { n: "Maersk", domain: "maersk.com" },
-  { n: "Vredestein", domain: "vredestein.com" },
-  { n: "Kuehne+Nagel", domain: "kuehne-nagel.com" },
-  { n: "Kimberly-Clark", domain: "kimberly-clark.com" },
+  { n: "Apollo Tyres", logo: "/logos/apollo-tyres.png" },
+  { n: "Ceat", logo: "/logos/ceat.png" },
+  { n: "Perfetti", logo: "/logos/perfetti.png" },
+  { n: "Maersk", logo: "/logos/Maersk.png" },
+  { n: "Vredestein", logo: "/logos/vredestein.jpg" },
+  { n: "Kimberly-Clark", logo: "/logos/kimberly-clark.png" },
+  { n: "DHL", logo: "/logos/dhl.png" },
 ];
 
 const row2 = [
-  { n: "DSV", domain: "dsv.com" },
-  { n: "Shell", domain: "shell.com" },
-  { n: "FM Logistic", domain: "fmlogistic.com" },
-  { n: "PepsiCo", domain: "pepsico.com" },
-  { n: "Bajaj", domain: "bajaj.com" },
-  { n: "Tata Steel", domain: "tatasteel.com" },
+  { n: "DSV", logo: "/logos/dsv.png" },
+  { n: "Shell", logo: "/logos/shell.png" },
+  { n: "FM Logistic", logo: "/logos/fm.png" },
+  { n: "Bajaj", logo: "/logos/bajaj.png" },
+  { n: "Delhivery", logo: "/logos/delhivery.png" },
+  { n: "TCI", logo: "/logos/tci.png" },
+  { n: "Saint-Gobain", logo: "/logos/saint-gobain.png" },
 ];
 
 const row3 = [
-  { n: "Reliance", domain: "ril.com" },
-  { n: "Delhivery", domain: "delhivery.com" },
-  { n: "Mahindra", domain: "mahindra.com" },
-  { n: "UltraTech", domain: "ultratechcement.com" },
-  { n: "Blue Dart", domain: "bluedart.com" },
+  { n: "Flipkart", logo: "/logos/flipkart.jpeg" },
+  { n: "Pernod Ricard", logo: "/logos/pernod.png" },
+  { n: "Zydus", logo: "/logos/zydus.jpeg" },
+  { n: "CJ Darcl", logo: "/logos/cjdarcl.png" },
+  { n: "Rhenus", logo: "/logos/rhenus.png" },
+  { n: "CEVA", logo: "/logos/ceva.png" },
+  { n: "Schreiber", logo: "/logos/schreiber.png" },
+  { n: "Jyothy Labs", logo: "/logos/jyothy-labs.png" },
 ];
 
-const lanes = [
-  "🟢 Mumbai → Delhi   ₹82,500   -18% vs Market",
-  "🔵 Bangalore → Chennai   ₹28,200   Normal",
-  "🟡 Pune → Ahmedabad   ₹41,000   Moderate",
-  "🟢 Delhi → Kolkata   ₹67,800   -12% vs Market",
-  "🔴 Chennai → Delhi   ₹79,500   High Demand",
-  "🟢 Surat → Jaipur   ₹38,600   -8% vs Market",
-];
+type ClientItem = { n: string; logo: string };
 
-function LogoCard({ n, domain }: { n: string; domain: string }) {
+function LogoCard({ n, logo }: ClientItem) {
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 28px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", whiteSpace: "nowrap", minWidth: 160 }}>
       <img
-        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+        src={logo}
         alt={n}
-        style={{ width: 24, height: 24, borderRadius: 4, objectFit: "contain" }}
+        style={{ width: 28, height: 28, borderRadius: 4, objectFit: "contain" }}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
       <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text2)", letterSpacing: ".04em" }}>{n}</span>
