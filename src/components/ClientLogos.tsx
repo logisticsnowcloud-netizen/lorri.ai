@@ -37,7 +37,7 @@ function LogoCard({ n, logo }: ClientItem) {
       <img
         src={logo}
         alt={n}
-        style={{ width: 28, height: 28, borderRadius: 4, objectFit: "contain" }}
+        style={{ width: 36, height: 36, borderRadius: 4, objectFit: "contain" }}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
       <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text2)", letterSpacing: ".04em" }}>{n}</span>
