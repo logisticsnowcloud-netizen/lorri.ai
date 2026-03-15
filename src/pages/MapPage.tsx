@@ -315,7 +315,7 @@ export default function MapPage() {
             <h1 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 1, fontFamily: "Outfit, sans-serif" }}>
               LoRRI Network Grid
             </h1>
-            <p style={{ fontSize: "0.9rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
+            <p style={{ fontSize: "0.8rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
               Search another plant location here:
             </p>
           </div>
