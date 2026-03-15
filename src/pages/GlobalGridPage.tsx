@@ -260,15 +260,6 @@ export default function GlobalGridPage() {
     else mapRef.current.once("load", updateSource);
   }, [networkData]);
 
-  // Toggle layer visibility
-  useEffect(() => {
-    if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
-    const visible = showInbound || showOutbound;
-    try {
-      mapRef.current.setLayoutProperty("worldMap", "visibility", visible ? "visible" : "none");
-      mapRef.current.setLayoutProperty("arrows-layer", "visibility", visible ? "visible" : "none");
-    } catch {}
-  }, [showInbound, showOutbound]);
 
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSearchParams({ region: e.target.value });
