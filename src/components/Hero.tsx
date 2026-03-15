@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 import { useDemoModal } from "@/hooks/use-demo-modal";
