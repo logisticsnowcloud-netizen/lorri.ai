@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { SearchIcon, PinIcon, CalendarIcon, Check, Arrow, GlobeNetIcon } from "./Icons";
 import { scrollTo } from "@/hooks/use-in-view";
 import { useDemoModal } from "@/hooks/use-demo-modal";
@@ -38,10 +39,16 @@ const gridDots = [0, 2, 4, 7, 12, 14, 17, 22];
 
 export default function Hero({ dark }: { dark: boolean }) {
   const openDemoModal = useDemoModal();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [tab, setTab] = useState("Intelligence");
   const [userPicked, setUserPicked] = useState(false);
+
+  const handleSearch = (searchQuery?: string) => {
+    const q = (searchQuery || query).trim();
+    if (q) navigate(`/map?location=${encodeURIComponent(q)}`);
+  };
 
   useEffect(() => {
     if (userPicked) return;
@@ -93,14 +100,15 @@ export default function Hero({ dark }: { dark: boolean }) {
           <div className="fu2" style={{ width: "100%", maxWidth: 540, position: "relative" }}>
             <div style={{ background: focused ? "var(--card2)" : "var(--purpleLt)", border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`, borderRadius: 14, padding: "14px 18px", display: "flex", alignItems: "center", gap: 12, transition: "all .3s", boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none" }}>
               <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
-              <input
-                value={query} onChange={e => setQuery(e.target.value)}
-                onFocus={() => setFocused(true)} onBlur={() => setTimeout(() => setFocused(false), 200)}
-                placeholder="Search locations, connect the digital dots!"
-                style={{ flex: 1, background: "none", border: "none", outline: "none", color: "var(--text)", fontFamily: "Outfit,sans-serif", fontSize: 15, fontWeight: 400 }}
-              />
-              <PinIcon />
-              <button style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
+               <input
+                 value={query} onChange={e => setQuery(e.target.value)}
+                 onFocus={() => setFocused(true)} onBlur={() => setTimeout(() => setFocused(false), 200)}
+                 onKeyDown={e => { if (e.key === "Enter") handleSearch(); }}
+                 placeholder="Search locations, connect the digital dots!"
+                 style={{ flex: 1, background: "none", border: "none", outline: "none", color: "var(--text)", fontFamily: "Outfit,sans-serif", fontSize: 15, fontWeight: 400 }}
+               />
+               <PinIcon />
+               <button onClick={() => handleSearch()} style={{ background: "linear-gradient(135deg,#393185,#4D44A8)", border: "none", borderRadius: 8, padding: "9px 22px", color: "white", fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0 }}>Search</button>
             </div>
             {focused && (
               <div style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0, background: "var(--card)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden", zIndex: 20, boxShadow: "0 20px 60px var(--shadow)" }}>
@@ -108,7 +116,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Popular Routes</span>
                 </div>
                 {suggestions.map((s, i) => (
-                  <div key={i} onClick={() => { setQuery(s); setFocused(false); }}
+                  <div key={i} onClick={() => { setQuery(s); setFocused(false); handleSearch(s); }}
                     style={{ padding: "12px 18px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer", transition: "background .15s", borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none", color: "var(--text)" }}
                     onMouseEnter={e => (e.currentTarget.style.background = "var(--purpleLt)")}
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
