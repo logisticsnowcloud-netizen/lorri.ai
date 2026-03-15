@@ -44,7 +44,7 @@ function LogoCard({ n, logo }: ClientItem) {
     </div>
   );
 }
-function MarqueeRow({ items, direction = "left", duration = 30 }: { items: typeof row1; direction?: "left" | "right"; duration?: number }) {
+function MarqueeRow({ items, direction = "left", duration = 30 }: { items: ClientItem[]; direction?: "left" | "right"; duration?: number }) {
   const doubled = [...items, ...items];
   return (
     <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)" }}>
@@ -54,7 +54,7 @@ function MarqueeRow({ items, direction = "left", duration = 30 }: { items: typeo
         animation: `${direction === "left" ? "ticker" : "tickerReverse"} ${duration}s linear infinite`,
         whiteSpace: "nowrap",
       }}>
-        {doubled.map((cl, i) => <LogoCard key={i} n={cl.n} domain={cl.domain} />)}
+        {doubled.map((cl, i) => <LogoCard key={i} n={cl.n} logo={cl.logo} />)}
       </div>
     </div>
   );
