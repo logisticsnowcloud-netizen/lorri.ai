@@ -143,8 +143,8 @@ export default function MapPage() {
     getScreenZeroData(selectedLocation.lon, selectedLocation.lat)
       .then(data => {
         console.log("Screen zero response keys:", Object.keys(data));
-        console.log("Inflow count:", data.network?.inflow?.length);
-        console.log("Outflow count:", data.network?.outflow?.length);
+        console.log("inflow_dashboard:", JSON.stringify(data.inflow_dashboard));
+        console.log("outflow_dashboard:", JSON.stringify(data.outflow_dashboard));
         if (data.network?.inflow?.length > 0) {
           console.log("Sample inflow item:", JSON.stringify(data.network.inflow[0]).substring(0, 500));
         }
@@ -455,9 +455,17 @@ export default function MapPage() {
             {loading ? (
               <span style={{ fontSize: "0.7rem" }}>Loading...</span>
             ) : (
-              <span style={{ fontSize: "0.7rem" }}>
-                <strong>{locationLabel}</strong> — Total Transporters: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
-              </span>
+              <>
+                <span style={{ fontSize: "0.7rem" }}>
+                  <strong>{locationLabel}</strong> — Total: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}
+                </span>
+                <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
+                  Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
+                </span>
+                <span style={{ fontSize: "0.7rem", color: OUTBOUND_COLOR, fontWeight: 700 }}>
+                  Outbound: {apiData.outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
+                </span>
+              </>
             )}
           </div>
         )}
