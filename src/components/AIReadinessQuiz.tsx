@@ -63,7 +63,7 @@ export default function AIReadinessQuiz() {
   };
 
   return (
-    <section style={{ padding: "80px 24px", background: "var(--bg)" }}>
+    <section style={{ padding: "32px 24px", background: "var(--bg)" }}>
       <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
         {/* Badge */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 20 }}>

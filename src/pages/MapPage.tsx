@@ -181,11 +181,11 @@ export default function MapPage() {
       const coords = extractCoords(item);
       if (coords && coords.length >= 2) {
         // Multi-point line (GeoJSON LineString)
-        const line = L.polyline(coords, { color: INBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline(coords, { color: INBOUND_COLOR, weight: 1, opacity: 0.5 });
         inflowLayersRef.current?.addLayer(line);
       } else if (coords && coords.length === 1) {
         // Single point — draw line from that point to center
-        const line = L.polyline([coords[0], [centerLat, centerLon]], { color: INBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline([coords[0], [centerLat, centerLon]], { color: INBOUND_COLOR, weight: 1, opacity: 0.5 });
         inflowLayersRef.current?.addLayer(line);
       }
     });
@@ -194,10 +194,10 @@ export default function MapPage() {
     apiData.network.outflow.forEach((item) => {
       const coords = extractCoords(item);
       if (coords && coords.length >= 2) {
-        const line = L.polyline(coords, { color: OUTBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline(coords, { color: OUTBOUND_COLOR, weight: 1, opacity: 0.5 });
         outflowLayersRef.current?.addLayer(line);
       } else if (coords && coords.length === 1) {
-        const line = L.polyline([[centerLat, centerLon], coords[0]], { color: OUTBOUND_COLOR, weight: 2, opacity: 0.8 });
+        const line = L.polyline([[centerLat, centerLon], coords[0]], { color: OUTBOUND_COLOR, weight: 1, opacity: 0.5 });
         outflowLayersRef.current?.addLayer(line);
       }
     });
@@ -450,24 +450,19 @@ export default function MapPage() {
           Outbound
         </div>
 
-        {selectedLocation && apiData && (
-          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 10, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
-            {loading ? (
-              <span style={{ fontSize: "0.7rem" }}>Loading...</span>
-            ) : (
-              <>
-                <span style={{ fontSize: "0.7rem" }}>
-                  <strong>{locationLabel}</strong> — Transporters: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}
-                </span>
-                <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
-                  Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
-                </span>
-                <span style={{ fontSize: "0.7rem", color: OUTBOUND_COLOR, fontWeight: 700 }}>
-                  Outbound: {apiData.outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
-                </span>
-              </>
-            )}
-          </div>
+        {selectedLocation && apiData && !loading && (
+          <>
+            <div style={{ width: 1, height: 14, background: "#cbd5e1" }} />
+            <span style={{ fontSize: "0.7rem", color: "#0f172a", fontWeight: 600, fontFamily: "Outfit, sans-serif" }}>
+              {locationLabel} — Total: <strong>{apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0}</strong>
+            </span>
+            <span style={{ fontSize: "0.7rem", color: INBOUND_COLOR, fontWeight: 700 }}>
+              Inbound: {apiData.inflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.inflow?.length ?? 0}
+            </span>
+            <span style={{ fontSize: "0.7rem", color: OUTBOUND_COLOR, fontWeight: 700 }}>
+              Outbound: {apiData.outflow_dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.network?.outflow?.length ?? 0}
+            </span>
+          </>
         )}
       </div>
       </div>
