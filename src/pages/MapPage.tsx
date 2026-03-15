@@ -205,6 +205,7 @@ export default function MapPage() {
 
   // Autocomplete search with debounce
   useEffect(() => {
+    if (!userTypedRef.current) return;
     if (query.length < 2) {
       setSuggestions([]);
       return;
