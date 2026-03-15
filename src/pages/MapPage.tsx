@@ -277,7 +277,7 @@ export default function MapPage() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <span key={i} style={{ color: i < Math.round(rating) ? "#f59e0b" : "#d1d5db", fontSize: 16 }}>★</span>
+        <span key={i} style={{ color: i < Math.round(rating) ? "#f59e0b" : "#d1d5db", fontSize: 12 }}>★</span>
       );
     }
     return stars;
@@ -323,19 +323,19 @@ export default function MapPage() {
 
       {/* Floating Header */}
       <div style={{
-        position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)",
+        position: "absolute", top: 8, left: "50%", transform: "translateX(-50%)",
         width: "calc(100% - 40px)", maxWidth: 1200, zIndex: 100,
         background: "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)", padding: "10px 24px", borderRadius: 12,
+        WebkitBackdropFilter: "blur(16px)", padding: "6px 20px", borderRadius: 10,
         boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
           <div>
-            <h1 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 1, fontFamily: "Outfit, sans-serif" }}>
+            <h1 style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", marginBottom: 0, fontFamily: "Outfit, sans-serif", lineHeight: 1.2 }}>
               LoRRI Network Grid
             </h1>
-            <p style={{ fontSize: "0.8rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
+            <p style={{ fontSize: "0.7rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
               Search another plant location here:
             </p>
           </div>
@@ -357,9 +357,9 @@ export default function MapPage() {
                   onKeyDown={e => { if (e.key === "Enter") handleSearchSubmit(); }}
                   placeholder="Search a city (e.g. Mumbai, Delhi)..."
                   style={{
-                    width: "100%", padding: "10px 36px 10px 16px", fontSize: "0.9rem", fontWeight: 500,
+                    width: "100%", padding: "7px 36px 7px 14px", fontSize: "0.85rem", fontWeight: 500,
                     fontFamily: "Outfit, sans-serif", color: "#0f172a", backgroundColor: "#ffffff",
-                    border: "1px solid #cbd5e1", borderRadius: 12, outline: "none",
+                    border: "1px solid #cbd5e1", borderRadius: 10, outline: "none",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
                   }}
@@ -382,8 +382,8 @@ export default function MapPage() {
                 onClick={handleSearchSubmit}
                 style={{
                   background: "linear-gradient(135deg, #393185, #4D44A8)", border: "none",
-                  borderRadius: 10, padding: "10px 20px", color: "white", fontFamily: "Outfit, sans-serif",
-                  fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
+                  borderRadius: 8, padding: "7px 18px", color: "white", fontFamily: "Outfit, sans-serif",
+                  fontSize: 12, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", flexShrink: 0,
                   boxShadow: "0 4px 16px rgba(57,49,133,0.35)",
                 }}
               >
@@ -422,9 +422,9 @@ export default function MapPage() {
           <button
             onClick={() => navigate("/")}
             style={{
-              background: "transparent", border: "1px solid #cbd5e1", borderRadius: 10,
-              padding: "10px 20px", color: "#334155", fontFamily: "Outfit, sans-serif",
-              fontSize: 13, fontWeight: 600, cursor: "pointer",
+              background: "transparent", border: "1px solid #cbd5e1", borderRadius: 8,
+              padding: "7px 16px", color: "#334155", fontFamily: "Outfit, sans-serif",
+              fontSize: 12, fontWeight: 600, cursor: "pointer",
             }}
           >
             ← Back to Home
@@ -434,29 +434,29 @@ export default function MapPage() {
 
       {/* Floating Bottom Legend */}
       <div style={{
-        position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 100,
-        display: "flex", justifyContent: "center", alignItems: "center", gap: 16,
-        padding: "8px 20px", background: "rgba(255, 255, 255, 0.85)",
+        position: "absolute", bottom: 10, left: "50%", transform: "translateX(-50%)", zIndex: 100,
+        display: "flex", justifyContent: "center", alignItems: "center", gap: 12,
+        padding: "5px 16px", background: "rgba(255, 255, 255, 0.85)",
         backdropFilter: "blur(16px)", borderRadius: 50,
         boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)",
         border: "1px solid rgba(255, 255, 255, 0.5)",
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
           Inbound
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.75rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ width: 10, height: 10, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.7rem", color: "#334155", fontWeight: 600 }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
           Outbound
         </div>
 
         {selectedLocation && apiData && (
-          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 20, marginLeft: 4, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
+          <div style={{ borderLeft: "2px solid #e2e8f0", paddingLeft: 14, marginLeft: 2, color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
             {loading ? (
-              <span style={{ fontSize: "0.85rem" }}>Loading...</span>
+              <span style={{ fontSize: "0.7rem" }}>Loading...</span>
             ) : (
-              <span style={{ fontSize: "0.75rem" }}>
-                <strong>{locationLabel}</strong> — Transporters: {apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
+              <span style={{ fontSize: "0.7rem" }}>
+                <strong>{locationLabel}</strong> — Total Transporters: {apiData.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
               </span>
             )}
           </div>
@@ -471,47 +471,47 @@ export default function MapPage() {
           background: "#fff", borderLeft: "1px solid #e2e8f0",
           fontFamily: "Outfit, sans-serif", zIndex: 10,
         }}>
-          <div style={{ padding: "16px 20px", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, background: "#fff", zIndex: 2 }}>
-            <h2 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
+          <div style={{ padding: "10px 16px", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, background: "#fff", zIndex: 2 }}>
+            <h2 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#0f172a", margin: 0 }}>
               Transporters in {locationLabel}
             </h2>
-            <p style={{ fontSize: "0.8rem", color: "#64748b", margin: "4px 0 0" }}>
-              Showing {transporters.length} of <strong>{apiData?.transporters_count ?? 0}</strong> transporters
+            <p style={{ fontSize: "0.7rem", color: "#64748b", margin: "2px 0 0" }}>
+              Showing {transporters.length} of <strong>{apiData?.dashboard?.find((d: any) => d.label === "No. of Transporters")?.value ?? apiData?.transporters_count ?? 0}</strong> transporters
             </p>
           </div>
           <div>
             {transporters.map((t: any, i: number) => (
               <div key={t.transporter_id || i} style={{
-                padding: "14px 20px", borderBottom: "1px solid #f1f5f9",
-                display: "flex", alignItems: "center", gap: 12,
+                padding: "6px 14px", borderBottom: "1px solid #f1f5f9",
+                display: "flex", alignItems: "center", gap: 8,
                 cursor: "pointer", transition: "background 0.15s",
               }}
               onMouseEnter={e => (e.currentTarget.style.background = "#f8fafc")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
               >
                 <div style={{
-                  width: 40, height: 40, borderRadius: 8, background: "#f1f5f9",
+                  width: 30, height: 30, borderRadius: 6, background: "#f1f5f9",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, fontWeight: 700, color: "#393185", flexShrink: 0,
+                  fontSize: 13, fontWeight: 700, color: "#393185", flexShrink: 0,
                 }}>
                   {t.transporter_name?.charAt(0) || "T"}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{
-                    fontSize: "0.82rem", fontWeight: 600, color: "#1e40af",
+                    fontSize: "0.72rem", fontWeight: 600, color: "#1e40af",
                     whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
                   }}>
                     {t.transporter_name?.toUpperCase()}
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 2, marginTop: 1 }}>
                     {renderStars(t.overall_rating ?? 0)}
                     {t.number_of_ratings > 0 && (
-                      <span style={{ fontSize: "0.7rem", color: "#94a3b8", marginLeft: 4 }}>({t.number_of_ratings})</span>
+                      <span style={{ fontSize: "0.6rem", color: "#94a3b8", marginLeft: 2 }}>({t.number_of_ratings})</span>
+                    )}
+                    {t.account_type === "verified" && (
+                      <span style={{ fontSize: "0.6rem", color: "#16a34a", fontWeight: 600, marginLeft: 6 }}>✓ Verified</span>
                     )}
                   </div>
-                  {t.account_type === "verified" && (
-                    <span style={{ fontSize: "0.65rem", color: "#16a34a", fontWeight: 600 }}>✓ Verified</span>
-                  )}
                 </div>
               </div>
             ))}
