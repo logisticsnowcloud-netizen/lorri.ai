@@ -263,13 +263,31 @@ export default function MapPage() {
   }, []);
 
   const locationLabel = selectedLocation?.name?.split(",")[0] || "";
+  const transporters = apiData?.transporter_list ?? [];
+  const showPanel = selectedLocation && transporters.length > 0;
+
+  // Invalidate map size when panel toggles
+  useEffect(() => {
+    setTimeout(() => mapRef.current?.invalidateSize(), 350);
+  }, [showPanel]);
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <span key={i} style={{ color: i < Math.round(rating) ? "#f59e0b" : "#d1d5db", fontSize: 16 }}>★</span>
+      );
+    }
+    return stars;
+  };
 
   return (
-    <div style={{ height: "100vh", position: "relative", overflow: "hidden", backgroundColor: "#e2e8f0" }}>
-      {/* Full-screen map */}
-      <main style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 1 }}>
-        <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
-      </main>
+    <div style={{ height: "100vh", display: "flex", overflow: "hidden", backgroundColor: "#e2e8f0" }}>
+      {/* Map area */}
+      <div style={{ flex: 1, position: "relative", transition: "all 0.3s ease" }}>
+        <main style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+          <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
+        </main>
 
       {/* Loading overlay */}
       {loading && (
