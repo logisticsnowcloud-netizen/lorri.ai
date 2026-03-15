@@ -434,7 +434,7 @@ export default function MapPage() {
             {loading ? (
               <span style={{ fontSize: "0.85rem" }}>Loading...</span>
             ) : (
-              <span style={{ fontSize: "0.85rem" }}>
+              <span style={{ fontSize: "0.75rem" }}>
                 <strong>{locationLabel}</strong> — Transporters: {apiData.transporters_count ?? 0} | In: {apiData.network?.inflow?.length ?? 0} | Out: {apiData.network?.outflow?.length ?? 0}
               </span>
             )}
