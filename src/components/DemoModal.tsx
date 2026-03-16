@@ -81,7 +81,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
       guests: mailingList,
       to: mailingList,
       location: "LogisticsNow",
-      duration: [1, "hour"] as [number, string],
+      duration: [1, "hour"] as any,
     };
   };
 
