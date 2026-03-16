@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { google, outlook, ics } from "calendar-link";
 
 const API_URL = "https://production.lorri.in/api/apilorri/log";
 
@@ -54,12 +55,77 @@ export function useDemoModal() {
 export default function DemoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [calMenuOpen, setCalMenuOpen] = useState(false);
+  const calBtnRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
   const [form, setForm] = useState({
     name: "", email: "", company: "", designation: "", phone: "", source: "",
     date: getDefaultDate(), time: getDefaultTime(), updates: true,
   });
   const set = (k: string, v: string | boolean) => setForm(p => ({ ...p, [k]: v }));
+
+  const mailingList = [
+    "connect@logisticsnow.in",
+    "raj@logisticsnow.in",
+    "associate@logisticsnow.in",
+  ];
+
+  const getCalendarEvent = () => {
+    const [year, month, day] = form.date.split("-").map(Number);
+    const [hour, minute] = form.time.split(":").map(Number);
+    const jsDate = new Date(year, month - 1, day, hour, minute, 0);
+    return {
+      title: "Lorri Demo",
+      description: "Join the zoom meeting here - https://us02web.zoom.us/j/3115035961",
+      start: jsDate.toISOString(),
+      guests: mailingList,
+      to: mailingList,
+      location: "LogisticsNow",
+      duration: [1, "hour"] as any,
+    };
+  };
+
+  const downloadIcsFile = () => {
+    const event = getCalendarEvent();
+    const icsResponse = ics(event);
+    const downloadLink = document.createElement("a");
+    downloadLink.setAttribute("href", icsResponse);
+    downloadLink.setAttribute("download", "Lorri-Demo.ics");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const openInOutlook = () => {
+    const event = getCalendarEvent();
+    const outlookResponse = outlook(event);
+    const toParam = mailingList.map(e => encodeURIComponent(e)).join("%2C");
+    window.open(`${outlookResponse}&to=${toParam}&cc=${toParam}`, "_blank");
+  };
+
+  const openInGoogleCalendar = () => {
+    const event = getCalendarEvent();
+    const googleResponse = google(event);
+    window.open(googleResponse, "_blank");
+  };
+
+  const handleCalendarAction = async (action: () => void) => {
+    if (!validate()) return;
+    setCalMenuOpen(false);
+    action();
+    // Also send emails
+    setLoading(true);
+    try {
+      await Promise.all([sendTeamEmails(), sendMeetingInvite()]);
+      setSent(true);
+      toast({ title: "Success!", description: "Demo request sent & calendar event created." });
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const validate = (): boolean => {
     if (!form.email || !isValidEmail(form.email)) {
@@ -244,12 +310,50 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                   cursor: loading ? "not-allowed" : "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const,
                   boxShadow: "0 4px 20px rgba(57,49,133,0.4)", opacity: loading ? 0.7 : 1,
                 }}>{loading ? "SENDING..." : "SCHEDULE DEMO"}</button>
-              <button style={{
-                padding: "14px 20px", background: "transparent", color: "var(--text2)",
-                border: "1px solid var(--border)", borderRadius: 8, fontFamily: "Outfit,sans-serif",
-                fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em",
-                textTransform: "uppercase" as const, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              }}>📅 ADD TO CALENDAR</button>
+              <div style={{ position: "relative" }}>
+                <button
+                  ref={calBtnRef}
+                  onClick={() => setCalMenuOpen(prev => !prev)}
+                  disabled={loading}
+                  style={{
+                    width: "100%", padding: "14px 20px", background: "transparent", color: "var(--text2)",
+                    border: "1px solid var(--border)", borderRadius: 8, fontFamily: "Outfit,sans-serif",
+                    fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em",
+                    textTransform: "uppercase" as const, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                  }}>📅 ADD TO CALENDAR</button>
+                {calMenuOpen && (
+                  <div style={{
+                    position: "absolute", bottom: "calc(100% + 8px)", left: 0, right: 0,
+                    background: "var(--card)", border: "1px solid var(--border)", borderRadius: 10,
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.3)", overflow: "hidden", zIndex: 10,
+                  }}>
+                    <button onClick={() => handleCalendarAction(downloadIcsFile)} style={{
+                      width: "100%", padding: "12px 16px", background: "transparent", border: "none",
+                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      textAlign: "left", display: "flex", alignItems: "center", gap: 10,
+                    }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
+                      onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
+                      📥 Download ICS File
+                    </button>
+                    <button onClick={() => handleCalendarAction(openInGoogleCalendar)} style={{
+                      width: "100%", padding: "12px 16px", background: "transparent", border: "none",
+                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      textAlign: "left", display: "flex", alignItems: "center", gap: 10,
+                    }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
+                      onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
+                      📆 Open in Google Calendar
+                    </button>
+                    <button onClick={() => handleCalendarAction(openInOutlook)} style={{
+                      width: "100%", padding: "12px 16px", background: "transparent", border: "none",
+                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      textAlign: "left", display: "flex", alignItems: "center", gap: 10,
+                    }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
+                      onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
+                      📧 Open in Outlook
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </>
         )}
