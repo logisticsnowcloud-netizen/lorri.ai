@@ -310,12 +310,50 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                   cursor: loading ? "not-allowed" : "pointer", letterSpacing: ".05em", textTransform: "uppercase" as const,
                   boxShadow: "0 4px 20px rgba(57,49,133,0.4)", opacity: loading ? 0.7 : 1,
                 }}>{loading ? "SENDING..." : "SCHEDULE DEMO"}</button>
-              <button style={{
-                padding: "14px 20px", background: "transparent", color: "var(--text2)",
-                border: "1px solid var(--border)", borderRadius: 8, fontFamily: "Outfit,sans-serif",
-                fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em",
-                textTransform: "uppercase" as const, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              }}>📅 ADD TO CALENDAR</button>
+              <div style={{ position: "relative" }}>
+                <button
+                  ref={calBtnRef}
+                  onClick={() => setCalMenuOpen(prev => !prev)}
+                  disabled={loading}
+                  style={{
+                    width: "100%", padding: "14px 20px", background: "transparent", color: "var(--text2)",
+                    border: "1px solid var(--border)", borderRadius: 8, fontFamily: "Outfit,sans-serif",
+                    fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em",
+                    textTransform: "uppercase" as const, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                  }}>📅 ADD TO CALENDAR</button>
+                {calMenuOpen && (
+                  <div style={{
+                    position: "absolute", bottom: "calc(100% + 8px)", left: 0, right: 0,
+                    background: "var(--card)", border: "1px solid var(--border)", borderRadius: 10,
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.3)", overflow: "hidden", zIndex: 10,
+                  }}>
+                    <button onClick={() => handleCalendarAction(downloadIcsFile)} style={{
+                      width: "100%", padding: "12px 16px", background: "transparent", border: "none",
+                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      textAlign: "left", display: "flex", alignItems: "center", gap: 10,
+                    }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
+                      onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
+                      📥 Download ICS File
+                    </button>
+                    <button onClick={() => handleCalendarAction(openInGoogleCalendar)} style={{
+                      width: "100%", padding: "12px 16px", background: "transparent", border: "none",
+                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      textAlign: "left", display: "flex", alignItems: "center", gap: 10,
+                    }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
+                      onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
+                      📆 Open in Google Calendar
+                    </button>
+                    <button onClick={() => handleCalendarAction(openInOutlook)} style={{
+                      width: "100%", padding: "12px 16px", background: "transparent", border: "none",
+                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      textAlign: "left", display: "flex", alignItems: "center", gap: 10,
+                    }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
+                      onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
+                      📧 Open in Outlook
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </>
         )}
