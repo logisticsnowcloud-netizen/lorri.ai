@@ -55,12 +55,77 @@ export function useDemoModal() {
 export default function DemoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [calMenuOpen, setCalMenuOpen] = useState(false);
+  const calBtnRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
   const [form, setForm] = useState({
     name: "", email: "", company: "", designation: "", phone: "", source: "",
     date: getDefaultDate(), time: getDefaultTime(), updates: true,
   });
   const set = (k: string, v: string | boolean) => setForm(p => ({ ...p, [k]: v }));
+
+  const mailingList = [
+    "connect@logisticsnow.in",
+    "raj@logisticsnow.in",
+    "associate@logisticsnow.in",
+  ];
+
+  const getCalendarEvent = () => {
+    const [year, month, day] = form.date.split("-").map(Number);
+    const [hour, minute] = form.time.split(":").map(Number);
+    const jsDate = new Date(year, month - 1, day, hour, minute, 0);
+    return {
+      title: "Lorri Demo",
+      description: "Join the zoom meeting here - https://us02web.zoom.us/j/3115035961",
+      start: jsDate.toISOString(),
+      guests: mailingList,
+      to: mailingList,
+      location: "LogisticsNow",
+      duration: [1, "hour"] as [number, string],
+    };
+  };
+
+  const downloadIcsFile = () => {
+    const event = getCalendarEvent();
+    const icsResponse = ics(event);
+    const downloadLink = document.createElement("a");
+    downloadLink.setAttribute("href", icsResponse);
+    downloadLink.setAttribute("download", "Lorri-Demo.ics");
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const openInOutlook = () => {
+    const event = getCalendarEvent();
+    const outlookResponse = outlook(event);
+    const toParam = mailingList.map(e => encodeURIComponent(e)).join("%2C");
+    window.open(`${outlookResponse}&to=${toParam}&cc=${toParam}`, "_blank");
+  };
+
+  const openInGoogleCalendar = () => {
+    const event = getCalendarEvent();
+    const googleResponse = google(event);
+    window.open(googleResponse, "_blank");
+  };
+
+  const handleCalendarAction = async (action: () => void) => {
+    if (!validate()) return;
+    setCalMenuOpen(false);
+    action();
+    // Also send emails
+    setLoading(true);
+    try {
+      await Promise.all([sendTeamEmails(), sendMeetingInvite()]);
+      setSent(true);
+      toast({ title: "Success!", description: "Demo request sent & calendar event created." });
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const validate = (): boolean => {
     if (!form.email || !isValidEmail(form.email)) {
