@@ -66,7 +66,7 @@ export default function AIReadinessQuiz() {
     <section style={{ padding: "16px 24px", background: "var(--bg)" }}>
       <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
         {/* Badge */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 10 }}>
           <span style={{ width: 28, height: 3, borderRadius: 2, background: "linear-gradient(90deg, #393185, #4D44A8)" }} />
           <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase" as const, color: "#4D44A8" }}>Interactive Tool</span>
         </div>
