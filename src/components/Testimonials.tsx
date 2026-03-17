@@ -117,7 +117,7 @@ export default function Testimonials() {
               </div>
             ))}
           </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 26 }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12 }}>
             {quotes.map((_, i) => (
               <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 26 : 8, height: 8, borderRadius: 4, background: i === active ? "#393185" : "var(--border)", border: "none", cursor: "pointer", transition: "all .3s", padding: 0 }} />
             ))}
