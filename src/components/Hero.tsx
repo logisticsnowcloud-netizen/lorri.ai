@@ -95,8 +95,8 @@ export default function Hero({ dark }: { dark: boolean }) {
                 src={lorriLogo}
                 alt="LoRRI Logo"
                 style={{
-                  height: 110,
-                  maxWidth: 380,
+                  height: 80,
+                  maxWidth: 300,
                   objectFit: "contain" as const,
                   filter: dark
                     ? "brightness(10) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
