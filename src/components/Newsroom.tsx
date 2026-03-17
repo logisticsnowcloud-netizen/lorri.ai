@@ -90,7 +90,7 @@ export default function Newsroom() {
           <h2
             className="max-md:!text-[1.9rem]"
             style={{
-              fontSize: "2.7rem",
+              fontSize: "1.6rem",
               fontWeight: 900,
               color: "hsl(var(--foreground))",
               letterSpacing: "-0.03em",
