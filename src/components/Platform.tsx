@@ -107,7 +107,7 @@ export default function Platform() {
 
               {/* Icon */}
               <div style={{
-                width: 64, height: 64, borderRadius: 16,
+                width: 48, height: 48, borderRadius: 12,
                 background: col.gradient,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 28,
