@@ -105,7 +105,7 @@ export default function Testimonials() {
               <div key={i} style={{ position: i === active ? "relative" : "absolute", top: 0, left: 0, right: 0, opacity: i === active ? 1 : 0, transform: i === active ? "translateY(0)" : "translateY(12px)", transition: "all .5s ease", pointerEvents: i === active ? "auto" : "none" }}>
                 <div style={{ padding: "20px 28px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16 }}>
                   <div style={{ color: "#393185", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
-                  <p style={{ fontSize: 18, fontWeight: 500, color: "var(--text)", lineHeight: 1.7, marginBottom: 22, fontStyle: "italic" }}>"{q.text}"</p>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: "var(--text)", lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>"{q.text}"</p>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
                     <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg,#393185,#1AA6DF)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: "white", fontSize: 13 }}>{q.role[0]}</div>
                     <div style={{ textAlign: "left" }}>
