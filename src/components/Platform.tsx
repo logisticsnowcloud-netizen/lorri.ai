@@ -73,7 +73,7 @@ export default function Platform() {
             Powering Freight Intelligence, Procurement and End to End Digitization/TMS at Leading Companies globally.
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="max-md:!grid-cols-1 max-lg:!grid-cols-2">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }} className="max-md:!grid-cols-1 max-lg:!grid-cols-2">
           {columns.map((col, i) => (
             <div key={i} style={{
               background: "var(--card)",
