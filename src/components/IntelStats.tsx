@@ -4,7 +4,7 @@ export default function IntelStats() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="intelligence" ref={ref as any} style={{ background: "var(--bg2)", padding: "28px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-6 max-md:px-4">
+    <section id="intelligence" ref={ref as any} style={{ background: "var(--bg2)", padding: "16px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-4 max-md:px-4">
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%,rgba(57,49,133,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
