@@ -69,7 +69,7 @@ export default function Platform() {
           <h2 style={{ fontSize: "1.4rem", fontWeight: 800, color: "#393185", lineHeight: 1.3, marginBottom: 8, maxWidth: 800, margin: "0 auto 8px" }} className="max-md:!text-[1.2rem]">
             Save cost, expand reach, save time & our planet!
           </h2>
-          <p style={{ fontSize: 15, color: "var(--text2)", maxWidth: 700, margin: "0 auto", lineHeight: 1.75 }}>
+          <p style={{ fontSize: 13, color: "var(--text2)", maxWidth: 700, margin: "0 auto", lineHeight: 1.6 }}>
             Powering Freight Intelligence, Procurement and End to End Digitization/TMS at Leading Companies globally.
           </p>
         </div>
