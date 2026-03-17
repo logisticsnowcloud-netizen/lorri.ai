@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)", padding: "28px 32px 18px" }}>
+    <footer style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)", padding: "18px 32px 12px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 40, marginBottom: 40 }} className="max-md:!grid-cols-2">
           <div>
