@@ -90,7 +90,7 @@ function MarqueeRow({ items, direction = "left", duration = 30, tooltipPosition 
 
 export default function ClientLogos() {
   return (
-    <section style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "28px 32px" }}>
+    <section style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "16px 32px" }}>
       <style>{`
         @keyframes tickerReverse {
           0% { transform: translateX(-50%); }
