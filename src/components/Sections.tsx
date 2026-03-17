@@ -106,7 +106,7 @@ export function ForTransporters() {
                     background: "var(--card)",
                     border: "1.5px solid var(--border)",
                     borderRadius: 16,
-                    padding: "22px 24px",
+                    padding: "14px 18px",
                     position: "relative",
                     overflow: "hidden",
                     transition: "all 0.3s ease",
