@@ -63,20 +63,20 @@ export default function AIReadinessQuiz() {
   };
 
   return (
-    <section style={{ padding: "32px 24px", background: "var(--bg)" }}>
+    <section style={{ padding: "16px 24px", background: "var(--bg)" }}>
       <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
         {/* Badge */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 10 }}>
           <span style={{ width: 28, height: 3, borderRadius: 2, background: "linear-gradient(90deg, #393185, #4D44A8)" }} />
           <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase" as const, color: "#4D44A8" }}>Interactive Tool</span>
         </div>
 
         {/* Title */}
-        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800, lineHeight: 1.15, color: "var(--text)", marginBottom: 16 }}>
+        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, lineHeight: 1.15, color: "var(--text)", marginBottom: 8 }}>
           Assess Your Logistics{" "}
           <span style={{ background: "linear-gradient(135deg, #393185, #4D44A8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Readiness</span>
         </h2>
-        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, color: "var(--text3)", marginBottom: 40, margin: "0 auto 40px" }}>
+        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 13, color: "var(--text3)", marginBottom: 20, margin: "0 auto 20px" }}>
           Answer {totalSteps} questions. Get an instant benchmark and personalized recommendation.
         </p>
 
@@ -85,8 +85,8 @@ export default function AIReadinessQuiz() {
           background: "var(--card2)",
           border: "1px solid var(--borderSm)",
           borderRadius: 16,
-          padding: "36px 32px 40px",
-          minHeight: 280,
+          padding: "20px 24px 24px",
+          minHeight: 200,
           position: "relative",
           overflow: "hidden",
         }}>

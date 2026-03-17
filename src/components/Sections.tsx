@@ -8,22 +8,22 @@ export function ForShippers() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="shippers" ref={ref as any} style={{ background: "var(--bg2)", padding: "28px 32px" }} className="max-md:py-6 max-md:px-4">
+    <section id="shippers" ref={ref as any} style={{ background: "var(--bg2)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
-          <div style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center" }} className="max-md:!grid-cols-1">
+           <div style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 10 }}>
               For Shippers & Manufacturers
             </div>
-            <h2 style={{ fontSize: "2.4rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 18 }} className="max-md:!text-[1.9rem]">
+            <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 10 }} className="max-md:!text-[1.4rem]">
               Procure Freight<br /><span style={{ color: "#393185" }}>With Confidence</span>
             </h2>
-            <p style={{ fontSize: 15, color: "var(--text2)", lineHeight: 1.8, marginBottom: 28 }}>
+            <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>
               LoRRI gives manufacturers access to the National Freight Benchmark — letting you procure at fair, data-backed rates with complete transparency.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
               {["National Price Benchmark — know what a lane should cost", "2,200+ verified carriers with reliability scores", "Automated tenders with AI-matched recommendations", "Benchmark against ₹2.5B+ of analysed freight data"].map((f, i) => (
-                <div key={i} style={{ display: "flex", gap: 12, padding: "13px 16px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 11 }}>
+                <div key={i} style={{ display: "flex", gap: 10, padding: "8px 12px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 9 }}>
                   <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#393185", flexShrink: 0, marginTop: 7 }} />
                   <span style={{ fontSize: 13.5, color: "var(--text2)", lineHeight: 1.6 }}>{f}</span>
                 </div>
@@ -68,12 +68,12 @@ export function ForTransporters() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "28px 32px" }} className="max-md:py-6 max-md:px-4">
+    <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center" }} className="max-md:!grid-cols-1">
           {/* Global Route Map Visual - desktop */}
           <div className="hidden md:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {[
                 {
                   num: "01",
@@ -106,7 +106,7 @@ export function ForTransporters() {
                     background: "var(--card)",
                     border: "1.5px solid var(--border)",
                     borderRadius: 16,
-                    padding: "22px 24px",
+                    padding: "14px 18px",
                     position: "relative",
                     overflow: "hidden",
                     transition: "all 0.3s ease",
@@ -141,18 +141,18 @@ export function ForTransporters() {
             </div>
           </div>
           <div style={{ animation: visible ? "fadeUp .7s .2s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 20 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 10 }}>
               For Carriers & Transporters
             </div>
-            <h2 style={{ fontSize: "2.4rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 18 }} className="max-md:!text-[1.9rem]">
+            <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 10 }} className="max-md:!text-[1.4rem]">
               Grow Your Fleet<br /><span style={{ color: "#54AF3A" }}>With Better Loads</span>
             </h2>
-            <p style={{ fontSize: 15, color: "var(--text2)", lineHeight: 1.8, marginBottom: 28 }}>
+            <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>
               LoRRI helps carriers find better loads, build a verified reputation, and access freight intelligence that keeps your trucks moving profitably.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
               {["Build a verified carrier profile trusted by top shippers", "AI load matching for your routes, truck types and capacity", "LoRRI Reliability Score unlocks premium loads", "Market rate visibility for every lane before you bid"].map((f, i) => (
-                <div key={i} style={{ display: "flex", gap: 12, padding: "13px 16px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 11 }}>
+                <div key={i} style={{ display: "flex", gap: 10, padding: "8px 12px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 9 }}>
                   <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#54AF3A", flexShrink: 0, marginTop: 7 }} />
                   <span style={{ fontSize: 13.5, color: "var(--text2)", lineHeight: 1.6 }}>{f}</span>
                 </div>

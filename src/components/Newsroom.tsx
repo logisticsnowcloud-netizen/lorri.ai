@@ -58,7 +58,7 @@ export default function Newsroom() {
       className="max-md:py-10 max-md:px-4"
       style={{
         background: "hsl(var(--background))",
-        padding: "32px 32px",
+        padding: "16px 32px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -75,7 +75,7 @@ export default function Newsroom() {
 
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
+        <div style={{ textAlign: "center", marginBottom: 14 }}>
           <div
             className="inline-flex items-center gap-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4"
             style={{
@@ -90,7 +90,7 @@ export default function Newsroom() {
           <h2
             className="max-md:!text-[1.9rem]"
             style={{
-              fontSize: "2.7rem",
+              fontSize: "1.6rem",
               fontWeight: 900,
               color: "hsl(var(--foreground))",
               letterSpacing: "-0.03em",
@@ -119,8 +119,8 @@ export default function Newsroom() {
 
         {/* Media Logos */}
         <div
-          className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12"
-          style={{ maxWidth: 900, margin: "0 auto 48px" }}
+          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-6"
+          style={{ maxWidth: 900, margin: "0 auto 20px" }}
         >
           {pressItems.map((item, i) => (
             <motion.a

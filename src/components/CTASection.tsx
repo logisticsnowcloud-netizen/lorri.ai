@@ -7,17 +7,17 @@ export default function CTASection() {
   const set = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
 
   return (
-    <section id="cta" style={{ background: "var(--bg2)", padding: "28px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-6 max-md:px-4">
+    <section id="cta" style={{ background: "var(--bg2)", padding: "16px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-4 max-md:px-4">
       <div style={{ position: "absolute", top: "30%", left: "50%", transform: "translateX(-50%)", width: 600, height: 400, background: "radial-gradient(ellipse,rgba(57,49,133,0.12) 0%,transparent 65%)", pointerEvents: "none" }} />
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center" }} className="max-md:!grid-cols-1">
           <div>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 20 }}>Get Started Today</div>
-            <h2 style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 18 }} className="max-md:!text-[1.9rem]">
+            <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 10 }} className="max-md:!text-[1.4rem]">
               Experience the<br /><span style={{ color: "#393185" }}>LoRRI Difference</span>
             </h2>
-            <p style={{ fontSize: 15, color: "var(--text2)", lineHeight: 1.8, marginBottom: 28 }}>Join India's most reputed companies that trust LoRRI for logistics intelligence, benchmarking, and procurement.</p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
+            <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>Join India's most reputed companies that trust LoRRI for logistics intelligence, benchmarking, and procurement.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
               {["Access the National Freight Benchmark", "Guaranteed cost reduction results", "Full platform integration in days", "Dedicated onboarding support"].map((f, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div style={{ width: 22, height: 22, borderRadius: "50%", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><Check color="#54AF3A" size={11} /></div>
@@ -32,7 +32,7 @@ export default function CTASection() {
               <div style={{ fontSize: 13, color: "var(--text3)" }}>409, Neptune's Flying Colors, Mulund West, Mumbai 400080</div>
             </div>
           </div>
-          <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22, padding: 34 }}>
+          <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: 22 }}>
             {sent ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
                 <div style={{ fontSize: 50, marginBottom: 14 }}>🎉</div>

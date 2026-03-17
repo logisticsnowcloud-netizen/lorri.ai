@@ -62,28 +62,28 @@ export default function Platform() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="platform" ref={ref as any} style={{ background: "var(--bg)", padding: "28px 32px" }} className="max-md:py-6 max-md:px-4">
+    <section id="platform" ref={ref as any} style={{ background: "var(--bg)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 20 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 18 }}>Industry Use Cases & Innovations</div>
-          <h2 style={{ fontSize: "1.8rem", fontWeight: 800, color: "#393185", lineHeight: 1.3, marginBottom: 16, maxWidth: 800, margin: "0 auto 16px" }} className="max-md:!text-[1.4rem]">
+        <div style={{ textAlign: "center", marginBottom: 12 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 8 }}>Industry Use Cases & Innovations</div>
+          <h2 style={{ fontSize: "1.4rem", fontWeight: 800, color: "#393185", lineHeight: 1.3, marginBottom: 8, maxWidth: 800, margin: "0 auto 8px" }} className="max-md:!text-[1.2rem]">
             Save cost, expand reach, save time & our planet!
           </h2>
-          <p style={{ fontSize: 15, color: "var(--text2)", maxWidth: 700, margin: "0 auto", lineHeight: 1.75 }}>
+          <p style={{ fontSize: 13, color: "var(--text2)", maxWidth: 700, margin: "0 auto", lineHeight: 1.6 }}>
             Powering Freight Intelligence, Procurement and End to End Digitization/TMS at Leading Companies globally.
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="max-md:!grid-cols-1 max-lg:!grid-cols-2">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }} className="max-md:!grid-cols-1 max-lg:!grid-cols-2">
           {columns.map((col, i) => (
             <div key={i} style={{
               background: "var(--card)",
               border: "1.5px solid var(--border)",
               borderRadius: 18,
-              padding: "28px 22px 24px",
+              padding: "18px 16px 16px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 14,
+              gap: 8,
               transition: "all .35s cubic-bezier(.4,0,.2,1)",
               cursor: "pointer",
               position: "relative",
@@ -107,10 +107,10 @@ export default function Platform() {
 
               {/* Icon */}
               <div style={{
-                width: 64, height: 64, borderRadius: 16,
+                width: 48, height: 48, borderRadius: 12,
                 background: col.gradient,
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 28,
+                fontSize: 22,
                 boxShadow: `0 8px 24px ${col.color}30`,
                 position: "relative",
               }}>

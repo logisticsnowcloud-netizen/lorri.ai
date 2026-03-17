@@ -10,10 +10,10 @@ interface ScrollRevealProps {
 }
 
 const directionOffsets = {
-  up: { y: 60, x: 0 },
-  down: { y: -60, x: 0 },
-  left: { x: 80, y: 0 },
-  right: { x: -80, y: 0 },
+  up: { y: 30, x: 0 },
+  down: { y: -30, x: 0 },
+  left: { x: 40, y: 0 },
+  right: { x: -40, y: 0 },
 };
 
 export default function ScrollReveal({

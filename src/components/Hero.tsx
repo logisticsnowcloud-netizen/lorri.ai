@@ -72,7 +72,7 @@ export default function Hero({ dark }: { dark: boolean }) {
   const td = TAB_DATA[tab];
 
   return (
-    <section id="hero" style={{ position: "relative", minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px 16px 36px", overflow: "hidden", background: "var(--bg)" }}>
+    <section id="hero" style={{ position: "relative", minHeight: "auto", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "12px 16px 20px", overflow: "hidden", background: "var(--bg)" }}>
       {/* Bg patterns */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(var(--gridLine) 1px,transparent 1px),linear-gradient(90deg,var(--gridLine) 1px,transparent 1px)", backgroundSize: "48px 48px", pointerEvents: "none" }} />
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 65% 55% at 50% 42%,rgba(57,49,133,0.18) 0%,transparent 65%)", pointerEvents: "none" }} />
@@ -95,8 +95,8 @@ export default function Hero({ dark }: { dark: boolean }) {
                 src={lorriLogo}
                 alt="LoRRI Logo"
                 style={{
-                  height: 110,
-                  maxWidth: 380,
+                  height: 80,
+                  maxWidth: 300,
                   objectFit: "contain" as const,
                   filter: dark
                     ? "brightness(10) drop-shadow(0 2px 18px rgba(57,49,133,0.5))"
@@ -106,7 +106,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             </div>
           </div>
 
-          <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 28px", borderRadius: 1 }} />
+          <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 14px", borderRadius: 1 }} />
 
           {/* SEARCH */}
           <div className="fu2" style={{ width: "100%", maxWidth: 540, position: "relative" }}>
@@ -143,7 +143,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           </div>
 
           {/* CTAs */}
-          <div className="fu5" style={{ display: "flex", gap: 10, marginTop: 24, flexWrap: "wrap", alignItems: "center" }}>
+          <div className="fu5" style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap", alignItems: "center" }}>
             <button onClick={() => openDemoModal()} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", border: "none", padding: "11px 24px", borderRadius: 10, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", boxShadow: "0 4px 16px rgba(57,49,133,0.35)", transition: "all .25s" }}>
               <CalendarIcon /> Schedule Demo
             </button>
@@ -182,7 +182,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           )}
 
           {/* Tab content panel */}
-          <div key={tab} style={{ width: "100%", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: "20px 24px", display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap", animation: "tabSlide .18s ease both" }}>
+          <div key={tab} style={{ width: "100%", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: "14px 18px", display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap", animation: "tabSlide .18s ease both" }}>
             <div style={{ flex: 1, minWidth: 200 }}>
               <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)", marginBottom: 6 }}>{td.headline}</div>
               <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>{td.sub}</p>
