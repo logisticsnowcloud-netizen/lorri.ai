@@ -106,7 +106,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             </div>
           </div>
 
-          <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 28px", borderRadius: 1 }} />
+          <div className="fu1" style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 14px", borderRadius: 1 }} />
 
           {/* SEARCH */}
           <div className="fu2" style={{ width: "100%", maxWidth: 540, position: "relative" }}>
