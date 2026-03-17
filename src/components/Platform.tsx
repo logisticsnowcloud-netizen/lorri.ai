@@ -79,7 +79,7 @@ export default function Platform() {
               background: "var(--card)",
               border: "1.5px solid var(--border)",
               borderRadius: 18,
-              padding: "28px 22px 24px",
+              padding: "18px 16px 16px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
