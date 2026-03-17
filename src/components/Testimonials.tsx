@@ -99,8 +99,8 @@ export default function Testimonials() {
         <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 8 }}>Freight Savings in excess of <strong style={{ color: "#54AF3A" }}>$21 Mn</strong> and growing!</p>
 
         {/* Quote Carousel */}
-        <div style={{ maxWidth: 840, margin: "0 auto", marginBottom: 50 }}>
-          <div style={{ position: "relative", minHeight: 200 }}>
+        <div style={{ maxWidth: 840, margin: "0 auto", marginBottom: 24 }}>
+          <div style={{ position: "relative", minHeight: 160 }}>
             {quotes.map((q, i) => (
               <div key={i} style={{ position: i === active ? "relative" : "absolute", top: 0, left: 0, right: 0, opacity: i === active ? 1 : 0, transform: i === active ? "translateY(0)" : "translateY(12px)", transition: "all .5s ease", pointerEvents: i === active ? "auto" : "none" }}>
                 <div style={{ padding: "34px 42px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22 }}>
