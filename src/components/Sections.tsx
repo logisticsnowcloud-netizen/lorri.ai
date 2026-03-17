@@ -68,7 +68,7 @@ export function ForTransporters() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "28px 32px" }} className="max-md:py-6 max-md:px-4">
+    <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
           {/* Global Route Map Visual - desktop */}
