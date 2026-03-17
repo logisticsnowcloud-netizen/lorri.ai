@@ -83,7 +83,7 @@ export default function Platform() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 14,
+              gap: 8,
               transition: "all .35s cubic-bezier(.4,0,.2,1)",
               cursor: "pointer",
               position: "relative",
