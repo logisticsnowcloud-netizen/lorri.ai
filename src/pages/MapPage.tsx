@@ -336,7 +336,7 @@ export default function MapPage() {
               LoRRI Global Grid
             </h1>
             <p style={{ fontSize: "0.7rem", color: "#64748b", fontWeight: 500, margin: 0 }}>
-              Search another plant location here:
+              Search your plant location here:
             </p>
           </div>
 

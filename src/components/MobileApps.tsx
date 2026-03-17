@@ -14,7 +14,7 @@ const apps = [
     icon: lorriBizIcon,
     playLink: "https://play.google.com/store/apps/details?id=com.thelogisticsnow.lorri_biz&hl=en_IN",
     iosLink: "https://apps.apple.com/in/app/lorri-biz/id6480331865",
-    features: ["Analytics Dashboard", "Benchmark Reports", "Company Profile", "Easy Registration"],
+    features: ["Analytics Dashboard", "TMS Reports", "Company Profile"],
     accent: "#393185",
     accentLight: "rgba(57,49,133,0.12)",
     accentBorder: "rgba(57,49,133,0.25)",
@@ -65,14 +65,14 @@ export default function MobileApps() {
               marginBottom: 16,
             }}
           >
-            <Smartphone size={14} style={{ color: "#54AF3A" }} />
+            <Smartphone size={14} style={{ color: "#383185" }} />
             <span
               style={{
                 fontSize: 11,
                 fontWeight: 700,
                 letterSpacing: ".08em",
                 textTransform: "uppercase",
-                color: "var(--text2)",
+                color: "#383185",
               }}
             >
               Available on Android
