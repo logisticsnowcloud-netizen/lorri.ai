@@ -72,7 +72,7 @@ export default function AIReadinessQuiz() {
         </div>
 
         {/* Title */}
-        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800, lineHeight: 1.15, color: "var(--text)", marginBottom: 16 }}>
+        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, lineHeight: 1.15, color: "var(--text)", marginBottom: 8 }}>
           Assess Your Logistics{" "}
           <span style={{ background: "linear-gradient(135deg, #393185, #4D44A8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Readiness</span>
         </h2>
