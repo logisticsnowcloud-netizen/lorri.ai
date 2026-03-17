@@ -7,7 +7,7 @@ export default function CTASection() {
   const set = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
 
   return (
-    <section id="cta" style={{ background: "var(--bg2)", padding: "28px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-6 max-md:px-4">
+    <section id="cta" style={{ background: "var(--bg2)", padding: "16px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-4 max-md:px-4">
       <div style={{ position: "absolute", top: "30%", left: "50%", transform: "translateX(-50%)", width: 600, height: 400, background: "radial-gradient(ellipse,rgba(57,49,133,0.12) 0%,transparent 65%)", pointerEvents: "none" }} />
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
