@@ -103,7 +103,7 @@ export default function Testimonials() {
           <div style={{ position: "relative", minHeight: 160 }}>
             {quotes.map((q, i) => (
               <div key={i} style={{ position: i === active ? "relative" : "absolute", top: 0, left: 0, right: 0, opacity: i === active ? 1 : 0, transform: i === active ? "translateY(0)" : "translateY(12px)", transition: "all .5s ease", pointerEvents: i === active ? "auto" : "none" }}>
-                <div style={{ padding: "34px 42px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22 }}>
+                <div style={{ padding: "20px 28px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16 }}>
                   <div style={{ color: "#393185", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
                   <p style={{ fontSize: 18, fontWeight: 500, color: "var(--text)", lineHeight: 1.7, marginBottom: 22, fontStyle: "italic" }}>"{q.text}"</p>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
