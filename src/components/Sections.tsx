@@ -70,7 +70,7 @@ export function ForTransporters() {
   return (
     <section id="transporters" ref={ref as any} style={{ background: "var(--bg)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="max-md:!grid-cols-1">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center" }} className="max-md:!grid-cols-1">
           {/* Global Route Map Visual - desktop */}
           <div className="hidden md:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
