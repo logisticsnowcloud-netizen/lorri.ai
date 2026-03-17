@@ -41,11 +41,11 @@ type ClientItem = { n: string; logo: string };
 
 function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPosition?: "top" | "bottom" }) {
   return (
-    <div className="group" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "16px 24px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", minWidth: 80 }}>
+    <div className="group" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 18px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", minWidth: 60 }}>
       <img
         src={logo}
         alt={n}
-        style={{ width: 64, height: 64, borderRadius: 4, objectFit: "contain" }}
+        style={{ width: 48, height: 48, borderRadius: 4, objectFit: "contain" }}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
       {/* Tooltip */}
