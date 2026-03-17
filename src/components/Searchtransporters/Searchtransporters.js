@@ -268,7 +268,7 @@ const SearchTransporters = (props) => {
                 </button>
               </span>
               <span className={`${classes["searched_text"]}`}>
-                Search another plant location here:
+                Search your plant location here:
               </span>
               <Searchbar
                 searchedInput={searchedInput}
@@ -302,7 +302,7 @@ const SearchTransporters = (props) => {
                   className={`${classes["searched_text"]}`}
                   style={{ marginLeft: 0 }}
                 >
-                  Search another plant location here:
+                  Search your plant location here:
                 </span>
                 <Searchbar
                   searchedInput={searchedInput}
