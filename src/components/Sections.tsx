@@ -150,9 +150,9 @@ export function ForTransporters() {
             <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>
               LoRRI helps carriers find better loads, build a verified reputation, and access freight intelligence that keeps your trucks moving profitably.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
               {["Build a verified carrier profile trusted by top shippers", "AI load matching for your routes, truck types and capacity", "LoRRI Reliability Score unlocks premium loads", "Market rate visibility for every lane before you bid"].map((f, i) => (
-                <div key={i} style={{ display: "flex", gap: 12, padding: "13px 16px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 11 }}>
+                <div key={i} style={{ display: "flex", gap: 10, padding: "8px 12px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 9 }}>
                   <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#54AF3A", flexShrink: 0, marginTop: 7 }} />
                   <span style={{ fontSize: 13.5, color: "var(--text2)", lineHeight: 1.6 }}>{f}</span>
                 </div>
