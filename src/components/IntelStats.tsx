@@ -4,12 +4,12 @@ export default function IntelStats() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="intelligence" ref={ref as any} style={{ background: "var(--bg2)", padding: "28px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-6 max-md:px-4">
+    <section id="intelligence" ref={ref as any} style={{ background: "var(--bg2)", padding: "16px 32px", position: "relative", overflow: "hidden" }} className="max-md:py-4 max-md:px-4">
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%,rgba(57,49,133,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
-        <div style={{ textAlign: "center", marginBottom: 28 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 18 }}>By The Numbers</div>
-          <h2 style={{ fontSize: "2.7rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 14 }} className="max-md:!text-[1.9rem]">
+        <div style={{ textAlign: "center", marginBottom: 14 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 8 }}>By The Numbers</div>
+          <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 8 }} className="max-md:!text-[1.4rem]">
             National Scale,<br /><span style={{ color: "#393185" }}>Real Intelligence</span>
           </h2>
         </div>
@@ -20,8 +20,8 @@ export default function IntelStats() {
             { v: "$500M+", l: "Spend Procured", c: "#1AA6DF" },
             { v: "$21M+", l: "Total Savings", c: "#B1D0EF" },
           ].map((s, i) => (
-            <div key={i} style={{ padding: "38px 22px", textAlign: "center", background: `linear-gradient(160deg,${s.c}0A 0%,transparent 60%)`, border: `1px solid ${s.c}22`, borderRadius: 16, animation: visible ? `fadeUp .7s ${i * 0.1}s ease both` : "none", opacity: visible ? undefined : 0 }}>
-              <div className="font-mono max-md:!text-[2rem]" style={{ fontSize: "2.6rem", fontWeight: 900, color: s.c, lineHeight: 1, marginBottom: 10, letterSpacing: "-0.02em" }}>{s.v}</div>
+            <div key={i} style={{ padding: "22px 16px", textAlign: "center", background: `linear-gradient(160deg,${s.c}0A 0%,transparent 60%)`, border: `1px solid ${s.c}22`, borderRadius: 12, animation: visible ? `fadeUp .7s ${i * 0.1}s ease both` : "none", opacity: visible ? undefined : 0 }}>
+              <div className="font-mono max-md:!text-[1.6rem]" style={{ fontSize: "2rem", fontWeight: 900, color: s.c, lineHeight: 1, marginBottom: 6, letterSpacing: "-0.02em" }}>{s.v}</div>
               <div style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.5 }}>{s.l}</div>
             </div>
           ))}

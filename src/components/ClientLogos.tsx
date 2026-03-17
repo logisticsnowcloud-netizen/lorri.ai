@@ -41,11 +41,11 @@ type ClientItem = { n: string; logo: string };
 
 function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPosition?: "top" | "bottom" }) {
   return (
-    <div className="group" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "16px 24px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", minWidth: 80 }}>
+    <div className="group" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 18px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", minWidth: 60 }}>
       <img
         src={logo}
         alt={n}
-        style={{ width: 64, height: 64, borderRadius: 4, objectFit: "contain" }}
+        style={{ width: 48, height: 48, borderRadius: 4, objectFit: "contain" }}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
       {/* Tooltip */}
@@ -90,7 +90,7 @@ function MarqueeRow({ items, direction = "left", duration = 30, tooltipPosition 
 
 export default function ClientLogos() {
   return (
-    <section style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "28px 32px" }}>
+    <section style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "16px 32px" }}>
       <style>{`
         @keyframes tickerReverse {
           0% { transform: translateX(-50%); }
@@ -98,12 +98,12 @@ export default function ClientLogos() {
         }
       `}</style>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 18 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 16px", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", borderRadius: 20, marginBottom: 14 }}>
+        <div style={{ textAlign: "center", marginBottom: 10 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "4px 14px", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", borderRadius: 20, marginBottom: 8 }}>
             <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#54AF3A", animation: "pulse-dot 2s infinite" }} />
             <span style={{ color: "#54AF3A", fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase" }}>LoRRI Makes a Difference</span>
           </div>
-          <h2 style={{ fontSize: "1.8rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 6 }}>Trusted by <span style={{color: "#393185"}}>Global Industry Leaders</span></h2>
+          <h2 style={{ fontSize: "1.4rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 4 }}>Trusted by <span style={{color: "#393185"}}>Global Industry Leaders</span></h2>
           <p style={{ fontSize: 14, color: "var(--text2)" }}>Fortune 500 companies and global logistics players rely on LoRRI</p>
         </div>
 

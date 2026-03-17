@@ -92,20 +92,20 @@ export default function Testimonials() {
   useEffect(() => { const t = setInterval(() => setActive(a => (a + 1) % 4), 4500); return () => clearInterval(t); }, []);
 
   return (
-    <section style={{ background: "var(--bg)", padding: "32px 32px" }} className="max-md:py-6 max-md:px-4">
+    <section style={{ background: "var(--bg)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
       <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 18 }}>Client Voices</div>
-        <h2 style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 10 }} className="max-md:!text-[1.9rem]">What Industry Leaders Say</h2>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 8 }}>Client Voices</div>
+        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }} className="max-md:!text-[1.4rem]">What Industry Leaders Say</h2>
         <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 8 }}>Freight Savings in excess of <strong style={{ color: "#54AF3A" }}>$21 Mn</strong> and growing!</p>
 
         {/* Quote Carousel */}
-        <div style={{ maxWidth: 840, margin: "0 auto", marginBottom: 50 }}>
-          <div style={{ position: "relative", minHeight: 200 }}>
+        <div style={{ maxWidth: 840, margin: "0 auto", marginBottom: 24 }}>
+          <div style={{ position: "relative", minHeight: 160 }}>
             {quotes.map((q, i) => (
               <div key={i} style={{ position: i === active ? "relative" : "absolute", top: 0, left: 0, right: 0, opacity: i === active ? 1 : 0, transform: i === active ? "translateY(0)" : "translateY(12px)", transition: "all .5s ease", pointerEvents: i === active ? "auto" : "none" }}>
-                <div style={{ padding: "34px 42px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22 }}>
+                <div style={{ padding: "20px 28px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16 }}>
                   <div style={{ color: "#393185", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
-                  <p style={{ fontSize: 18, fontWeight: 500, color: "var(--text)", lineHeight: 1.7, marginBottom: 22, fontStyle: "italic" }}>"{q.text}"</p>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: "var(--text)", lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>"{q.text}"</p>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
                     <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg,#393185,#1AA6DF)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: "white", fontSize: 13 }}>{q.role[0]}</div>
                     <div style={{ textAlign: "left" }}>
@@ -117,7 +117,7 @@ export default function Testimonials() {
               </div>
             ))}
           </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 26 }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12 }}>
             {quotes.map((_, i) => (
               <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 26 : 8, height: 8, borderRadius: 4, background: i === active ? "#393185" : "var(--border)", border: "none", cursor: "pointer", transition: "all .3s", padding: 0 }} />
             ))}
@@ -125,7 +125,7 @@ export default function Testimonials() {
         </div>
 
         {/* Video Testimonials */}
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 24 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 12 }}>
           <Play size={12} /> Case Study Videos
         </div>
         <div className="grid grid-cols-3 max-md:grid-cols-1 max-lg:grid-cols-2 gap-5" style={{ textAlign: "left" }}>

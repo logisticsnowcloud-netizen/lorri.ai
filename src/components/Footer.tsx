@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)", padding: "28px 32px 18px" }}>
+    <footer style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)", padding: "18px 32px 12px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 40, marginBottom: 40 }} className="max-md:!grid-cols-2">
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 24, marginBottom: 20 }} className="max-md:!grid-cols-2">
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
               <div style={{ width: 32, height: 32, borderRadius: 9, background: "linear-gradient(135deg,#393185,#54AF3A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
