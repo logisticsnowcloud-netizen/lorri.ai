@@ -5,57 +5,96 @@ const pressItems = [
   {
     name: "Economic Times",
     logo: "https://logo.clearbit.com/economictimes.com",
-    url: "https://economictimes.indiatimes.com",
+    url: "https://economictimes.indiatimes.com/tech/startups/logisticsnow-launches-benchmark-platform-for-road-freight-rates/articleshow/79562516.cms",
+  },
+  {
+    name: "The Hindu",
+    logo: "https://logo.clearbit.com/thehindu.com",
+    url: "https://www.thehindubusinessline.com/economy/logistics/logisticsnow-launches-platform-for-contracted-truck-rates/article33231340.ece",
   },
   {
     name: "YourStory",
     logo: "https://logo.clearbit.com/yourstory.com",
-    url: "https://yourstory.com",
-  },
-  {
-    name: "Inc42",
-    logo: "https://logo.clearbit.com/inc42.com",
-    url: "https://inc42.com",
+    url: "https://yourstory.com/2020/04/indian-logistics-startups-revamp-coronavirus-logisticsnow",
   },
   {
     name: "Business Standard",
     logo: "https://logo.clearbit.com/business-standard.com",
-    url: "https://business-standard.com",
+    url: "https://newssection.blob.core.windows.net/images/Business%20Standard%20Mumbai_Page%2004_24th%20December%202020_LogisticsNow.pdf",
   },
   {
-    name: "Mint",
-    logo: "https://logo.clearbit.com/livemint.com",
-    url: "https://livemint.com",
+    name: "Manufacturing Today",
+    logo: "https://logo.clearbit.com/manufacturingtodayindia.com",
+    url: "https://www.manufacturingtodayindia.com/products-suppliers/9149-logisticsnow-launches-lorri-benchmark-indias-first-freight-benchmark-for-contracted-freight",
   },
   {
-    name: "Forbes India",
-    logo: "https://logo.clearbit.com/forbesindia.com",
-    url: "https://forbesindia.com",
+    name: "ANI News",
+    logo: "https://logo.clearbit.com/aninews.in",
+    url: "http://www.aninews.in/news/business/logisticsnow-wins-the-sustainability-leaders-track-at-supernova-challenge-dubai-202520260120111714",
   },
 ];
 
 const pressArticles = [
   {
+    outlet: "ANI News",
+    title: "LogisticsNow Wins the Sustainability Leaders Track at Supernova Challenge Dubai 2025",
+    url: "http://www.aninews.in/news/business/logisticsnow-wins-the-sustainability-leaders-track-at-supernova-challenge-dubai-202520260120111714",
+    date: "Jan 2026",
+  },
+  {
     outlet: "Economic Times",
-    title: "How LogisticsNow Is Using AI to Transform India's Freight Industry",
-    url: "#",
+    title: "LogisticsNow Launches Benchmark Platform for Road Freight Rates",
+    url: "https://economictimes.indiatimes.com/tech/startups/logisticsnow-launches-benchmark-platform-for-road-freight-rates/articleshow/79562516.cms",
+    date: "Dec 2020",
+  },
+  {
+    outlet: "Logistics Insider",
+    title: "Freight Benchmarking: Elevating Supply Chain Standards",
+    url: "https://newssection.blob.core.windows.net/images/LogisticsInsider_Pg10to16_January2021issue_LogisticsNow.pdf",
+    date: "Jan 2021",
+  },
+  {
+    outlet: "Telangana Today",
+    title: "LogisticsNow to Go Multi-Modal — Plans to Foray Into Rail & Coastal Shipping",
+    url: "https://telanganatoday.com/logisticsnow-to-go-multi-modal",
+    date: "Dec 2020",
+  },
+  {
+    outlet: "The Hindu Business Line",
+    title: "LogisticsNow Launches Platform for Contracted Truck Rates",
+    url: "https://www.thehindubusinessline.com/economy/logistics/logisticsnow-launches-platform-for-contracted-truck-rates/article33231340.ece",
+    date: "Dec 2020",
+  },
+  {
+    outlet: "ITLN",
+    title: "Democratising Indian Logistics With a Trusted Freight-Rate Referee",
+    url: "https://www.itln.in/democratising-indian-logistics-with-a-trusted-freightrate-referee",
+    date: "Dec 2020",
   },
   {
     outlet: "YourStory",
-    title: "LogisticsNow Raises Funding to Scale AI-Driven Logistics Platform",
-    url: "#",
+    title: "How Indian Logistics Can Revamp Despite Coronavirus Pandemic",
+    url: "https://yourstory.com/2020/04/indian-logistics-startups-revamp-coronavirus-logisticsnow",
+    date: "Apr 2020",
   },
   {
-    outlet: "Inc42",
-    title: "This Startup Is Building the Operating System for Indian Logistics",
-    url: "#",
+    outlet: "Business Standard",
+    title: "Backed by Shell, LogisticsNow Ready to Improve Road Transportation Biz",
+    url: "https://newssection.blob.core.windows.net/images/Business%20Standard%20Mumbai_Page%2004_24th%20December%202020_LogisticsNow.pdf",
+    date: "Dec 2020",
+  },
+  {
+    outlet: "Manufacturing Today",
+    title: "How Data Science Can Enable Solutions for the Logistics Industry",
+    url: "https://www.manufacturingtodayindia.com/people/9058-how-data-science-can-enable-solutions-for-and-help-organize-the-logistics-industry",
+    date: "Nov 2020",
   },
 ];
 
 export default function Newsroom() {
   return (
     <section
-      className="max-md:py-10 max-md:px-4"
+      className="max-md:py-4 max-md:px-4"
       style={{
         background: "hsl(var(--background))",
         padding: "16px 32px",
@@ -77,9 +116,9 @@ export default function Newsroom() {
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 14 }}>
           <div
-            className="inline-flex items-center gap-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2"
             style={{
-              padding: "5px 14px",
+              padding: "4px 12px",
               background: "hsl(var(--primary) / 0.12)",
               border: "1px solid hsl(var(--border))",
               color: "hsl(var(--l-blue))",
@@ -88,14 +127,14 @@ export default function Newsroom() {
             In The News
           </div>
           <h2
-            className="max-md:!text-[1.9rem]"
+            className="max-md:!text-[1.4rem]"
             style={{
               fontSize: "1.6rem",
               fontWeight: 900,
               color: "hsl(var(--foreground))",
               letterSpacing: "-0.03em",
               lineHeight: 1.1,
-              marginBottom: 14,
+              marginBottom: 8,
             }}
           >
             Newsroom &{" "}
@@ -106,21 +145,21 @@ export default function Newsroom() {
           <p
             style={{
               color: "hsl(var(--muted-foreground))",
-              fontSize: 16,
+              fontSize: 13,
               maxWidth: 520,
               margin: "0 auto",
-              lineHeight: 1.6,
+              lineHeight: 1.5,
             }}
           >
             See what leading publications are saying about LogisticsNow's
-            mission to transform India's freight ecosystem.
+            mission to transform the global freight ecosystem.
           </p>
         </div>
 
         {/* Media Logos */}
         <div
-          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-6"
-          style={{ maxWidth: 900, margin: "0 auto 20px" }}
+          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-4"
+          style={{ maxWidth: 900, margin: "0 auto 16px" }}
         >
           {pressItems.map((item, i) => (
             <motion.a
@@ -128,11 +167,11 @@ export default function Newsroom() {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.5 }}
-              className="group flex flex-col items-center justify-center gap-2 rounded-xl p-5 transition-all duration-300"
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+              className="group flex flex-col items-center justify-center gap-1.5 rounded-xl p-3 transition-all duration-300"
               style={{
                 background: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border-subtle))",
@@ -145,14 +184,14 @@ export default function Newsroom() {
               <img
                 src={item.logo}
                 alt={item.name}
-                className="h-8 w-8 rounded object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                className="h-7 w-7 rounded object-contain opacity-60 group-hover:opacity-100 transition-opacity"
                 style={{ filter: "grayscale(80%)" }}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
                 }}
               />
               <span
-                className="text-[11px] font-semibold text-center leading-tight"
+                className="text-[10px] font-semibold text-center leading-tight"
                 style={{ color: "hsl(var(--muted-foreground))" }}
               >
                 {item.name}
@@ -162,43 +201,51 @@ export default function Newsroom() {
         </div>
 
         {/* Press Articles */}
-        <div className="grid md:grid-cols-3 gap-4" style={{ maxWidth: 900, margin: "0 auto" }}>
+        <div className="grid md:grid-cols-3 gap-3" style={{ maxWidth: 900, margin: "0 auto" }}>
           {pressArticles.map((article, i) => (
             <motion.a
               key={i}
               href={article.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
-              className="group flex flex-col justify-between rounded-xl p-5 transition-all duration-300 hover:translate-y-[-2px]"
+              transition={{ delay: 0.05 + i * 0.06, duration: 0.4 }}
+              className="group flex flex-col justify-between rounded-xl p-4 transition-all duration-300 hover:translate-y-[-2px]"
               style={{
                 background: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border-subtle))",
               }}
             >
               <div>
-                <span
-                  className="text-[10px] font-bold uppercase tracking-wider mb-2 block"
-                  style={{ color: "hsl(var(--primary-glow))" }}
-                >
-                  {article.outlet}
-                </span>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span
+                    className="text-[9px] font-bold uppercase tracking-wider"
+                    style={{ color: "hsl(var(--primary-glow))" }}
+                  >
+                    {article.outlet}
+                  </span>
+                  <span
+                    className="text-[9px] font-medium"
+                    style={{ color: "hsl(var(--muted-dim))" }}
+                  >
+                    {article.date}
+                  </span>
+                </div>
                 <p
-                  className="text-sm font-medium leading-snug"
+                  className="text-[12px] font-medium leading-snug"
                   style={{ color: "hsl(var(--foreground))" }}
                 >
                   {article.title}
                 </p>
               </div>
               <div
-                className="flex items-center gap-1 mt-4 text-[12px] font-semibold transition-colors"
+                className="flex items-center gap-1 mt-3 text-[11px] font-semibold transition-colors"
                 style={{ color: "hsl(var(--accent))" }}
               >
                 Read Article
-                <ExternalLink size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                <ExternalLink size={10} className="group-hover:translate-x-0.5 transition-transform" />
               </div>
             </motion.a>
           ))}
