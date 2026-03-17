@@ -58,7 +58,7 @@ export default function Newsroom() {
       className="max-md:py-10 max-md:px-4"
       style={{
         background: "hsl(var(--background))",
-        padding: "32px 32px",
+        padding: "16px 32px",
         position: "relative",
         overflow: "hidden",
       }}
