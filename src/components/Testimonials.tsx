@@ -125,7 +125,7 @@ export default function Testimonials() {
         </div>
 
         {/* Video Testimonials */}
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 24 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 12 }}>
           <Play size={12} /> Case Study Videos
         </div>
         <div className="grid grid-cols-3 max-md:grid-cols-1 max-lg:grid-cols-2 gap-5" style={{ textAlign: "left" }}>

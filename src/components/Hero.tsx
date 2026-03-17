@@ -182,7 +182,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           )}
 
           {/* Tab content panel */}
-          <div key={tab} style={{ width: "100%", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: "20px 24px", display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap", animation: "tabSlide .18s ease both" }}>
+          <div key={tab} style={{ width: "100%", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: "14px 18px", display: "flex", gap: 16, alignItems: "flex-start", flexWrap: "wrap", animation: "tabSlide .18s ease both" }}>
             <div style={{ flex: 1, minWidth: 200 }}>
               <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)", marginBottom: 6 }}>{td.headline}</div>
               <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>{td.sub}</p>

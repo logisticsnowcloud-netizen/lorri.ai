@@ -51,7 +51,7 @@ export default function MobileApps() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          style={{ textAlign: "center", marginBottom: 24 }}
+          style={{ textAlign: "center", marginBottom: 14 }}
         >
           <div
             style={{

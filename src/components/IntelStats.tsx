@@ -20,8 +20,8 @@ export default function IntelStats() {
             { v: "$500M+", l: "Spend Procured", c: "#1AA6DF" },
             { v: "$21M+", l: "Total Savings", c: "#B1D0EF" },
           ].map((s, i) => (
-            <div key={i} style={{ padding: "38px 22px", textAlign: "center", background: `linear-gradient(160deg,${s.c}0A 0%,transparent 60%)`, border: `1px solid ${s.c}22`, borderRadius: 16, animation: visible ? `fadeUp .7s ${i * 0.1}s ease both` : "none", opacity: visible ? undefined : 0 }}>
-              <div className="font-mono max-md:!text-[2rem]" style={{ fontSize: "2.6rem", fontWeight: 900, color: s.c, lineHeight: 1, marginBottom: 10, letterSpacing: "-0.02em" }}>{s.v}</div>
+            <div key={i} style={{ padding: "22px 16px", textAlign: "center", background: `linear-gradient(160deg,${s.c}0A 0%,transparent 60%)`, border: `1px solid ${s.c}22`, borderRadius: 12, animation: visible ? `fadeUp .7s ${i * 0.1}s ease both` : "none", opacity: visible ? undefined : 0 }}>
+              <div className="font-mono max-md:!text-[1.6rem]" style={{ fontSize: "2rem", fontWeight: 900, color: s.c, lineHeight: 1, marginBottom: 6, letterSpacing: "-0.02em" }}>{s.v}</div>
               <div style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.5 }}>{s.l}</div>
             </div>
           ))}

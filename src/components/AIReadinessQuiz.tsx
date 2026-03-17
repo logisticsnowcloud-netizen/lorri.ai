@@ -85,8 +85,8 @@ export default function AIReadinessQuiz() {
           background: "var(--card2)",
           border: "1px solid var(--borderSm)",
           borderRadius: 16,
-          padding: "36px 32px 40px",
-          minHeight: 280,
+          padding: "20px 24px 24px",
+          minHeight: 200,
           position: "relative",
           overflow: "hidden",
         }}>

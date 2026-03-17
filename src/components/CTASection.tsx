@@ -32,7 +32,7 @@ export default function CTASection() {
               <div style={{ fontSize: 13, color: "var(--text3)" }}>409, Neptune's Flying Colors, Mulund West, Mumbai 400080</div>
             </div>
           </div>
-          <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22, padding: 34 }}>
+          <div style={{ background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16, padding: 22 }}>
             {sent ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
                 <div style={{ fontSize: 50, marginBottom: 14 }}>🎉</div>

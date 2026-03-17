@@ -119,8 +119,8 @@ export default function Newsroom() {
 
         {/* Media Logos */}
         <div
-          className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12"
-          style={{ maxWidth: 900, margin: "0 auto 48px" }}
+          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-6"
+          style={{ maxWidth: 900, margin: "0 auto 20px" }}
         >
           {pressItems.map((item, i) => (
             <motion.a

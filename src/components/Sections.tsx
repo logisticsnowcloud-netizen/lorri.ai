@@ -73,7 +73,7 @@ export function ForTransporters() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center" }} className="max-md:!grid-cols-1">
           {/* Global Route Map Visual - desktop */}
           <div className="hidden md:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {[
                 {
                   num: "01",

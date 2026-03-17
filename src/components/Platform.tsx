@@ -110,7 +110,7 @@ export default function Platform() {
                 width: 48, height: 48, borderRadius: 12,
                 background: col.gradient,
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 28,
+                fontSize: 22,
                 boxShadow: `0 8px 24px ${col.color}30`,
                 position: "relative",
               }}>
