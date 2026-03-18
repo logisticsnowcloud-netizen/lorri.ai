@@ -594,21 +594,21 @@ export default function MapPage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                padding: "8px 0",
+                padding: "7px 0",
                 borderBottom: `1px solid ${PANEL_BORDER}`,
               }}
             >
               <div
                 style={{
-                  width: 36,
-                  height: 36,
+                  width: 34,
+                  height: 34,
                   borderRadius: 8,
                   backgroundColor: "hsl(220 25% 94%)",
                   color: INBOUND_COLOR,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "1.4rem",
+                  fontSize: "1.28rem",
                   fontWeight: 700,
                   flexShrink: 0,
                   lineHeight: 1,
@@ -624,14 +624,15 @@ export default function MapPage() {
                   style={{
                     color: "hsl(226 70% 46%)",
                     textDecoration: "none",
-                    fontSize: "0.8rem",
-                    fontWeight: 700,
-                    lineHeight: 1.15,
+                    fontSize: "0.76rem",
+                    fontWeight: 800,
+                    lineHeight: 1.1,
                     textTransform: "uppercase",
                     display: "block",
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
+                    letterSpacing: "-0.01em",
                   }}
                   title={transporter.transporter_name}
                 >
@@ -642,17 +643,17 @@ export default function MapPage() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 4,
-                    marginTop: 2,
+                    gap: 3,
+                    marginTop: 1,
                     flexWrap: "wrap",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 0, transform: "translateY(-0.5px)" }}>
                     {renderStars(transporter.overall_rating ?? 0)}
                   </div>
                   <span
                     style={{
-                      fontSize: "0.72rem",
+                      fontSize: "0.68rem",
                       color: TEXT_SECONDARY,
                       lineHeight: 1,
                     }}
@@ -662,11 +663,11 @@ export default function MapPage() {
                   {transporter.account_type === "verified" && (
                     <span
                       style={{
-                        fontSize: "0.72rem",
+                        fontSize: "0.68rem",
                         fontWeight: 700,
                         color: "hsl(142 71% 35%)",
                         lineHeight: 1,
-                        marginLeft: 6,
+                        marginLeft: 5,
                       }}
                     >
                       ✓ Verified
