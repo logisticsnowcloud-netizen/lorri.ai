@@ -711,80 +711,25 @@ export default function MapPage() {
           {searchInput}
         </div>
 
-        <div style={{ flex: 1, position: "relative", minHeight: 0 }}>
-          <div
-            ref={containerRef}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-            }}
-          />
-
-          {loading && (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                zIndex: 80,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "hsla(0 0% 100% / 0.45)",
-                backdropFilter: "blur(2px)",
-                pointerEvents: "none",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 14,
-                  background: PANEL_BG_SOFT,
-                  padding: "24px 28px",
-                  borderRadius: 16,
-                  boxShadow: "0 14px 28px -16px hsla(222 47% 11% / 0.25)",
-                }}
-              >
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: "50%",
-                    border: "3px solid hsl(215 28% 88%)",
-                    borderTopColor: INBOUND_COLOR,
-                    animation: "spin 0.8s linear infinite",
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: "Outfit, sans-serif",
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: TEXT_PRIMARY,
-                  }}
-                >
-                  Loading routes for <strong>{locationLabel}</strong>...
-                </span>
-              </div>
-            </div>
-          )}
-
+        <div
+          style={{
+            flex: 1,
+            minHeight: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            padding: 12,
+          }}
+        >
           {showPanel && !loading && (
             <div
               style={{
-                position: "absolute",
-                top: 12,
-                left: 12,
-                right: 12,
-                zIndex: 1200,
                 backgroundColor: PANEL_BG,
                 border: `1px solid ${PANEL_BORDER}`,
                 borderRadius: 16,
                 boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
                 padding: 12,
+                flexShrink: 0,
               }}
             >
               <div
@@ -801,19 +746,96 @@ export default function MapPage() {
             </div>
           )}
 
-          {selectedLocation && apiData && !loading && (
-            <>
+          <div
+            style={{
+              position: "relative",
+              flex: 1,
+              minHeight: selectedLocation ? 280 : 340,
+              borderRadius: 24,
+              overflow: "hidden",
+              border: `1px solid ${PANEL_BORDER}`,
+              boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.2)",
+              backgroundColor: "hsl(210 35% 92%)",
+            }}
+          >
+            <div
+              ref={containerRef}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+              }}
+            />
+
+            {loading && (
               <div
                 style={{
                   position: "absolute",
-                  left: 12,
-                  bottom: 16,
-                  zIndex: 1200,
+                  inset: 0,
+                  zIndex: 80,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "hsla(0 0% 100% / 0.45)",
+                  backdropFilter: "blur(2px)",
+                  pointerEvents: "none",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 14,
+                    background: PANEL_BG_SOFT,
+                    padding: "24px 28px",
+                    borderRadius: 16,
+                    boxShadow: "0 14px 28px -16px hsla(222 47% 11% / 0.25)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 38,
+                      height: 38,
+                      borderRadius: "50%",
+                      border: "3px solid hsl(215 28% 88%)",
+                      borderTopColor: INBOUND_COLOR,
+                      animation: "spin 0.8s linear infinite",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "Outfit, sans-serif",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: TEXT_PRIMARY,
+                    }}
+                  >
+                    Loading routes for <strong>{locationLabel}</strong>...
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {selectedLocation && apiData && !loading && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: 12,
+                flexShrink: 0,
+              }}
+            >
+              <div
+                style={{
                   display: "flex",
                   flexDirection: "column",
                   gap: 8,
                   padding: "12px 16px",
-                  maxWidth: "calc(100% - 176px)",
+                  maxWidth: "calc(100% - 170px)",
                   backgroundColor: "hsla(0 0% 100% / 0.96)",
                   border: `1px solid ${PANEL_BORDER}`,
                   borderRadius: 999,
@@ -868,10 +890,6 @@ export default function MapPage() {
 
               <div
                 style={{
-                  position: "absolute",
-                  right: 12,
-                  bottom: 16,
-                  zIndex: 1200,
                   display: "flex",
                   flexDirection: "column",
                   gap: 10,
@@ -891,7 +909,7 @@ export default function MapPage() {
                   Outbound Movement
                 </label>
               </div>
-            </>
+            </div>
           )}
 
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
