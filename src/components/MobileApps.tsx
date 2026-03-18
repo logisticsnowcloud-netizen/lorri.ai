@@ -39,7 +39,7 @@ export default function MobileApps() {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ textAlign: "center", marginBottom: 14 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--purpleLt)", border: "1px solid var(--borderSm)", borderRadius: 20, padding: "6px 16px", marginBottom: 16 }}>
             <Smartphone size={14} style={{ color: "#383185" }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "#383185" }}>Available on Android</span>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "#383185" }}>Available on Android & iOS</span>
           </div>
           <h2 style={{ fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 800, color: "var(--text)", marginBottom: 10, fontFamily: "Outfit, sans-serif" }}>
             Logistics Intelligence, <span style={{ color: "#54AF3A" }}>In Your Pocket</span>

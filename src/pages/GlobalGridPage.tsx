@@ -64,7 +64,7 @@ export default function GlobalGridPage() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
   const regionTotalCounts: Record<string, number> = {
-    india: 938, europe: 697, united_states: 1298, china: 91, australia: 914,
+    india: 80000, europe: 748, united_states: 1298, china: 91, australia: 914,
   };
 
   const getRegionFromUrl = (): [number, number] => {
