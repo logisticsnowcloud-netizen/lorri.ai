@@ -592,23 +592,23 @@ export default function MapPage() {
               key={transporterId}
               style={{
                 display: "flex",
-                alignItems: "flex-start",
-                gap: 12,
-                padding: "14px 0",
+                alignItems: "center",
+                gap: 10,
+                padding: "8px 0",
                 borderBottom: `1px solid ${PANEL_BORDER}`,
               }}
             >
               <div
                 style={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 10,
+                  width: 36,
+                  height: 36,
+                  borderRadius: 8,
                   backgroundColor: "hsl(220 25% 94%)",
                   color: INBOUND_COLOR,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "1.7rem",
+                  fontSize: "1.4rem",
                   fontWeight: 700,
                   flexShrink: 0,
                   lineHeight: 1,
@@ -624,9 +624,9 @@ export default function MapPage() {
                   style={{
                     color: "hsl(226 70% 46%)",
                     textDecoration: "none",
-                    fontSize: "0.94rem",
+                    fontSize: "0.8rem",
                     fontWeight: 700,
-                    lineHeight: 1.3,
+                    lineHeight: 1.15,
                     textTransform: "uppercase",
                     display: "block",
                     whiteSpace: "nowrap",
@@ -642,8 +642,8 @@ export default function MapPage() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 6,
-                    marginTop: 6,
+                    gap: 4,
+                    marginTop: 2,
                     flexWrap: "wrap",
                   }}
                 >
@@ -652,7 +652,7 @@ export default function MapPage() {
                   </div>
                   <span
                     style={{
-                      fontSize: "0.82rem",
+                      fontSize: "0.72rem",
                       color: TEXT_SECONDARY,
                       lineHeight: 1,
                     }}
@@ -662,11 +662,11 @@ export default function MapPage() {
                   {transporter.account_type === "verified" && (
                     <span
                       style={{
-                        fontSize: "0.82rem",
+                        fontSize: "0.72rem",
                         fontWeight: 700,
                         color: "hsl(142 71% 35%)",
                         lineHeight: 1,
-                        marginLeft: 8,
+                        marginLeft: 6,
                       }}
                     >
                       ✓ Verified
@@ -1182,8 +1182,8 @@ export default function MapPage() {
       {showPanel && (
         <div
           style={{
-            width: 540,
-            minWidth: 540,
+            width: 400,
+            minWidth: 400,
             background: "hsla(0 0% 100% / 0.98)",
             borderLeft: `1px solid ${PANEL_BORDER}`,
             fontFamily: "Outfit, sans-serif",
@@ -1194,19 +1194,19 @@ export default function MapPage() {
         >
           <div
             style={{
-              padding: "18px 20px 10px",
+              padding: "12px 14px 6px",
               background: "hsla(0 0% 100% / 0.98)",
               flexShrink: 0,
             }}
           >
-            <h2 style={{ fontSize: "1rem", fontWeight: 800, color: TEXT_PRIMARY, margin: 0 }}>
+            <h2 style={{ fontSize: "0.92rem", fontWeight: 800, color: TEXT_PRIMARY, margin: 0 }}>
               Transporters in {locationLabel}
             </h2>
-            <p style={{ fontSize: "0.84rem", color: TEXT_SECONDARY, margin: "6px 0 0" }}>
+            <p style={{ fontSize: "0.78rem", color: TEXT_SECONDARY, margin: "4px 0 0" }}>
               Showing {transporters.length} of <strong style={{ color: TEXT_PRIMARY }}>{totalTransporters}</strong> transporters
             </p>
           </div>
-          <div style={{ padding: "0 20px 24px" }}>{transporterDesktopList}</div>
+          <div style={{ padding: "0 14px 12px" }}>{transporterDesktopList}</div>
         </div>
       )}
     </div>
