@@ -1182,8 +1182,8 @@ export default function MapPage() {
       {showPanel && (
         <div
           style={{
-            width: 540,
-            minWidth: 540,
+            width: 400,
+            minWidth: 400,
             background: "hsla(0 0% 100% / 0.98)",
             borderLeft: `1px solid ${PANEL_BORDER}`,
             fontFamily: "Outfit, sans-serif",
@@ -1194,19 +1194,19 @@ export default function MapPage() {
         >
           <div
             style={{
-              padding: "18px 20px 10px",
+              padding: "12px 14px 6px",
               background: "hsla(0 0% 100% / 0.98)",
               flexShrink: 0,
             }}
           >
-            <h2 style={{ fontSize: "1rem", fontWeight: 800, color: TEXT_PRIMARY, margin: 0 }}>
+            <h2 style={{ fontSize: "0.92rem", fontWeight: 800, color: TEXT_PRIMARY, margin: 0 }}>
               Transporters in {locationLabel}
             </h2>
-            <p style={{ fontSize: "0.84rem", color: TEXT_SECONDARY, margin: "6px 0 0" }}>
+            <p style={{ fontSize: "0.78rem", color: TEXT_SECONDARY, margin: "4px 0 0" }}>
               Showing {transporters.length} of <strong style={{ color: TEXT_PRIMARY }}>{totalTransporters}</strong> transporters
             </p>
           </div>
-          <div style={{ padding: "0 20px 24px" }}>{transporterDesktopList}</div>
+          <div style={{ padding: "0 14px 12px" }}>{transporterDesktopList}</div>
         </div>
       )}
     </div>
