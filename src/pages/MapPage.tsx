@@ -22,6 +22,13 @@ L.Icon.Default.mergeOptions({
 
 const INBOUND_COLOR = "hsl(247 46% 36%)";
 const OUTBOUND_COLOR = "hsl(112 53% 45%)";
+const PANEL_BG = "rgba(255, 255, 255, 0.94)";
+const PANEL_BG_SOFT = "rgba(255, 255, 255, 0.96)";
+const PANEL_BORDER = "hsl(215 28% 88%)";
+const TEXT_PRIMARY = "hsl(222 47% 11%)";
+const TEXT_SECONDARY = "hsl(215 16% 47%)";
+const INPUT_BG = "hsl(0 0% 100%)";
+const INPUT_BORDER = "hsl(215 20% 78%)";
 
 function extractCoords(item: any): [number, number][] | null {
   if (item?.geometry?.type === "LineString" && item.geometry.coordinates) {
@@ -412,12 +419,12 @@ export default function MapPage() {
             fontSize: isMobileView ? "0.95rem" : "0.9rem",
             fontWeight: 500,
             fontFamily: "Outfit, sans-serif",
-            color: "hsl(var(--foreground))",
-            backgroundColor: "hsl(var(--background))",
-            border: "1px solid hsl(var(--border))",
+            color: TEXT_PRIMARY,
+            backgroundColor: INPUT_BG,
+            border: `1px solid ${INPUT_BORDER}`,
             borderRadius: 12,
             outline: "none",
-            boxShadow: "0 8px 24px -16px hsl(var(--foreground) / 0.28)",
+            boxShadow: "0 8px 24px -16px rgba(15, 23, 42, 0.28)",
           }}
         />
         {query && (
@@ -432,7 +439,7 @@ export default function MapPage() {
               border: "none",
               cursor: "pointer",
               fontSize: 16,
-              color: "hsl(var(--muted-foreground))",
+              color: TEXT_SECONDARY,
               padding: 4,
               lineHeight: 1,
             }}
@@ -453,13 +460,13 @@ export default function MapPage() {
             margin: 0,
             padding: "8px 0",
             listStyle: "none",
-            backgroundColor: "hsl(var(--background) / 0.98)",
-            border: "1px solid hsl(var(--border))",
+            backgroundColor: PANEL_BG_SOFT,
+            border: `1px solid ${PANEL_BORDER}`,
             borderRadius: 12,
             maxHeight: isMobileView ? 220 : 280,
             overflowY: "auto",
             zIndex: 200,
-            boxShadow: "0 20px 30px -18px hsl(var(--foreground) / 0.25)",
+            boxShadow: "0 20px 30px -18px rgba(15, 23, 42, 0.25)",
           }}
         >
           {suggestions.map((location, index) => (
@@ -469,13 +476,13 @@ export default function MapPage() {
               style={{
                 padding: "12px 16px",
                 cursor: "pointer",
-                color: "hsl(var(--foreground))",
+                color: TEXT_PRIMARY,
                 fontWeight: 500,
                 fontFamily: "Outfit, sans-serif",
                 fontSize: "0.9rem",
               }}
               onMouseEnter={(event) => {
-                event.currentTarget.style.backgroundColor = "hsl(var(--accent))";
+                event.currentTarget.style.backgroundColor = "rgba(241, 245, 249, 0.9)";
               }}
               onMouseLeave={(event) => {
                 event.currentTarget.style.backgroundColor = "transparent";
@@ -508,9 +515,9 @@ export default function MapPage() {
           <div
             key={transporterId}
             style={{
-              border: "1px solid hsl(var(--border))",
+              border: `1px solid ${PANEL_BORDER}`,
               borderRadius: 12,
-              backgroundColor: "hsl(var(--background) / 0.95)",
+              backgroundColor: "rgba(255, 255, 255, 0.98)",
               overflow: "hidden",
             }}
           >
@@ -545,7 +552,7 @@ export default function MapPage() {
               </span>
               <span
                 style={{
-                  color: "hsl(var(--muted-foreground))",
+                  color: TEXT_SECONDARY,
                   fontSize: 18,
                   transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "transform 0.2s ease",
@@ -559,8 +566,8 @@ export default function MapPage() {
               <div
                 style={{
                   padding: "0 14px 14px",
-                  borderTop: "1px solid hsl(var(--border))",
-                  backgroundColor: "hsl(var(--muted) / 0.25)",
+                  borderTop: `1px solid ${PANEL_BORDER}`,
+                  backgroundColor: "rgba(248, 250, 252, 0.92)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10 }}>
@@ -569,7 +576,7 @@ export default function MapPage() {
                     <span
                       style={{
                         fontSize: "0.72rem",
-                        color: "hsl(var(--muted-foreground))",
+                        color: TEXT_SECONDARY,
                         marginLeft: 2,
                       }}
                     >
@@ -605,7 +612,7 @@ export default function MapPage() {
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
-          backgroundColor: "hsl(var(--muted) / 0.35)",
+          backgroundColor: "hsl(210 40% 96%)",
         }}
       >
         <div
@@ -614,8 +621,8 @@ export default function MapPage() {
             display: "flex",
             flexDirection: "column",
             gap: 10,
-            backgroundColor: "hsl(var(--background) / 0.96)",
-            borderBottom: "1px solid hsl(var(--border))",
+            backgroundColor: PANEL_BG_SOFT,
+            borderBottom: `1px solid ${PANEL_BORDER}`,
             position: "relative",
             zIndex: 120,
           }}
@@ -625,10 +632,10 @@ export default function MapPage() {
             style={{
               alignSelf: "flex-start",
               background: "transparent",
-              border: "1px solid hsl(var(--border))",
+              border: `1px solid ${PANEL_BORDER}`,
               borderRadius: 10,
               padding: "9px 12px",
-              color: "hsl(var(--foreground))",
+              color: TEXT_PRIMARY,
               fontFamily: "Outfit, sans-serif",
               fontSize: 12,
               fontWeight: 700,
@@ -660,7 +667,7 @@ export default function MapPage() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "hsl(var(--background) / 0.45)",
+                background: "rgba(255,255,255,0.45)",
                 backdropFilter: "blur(2px)",
                 pointerEvents: "none",
               }}
@@ -671,10 +678,10 @@ export default function MapPage() {
                   flexDirection: "column",
                   alignItems: "center",
                   gap: 14,
-                  background: "hsl(var(--background) / 0.95)",
+                  background: PANEL_BG_SOFT,
                   padding: "24px 28px",
                   borderRadius: 16,
-                  boxShadow: "0 14px 28px -16px hsl(var(--foreground) / 0.25)",
+                  boxShadow: "0 14px 28px -16px rgba(15, 23, 42, 0.25)",
                 }}
               >
                 <div
@@ -682,7 +689,7 @@ export default function MapPage() {
                     width: 38,
                     height: 38,
                     borderRadius: "50%",
-                    border: "3px solid hsl(var(--border))",
+                    border: "3px solid hsl(215 28% 88%)",
                     borderTopColor: INBOUND_COLOR,
                     animation: "spin 0.8s linear infinite",
                   }}
@@ -692,7 +699,7 @@ export default function MapPage() {
                     fontFamily: "Outfit, sans-serif",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "hsl(var(--foreground))",
+                    color: TEXT_PRIMARY,
                   }}
                 >
                   Loading routes for <strong>{locationLabel}</strong>...
@@ -709,10 +716,10 @@ export default function MapPage() {
                 left: 12,
                 right: 12,
                 zIndex: 90,
-                backgroundColor: "hsl(var(--background) / 0.96)",
-                border: "1px solid hsl(var(--border))",
+                backgroundColor: PANEL_BG,
+                border: `1px solid ${PANEL_BORDER}`,
                 borderRadius: 16,
-                boxShadow: "0 18px 36px -24px hsl(var(--foreground) / 0.35)",
+                boxShadow: "0 18px 36px -24px rgba(15, 23, 42, 0.35)",
                 padding: 12,
               }}
             >
@@ -720,7 +727,7 @@ export default function MapPage() {
                 style={{
                   fontSize: "0.84rem",
                   fontWeight: 700,
-                  color: "hsl(var(--foreground))",
+                  color: TEXT_PRIMARY,
                   marginBottom: 10,
                 }}
               >
@@ -737,10 +744,10 @@ export default function MapPage() {
               right: 12,
               bottom: 12,
               zIndex: 90,
-              backgroundColor: "hsl(var(--background) / 0.96)",
-              border: "1px solid hsl(var(--border))",
+              backgroundColor: PANEL_BG,
+              border: `1px solid ${PANEL_BORDER}`,
               borderRadius: 16,
-              boxShadow: "0 18px 36px -24px hsl(var(--foreground) / 0.35)",
+              boxShadow: "0 18px 36px -24px rgba(15, 23, 42, 0.35)",
               padding: 12,
             }}
           >
@@ -753,11 +760,11 @@ export default function MapPage() {
                 marginBottom: 10,
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
                 <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: INBOUND_COLOR, display: "inline-block" }} />
                 Inbound
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
                 <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: OUTBOUND_COLOR, display: "inline-block" }} />
                 Outbound
               </div>
@@ -768,7 +775,7 @@ export default function MapPage() {
                 style={{
                   fontSize: "0.8rem",
                   lineHeight: 1.5,
-                  color: "hsl(var(--foreground))",
+                  color: TEXT_PRIMARY,
                   marginBottom: 10,
                 }}
               >
@@ -777,11 +784,11 @@ export default function MapPage() {
             )}
 
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: "hsl(var(--foreground))" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
                 <input type="checkbox" checked={showInbound} onChange={() => setShowInbound((current) => !current)} />
                 Inbound Movement
               </label>
-              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: "hsl(var(--foreground))" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
                 <input type="checkbox" checked={showOutbound} onChange={() => setShowOutbound((current) => !current)} />
                 Outbound Movement
               </label>
@@ -800,7 +807,7 @@ export default function MapPage() {
         height: "100vh",
         display: "flex",
         overflow: "hidden",
-        backgroundColor: "hsl(var(--muted) / 0.35)",
+        backgroundColor: "hsl(210 40% 96%)",
       }}
     >
       <div style={{ flex: 1, position: "relative", transition: "all 0.3s ease" }}>
@@ -829,7 +836,7 @@ export default function MapPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "hsl(var(--background) / 0.45)",
+              background: "rgba(255,255,255,0.45)",
               backdropFilter: "blur(2px)",
               pointerEvents: "none",
             }}
@@ -840,10 +847,10 @@ export default function MapPage() {
                 flexDirection: "column",
                 alignItems: "center",
                 gap: 16,
-                background: "hsl(var(--background) / 0.95)",
+                background: PANEL_BG_SOFT,
                 padding: "28px 40px",
                 borderRadius: 16,
-                boxShadow: "0 14px 28px -16px hsl(var(--foreground) / 0.25)",
+                boxShadow: "0 14px 28px -16px rgba(15, 23, 42, 0.25)",
                 pointerEvents: "auto",
               }}
             >
@@ -852,7 +859,7 @@ export default function MapPage() {
                   width: 40,
                   height: 40,
                   borderRadius: "50%",
-                  border: "3px solid hsl(var(--border))",
+                  border: "3px solid hsl(215 28% 88%)",
                   borderTopColor: INBOUND_COLOR,
                   animation: "spin 0.8s linear infinite",
                 }}
@@ -862,7 +869,7 @@ export default function MapPage() {
                   fontFamily: "Outfit, sans-serif",
                   fontSize: 14,
                   fontWeight: 600,
-                  color: "hsl(var(--foreground))",
+                  color: TEXT_PRIMARY,
                 }}
               >
                 Loading routes for <strong>{locationLabel}</strong>...
@@ -882,13 +889,13 @@ export default function MapPage() {
             width: "calc(100% - 40px)",
             maxWidth: 1200,
             zIndex: 100,
-            background: "hsl(var(--background) / 0.9)",
+            background: PANEL_BG,
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
             padding: "10px 20px",
             borderRadius: 12,
-            boxShadow: "0 10px 30px -10px hsl(var(--foreground) / 0.14)",
-            border: "1px solid hsl(var(--border))",
+            boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.15)",
+            border: `1px solid rgba(255, 255, 255, 0.5)`,
           }}
         >
           <div
@@ -905,7 +912,7 @@ export default function MapPage() {
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 700,
-                  color: "hsl(var(--foreground))",
+                  color: TEXT_PRIMARY,
                   letterSpacing: "-0.01em",
                   marginBottom: 2,
                   fontFamily: "Outfit, sans-serif",
@@ -916,7 +923,7 @@ export default function MapPage() {
               <p
                 style={{
                   fontSize: "0.75rem",
-                  color: "hsl(var(--muted-foreground))",
+                  color: TEXT_SECONDARY,
                   fontWeight: 500,
                   margin: 0,
                 }}
@@ -931,10 +938,10 @@ export default function MapPage() {
               onClick={() => navigate("/")}
               style={{
                 background: "transparent",
-                border: "1px solid hsl(var(--border))",
+                border: `1px solid ${INPUT_BORDER}`,
                 borderRadius: 10,
                 padding: "10px 16px",
-                color: "hsl(var(--foreground))",
+                color: TEXT_PRIMARY,
                 fontFamily: "Outfit, sans-serif",
                 fontSize: 12,
                 fontWeight: 700,
@@ -958,27 +965,27 @@ export default function MapPage() {
             alignItems: "center",
             gap: 12,
             padding: "8px 16px",
-            background: "hsl(var(--background) / 0.9)",
+            background: "rgba(255, 255, 255, 0.92)",
             backdropFilter: "blur(16px)",
             borderRadius: 999,
-            boxShadow: "0 10px 25px -5px hsl(var(--foreground) / 0.1)",
-            border: "1px solid hsl(var(--border))",
+            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+            border: `1px solid rgba(255, 255, 255, 0.5)`,
             width: "50%",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.72rem", color: "hsl(var(--foreground))", fontWeight: 700 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.72rem", color: TEXT_PRIMARY, fontWeight: 700 }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: INBOUND_COLOR }} />
             Inbound
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.72rem", color: "hsl(var(--foreground))", fontWeight: 700 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.72rem", color: TEXT_PRIMARY, fontWeight: 700 }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", display: "inline-block", backgroundColor: OUTBOUND_COLOR }} />
             Outbound
           </div>
 
           {selectedLocation && apiData && !loading && (
             <>
-              <div style={{ width: 1, height: 14, background: "hsl(var(--border))" }} />
-              <span style={{ fontSize: "0.72rem", color: "hsl(var(--foreground))", fontWeight: 700, fontFamily: "Outfit, sans-serif" }}>
+              <div style={{ width: 1, height: 14, background: "hsl(215 20% 78%)" }} />
+              <span style={{ fontSize: "0.72rem", color: TEXT_PRIMARY, fontWeight: 700, fontFamily: "Outfit, sans-serif" }}>
                 {locationLabel} — Total: <strong>{totalTransporters}</strong>
               </span>
               <span style={{ fontSize: "0.72rem", color: INBOUND_COLOR, fontWeight: 700 }}>
@@ -999,8 +1006,8 @@ export default function MapPage() {
             minWidth: 380,
             height: "100vh",
             overflowY: "auto",
-            background: "hsl(var(--background))",
-            borderLeft: "1px solid hsl(var(--border))",
+            background: "rgba(255, 255, 255, 0.98)",
+            borderLeft: `1px solid ${PANEL_BORDER}`,
             fontFamily: "Outfit, sans-serif",
             zIndex: 10,
           }}
@@ -1008,17 +1015,17 @@ export default function MapPage() {
           <div
             style={{
               padding: "12px 16px",
-              borderBottom: "1px solid hsl(var(--border))",
+              borderBottom: `1px solid ${PANEL_BORDER}`,
               position: "sticky",
               top: 0,
-              background: "hsl(var(--background))",
+              background: "rgba(255, 255, 255, 0.98)",
               zIndex: 2,
             }}
           >
-            <h2 style={{ fontSize: "0.98rem", fontWeight: 700, color: "hsl(var(--foreground))", margin: 0 }}>
+            <h2 style={{ fontSize: "0.98rem", fontWeight: 700, color: TEXT_PRIMARY, margin: 0 }}>
               Transporters in {locationLabel}
             </h2>
-            <p style={{ fontSize: "0.74rem", color: "hsl(var(--muted-foreground))", margin: "4px 0 0" }}>
+            <p style={{ fontSize: "0.74rem", color: TEXT_SECONDARY, margin: "4px 0 0" }}>
               Showing {transporters.length} of <strong>{totalTransporters}</strong> transporters
             </p>
           </div>
