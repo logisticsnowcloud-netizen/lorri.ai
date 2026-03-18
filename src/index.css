@@ -154,6 +154,13 @@ body.light {
   section, footer {
     scroll-snap-align: start;
   }
+  .chat-panel {
+    overscroll-behavior: contain;
+  }
+  .chat-scroll-area [data-radix-scroll-area-viewport] {
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+  }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: hsl(var(--background)); }
   ::-webkit-scrollbar-thumb { background: hsl(var(--primary)); border-radius: 2px; }
