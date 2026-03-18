@@ -84,6 +84,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         alignItems: "center",
         justifyContent: "center",
         background: "var(--bg)",
+        marginBottom: '5%'
       }}
     >
       <div
@@ -204,7 +205,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             )}
           </div>
 
-          <div className="mt-3 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="mt-3 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center" style={{marginTop: '10%'}}>
             <button
               onClick={() => openDemoModal()}
               className="w-full justify-center sm:w-auto"

@@ -120,7 +120,10 @@ function Nav() {
           style={{ cursor: "pointer" }}
           onClick={() => scrollTo("hero")}
         >
-          <img src={logoImg} alt="LogisticsNow" className="nav-logo h-8 w-auto sm:h-9" style={{ mixBlendMode: "multiply" }} />
+          <span style={{ fontWeight: 800, fontSize: 24, color: "#393185" }}>
+            LoRRI<span style={{ color: "#54AF3A" }}>.ai</span>
+          </span>
+          {/* <img src={logoImg} alt="LogisticsNow" className="nav-logo h-8 w-auto sm:h-9" style={{ mixBlendMode: "multiply" }} /> */}
         </button>
 
         <div className="hidden lg:flex" style={{ alignItems: "center", gap: 24 }}>

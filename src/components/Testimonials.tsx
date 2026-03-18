@@ -185,7 +185,7 @@ export default function Testimonials() {
   return (
     <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#B1D0EF", marginBottom: 8 }}>Client Voices</div>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#393185", marginBottom: 8 }}>Client Voices</div>
         <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">What Industry Leaders Say</h2>
         <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 8 }}>Freight Savings in excess of <strong style={{ color: "#54AF3A" }}>$21 Mn</strong> and growing!</p>
 
