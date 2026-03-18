@@ -60,11 +60,6 @@ export default function Hero({ dark }: { dark: boolean }) {
     };
   }, [query]);
 
-  const handleSearch = (searchQuery?: string) => {
-    const q = (searchQuery || query).trim();
-    if (q) navigate(`/map?location=${encodeURIComponent(q)}`);
-  };
-
   useEffect(() => {
     if (userPicked) return;
     const t = setInterval(() => setTab((cur) => TABS[(TABS.indexOf(cur) + 1) % TABS.length]), 1800);
@@ -81,7 +76,7 @@ export default function Hero({ dark }: { dark: boolean }) {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden px-4 pb-5 pt-3 sm:px-6 sm:pt-4 lg:px-8"
+      className="relative overflow-visible px-4 pb-5 pt-3 sm:px-6 sm:pt-4 lg:px-8"
       style={{
         minHeight: "auto",
         display: "flex",
@@ -123,9 +118,9 @@ export default function Hero({ dark }: { dark: boolean }) {
 
           <div style={{ width: 160, height: 1.5, background: "linear-gradient(90deg,transparent,#393185,#1AA6DF,transparent)", margin: "4px 0 14px", borderRadius: 1 }} />
 
-          <div className="w-full max-w-[540px]" style={{ position: "relative" }}>
+          <div className="relative z-[40] w-full max-w-[540px]" style={{ position: "relative" }}>
             <div
-              className="flex flex-col gap-3 sm:flex-row sm:items-center"
+              className="flex items-center gap-3"
               style={{
                 background: focused ? "var(--card2)" : "var(--purpleLt)",
                 border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`,
@@ -135,52 +130,28 @@ export default function Hero({ dark }: { dark: boolean }) {
                 boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none",
               }}
             >
-              <div className="flex min-w-0 flex-1 items-center gap-3">
-                <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onFocus={() => setFocused(true)}
-                  onBlur={() => setTimeout(() => setFocused(false), 200)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSearch();
-                  }}
-                  placeholder="Search locations, connect the digital dots!"
-                  style={{
-                    flex: 1,
-                    minWidth: 0,
-                    background: "none",
-                    border: "none",
-                    outline: "none",
-                    color: "var(--text)",
-                    fontFamily: "Outfit,sans-serif",
-                    fontSize: 15,
-                    fontWeight: 400,
-                  }}
-                />
-                <span className="hidden sm:inline-flex">
-                  <PinIcon />
-                </span>
-              </div>
-              <button
-                onClick={() => handleSearch()}
-                className="w-full sm:w-auto"
+              <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setTimeout(() => setFocused(false), 200)}
+                placeholder="Search locations, connect the digital dots!"
                 style={{
-                  background: "linear-gradient(135deg,#393185,#4D44A8)",
+                  flex: 1,
+                  minWidth: 0,
+                  background: "none",
                   border: "none",
-                  borderRadius: 8,
-                  padding: "10px 22px",
-                  color: "white",
+                  outline: "none",
+                  color: "var(--text)",
                   fontFamily: "Outfit,sans-serif",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  letterSpacing: ".04em",
-                  flexShrink: 0,
+                  fontSize: 15,
+                  fontWeight: 400,
                 }}
-              >
-                Search
-              </button>
+              />
+              <span className="hidden sm:inline-flex">
+                <PinIcon />
+              </span>
             </div>
 
             {focused && suggestions.length > 0 && (
@@ -193,7 +164,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   background: "var(--card)",
                   border: "1px solid var(--border)",
                   borderRadius: 12,
-                  zIndex: 20,
+                  zIndex: 60,
                   boxShadow: "0 20px 60px var(--shadow)",
                   maxHeight: 300,
                   overflowY: "auto",
