@@ -496,78 +496,190 @@ export default function MapPage() {
     </div>
   );
 
-  const renderTransporterRows = (compact = false) => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: compact ? 8 : 10,
-        maxHeight: compact ? "26vh" : "none",
-        overflowY: compact ? "auto" : "visible",
-        paddingRight: compact ? 4 : 0,
-      }}
-    >
-      {transporters.map((transporter: any, index: number) => {
-        const transporterId = transporter.transporter_id ?? index;
+  const getTransporterInitial = (name?: string) =>
+    (name?.trim().charAt(0) || "?").toUpperCase();
 
-        return (
-          <div
-            key={transporterId}
-            style={{
-              border: `1px solid ${PANEL_BORDER}`,
-              borderRadius: 12,
-              backgroundColor: "hsla(0 0% 100% / 0.98)",
-              padding: compact ? "10px 12px" : "12px 14px",
-            }}
-          >
-            <a
-              href="#"
-              onClick={(event) => event.preventDefault()}
-              style={{
-                color: "hsl(221 83% 53%)",
-                textDecoration: "underline",
-                fontSize: compact ? "0.78rem" : "0.8rem",
-                fontWeight: 700,
-                lineHeight: 1.35,
-                textTransform: "uppercase",
-                display: "inline-block",
-              }}
-            >
-              {transporter.transporter_name}
-            </a>
+  const renderTransporterRows = (compact = false) => {
+    if (compact) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            maxHeight: "26vh",
+            overflowY: "auto",
+            paddingRight: 4,
+          }}
+        >
+          {transporters.map((transporter: any, index: number) => {
+            const transporterId = transporter.transporter_id ?? index;
+            const ratingCount = transporter.number_of_ratings ?? 0;
 
-            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10, flexWrap: "wrap" }}>
-              {renderStars(transporter.overall_rating ?? 0)}
-              {transporter.number_of_ratings > 0 && (
-                <span
-                  style={{
-                    fontSize: "0.72rem",
-                    color: TEXT_SECONDARY,
-                    marginLeft: 2,
-                  }}
-                >
-                  ({transporter.number_of_ratings})
-                </span>
-              )}
-            </div>
-
-            {transporter.account_type === "verified" && (
+            return (
               <div
+                key={transporterId}
                 style={{
-                  marginTop: 8,
-                  fontSize: "0.74rem",
-                  fontWeight: 700,
-                  color: "hsl(142 71% 35%)",
+                  border: `1px solid ${PANEL_BORDER}`,
+                  borderRadius: 12,
+                  backgroundColor: "hsla(0 0% 100% / 0.98)",
+                  padding: "10px 12px",
                 }}
               >
-                ✓ Verified transporter
+                <a
+                  href="#"
+                  onClick={(event) => event.preventDefault()}
+                  style={{
+                    color: "hsl(221 83% 53%)",
+                    textDecoration: "none",
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    lineHeight: 1.35,
+                    textTransform: "uppercase",
+                    display: "inline-block",
+                  }}
+                >
+                  {transporter.transporter_name}
+                </a>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 4,
+                    marginTop: 10,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {renderStars(transporter.overall_rating ?? 0)}
+                  <span
+                    style={{
+                      fontSize: "0.72rem",
+                      color: TEXT_SECONDARY,
+                      marginLeft: 2,
+                    }}
+                  >
+                    ({ratingCount})
+                  </span>
+                  {transporter.account_type === "verified" && (
+                    <span
+                      style={{
+                        fontSize: "0.74rem",
+                        fontWeight: 700,
+                        color: "hsl(142 71% 35%)",
+                        marginLeft: 8,
+                      }}
+                    >
+                      ✓ Verified
+                    </span>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
+            );
+          })}
+        </div>
+      );
+    }
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {transporters.map((transporter: any, index: number) => {
+          const transporterId = transporter.transporter_id ?? index;
+          const ratingCount = transporter.number_of_ratings ?? 0;
+
+          return (
+            <div
+              key={transporterId}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 12,
+                padding: "14px 0",
+                borderBottom: `1px solid ${PANEL_BORDER}`,
+              }}
+            >
+              <div
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 10,
+                  backgroundColor: "hsl(220 25% 94%)",
+                  color: INBOUND_COLOR,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "1.7rem",
+                  fontWeight: 700,
+                  flexShrink: 0,
+                  lineHeight: 1,
+                }}
+              >
+                {getTransporterInitial(transporter.transporter_name)}
+              </div>
+
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <a
+                  href="#"
+                  onClick={(event) => event.preventDefault()}
+                  style={{
+                    color: "hsl(226 70% 46%)",
+                    textDecoration: "none",
+                    fontSize: "0.94rem",
+                    fontWeight: 700,
+                    lineHeight: 1.3,
+                    textTransform: "uppercase",
+                    display: "block",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                  title={transporter.transporter_name}
+                >
+                  {transporter.transporter_name}
+                </a>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    marginTop: 6,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    {renderStars(transporter.overall_rating ?? 0)}
+                  </div>
+                  <span
+                    style={{
+                      fontSize: "0.82rem",
+                      color: TEXT_SECONDARY,
+                      lineHeight: 1,
+                    }}
+                  >
+                    ({ratingCount})
+                  </span>
+                  {transporter.account_type === "verified" && (
+                    <span
+                      style={{
+                        fontSize: "0.82rem",
+                        fontWeight: 700,
+                        color: "hsl(142 71% 35%)",
+                        lineHeight: 1,
+                        marginLeft: 8,
+                      }}
+                    >
+                      ✓ Verified
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
 
   const transporterAccordion = (
     <div
@@ -861,13 +973,24 @@ export default function MapPage() {
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
-        overflow: "hidden",
+        alignItems: "stretch",
+        overflow: "visible",
         backgroundColor: "hsl(210 40% 96%)",
       }}
     >
-      <div style={{ flex: 1, position: "relative", transition: "all 0.3s ease" }}>
+      <div
+        style={{
+          flex: 1,
+          minWidth: 0,
+          height: "100vh",
+          position: "sticky",
+          top: 0,
+          alignSelf: "flex-start",
+          transition: "all 0.3s ease",
+        }}
+      >
         <main
           style={{
             position: "absolute",
@@ -1059,10 +1182,8 @@ export default function MapPage() {
       {showPanel && (
         <div
           style={{
-            width: 380,
-            minWidth: 380,
-            height: "100vh",
-            overflowY: "visible",
+            width: 540,
+            minWidth: 540,
             background: "hsla(0 0% 100% / 0.98)",
             borderLeft: `1px solid ${PANEL_BORDER}`,
             fontFamily: "Outfit, sans-serif",
@@ -1073,21 +1194,19 @@ export default function MapPage() {
         >
           <div
             style={{
-              padding: "12px 16px",
-              borderBottom: `1px solid ${PANEL_BORDER}`,
+              padding: "18px 20px 10px",
               background: "hsla(0 0% 100% / 0.98)",
-              zIndex: 2,
               flexShrink: 0,
             }}
           >
-            <h2 style={{ fontSize: "0.98rem", fontWeight: 700, color: TEXT_PRIMARY, margin: 0 }}>
+            <h2 style={{ fontSize: "1rem", fontWeight: 800, color: TEXT_PRIMARY, margin: 0 }}>
               Transporters in {locationLabel}
             </h2>
-            <p style={{ fontSize: "0.74rem", color: TEXT_SECONDARY, margin: "4px 0 0" }}>
-              Showing {transporters.length} of <strong>{totalTransporters}</strong> transporters
+            <p style={{ fontSize: "0.84rem", color: TEXT_SECONDARY, margin: "6px 0 0" }}>
+              Showing {transporters.length} of <strong style={{ color: TEXT_PRIMARY }}>{totalTransporters}</strong> transporters
             </p>
           </div>
-          <div style={{ padding: 12, overflow: "visible", flex: 1 }}>{transporterDesktopList}</div>
+          <div style={{ padding: "0 20px 24px" }}>{transporterDesktopList}</div>
         </div>
       )}
     </div>
