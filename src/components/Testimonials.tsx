@@ -12,20 +12,149 @@ const quotes = [
 const videoTestimonials = [
   { name: "Apollo Tyres Limited (Global)", person: "Mr. Parmeshwaran Iyer", title: "Chief Supply Chain Officer", videoId: "hwRp72mT18E", domain: "apollotyres.com" },
   { name: "Jyothy Labs Ltd.", person: "Mr. Ananth Rao", title: "Head – Operations", videoId: "T1sUqxHzX9c", domain: "jyothylabs.com" },
-  { name: "Perfetti Van Melle (India)", person: "Mr. Vaseem Ahamad", title: "Associate Director, Logistics & Warehousing", videoId: "akFrzBqu-d0", domain: "perfettivanmelle.com" },
+  {
+    name: "Perfetti Van Melle (India)",
+    person: "Mr. Vaseem Ahamad",
+    title: "Associate Director, Logistics & Warehousing",
+    videoId: "akFrzBqu-d0",
+    domain: "perfettivanmelle.com",
+    thumbnailLogo: "/newlogo/perfetti-van-melle-removebg-preview.png",
+  },
   { name: "MIRC Electronics (Onida)", person: "Mr. Nilesh Patil", title: "VP – Global Supply Chain", videoId: "77_eYlVvehE", domain: "onida.com" },
-  { name: "Saint-Gobain India", person: "Mr. Shekhar Kulkarni", title: "SCM Head", videoId: "dChAh9biv0c", domain: "saint-gobain.co.in" },
+  {
+    name: "Saint-Gobain India",
+    person: "Mr. Shekhar Kulkarni",
+    title: "SCM Head",
+    videoId: "dChAh9biv0c",
+    domain: "saint-gobain.co.in",
+    thumbnailLogo: "/newlogo/Saint-Gobain-Logo.png",
+  },
   { name: "New Darbar Transport", person: "Mr. Jatindra Vohra", title: "Director", videoId: "5jc7YnwtlwQ", domain: "newdarbartransport.com" },
 ];
+
+function VideoThumbnail({ v }: { v: typeof videoTestimonials[0] }) {
+  if (v.thumbnailLogo) {
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(135deg, hsl(var(--card-alt)), hsl(var(--bg-deep)))",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: "12% auto auto 8%",
+            padding: "5px 10px",
+            borderRadius: 999,
+            background: "hsl(var(--success) / 0.14)",
+            border: "1px solid hsl(var(--success) / 0.28)",
+            color: "hsl(var(--success))",
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: ".08em",
+            textTransform: "uppercase",
+          }}
+        >
+          Case Study
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            inset: "auto -8% -22% auto",
+            width: 180,
+            height: 180,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.28) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: "-30% auto auto -12%",
+            width: 160,
+            height: 160,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, hsl(var(--accent) / 0.22) 0%, transparent 70%)",
+          }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center px-8">
+          <img src={v.thumbnailLogo} alt={`${v.name} thumbnail`} className="max-h-20 w-full object-contain sm:max-h-24" />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            inset: "auto 12px 12px 12px",
+            borderRadius: 12,
+            padding: "10px 12px",
+            background: "hsl(var(--background) / 0.7)",
+            border: "1px solid hsl(var(--border-subtle))",
+            color: "hsl(var(--foreground))",
+            fontSize: 12,
+            fontWeight: 700,
+            lineHeight: 1.25,
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          {v.name}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={`https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg`}
+      alt={v.name}
+      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform .4s ease" }}
+      className="group-hover:scale-110"
+    />
+  );
+}
 
 function VideoCard({ v }: { v: typeof videoTestimonials[0] }) {
   return (
     <a href={`https://www.youtube.com/watch?v=${v.videoId}`} target="_blank" rel="noopener noreferrer" className="group block" style={{ textDecoration: "none" }}>
-      <div style={{ borderRadius: 16, overflow: "hidden", background: "var(--card)", border: "1.5px solid var(--border)", transition: "all .3s ease" }} className="group-hover:scale-[1.02] group-hover:shadow-[0_8px_32px_rgba(57,49,133,0.25)]">
-        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "#0a0a1a" }}>
-          <img src={`https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg`} alt={v.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform .4s ease" }} className="group-hover:scale-110" />
-          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.25)", transition: "background .3s" }} className="group-hover:!bg-black/40">
-            <div style={{ width: 52, height: 52, borderRadius: "50%", background: "linear-gradient(135deg, #FF0000, #CC0000)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 20px rgba(255,0,0,0.4)", transition: "transform .3s" }} className="group-hover:scale-110">
+      <div
+        style={{
+          borderRadius: 16,
+          overflow: "hidden",
+          background: "hsl(var(--card))",
+          border: "1.5px solid hsl(var(--border-subtle))",
+          transition: "all .3s ease",
+        }}
+        className="group-hover:scale-[1.02]"
+      >
+        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "hsl(var(--bg-deep))" }}>
+          <VideoThumbnail v={v} />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "hsl(var(--background) / 0.24)",
+              transition: "background .3s ease",
+            }}
+            className="group-hover:!bg-[hsl(var(--background)/0.36)]"
+          >
+            <div
+              style={{
+                width: 52,
+                height: 52,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.8))",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 8px 24px -8px hsl(var(--destructive) / 0.6)",
+                transition: "transform .3s ease",
+              }}
+              className="group-hover:scale-110"
+            >
               <Play size={22} fill="white" color="white" style={{ marginLeft: 2 }} />
             </div>
           </div>
@@ -34,9 +163,9 @@ function VideoCard({ v }: { v: typeof videoTestimonials[0] }) {
         <div style={{ padding: "14px 16px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <img src={`https://www.google.com/s2/favicons?domain=${v.domain}&sz=32`} alt="" style={{ width: 20, height: 20, borderRadius: 4 }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
-            <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text)", lineHeight: 1.2 }}>{v.name}</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "hsl(var(--foreground))", lineHeight: 1.2 }}>{v.name}</span>
           </div>
-          <p style={{ fontSize: 12, color: "var(--text2)", lineHeight: 1.45, margin: 0 }}>
+          <p style={{ fontSize: 12, color: "hsl(var(--muted-foreground))", lineHeight: 1.45, margin: 0 }}>
             {v.person} — {v.title}
           </p>
         </div>
