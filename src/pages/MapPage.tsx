@@ -1062,21 +1062,22 @@ export default function MapPage() {
             width: 380,
             minWidth: 380,
             height: "100vh",
-            overflowY: "auto",
+            overflowY: "visible",
             background: "hsla(0 0% 100% / 0.98)",
             borderLeft: `1px solid ${PANEL_BORDER}`,
             fontFamily: "Outfit, sans-serif",
             zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <div
             style={{
               padding: "12px 16px",
               borderBottom: `1px solid ${PANEL_BORDER}`,
-              position: "sticky",
-              top: 0,
               background: "hsla(0 0% 100% / 0.98)",
               zIndex: 2,
+              flexShrink: 0,
             }}
           >
             <h2 style={{ fontSize: "0.98rem", fontWeight: 700, color: TEXT_PRIMARY, margin: 0 }}>
@@ -1086,7 +1087,7 @@ export default function MapPage() {
               Showing {transporters.length} of <strong>{totalTransporters}</strong> transporters
             </p>
           </div>
-          <div style={{ padding: 12 }}>{transporterDesktopList}</div>
+          <div style={{ padding: 12, overflow: "visible", flex: 1 }}>{transporterDesktopList}</div>
         </div>
       )}
     </div>
