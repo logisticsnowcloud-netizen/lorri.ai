@@ -1,82 +1,89 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { generateAnswer } from "@/lib/chatbot";
-import { Send, X, Bot, MessageSquare, ChevronRight, ExternalLink } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Bot, ChevronRight, ExternalLink, MessageSquare, Send, Sparkles, X } from "lucide-react";
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useDemoModal } from "@/hooks/use-demo-modal";
+import { CHATBOT_SUGGESTIONS, generateAnswer, type ChatIntent } from "@/lib/chatbot";
+import { cn } from "@/lib/utils";
 
 interface Message {
   role: "bot" | "user";
   text: string;
   time: string;
+  intent?: ChatIntent;
 }
 
+const initialMessage: Message = {
+  role: "bot",
+  text: "Hi — I'm the LogisticsNow assistant. Ask about LoRRI, freight intelligence, pricing, carrier discovery, or booking a demo.",
+  time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+  intent: "general",
+};
+
+const QUICK_REPLY_CATEGORIES = [
+  { label: "Products", prompt: "What products does LogisticsNow offer?", badge: "PR" },
+  { label: "Pricing", prompt: "How does pricing work for LoRRI?", badge: "₹" },
+  { label: "Demo", prompt: "I want to book a demo.", badge: "DM" },
+  { label: "Support", prompt: "I need support with LogisticsNow.", badge: "SP" },
+] as const;
+
+const suggestions = CHATBOT_SUGGESTIONS.map((query) => ({ label: query, query }));
+
+const launcherGradient = {
+  backgroundImage: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
+};
+
+const panelGradient = {
+  backgroundImage: "linear-gradient(160deg, hsl(var(--card)) 0%, hsl(var(--card-alt)) 100%)",
+};
+
 const ChatWidget = () => {
-  const navigate = useNavigate();
+  const openDemoModal = useDemoModal();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "bot",
-      text: "👋 Hello! I'm the LogisticsNow Assistant. I can answer questions about LogisticsNow and LoRRI — our products, services, vision, and how to get in touch.",
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([initialMessage]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(true);
-  
+  const [lastIntent, setLastIntent] = useState<ChatIntent>("general");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, isLoading]);
 
   const handleSendMessage = async (text: string) => {
-    if (!text.trim() || isLoading) return;
+    const trimmed = text.trim();
+    if (!trimmed || isLoading) return;
 
-    const userMsg: Message = {
-      role: "user",
-      text,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
+    const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    setMessages((prev) => [...prev, { role: "user", text: trimmed, time }]);
     setInput("");
     setIsLoading(true);
 
     try {
-      const result = await generateAnswer(text);
-      const botMsg: Message = {
-        role: "bot",
-        text: result.answer,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      setMessages((prev) => [...prev, botMsg]);
-
-      // Check for demo/contact intent to redirect
-      const lowerInput = text.toLowerCase();
-      const lowerAnswer = result.answer.toLowerCase();
-      if (
-        lowerInput.includes("demo") || 
-        lowerInput.includes("contact") || 
-        lowerInput.includes("schedule") ||
-        lowerAnswer.includes("redirecting you")
-      ) {
-        setTimeout(() => {
-          setIsOpen(false);
-          navigate("/contact");
-        }, 2500);
-      }
-    } catch (error) {
+      const result = await generateAnswer(trimmed);
+      setLastIntent(result.intent);
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
-          text: "Sorry, I encountered an error. Please try again.",
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          text: result.answer,
+          time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          intent: result.intent,
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "bot",
+          text: "Sorry — I hit an issue. Please try again in a moment.",
+          time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          intent: "general",
         },
       ]);
     } finally {
@@ -84,178 +91,225 @@ const ChatWidget = () => {
     }
   };
 
-  const suggestions = [
-    { label: "What is LoRRI?", query: "What is LoRRI?" },
-    { label: "Why choose us?", query: "How is LogisticsNow better than others?" },
-    { label: "Book a Demo", query: "I want to request a demo." },
-  ];
-
   return (
     <>
-      {/* Floating Toggle Button */}
-      <button
+      <motion.button
+        type="button"
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsOpen((prev) => !prev);
           setShowNotification(false);
         }}
-        className={`fixed bottom-7 right-7 z-[500] w-[62px] h-[62px] rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:scale-110 active:scale-95 group ${
-          isOpen ? "bg-ln-purple" : "gradient-primary"
-        }`}
-        style={{ boxShadow: isOpen ? '0 8px 28px rgba(0,0,0,0.2)' : '0 8px 32px rgba(var(--ln-purple), 0.4)' }}
+        className="fixed bottom-4 right-4 z-[500] flex h-14 w-14 items-center justify-center rounded-full border border-border-subtle text-primary-foreground shadow-2xl ring-1 ring-white/10 transition-transform duration-300 hover:scale-105 md:bottom-6 md:right-6 md:h-16 md:w-16"
+        style={launcherGradient}
+        whileTap={{ scale: 0.96 }}
+        aria-label={isOpen ? "Close chat assistant" : "Open chat assistant"}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.div
+            <motion.span
               key="close"
-              initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+              initial={{ opacity: 0, rotate: 90, scale: 0.7 }}
               animate={{ opacity: 1, rotate: 0, scale: 1 }}
-              exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+              exit={{ opacity: 0, rotate: -90, scale: 0.7 }}
             >
-              <X className="w-7 h-7 text-white" />
-            </motion.div>
+              <X className="h-6 w-6" />
+            </motion.span>
           ) : (
-            <motion.div
+            <motion.span
               key="open"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1,
-                y: [0, -4, 0],
-              }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              transition={{
-                y: {
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
-              className="relative text-3xl"
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -3, 0] }}
+              transition={{ y: { duration: 2.4, repeat: Infinity, ease: "easeInOut" } }}
+              className="relative"
             >
-              🤖
-              {showNotification && (
-                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 border-2 border-white rounded-full animate-bounce" />
-              )}
-            </motion.div>
+              <MessageSquare className="h-6 w-6 md:h-7 md:w-7" />
+              {showNotification && <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-accent ring-2 ring-background" />}
+            </motion.span>
           )}
         </AnimatePresence>
-      </button>
+      </motion.button>
 
-      {/* Chat Widget Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 18, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-[104px] right-7 z-[500] w-[390px] h-[580px] bg-white dark:bg-zinc-950 rounded-[28px] shadow-2xl overflow-hidden flex flex-col border border-border/50 backdrop-blur-xl"
-            style={{ 
-              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.15)',
-              background: 'rgba(255, 255, 255, 0.98)'
-            }}
+            exit={{ opacity: 0, y: 18, scale: 0.96 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="chat-panel fixed bottom-20 right-2 z-[500] flex h-[min(82vh,46rem)] w-[calc(100vw-1rem)] max-w-[28rem] flex-col overflow-hidden rounded-[1.5rem] border border-border-subtle bg-card/95 shadow-2xl backdrop-blur-xl sm:bottom-24 sm:right-4 sm:w-[26rem]"
+            style={panelGradient}
+            onWheelCapture={(event) => event.stopPropagation()}
+            onTouchMoveCapture={(event) => event.stopPropagation()}
           >
-            {/* Header */}
-            <div className="p-4 gradient-primary flex items-center justify-between text-white shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center shadow-inner">
-                  <Bot className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="font-bold text-sm">LoRRIAssit</div>
-                  <div className="flex items-center gap-1.5 text-[11px] text-white/80">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    Online & Ready
-                  </div>
-                </div>
+            <div
+              className="relative overflow-hidden border-b border-border-subtle px-4 py-3.5 text-primary-foreground"
+              style={launcherGradient}
+            >
+              <div className="absolute inset-0 opacity-20" aria-hidden>
+                <div className="absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
+                <div className="absolute -bottom-10 left-0 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="p-2 hover:bg-white/10 rounded-full transition-colors"
-              >
-                <X className="w-5 h-5 text-white/70" />
-              </button>
-            </div>
-
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-zinc-200">
-              {messages.map((m, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className={`flex flex-col max-w-[85%] ${m.role === "bot" ? "self-start" : "self-end"}`}
-                >
-                  <div 
-                    className={`px-4 py-3 rounded-2xl text-[13.5px] leading-relaxed relative ${
-                      m.role === "bot" 
-                        ? "bg-zinc-100 text-zinc-800 rounded-tl-none border border-zinc-200/50 shadow-sm"
-                        : "gradient-primary text-white rounded-tr-none shadow-md"
-                    }`}
-                  >
-                    {m.text}
+              <div className="relative flex items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/10 backdrop-blur">
+                    <Bot className="h-5 w-5" />
                   </div>
-                  <span className={`text-[10px] mt-1.5 px-1 font-medium text-zinc-400 ${m.role === "bot" ? "text-left" : "text-right"}`}>
-                    {m.time}
-                  </span>
-                </motion.div>
-              ))}
-
-              {/* Loading Indicator */}
-              {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="self-start max-w-[80%] bg-zinc-100 px-4 py-3 rounded-2xl rounded-tl-none flex items-center gap-1"
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-sm font-semibold md:text-base">LoRRI Assit</p>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-white/85">
+                        <Sparkles className="h-3 w-3" /> AI
+                      </span>
+                    </div>
+                    <p className="mt-1 flex items-center gap-2 text-[11px] text-white/80 md:text-xs">
+                      <span className="h-2 w-2 rounded-full bg-success animate-pulse" />
+                      Powered by LoRRI
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsOpen(false)}
+                  className="h-8 w-8 shrink-0 rounded-full text-primary-foreground hover:bg-white/10 hover:text-primary-foreground"
                 >
-                  <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                  <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                  <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce" />
-                </motion.div>
-              )}
-              <div ref={messagesEndRef} />
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
 
-            {/* Footer / Input Area */}
-            <div className="p-4 bg-zinc-50 border-t border-zinc-100 flex flex-col gap-3">
-              {/* Suggestion Chips */}
-              {messages.length < 3 && !isLoading && (
-                <div className="flex flex-wrap gap-2">
-                  {suggestions.map((s, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleSendMessage(s.query)}
-                      className="px-3 py-1.5 bg-white border border-zinc-200 rounded-full text-[12px] font-semibold text-zinc-600 hover:border-ln-purple hover:text-ln-purple transition-all shadow-sm flex items-center gap-1"
+            <ScrollArea className="chat-scroll-area flex-1 px-3 py-3">
+              <div className="flex flex-col gap-3 pb-2">
+                {messages.map((message, index) => (
+                  <motion.div
+                    key={`${message.role}-${index}-${message.time}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={cn("flex gap-2", message.role === "user" ? "justify-end" : "justify-start")}
+                  >
+                    {message.role === "bot" && (
+                      <Avatar className="mt-1 h-8 w-8 border border-border-subtle bg-card-alt">
+                        <AvatarFallback className="bg-card-alt text-[11px] font-semibold text-accent">LN</AvatarFallback>
+                      </Avatar>
+                    )}
+                    <div className="max-w-[88%]">
+                      <div
+                        className={cn(
+                          "rounded-2xl px-3.5 py-2.5 text-[12px] leading-5 shadow-sm sm:text-[13px] sm:leading-6",
+                          message.role === "user"
+                            ? "rounded-tr-md text-primary-foreground"
+                            : "rounded-tl-md border border-border-subtle bg-card-alt text-card-foreground",
+                        )}
+                        style={message.role === "user" ? launcherGradient : undefined}
+                      >
+                        {message.text}
+                      </div>
+                      <p className={cn("mt-1 px-1 text-[10px] text-muted-foreground", message.role === "user" && "text-right")}>
+                        {message.time}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+
+                {isLoading && (
+                  <div className="flex justify-start gap-2">
+                    <Avatar className="mt-1 h-8 w-8 border border-border-subtle bg-card-alt">
+                      <AvatarFallback className="bg-card-alt text-[11px] font-semibold text-accent">LN</AvatarFallback>
+                    </Avatar>
+                    <div className="flex items-center gap-1 rounded-2xl rounded-tl-md border border-border-subtle bg-card-alt px-3.5 py-3">
+                      {[0, 1, 2].map((dot) => (
+                        <span
+                          key={dot}
+                          className="h-2 w-2 rounded-full bg-accent"
+                          style={{ animation: `pulse-dot 1s ${dot * 0.16}s infinite` }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+            </ScrollArea>
+
+            <div className="border-t border-border-subtle bg-background/50 px-3 py-3 backdrop-blur">
+              <div className="mb-3 grid grid-cols-2 gap-2">
+                {QUICK_REPLY_CATEGORIES.map((category) => (
+                  <Button
+                    key={category.label}
+                    type="button"
+                    variant="outline"
+                    onClick={() => handleSendMessage(category.prompt)}
+                    disabled={isLoading}
+                    className="h-auto items-start justify-start rounded-2xl border-border-subtle bg-card-alt/90 px-3 py-2.5 text-left hover:bg-card"
+                  >
+                    <span className="flex w-full items-start gap-2.5">
+                      <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-background text-[10px] font-bold text-accent">
+                        {category.badge}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-xs font-semibold text-foreground">{category.label}</span>
+                        <span className="block text-[10px] text-muted-foreground">Quick reply</span>
+                      </span>
+                    </span>
+                  </Button>
+                ))}
+              </div>
+
+              {messages.length <= 2 && !isLoading && (
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {suggestions.map((suggestion) => (
+                    <Button
+                      key={suggestion.query}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleSendMessage(suggestion.query)}
+                      className="h-auto rounded-full border-border-subtle bg-card-alt px-3 py-1.5 text-[11px] text-foreground hover:bg-accent/10 hover:text-accent"
                     >
-                      {s.label}
-                      <ChevronRight className="w-3 h-3 opacity-50" />
-                    </button>
+                      <span className="truncate">{suggestion.label}</span>
+                      <ChevronRight className="h-3 w-3" />
+                    </Button>
                   ))}
                 </div>
               )}
 
-              {/* Input Box */}
+              {(lastIntent === "demo" || lastIntent === "contact") && !isLoading && (
+                <Button
+                  type="button"
+                  onClick={openDemoModal}
+                  className="mb-3 h-10 w-full justify-between rounded-2xl px-4 text-sm font-semibold"
+                  style={launcherGradient}
+                >
+                  Open demo request form
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+              )}
+
               <div className="flex items-center gap-2">
-                <input
-                  type="text"
+                <Input
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSendMessage(input)}
-                  placeholder="Ask about LogisticsNow..."
-                  className="flex-1 bg-white border border-zinc-200 rounded-2xl px-4 py-3 text-[14px] outline-none focus:border-ln-purple/50 focus:ring-4 focus:ring-ln-purple/5 transition-all"
+                  onChange={(event) => setInput(event.target.value)}
+                  onKeyDown={(event) => event.key === "Enter" && handleSendMessage(input)}
+                  placeholder="Ask about LoRRI, pricing, carriers…"
                   disabled={isLoading}
+                  className="h-10 rounded-2xl border-border-subtle bg-card-alt text-sm"
                 />
-                <button
+                <Button
+                  type="button"
+                  size="icon"
                   onClick={() => handleSendMessage(input)}
                   disabled={isLoading || !input.trim()}
-                  className="w-12 h-12 rounded-2xl gradient-primary flex items-center justify-center text-white shadow-md disabled:opacity-50 hover:scale-105 active:scale-95 transition-all shrink-0"
+                  className="h-10 w-10 shrink-0 rounded-2xl"
+                  style={launcherGradient}
                 >
-                  <Send className="w-5 h-5" />
-                </button>
+                  <Send className="h-4 w-4" />
+                </Button>
               </div>
-              <div className="text-center text-[10px] text-zinc-400 font-medium">
-                AI can make mistakes. Check important info.
-              </div>
+              <p className="mt-2 text-center text-[10px] text-muted-foreground">
+                AI can be imperfect — please verify important business details.
+              </p>
             </div>
           </motion.div>
         )}
