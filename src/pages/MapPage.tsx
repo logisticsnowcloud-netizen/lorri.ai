@@ -184,7 +184,7 @@ export default function MapPage() {
     getScreenZeroData(selectedLocation.lon, selectedLocation.lat)
       .then((data) => {
         setApiData(data);
-        setExpandedTransporter(true);
+        setExpandedTransporter(false);
       })
       .catch((error) => console.error("Error fetching screen_zero data:", error))
       .finally(() => setLoading(false));
