@@ -76,7 +76,7 @@ export default function MapPage() {
   const [isMobileView, setIsMobileView] = useState(() => window.innerWidth <= 768);
   const [showInbound, setShowInbound] = useState(true);
   const [showOutbound, setShowOutbound] = useState(true);
-  const [expandedTransporter, setExpandedTransporter] = useState<boolean>(true);
+  const [expandedTransporter, setExpandedTransporter] = useState<boolean>(false);
 
   const userTypedRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
