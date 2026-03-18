@@ -62,72 +62,58 @@ export default function Platform() {
   const { ref, visible } = useInView();
 
   return (
-    <section id="platform" ref={ref as any} style={{ background: "var(--bg)", padding: "16px 32px" }} className="max-md:py-4 max-md:px-4">
+    <section id="platform" ref={ref as any} className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 12 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#383185", marginBottom: 8 }}>Industry Use Cases & Innovations</div>
-          <h2 style={{ fontSize: "1.4rem", fontWeight: 800, color: "#393185", lineHeight: 1.3, marginBottom: 8, maxWidth: 800, margin: "0 auto 8px" }} className="max-md:!text-[1.2rem]">
+          <h2 style={{ fontSize: "1.4rem", fontWeight: 800, color: "#393185", lineHeight: 1.3, margin: "0 auto 8px", maxWidth: 800 }} className="text-[1.2rem] sm:text-[1.3rem] lg:text-[1.4rem]">
             Save cost, expand reach, save time & our planet!
           </h2>
           <p style={{ fontSize: 13, color: "var(--text2)", maxWidth: 700, margin: "0 auto", lineHeight: 1.6 }}>
             Powering Freight Intelligence, Procurement and End to End Digitization/TMS at Leading Companies globally.
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }} className="max-md:!grid-cols-1 max-lg:!grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {columns.map((col, i) => (
-            <div key={i} style={{
-              background: "var(--card)",
-              border: "1.5px solid var(--border)",
-              borderRadius: 18,
-              padding: "18px 16px 16px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 8,
-              transition: "all .35s cubic-bezier(.4,0,.2,1)",
-              cursor: "pointer",
-              position: "relative",
-              overflow: "hidden",
-              animation: visible ? `fadeUp .7s ${i * 0.12}s ease both` : "none",
-              opacity: visible ? undefined : 0,
-            }}
-              onMouseEnter={e => {
+            <div
+              key={i}
+              style={{
+                background: "var(--card)",
+                border: "1.5px solid var(--border)",
+                borderRadius: 18,
+                padding: "18px 16px 16px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 8,
+                transition: "all .35s cubic-bezier(.4,0,.2,1)",
+                cursor: "pointer",
+                position: "relative",
+                overflow: "hidden",
+                animation: visible ? `fadeUp .7s ${i * 0.12}s ease both` : "none",
+                opacity: visible ? undefined : 0,
+              }}
+              onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = col.color;
                 e.currentTarget.style.boxShadow = `0 12px 40px ${col.color}25, 0 0 0 1px ${col.color}15`;
                 e.currentTarget.style.transform = "translateY(-6px)";
               }}
-              onMouseLeave={e => {
+              onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = "";
                 e.currentTarget.style.boxShadow = "none";
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              {/* Background glow */}
               <div style={{ position: "absolute", top: -40, left: "50%", transform: "translateX(-50%)", width: 120, height: 120, borderRadius: "50%", background: `radial-gradient(circle, ${col.color}15, transparent 70%)`, pointerEvents: "none" }} />
-
-              {/* Icon */}
-              <div style={{
-                width: 48, height: 48, borderRadius: 12,
-                background: col.gradient,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 22,
-                boxShadow: `0 8px 24px ${col.color}30`,
-                position: "relative",
-              }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: col.gradient, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, boxShadow: `0 8px 24px ${col.color}30`, position: "relative" }}>
                 <span style={{ filter: "grayscale(0) brightness(1.1)" }}>{col.icon}</span>
               </div>
-
-              {/* Title */}
               <h3 style={{ fontSize: 15, fontWeight: 700, color: col.color, lineHeight: 1.4, textAlign: "center", marginTop: 2 }}>{col.title}</h3>
-
-              {/* Bullet points */}
               <ul style={{ listStyle: "none", padding: 0, margin: 0, textAlign: "left", width: "100%" }}>
                 {col.points.map((point, j) => (
                   <RenderPoint key={j} point={point} />
                 ))}
               </ul>
-
-              {/* Bottom accent line */}
               <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 3, borderRadius: "3px 3px 0 0", background: col.gradient, opacity: 0.6 }} />
             </div>
           ))}

@@ -4,7 +4,7 @@ const row1 = [
   { n: "Bajaj Electricals", logo: "/logos/bajaj.png" },
   { n: "Jyothy Labs", logo: "/logos/jyothy-labs.png" },
   { n: "Hidromas", logo: "/logos/hidromas.png" },
-  { n: "Onida", logo: "/logos/mirc.png" },  
+  { n: "Onida", logo: "/logos/mirc.png" },
   { n: "Maersk", logo: "/logos/Maersk.png" },
   { n: "General Mills", logo: "/logos/general-mills.png" },
   { n: "Kimbal", logo: "/logos/kimbal.png" },
@@ -41,31 +41,9 @@ type ClientItem = { n: string; logo: string };
 
 function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPosition?: "top" | "bottom" }) {
   return (
-    <div className="group" style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px 18px", borderRadius: 10, background: "var(--purpleLt)", border: "1px solid var(--border)", flexShrink: 0, cursor: "pointer", minWidth: 60 }}>
-      <img
-        src={logo}
-        alt={n}
-        style={{ width: 48, height: 48, borderRadius: 4, objectFit: "contain" }}
-        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-      />
-      {/* Tooltip */}
-      <div style={{
-        position: "absolute",
-        [tooltipPosition === "top" ? "bottom" : "top"]: "calc(100% + 6px)",
-        left: "50%",
-        transform: "translateX(-50%)",
-        background: "var(--text)",
-        color: "var(--bg)",
-        fontSize: 11,
-        fontWeight: 600,
-        padding: "4px 10px",
-        borderRadius: 6,
-        whiteSpace: "nowrap",
-        pointerEvents: "none",
-        opacity: 0,
-        transition: "opacity 0.2s",
-        zIndex: 10,
-      }} className="group-hover:!opacity-100">
+    <div className="group relative flex min-w-[56px] flex-shrink-0 items-center justify-center rounded-[10px] px-3 py-2 sm:px-[18px] sm:py-[10px]" style={{ background: "var(--purpleLt)", border: "1px solid var(--border)", cursor: "pointer" }}>
+      <img src={logo} alt={n} className="h-9 w-9 rounded object-contain sm:h-12 sm:w-12" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+      <div className="pointer-events-none absolute left-1/2 z-10 hidden -translate-x-1/2 whitespace-nowrap rounded-md px-2.5 py-1 text-[11px] font-semibold md:block group-hover:!opacity-100" style={{ [tooltipPosition === "top" ? "bottom" : "top"]: "calc(100% + 6px)", background: "var(--text)", color: "var(--bg)", opacity: 0, transition: "opacity 0.2s" }}>
         {n}
       </div>
     </div>
@@ -75,13 +53,8 @@ function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPo
 function MarqueeRow({ items, direction = "left", duration = 30, tooltipPosition = "top" }: { items: ClientItem[]; direction?: "left" | "right"; duration?: number; tooltipPosition?: "top" | "bottom" }) {
   const doubled = [...items, ...items];
   return (
-    <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", padding: tooltipPosition === "top" ? "28px 0 0" : "0 0 28px" }}>
-      <div style={{
-        display: "inline-flex",
-        gap: 12,
-        animation: `${direction === "left" ? "ticker" : "tickerReverse"} ${duration}s linear infinite`,
-        whiteSpace: "nowrap",
-      }}>
+    <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", padding: tooltipPosition === "top" ? "24px 0 0" : "0 0 24px" }}>
+      <div style={{ display: "inline-flex", gap: 10, animation: `${direction === "left" ? "ticker" : "tickerReverse"} ${duration}s linear infinite`, whiteSpace: "nowrap" }}>
         {doubled.map((cl, i) => <LogoCard key={i} n={cl.n} logo={cl.logo} tooltipPosition={tooltipPosition} />)}
       </div>
     </div>
@@ -90,7 +63,7 @@ function MarqueeRow({ items, direction = "left", duration = 30, tooltipPosition 
 
 export default function ClientLogos() {
   return (
-    <section style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "16px 32px" }}>
+    <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
       <style>{`
         @keyframes tickerReverse {
           0% { transform: translateX(-50%); }
@@ -103,15 +76,14 @@ export default function ClientLogos() {
             <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#54AF3A", animation: "pulse-dot 2s infinite" }} />
             <span style={{ color: "#54AF3A", fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase" }}>LoRRI Makes a Difference</span>
           </div>
-          <h2 style={{ fontSize: "1.4rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 4 }}>Trusted by <span style={{color: "#393185"}}>Global Industry Leaders</span></h2>
+          <h2 style={{ fontSize: "1.4rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 4 }} className="text-[1.2rem] sm:text-[1.3rem] lg:text-[1.4rem]">Trusted by <span style={{ color: "#393185" }}>Global Industry Leaders</span></h2>
           <p style={{ fontSize: 14, color: "var(--text2)" }}>Fortune 500 companies and global logistics players rely on LoRRI</p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <MarqueeRow items={row1} direction="left" duration={30} tooltipPosition="top" />
           <MarqueeRow items={row2} direction="right" duration={35} tooltipPosition="bottom" />
         </div>
-
       </div>
     </section>
   );

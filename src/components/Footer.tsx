@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)", padding: "18px 32px 12px" }}>
+    <footer className="px-4 pb-3 pt-5 sm:px-6 lg:px-8" style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 24, marginBottom: 20 }} className="max-md:!grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-[2fr_1fr_1fr_1fr]" style={{ marginBottom: 20 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
               <div style={{ width: 32, height: 32, borderRadius: 9, background: "linear-gradient(135deg,#393185,#54AF3A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -13,6 +13,7 @@ export default function Footer() {
             <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, maxWidth: 250, marginBottom: 14 }}>Logistics Intelligence & Ratings Ecosystem. The Digital Backbone of India's Freight Industry.</p>
             <div style={{ fontSize: 11, color: "var(--text3)" }}>A LogisticsNow Product · Flipkart-Backed</div>
           </div>
+
           {[
             { title: "Platform", links: ["For Shippers", "For Carriers", "Intelligence", "Benchmarking", "Optimisation"] },
             { title: "Company", links: ["About Us", "Vision", "Customers", "Investors", "Careers", "News"] },
@@ -22,18 +23,19 @@ export default function Footer() {
               <div style={{ fontSize: 10, color: "var(--text2)", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 14 }}>{col.title}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                 {col.links.map((l, j) => (
-                  <span key={j} style={{ fontSize: 13, color: "var(--text3)", cursor: "pointer", transition: "color .2s" }}
-                    onMouseEnter={e => ((e.target as HTMLElement).style.color = "var(--text)")}
-                    onMouseLeave={e => ((e.target as HTMLElement).style.color = "var(--text3)")}>{l}</span>
+                  <span key={j} style={{ fontSize: 13, color: "var(--text3)", cursor: "pointer", transition: "color .2s", overflowWrap: "anywhere" }} onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--text)")} onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--text3)")}>{l}</span>
                 ))}
               </div>
             </div>
           ))}
         </div>
-        <div style={{ paddingTop: 20, borderTop: "1px solid var(--borderSm)", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
+
+        <div className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between" style={{ borderColor: "var(--borderSm)" }}>
           <span style={{ fontSize: 12, color: "var(--text3)" }}>© 2025 LogisticsNow Private Limited. All rights reserved.</span>
-          <div style={{ display: "flex", gap: 20 }}>
-            {["Privacy Policy", "Terms of Use", "Sitemap"].map(l => <span key={l} style={{ fontSize: 12, color: "var(--text3)", cursor: "pointer" }}>{l}</span>)}
+          <div className="flex flex-wrap gap-4 sm:gap-5">
+            {["Privacy Policy", "Terms of Use", "Sitemap"].map((l) => (
+              <span key={l} style={{ fontSize: 12, color: "var(--text3)", cursor: "pointer" }}>{l}</span>
+            ))}
           </div>
         </div>
       </div>

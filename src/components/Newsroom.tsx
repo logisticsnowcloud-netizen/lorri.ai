@@ -93,74 +93,23 @@ const pressArticles = [
 
 export default function Newsroom() {
   return (
-    <section
-      className="max-md:py-4 max-md:px-4"
-      style={{
-        background: "hsl(var(--background))",
-        padding: "16px 32px",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 50%, hsl(var(--primary) / 0.06) 0%, transparent 65%)",
-          pointerEvents: "none",
-        }}
-      />
+    <section className="relative overflow-hidden px-4 py-4 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 50%, hsl(var(--primary) / 0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
 
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
-        {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 14 }}>
-          <div
-            className="inline-flex items-center gap-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2"
-            style={{
-              padding: "4px 12px",
-              background: "hsl(var(--primary) / 0.12)",
-              border: "1px solid hsl(var(--border))",
-              color: "hsl(var(--l-blue))",
-            }}
-          >
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest" style={{ background: "hsl(var(--primary) / 0.12)", border: "1px solid hsl(var(--border))", color: "hsl(var(--l-blue))" }}>
             In The News
           </div>
-          <h2
-            className="max-md:!text-[1.4rem]"
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: 900,
-              color: "hsl(var(--foreground))",
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-              marginBottom: 8,
-            }}
-          >
-            Newsroom &{" "}
-            <span style={{ color: "hsl(var(--primary-glow))" }}>
-              Press Coverage
-            </span>
+          <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "hsl(var(--foreground))", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 8 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
+            Newsroom & <span style={{ color: "hsl(var(--primary-glow))" }}>Press Coverage</span>
           </h2>
-          <p
-            style={{
-              color: "hsl(var(--muted-foreground))",
-              fontSize: 13,
-              maxWidth: 520,
-              margin: "0 auto",
-              lineHeight: 1.5,
-            }}
-          >
-            See what leading publications are saying about LogisticsNow's
-            mission to transform the global freight ecosystem.
+          <p style={{ color: "hsl(var(--muted-foreground))", fontSize: 13, maxWidth: 520, margin: "0 auto", lineHeight: 1.5 }}>
+            See what leading publications are saying about LogisticsNow's mission to transform the global freight ecosystem.
           </p>
         </div>
 
-        {/* Media Logos */}
-        <div
-          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-4"
-          style={{ maxWidth: 900, margin: "0 auto 16px" }}
-        >
+        <div className="mx-auto mb-4 grid max-w-[960px] grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {pressItems.map((item, i) => (
             <motion.a
               key={item.name}
@@ -171,37 +120,19 @@ export default function Newsroom() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="group flex flex-col items-center justify-center gap-1.5 rounded-xl p-3 transition-all duration-300"
-              style={{
-                background: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border-subtle))",
-              }}
-              whileHover={{
-                scale: 1.04,
-                borderColor: "hsl(var(--primary) / 0.5)",
-              }}
+              className="group flex min-h-[72px] flex-col items-center justify-center gap-1.5 rounded-xl p-3 transition-all duration-300"
+              style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border-subtle))" }}
+              whileHover={{ scale: 1.04, borderColor: "hsl(var(--primary) / 0.5)" }}
             >
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="h-7 w-7 rounded object-contain opacity-60 group-hover:opacity-100 transition-opacity"
-                style={{ filter: "grayscale(80%)" }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
-              <span
-                className="text-[10px] font-semibold text-center leading-tight"
-                style={{ color: "hsl(var(--muted-foreground))" }}
-              >
+              <img src={item.logo} alt={item.name} className="h-7 w-7 rounded object-contain opacity-60 transition-opacity group-hover:opacity-100" style={{ filter: "grayscale(80%)" }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+              <span className="text-center text-[10px] font-semibold leading-tight" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {item.name}
               </span>
             </motion.a>
           ))}
         </div>
 
-        {/* Press Articles */}
-        <div className="grid md:grid-cols-3 gap-3" style={{ maxWidth: 900, margin: "0 auto" }}>
+        <div className="mx-auto grid max-w-[960px] grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {pressArticles.map((article, i) => (
             <motion.a
               key={i}
@@ -212,40 +143,25 @@ export default function Newsroom() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.05 + i * 0.06, duration: 0.4 }}
-              className="group flex flex-col justify-between rounded-xl p-4 transition-all duration-300 hover:translate-y-[-2px]"
-              style={{
-                background: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border-subtle))",
-              }}
+              className="group flex min-h-[140px] flex-col justify-between rounded-xl p-4 transition-all duration-300 hover:translate-y-[-2px]"
+              style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border-subtle))" }}
             >
               <div>
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span
-                    className="text-[9px] font-bold uppercase tracking-wider"
-                    style={{ color: "hsl(var(--primary-glow))" }}
-                  >
+                <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                  <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: "hsl(var(--primary-glow))" }}>
                     {article.outlet}
                   </span>
-                  <span
-                    className="text-[9px] font-medium"
-                    style={{ color: "hsl(var(--muted-dim))" }}
-                  >
+                  <span className="text-[9px] font-medium" style={{ color: "hsl(var(--muted-dim))" }}>
                     {article.date}
                   </span>
                 </div>
-                <p
-                  className="text-[12px] font-medium leading-snug"
-                  style={{ color: "hsl(var(--foreground))" }}
-                >
+                <p className="text-[12px] font-medium leading-snug" style={{ color: "hsl(var(--foreground))" }}>
                   {article.title}
                 </p>
               </div>
-              <div
-                className="flex items-center gap-1 mt-3 text-[11px] font-semibold transition-colors"
-                style={{ color: "hsl(var(--accent))" }}
-              >
+              <div className="mt-3 flex items-center gap-1 text-[11px] font-semibold transition-colors" style={{ color: "hsl(var(--accent))" }}>
                 Read Article
-                <ExternalLink size={10} className="group-hover:translate-x-0.5 transition-transform" />
+                <ExternalLink size={10} className="transition-transform group-hover:translate-x-0.5" />
               </div>
             </motion.a>
           ))}
