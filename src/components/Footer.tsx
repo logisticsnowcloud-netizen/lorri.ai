@@ -5,13 +5,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-[2fr_1fr_1fr_1fr]" style={{ marginBottom: 20 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 9, background: "linear-gradient(135deg,#393185,#54AF3A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              {/* <div style={{ width: 32, height: 32, borderRadius: 9, background: "linear-gradient(135deg,#393185,#54AF3A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <span style={{ color: "white", fontWeight: 900, fontSize: 13, fontFamily: "Outfit,sans-serif" }}>LN</span>
-              </div>
-              <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)" }}>Logistics<span style={{ color: "#54AF3A" }}>Now</span></div>
+              </div> */}
+              <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)" }}>LoRRI<span style={{ color: "#54AF3A" }}>.ai</span></div>
             </div>
             <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, maxWidth: 250, marginBottom: 14 }}>Logistics Intelligence & Ratings Ecosystem. The Digital Backbone of India's Freight Industry.</p>
-            <div style={{ fontSize: 11, color: "var(--text3)" }}>A LogisticsNow Product · Flipkart-Backed</div>
+            <div style={{ fontSize: 11, color: "var(--text3)" }}>A LogisticsNow Product · Backed by Shell & Flipkart</div>
           </div>
 
           {[
