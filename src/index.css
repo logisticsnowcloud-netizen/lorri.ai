@@ -148,11 +148,7 @@ body.light {
     transition: background 0.3s, color 0.3s;
   }
   html {
-    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
-  }
-  section, footer {
-    scroll-snap-align: start;
   }
   .chat-panel {
     overscroll-behavior: contain;
