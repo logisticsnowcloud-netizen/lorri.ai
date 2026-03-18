@@ -22,13 +22,13 @@ L.Icon.Default.mergeOptions({
 
 const INBOUND_COLOR = "hsl(247 46% 36%)";
 const OUTBOUND_COLOR = "hsl(112 53% 45%)";
-const PANEL_BG = "rgba(255, 255, 255, 0.94)";
-const PANEL_BG_SOFT = "rgba(255, 255, 255, 0.96)";
-const PANEL_BORDER = "hsl(215 28% 88%)";
+const PANEL_BG = "hsl(0 0% 100%)";
+const PANEL_BG_SOFT = "hsl(0 0% 100%)";
+const PANEL_BORDER = "hsl(220 20% 86%)";
 const TEXT_PRIMARY = "hsl(222 47% 11%)";
 const TEXT_SECONDARY = "hsl(215 16% 47%)";
 const INPUT_BG = "hsl(0 0% 100%)";
-const INPUT_BORDER = "hsl(215 20% 78%)";
+const INPUT_BORDER = "hsl(220 18% 80%)";
 
 function extractCoords(item: any): [number, number][] | null {
   if (item?.geometry?.type === "LineString" && item.geometry.coordinates) {
