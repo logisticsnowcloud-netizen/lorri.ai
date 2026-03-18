@@ -40,8 +40,8 @@ type ClientItem = { n: string; logo: string };
 
 function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPosition?: "top" | "bottom" }) {
   return (
-    <div className="group relative flex min-w-[56px] flex-shrink-0 items-center justify-center rounded-[10px] px-3 py-2 sm:px-[18px] sm:py-[10px]" style={{ background: "var(--purpleLt)", border: "1px solid var(--border)", cursor: "pointer" }}>
-      <img src={logo} alt={n} className="h-9 w-9 rounded object-contain sm:h-12 sm:w-12" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+    <div className="group relative flex min-w-[74px] flex-shrink-0 items-center justify-center rounded-[12px] px-3.5 py-2.5 sm:min-w-[92px] sm:px-5 sm:py-3" style={{ background: "var(--purpleLt)", border: "1px solid var(--border)", cursor: "pointer" }}>
+      <img src={logo} alt={n} className="h-11 w-11 rounded object-contain sm:h-14 sm:w-14 lg:h-16 lg:w-16" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
       <div className="pointer-events-none absolute left-1/2 z-10 hidden -translate-x-1/2 whitespace-nowrap rounded-md px-2.5 py-1 text-[11px] font-semibold md:block group-hover:!opacity-100" style={{ [tooltipPosition === "top" ? "bottom" : "top"]: "calc(100% + 6px)", background: "var(--text)", color: "var(--bg)", opacity: 0, transition: "opacity 0.2s" }}>
         {n}
       </div>
@@ -50,11 +50,11 @@ function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPo
 }
 
 function MarqueeRow({ items, direction = "left", duration = 30, tooltipPosition = "top" }: { items: ClientItem[]; direction?: "left" | "right"; duration?: number; tooltipPosition?: "top" | "bottom" }) {
-  const doubled = [...items, ...items];
+  const seamlessItems = [...items, ...items, ...items];
   return (
     <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,black 8%,black 92%,transparent)", padding: tooltipPosition === "top" ? "24px 0 0" : "0 0 24px" }}>
-      <div style={{ display: "inline-flex", gap: 10, animation: `${direction === "left" ? "ticker" : "tickerReverse"} ${duration}s linear infinite`, whiteSpace: "nowrap" }}>
-        {doubled.map((cl, i) => <LogoCard key={i} n={cl.n} logo={cl.logo} tooltipPosition={tooltipPosition} />)}
+      <div style={{ display: "flex", width: "max-content", gap: 12, animation: `${direction === "left" ? "tickerSeamless" : "tickerReverseSeamless"} ${duration}s linear infinite`, whiteSpace: "nowrap", willChange: "transform" }}>
+        {seamlessItems.map((cl, i) => <LogoCard key={`${cl.n}-${i}`} n={cl.n} logo={cl.logo} tooltipPosition={tooltipPosition} />)}
       </div>
     </div>
   );
@@ -64,9 +64,14 @@ export default function ClientLogos() {
   return (
     <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
       <style>{`
-        @keyframes tickerReverse {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
+        @keyframes tickerSeamless {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-33.333%, 0, 0); }
+        }
+
+        @keyframes tickerReverseSeamless {
+          0% { transform: translate3d(-33.333%, 0, 0); }
+          100% { transform: translate3d(0, 0, 0); }
         }
       `}</style>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
