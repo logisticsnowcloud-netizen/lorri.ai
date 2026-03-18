@@ -62,7 +62,7 @@ export default function Hero({ dark }: { dark: boolean }) {
 
   useEffect(() => {
     if (userPicked) return;
-    const t = setInterval(() => setTab((cur) => TABS[(TABS.indexOf(cur) + 1) % TABS.length]), 1800);
+    const t = setInterval(() => setTab((cur) => TABS[(TABS.indexOf(cur) + 1) % TABS.length]), 3200);
     return () => clearInterval(t);
   }, [userPicked]);
 
