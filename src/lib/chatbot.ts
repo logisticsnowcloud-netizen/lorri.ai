@@ -45,12 +45,14 @@ function getBotReply(message: string): string {
     if (key !== "default" && lower.includes(key)) return value;
   }
 
+  if (lower.includes("product") || lower.includes("solution") || lower.includes("platform")) return BOT_KNOWLEDGE.products;
   if (lower.includes("sav") || lower.includes("cost") || lower.includes("cheap")) return BOT_KNOWLEDGE.savings;
   if (lower.includes("carrier") || lower.includes("transport") || lower.includes("truck")) return BOT_KNOWLEDGE.carriers;
   if (lower.includes("route") || lower.includes("lane") || lower.includes("map")) return BOT_KNOWLEDGE.routes;
   if (lower.includes("procure") || lower.includes("tender") || lower.includes("bid")) return BOT_KNOWLEDGE.procurement;
   if (lower.includes("track") || lower.includes("shipment") || lower.includes("visibility") || lower.includes("tms")) return BOT_KNOWLEDGE.tms;
   if (lower.includes("data") || lower.includes("benchmark") || lower.includes("rate")) return BOT_KNOWLEDGE.intelligence;
+  if (lower.includes("support") || lower.includes("help") || lower.includes("issue") || lower.includes("problem")) return BOT_KNOWLEDGE.support;
   if (lower.includes("client") || lower.includes("customer") || lower.includes("who use")) return BOT_KNOWLEDGE.clients;
   if (lower.includes("price") || lower.includes("plan") || lower.includes("quote")) return BOT_KNOWLEDGE.price;
   if (lower.includes("hello") || lower.includes("hi") || lower.includes("hey")) {
