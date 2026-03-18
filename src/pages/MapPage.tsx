@@ -176,7 +176,7 @@ export default function MapPage() {
   useEffect(() => {
     if (!selectedLocation) {
       setApiData(null);
-      setExpandedTransporter(null);
+      setExpandedTransporter(false);
       return;
     }
 
@@ -184,7 +184,7 @@ export default function MapPage() {
     getScreenZeroData(selectedLocation.lon, selectedLocation.lat)
       .then((data) => {
         setApiData(data);
-        setExpandedTransporter(data.transporter_list?.[0]?.transporter_id ?? 0);
+        setExpandedTransporter(true);
       })
       .catch((error) => console.error("Error fetching screen_zero data:", error))
       .finally(() => setLoading(false));
