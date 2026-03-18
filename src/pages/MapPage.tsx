@@ -502,9 +502,9 @@ export default function MapPage() {
         display: "flex",
         flexDirection: "column",
         gap: 10,
-        maxHeight: isMobileView ? "26vh" : "none",
-        overflowY: isMobileView ? "auto" : "visible",
-        paddingRight: isMobileView ? 4 : 0,
+        maxHeight: "26vh",
+        overflowY: "auto",
+        paddingRight: 4,
       }}
     >
       {transporters.map((transporter: any, index: number) => {
@@ -517,7 +517,7 @@ export default function MapPage() {
             style={{
               border: `1px solid ${PANEL_BORDER}`,
               borderRadius: 12,
-              backgroundColor: "rgba(255, 255, 255, 0.98)",
+              backgroundColor: "hsla(0 0% 100% / 0.98)",
               overflow: "hidden",
             }}
           >
@@ -541,7 +541,7 @@ export default function MapPage() {
                 style={{
                   color: "hsl(221 83% 53%)",
                   textDecoration: "underline",
-                  fontSize: isMobileView ? "0.82rem" : "0.78rem",
+                  fontSize: "0.82rem",
                   fontWeight: 700,
                   lineHeight: 1.35,
                   textTransform: "uppercase",
@@ -567,7 +567,7 @@ export default function MapPage() {
                 style={{
                   padding: "0 14px 14px",
                   borderTop: `1px solid ${PANEL_BORDER}`,
-                  backgroundColor: "rgba(248, 250, 252, 0.92)",
+                  backgroundColor: "hsla(210 40% 98% / 0.92)",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10 }}>
@@ -596,6 +596,70 @@ export default function MapPage() {
                     ✓ Verified transporter
                   </div>
                 )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  const transporterDesktopList = (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      {transporters.map((transporter: any, index: number) => {
+        const transporterId = transporter.transporter_id ?? index;
+
+        return (
+          <div
+            key={transporterId}
+            style={{
+              border: `1px solid ${PANEL_BORDER}`,
+              borderRadius: 12,
+              backgroundColor: "hsla(0 0% 100% / 0.98)",
+              padding: "12px 14px",
+            }}
+          >
+            <a
+              href="#"
+              onClick={(event) => event.preventDefault()}
+              style={{
+                color: "hsl(221 83% 53%)",
+                textDecoration: "underline",
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                lineHeight: 1.35,
+                textTransform: "uppercase",
+                display: "inline-block",
+              }}
+            >
+              {transporter.transporter_name}
+            </a>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10 }}>
+              {renderStars(transporter.overall_rating ?? 0)}
+              {transporter.number_of_ratings > 0 && (
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    color: TEXT_SECONDARY,
+                    marginLeft: 2,
+                  }}
+                >
+                  ({transporter.number_of_ratings})
+                </span>
+              )}
+            </div>
+
+            {transporter.account_type === "verified" && (
+              <div
+                style={{
+                  marginTop: 8,
+                  fontSize: "0.74rem",
+                  fontWeight: 700,
+                  color: "hsl(142 71% 35%)",
+                }}
+              >
+                ✓ Verified transporter
               </div>
             )}
           </div>
@@ -667,7 +731,7 @@ export default function MapPage() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "rgba(255,255,255,0.45)",
+                background: "hsla(0 0% 100% / 0.45)",
                 backdropFilter: "blur(2px)",
                 pointerEvents: "none",
               }}
@@ -681,7 +745,7 @@ export default function MapPage() {
                   background: PANEL_BG_SOFT,
                   padding: "24px 28px",
                   borderRadius: 16,
-                  boxShadow: "0 14px 28px -16px rgba(15, 23, 42, 0.25)",
+                  boxShadow: "0 14px 28px -16px hsla(222 47% 11% / 0.25)",
                 }}
               >
                 <div
@@ -719,7 +783,7 @@ export default function MapPage() {
                 backgroundColor: PANEL_BG,
                 border: `1px solid ${PANEL_BORDER}`,
                 borderRadius: 16,
-                boxShadow: "0 18px 36px -24px rgba(15, 23, 42, 0.35)",
+                boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
                 padding: 12,
               }}
             >
@@ -737,63 +801,98 @@ export default function MapPage() {
             </div>
           )}
 
-          <div
-            style={{
-              position: "absolute",
-              left: 12,
-              right: 12,
-              bottom: 12,
-              zIndex: 90,
-              backgroundColor: PANEL_BG,
-              border: `1px solid ${PANEL_BORDER}`,
-              borderRadius: 16,
-              boxShadow: "0 18px 36px -24px rgba(15, 23, 42, 0.35)",
-              padding: 12,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 14,
-                flexWrap: "wrap",
-                marginBottom: 10,
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
-                <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: INBOUND_COLOR, display: "inline-block" }} />
-                Inbound
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
-                <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: OUTBOUND_COLOR, display: "inline-block" }} />
-                Outbound
-              </div>
-            </div>
-
-            {selectedLocation && apiData && !loading && (
+          {selectedLocation && apiData && !loading && (
+            <>
               <div
                 style={{
-                  fontSize: "0.8rem",
-                  lineHeight: 1.5,
-                  color: TEXT_PRIMARY,
-                  marginBottom: 10,
+                  position: "absolute",
+                  left: 12,
+                  bottom: 16,
+                  zIndex: 90,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 8,
+                  padding: "12px 16px",
+                  maxWidth: "calc(100% - 176px)",
+                  backgroundColor: "hsla(0 0% 100% / 0.96)",
+                  border: `1px solid ${PANEL_BORDER}`,
+                  borderRadius: 999,
+                  boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
                 }}
               >
-                <strong>{locationLabel}</strong> — Total:{totalTransporters} Inbound:{inboundCount} Outbound:{outboundCount}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
+                    <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: INBOUND_COLOR, display: "inline-block" }} />
+                    Inbound
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
+                    <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: OUTBOUND_COLOR, display: "inline-block" }} />
+                    Outbound
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "auto auto auto",
+                    gap: "2px 18px",
+                    alignItems: "start",
+                  }}
+                >
+                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.2 }}>
+                    {locationLabel}
+                  </div>
+                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: INBOUND_COLOR, lineHeight: 1.2 }}>
+                    Inbound:
+                  </div>
+                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: OUTBOUND_COLOR, lineHeight: 1.2 }}>
+                    Outbound:
+                  </div>
+                  <div style={{ fontSize: "0.78rem", fontWeight: 800, color: TEXT_PRIMARY, lineHeight: 1.2 }}>
+                    Total: {totalTransporters}
+                  </div>
+                  <div style={{ fontSize: "0.78rem", fontWeight: 800, color: INBOUND_COLOR, lineHeight: 1.2 }}>
+                    {inboundCount}
+                  </div>
+                  <div style={{ fontSize: "0.78rem", fontWeight: 800, color: OUTBOUND_COLOR, lineHeight: 1.2 }}>
+                    {outboundCount}
+                  </div>
+                </div>
               </div>
-            )}
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
-                <input type="checkbox" checked={showInbound} onChange={() => setShowInbound((current) => !current)} />
-                Inbound Movement
-              </label>
-              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
-                <input type="checkbox" checked={showOutbound} onChange={() => setShowOutbound((current) => !current)} />
-                Outbound Movement
-              </label>
-            </div>
-          </div>
+              <div
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  bottom: 16,
+                  zIndex: 90,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 10,
+                  padding: "12px 14px",
+                  backgroundColor: "hsla(0 0% 100% / 0.96)",
+                  border: `1px solid ${PANEL_BORDER}`,
+                  borderRadius: 12,
+                  boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
+                }}
+              >
+                <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
+                  <input type="checkbox" checked={showInbound} onChange={() => setShowInbound((current) => !current)} />
+                  Inbound Movement
+                </label>
+                <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
+                  <input type="checkbox" checked={showOutbound} onChange={() => setShowOutbound((current) => !current)} />
+                  Outbound Movement
+                </label>
+              </div>
+            </>
+          )}
 
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
@@ -836,7 +935,7 @@ export default function MapPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "rgba(255,255,255,0.45)",
+              background: "hsla(0 0% 100% / 0.45)",
               backdropFilter: "blur(2px)",
               pointerEvents: "none",
             }}
@@ -850,7 +949,7 @@ export default function MapPage() {
                 background: PANEL_BG_SOFT,
                 padding: "28px 40px",
                 borderRadius: 16,
-                boxShadow: "0 14px 28px -16px rgba(15, 23, 42, 0.25)",
+                boxShadow: "0 14px 28px -16px hsla(222 47% 11% / 0.25)",
                 pointerEvents: "auto",
               }}
             >
@@ -894,8 +993,8 @@ export default function MapPage() {
             WebkitBackdropFilter: "blur(16px)",
             padding: "10px 20px",
             borderRadius: 12,
-            boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.15)",
-            border: `1px solid rgba(255, 255, 255, 0.5)`,
+            boxShadow: "0 10px 30px -10px hsla(0 0% 0% / 0.15)",
+            border: `1px solid hsla(0 0% 100% / 0.5)`,
           }}
         >
           <div
@@ -965,11 +1064,11 @@ export default function MapPage() {
             alignItems: "center",
             gap: 12,
             padding: "8px 16px",
-            background: "rgba(255, 255, 255, 0.92)",
+            background: "hsla(0 0% 100% / 0.92)",
             backdropFilter: "blur(16px)",
             borderRadius: 999,
-            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-            border: `1px solid rgba(255, 255, 255, 0.5)`,
+            boxShadow: "0 10px 25px -5px hsla(0 0% 0% / 0.1)",
+            border: `1px solid hsla(0 0% 100% / 0.5)`,
             width: "50%",
           }}
         >
@@ -1006,7 +1105,7 @@ export default function MapPage() {
             minWidth: 380,
             height: "100vh",
             overflowY: "auto",
-            background: "rgba(255, 255, 255, 0.98)",
+            background: "hsla(0 0% 100% / 0.98)",
             borderLeft: `1px solid ${PANEL_BORDER}`,
             fontFamily: "Outfit, sans-serif",
             zIndex: 10,
@@ -1018,7 +1117,7 @@ export default function MapPage() {
               borderBottom: `1px solid ${PANEL_BORDER}`,
               position: "sticky",
               top: 0,
-              background: "rgba(255, 255, 255, 0.98)",
+              background: "hsla(0 0% 100% / 0.98)",
               zIndex: 2,
             }}
           >
@@ -1029,7 +1128,7 @@ export default function MapPage() {
               Showing {transporters.length} of <strong>{totalTransporters}</strong> transporters
             </p>
           </div>
-          <div style={{ padding: 12 }}>{transporterAccordion}</div>
+          <div style={{ padding: 12 }}>{transporterDesktopList}</div>
         </div>
       )}
     </div>
