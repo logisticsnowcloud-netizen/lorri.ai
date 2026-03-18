@@ -348,7 +348,7 @@ export default function MapPage() {
     setShowSuggestions(false);
     setSelectedLocation(null);
     setApiData(null);
-    setExpandedTransporter(null);
+    setExpandedTransporter(false);
     userTypedRef.current = false;
 
     if (mapRef.current) {
@@ -359,8 +359,8 @@ export default function MapPage() {
     }
   }, []);
 
-  const toggleTransporter = useCallback((id: string | number) => {
-    setExpandedTransporter((current) => (current === id ? null : id));
+  const toggleTransporter = useCallback(() => {
+    setExpandedTransporter((current) => !current);
   }, []);
 
   const renderStars = (rating: number) => {
@@ -496,20 +496,19 @@ export default function MapPage() {
     </div>
   );
 
-  const transporterAccordion = (
+  const renderTransporterRows = (compact = false) => (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 10,
-        maxHeight: "26vh",
-        overflowY: "auto",
-        paddingRight: 4,
+        gap: compact ? 8 : 10,
+        maxHeight: compact ? "26vh" : "none",
+        overflowY: compact ? "auto" : "visible",
+        paddingRight: compact ? 4 : 0,
       }}
     >
       {transporters.map((transporter: any, index: number) => {
         const transporterId = transporter.transporter_id ?? index;
-        const isOpen = expandedTransporter === transporterId;
 
         return (
           <div
@@ -518,105 +517,7 @@ export default function MapPage() {
               border: `1px solid ${PANEL_BORDER}`,
               borderRadius: 12,
               backgroundColor: "hsla(0 0% 100% / 0.98)",
-              overflow: "hidden",
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => toggleTransporter(transporterId)}
-              style={{
-                width: "100%",
-                background: "transparent",
-                border: "none",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 12,
-                padding: "12px 14px",
-                textAlign: "left",
-                cursor: "pointer",
-              }}
-            >
-              <span
-                style={{
-                  color: "hsl(221 83% 53%)",
-                  textDecoration: "underline",
-                  fontSize: "0.82rem",
-                  fontWeight: 700,
-                  lineHeight: 1.35,
-                  textTransform: "uppercase",
-                  flex: 1,
-                }}
-              >
-                {transporter.transporter_name}
-              </span>
-              <span
-                style={{
-                  color: TEXT_SECONDARY,
-                  fontSize: 18,
-                  transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.2s ease",
-                }}
-              >
-                ▾
-              </span>
-            </button>
-
-            {isOpen && (
-              <div
-                style={{
-                  padding: "0 14px 14px",
-                  borderTop: `1px solid ${PANEL_BORDER}`,
-                  backgroundColor: "hsla(210 40% 98% / 0.92)",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10 }}>
-                  {renderStars(transporter.overall_rating ?? 0)}
-                  {transporter.number_of_ratings > 0 && (
-                    <span
-                      style={{
-                        fontSize: "0.72rem",
-                        color: TEXT_SECONDARY,
-                        marginLeft: 2,
-                      }}
-                    >
-                      ({transporter.number_of_ratings})
-                    </span>
-                  )}
-                </div>
-                {transporter.account_type === "verified" && (
-                  <div
-                    style={{
-                      marginTop: 8,
-                      fontSize: "0.74rem",
-                      fontWeight: 700,
-                      color: "hsl(142 71% 35%)",
-                    }}
-                  >
-                    ✓ Verified transporter
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-
-  const transporterDesktopList = (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      {transporters.map((transporter: any, index: number) => {
-        const transporterId = transporter.transporter_id ?? index;
-
-        return (
-          <div
-            key={transporterId}
-            style={{
-              border: `1px solid ${PANEL_BORDER}`,
-              borderRadius: 12,
-              backgroundColor: "hsla(0 0% 100% / 0.98)",
-              padding: "12px 14px",
+              padding: compact ? "10px 12px" : "12px 14px",
             }}
           >
             <a
@@ -625,7 +526,7 @@ export default function MapPage() {
               style={{
                 color: "hsl(221 83% 53%)",
                 textDecoration: "underline",
-                fontSize: "0.8rem",
+                fontSize: compact ? "0.78rem" : "0.8rem",
                 fontWeight: 700,
                 lineHeight: 1.35,
                 textTransform: "uppercase",
@@ -635,7 +536,7 @@ export default function MapPage() {
               {transporter.transporter_name}
             </a>
 
-            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 10, flexWrap: "wrap" }}>
               {renderStars(transporter.overall_rating ?? 0)}
               {transporter.number_of_ratings > 0 && (
                 <span
@@ -668,6 +569,80 @@ export default function MapPage() {
     </div>
   );
 
+  const transporterAccordion = (
+    <div
+      style={{
+        border: `1px solid ${PANEL_BORDER}`,
+        borderRadius: 16,
+        backgroundColor: PANEL_BG,
+        boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
+        overflow: "hidden",
+      }}
+    >
+      <button
+        type="button"
+        onClick={toggleTransporter}
+        style={{
+          width: "100%",
+          background: "transparent",
+          border: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 12,
+          padding: "14px 16px",
+          textAlign: "left",
+          cursor: "pointer",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          <span
+            style={{
+              fontSize: "0.84rem",
+              fontWeight: 700,
+              color: TEXT_PRIMARY,
+            }}
+          >
+            Showing {transporters.length} of {totalTransporters} transporters
+          </span>
+          <span
+            style={{
+              fontSize: "0.74rem",
+              fontWeight: 500,
+              color: TEXT_SECONDARY,
+            }}
+          >
+            Tap to {expandedTransporter ? "hide" : "view"} transporter list
+          </span>
+        </div>
+        <span
+          style={{
+            color: TEXT_SECONDARY,
+            fontSize: 18,
+            transform: expandedTransporter ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.2s ease",
+          }}
+        >
+          ▾
+        </span>
+      </button>
+
+      {expandedTransporter && (
+        <div
+          style={{
+            padding: "0 12px 12px",
+            borderTop: `1px solid ${PANEL_BORDER}`,
+            backgroundColor: "hsla(210 40% 98% / 0.92)",
+          }}
+        >
+          <div style={{ paddingTop: 12 }}>{renderTransporterRows(true)}</div>
+        </div>
+      )}
+    </div>
+  );
+
+  const transporterDesktopList = renderTransporterRows(false);
+
   if (isMobileView) {
     return (
       <div
@@ -683,7 +658,7 @@ export default function MapPage() {
           style={{
             padding: 12,
             display: "flex",
-            flexDirection: "column",
+            alignItems: "center",
             gap: 10,
             backgroundColor: PANEL_BG_SOFT,
             borderBottom: `1px solid ${PANEL_BORDER}`,
@@ -694,21 +669,22 @@ export default function MapPage() {
           <button
             onClick={() => navigate("/")}
             style={{
-              alignSelf: "flex-start",
+              flexShrink: 0,
               background: "transparent",
               border: `1px solid ${PANEL_BORDER}`,
               borderRadius: 10,
-              padding: "9px 12px",
+              padding: "11px 12px",
               color: TEXT_PRIMARY,
               fontFamily: "Outfit, sans-serif",
               fontSize: 12,
               fontWeight: 700,
               cursor: "pointer",
+              whiteSpace: "nowrap",
             }}
           >
-            ← Back to Home
+            ← Back
           </button>
-          {searchInput}
+          <div style={{ flex: 1, minWidth: 0 }}>{searchInput}</div>
         </div>
 
         <div
@@ -721,36 +697,13 @@ export default function MapPage() {
             padding: 12,
           }}
         >
-          {showPanel && !loading && (
-            <div
-              style={{
-                backgroundColor: PANEL_BG,
-                border: `1px solid ${PANEL_BORDER}`,
-                borderRadius: 16,
-                boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
-                padding: 12,
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "0.84rem",
-                  fontWeight: 700,
-                  color: TEXT_PRIMARY,
-                  marginBottom: 10,
-                }}
-              >
-                Showing {transporters.length} of {totalTransporters} transporters
-              </div>
-              {transporterAccordion}
-            </div>
-          )}
+          {showPanel && !loading && transporterAccordion}
 
           <div
             style={{
               position: "relative",
               flex: 1,
-              minHeight: selectedLocation ? 280 : 340,
+              minHeight: selectedLocation ? 320 : 340,
               borderRadius: 24,
               overflow: "hidden",
               border: `1px solid ${PANEL_BORDER}`,
@@ -767,6 +720,86 @@ export default function MapPage() {
                 height: "100%",
               }}
             />
+
+            {selectedLocation && apiData && !loading && (
+              <div
+                style={{
+                  position: "absolute",
+                  left: 10,
+                  right: 10,
+                  bottom: 10,
+                  zIndex: 1200,
+                  pointerEvents: "auto",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
+                    padding: "12px 14px",
+                    backgroundColor: "hsla(0 0% 100% / 0.96)",
+                    border: `1px solid ${PANEL_BORDER}`,
+                    borderRadius: 16,
+                    boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 10,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.76rem", fontWeight: 700, color: TEXT_PRIMARY }}>
+                        <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: INBOUND_COLOR, display: "inline-block" }} />
+                        Inbound
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.76rem", fontWeight: 700, color: TEXT_PRIMARY }}>
+                        <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: OUTBOUND_COLOR, display: "inline-block" }} />
+                        Outbound
+                      </div>
+                    </div>
+
+                    <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                      <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.76rem", fontWeight: 600, color: TEXT_PRIMARY }}>
+                        <input type="checkbox" checked={showInbound} onChange={() => setShowInbound((current) => !current)} />
+                        Inbound
+                      </label>
+                      <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.76rem", fontWeight: 600, color: TEXT_PRIMARY }}>
+                        <input type="checkbox" checked={showOutbound} onChange={() => setShowOutbound((current) => !current)} />
+                        Outbound
+                      </label>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "minmax(0, 1fr) auto auto auto",
+                      gap: 8,
+                      alignItems: "end",
+                    }}
+                  >
+                    <div style={{ fontSize: "0.74rem", fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.2 }}>
+                      {locationLabel}
+                    </div>
+                    <div style={{ fontSize: "0.7rem", fontWeight: 700, color: TEXT_SECONDARY }}>Total</div>
+                    <div style={{ fontSize: "0.7rem", fontWeight: 700, color: INBOUND_COLOR }}>Inbound</div>
+                    <div style={{ fontSize: "0.7rem", fontWeight: 700, color: OUTBOUND_COLOR }}>Outbound</div>
+                    <div style={{ fontSize: "0.76rem", fontWeight: 600, color: TEXT_SECONDARY }}>
+                      Transporters
+                    </div>
+                    <div style={{ fontSize: "0.82rem", fontWeight: 800, color: TEXT_PRIMARY }}>{totalTransporters}</div>
+                    <div style={{ fontSize: "0.82rem", fontWeight: 800, color: INBOUND_COLOR }}>{inboundCount}</div>
+                    <div style={{ fontSize: "0.82rem", fontWeight: 800, color: OUTBOUND_COLOR }}>{outboundCount}</div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {loading && (
               <div
@@ -818,99 +851,6 @@ export default function MapPage() {
               </div>
             )}
           </div>
-
-          {selectedLocation && apiData && !loading && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "space-between",
-                gap: 12,
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                  padding: "12px 16px",
-                  maxWidth: "calc(100% - 170px)",
-                  backgroundColor: "hsla(0 0% 100% / 0.96)",
-                  border: `1px solid ${PANEL_BORDER}`,
-                  borderRadius: 999,
-                  boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 14,
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
-                    <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: INBOUND_COLOR, display: "inline-block" }} />
-                    Inbound
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY }}>
-                    <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: OUTBOUND_COLOR, display: "inline-block" }} />
-                    Outbound
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "auto auto auto",
-                    gap: "2px 18px",
-                    alignItems: "start",
-                  }}
-                >
-                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.2 }}>
-                    {locationLabel}
-                  </div>
-                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: INBOUND_COLOR, lineHeight: 1.2 }}>
-                    Inbound:
-                  </div>
-                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: OUTBOUND_COLOR, lineHeight: 1.2 }}>
-                    Outbound:
-                  </div>
-                  <div style={{ fontSize: "0.78rem", fontWeight: 800, color: TEXT_PRIMARY, lineHeight: 1.2 }}>
-                    Total: {totalTransporters}
-                  </div>
-                  <div style={{ fontSize: "0.78rem", fontWeight: 800, color: INBOUND_COLOR, lineHeight: 1.2 }}>
-                    {inboundCount}
-                  </div>
-                  <div style={{ fontSize: "0.78rem", fontWeight: 800, color: OUTBOUND_COLOR, lineHeight: 1.2 }}>
-                    {outboundCount}
-                  </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 10,
-                  padding: "12px 14px",
-                  backgroundColor: "hsla(0 0% 100% / 0.96)",
-                  border: `1px solid ${PANEL_BORDER}`,
-                  borderRadius: 12,
-                  boxShadow: "0 18px 36px -24px hsla(222 47% 11% / 0.35)",
-                }}
-              >
-                <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
-                  <input type="checkbox" checked={showInbound} onChange={() => setShowInbound((current) => !current)} />
-                  Inbound Movement
-                </label>
-                <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", fontWeight: 600, color: TEXT_PRIMARY }}>
-                  <input type="checkbox" checked={showOutbound} onChange={() => setShowOutbound((current) => !current)} />
-                  Outbound Movement
-                </label>
-              </div>
-            </div>
-          )}
 
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
