@@ -91,8 +91,27 @@ export default function Footer() {
         <div className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between" style={{ borderColor: "var(--borderSm)" }}>
           <span style={{ fontSize: 12, color: "var(--text3)" }}>© 2025 LogisticsNow Private Limited. All rights reserved.</span>
           <div className="flex flex-wrap gap-4 sm:gap-5">
-            {["Privacy Policy", "Terms of Use", "Sitemap"].map((l) => (
-              <span key={l} style={{ fontSize: 12, color: "var(--text3)", cursor: "pointer" }}>{l}</span>
+            {[
+              {
+                label: "Privacy Policy",
+                href: "https://lntermsandconditions.blob.core.windows.net/tnc/privacypolicy.html",
+              },
+              {
+                label: "Terms of Use",
+                href: "https://lntermsandconditions.blob.core.windows.net/tnc/benchmark_tnc.html",
+              },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: 12, color: "var(--text3)", cursor: "pointer", textDecoration: "none" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text3)")}
+              >
+                {link.label}
+              </a>
             ))}
           </div>
         </div>
