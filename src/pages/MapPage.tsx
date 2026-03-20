@@ -164,7 +164,8 @@ export default function MapPage() {
   }, []);
 
   useEffect(() => {
-    if (initialLocation && !selectedLocation) {
+    if (initialLocation && !initialLoadedRef.current) {
+      initialLoadedRef.current = true;
       searchLocations(initialLocation).then((results) => {
         if (results.length > 0) {
           setSelectedLocation(results[0]);
@@ -172,7 +173,7 @@ export default function MapPage() {
         }
       });
     }
-  }, [initialLocation, selectedLocation]);
+  }, [initialLocation]);
 
   useEffect(() => {
     if (!selectedLocation) {
