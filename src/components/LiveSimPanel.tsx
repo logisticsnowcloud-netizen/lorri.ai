@@ -79,7 +79,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 3200,
+        duration: 5000,
         lines: [
           { text: "✅  Route Optimized Successfully", bold: true, color: "#54AF3A" },
           { text: "Mumbai → Indore → Jaipur → Delhi", mono: true },
