@@ -43,7 +43,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 5000,
+        duration: 7500,
         lines: [
           { text: "✅  Best Carrier Match Found", bold: true, color: "#54AF3A" },
           { text: "Carrier: Shrinidhi Chemicals Pvt Ltd", mono: true },
@@ -79,7 +79,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 5000,
+        duration: 7500,
         lines: [
           { text: "✅  Route Optimized Successfully", bold: true, color: "#54AF3A" },
           { text: "Mumbai → Indore → Jaipur → Delhi", mono: true },
@@ -115,7 +115,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 5000,
+        duration: 7500,
         lines: [
           { text: "✅  Intelligence Report Ready", bold: true, color: "#54AF3A" },
           { text: "Active Shipments:    1,284", mono: true },
