@@ -134,6 +134,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
   const scenario = SCENARIOS[tab] || SCENARIOS.Intelligence;
   const [stepIndex, setStepIndex] = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
+  const [progressDuration, setProgressDuration] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const lineTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
