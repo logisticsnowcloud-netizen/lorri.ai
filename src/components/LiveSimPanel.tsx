@@ -134,14 +134,25 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
   const scenario = SCENARIOS[tab] || SCENARIOS.Intelligence;
   const [stepIndex, setStepIndex] = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
-  const [progressDuration, setProgressDuration] = useState(0);
+  const [progressKey, setProgressKey] = useState(0);
+  const [activeDuration, setActiveDuration] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const lineTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const rafRef = useRef<number>();
+  const prevTabRef = useRef(tab);
 
-  // Reset on tab change
+  // Reset on tab change — clear everything synchronously
   useEffect(() => {
-    setStepIndex(0);
-    setVisibleLines(0);
+    if (prevTabRef.current !== tab) {
+      prevTabRef.current = tab;
+      clearTimeout(timeoutRef.current);
+      clearTimeout(lineTimerRef.current);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      setStepIndex(0);
+      setVisibleLines(0);
+      setActiveDuration(0);
+      setProgressKey((k) => k + 1);
+    }
   }, [tab]);
 
   // Auto-advance steps
@@ -149,11 +160,12 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
     const step = scenario.steps[stepIndex];
     if (!step) return;
 
-    // Reset and restart progress bar
-    setProgressDuration(0);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setProgressDuration(step.duration);
+    // Reset progress bar then start it
+    setActiveDuration(0);
+    setProgressKey((k) => k + 1);
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = requestAnimationFrame(() => {
+        setActiveDuration(step.duration);
       });
     });
 
@@ -178,6 +190,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
     return () => {
       clearTimeout(timeoutRef.current);
       clearTimeout(lineTimerRef.current);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [stepIndex, scenario]);
 
@@ -328,15 +341,14 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
         )}
       </div>
 
-      {/* Progress bar */}
       <div style={{ height: 3, background: "var(--borderSm)", overflow: "hidden" }}>
         <div
-          key={`${tab}-${stepIndex}`}
+          key={progressKey}
           style={{
             height: "100%",
-            width: progressDuration > 0 ? "100%" : "0%",
+            width: activeDuration > 0 ? "100%" : "0%",
             background: step.type === "result" ? "#54AF3A" : step.type === "processing" ? "#E8A838" : "#393185",
-            transition: progressDuration > 0 ? `width ${progressDuration}ms linear` : "none",
+            transition: activeDuration > 0 ? `width ${activeDuration}ms linear` : "none",
             borderRadius: 2,
           }}
         />
