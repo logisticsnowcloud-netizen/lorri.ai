@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { SearchIcon, PinIcon, CalendarIcon, Check, GlobeNetIcon } from "./Icons";
+import { SearchIcon, PinIcon, CalendarIcon, GlobeNetIcon } from "./Icons";
 import { useDemoModal } from "@/hooks/use-demo-modal";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo-transparent.png";
 import { searchLocations, type LocationSuggestion } from "@/lib/map-api";
+import AIDecisionLog from "./AIDecisionLog";
 
 const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; stats: { v: string; l: string }[]; pts: string[]; color: string }> = {
   Intelligence: {
@@ -290,44 +291,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             </div>
           )}
 
-          <div
-            key={tab}
-            className="flex w-full flex-col gap-4 md:flex-row"
-            style={{
-              background: "var(--card)",
-              border: "1.5px solid var(--border)",
-              borderRadius: 16,
-              padding: "16px 18px",
-              alignItems: "flex-start",
-              animation: "tabSlide .18s ease both",
-            }}
-          >
-            <div className="min-w-0 flex-1">
-              <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)", marginBottom: 6 }}>{td.headline}</div>
-              <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>{td.sub}</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-                {td.pts.map((p, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <Check color={td.color} size={12} />
-                    <span style={{ fontSize: 13, color: "var(--text2)" }}>{p}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex w-full flex-row gap-2 md:w-auto md:flex-col md:gap-3">
-              {td.stats.map((s, i) => (
-                <div
-                  key={i}
-                  className="flex-1 md:flex-none"
-                  style={{ padding: "10px 14px", background: `${td.color}12`, border: `1px solid ${td.color}28`, borderRadius: 10, textAlign: "center", minWidth: 0 }}
-                >
-                  <div className="font-mono" style={{ fontSize: 18, fontWeight: 700, color: td.color, lineHeight: 1 }}>{s.v}</div>
-                  <div style={{ fontSize: 10, color: "var(--text3)", marginTop: 4, letterSpacing: ".06em", textTransform: "uppercase" }}>{s.l}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <AIDecisionLog />
         </div>
       </div>
 
