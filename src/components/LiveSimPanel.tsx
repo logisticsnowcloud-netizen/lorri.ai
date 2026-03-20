@@ -115,7 +115,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 5000,
+        duration: 7500,
         lines: [
           { text: "✅  Intelligence Report Ready", bold: true, color: "#54AF3A" },
           { text: "Active Shipments:    1,284", mono: true },
