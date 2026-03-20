@@ -63,7 +63,7 @@ function extractCoords(item: any): [number, number][] | null {
 }
 
 export default function MapPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const initialLocation = searchParams.get("location") || "";
 
