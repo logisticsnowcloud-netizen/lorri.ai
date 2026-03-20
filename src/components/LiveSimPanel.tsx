@@ -43,7 +43,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 3200,
+        duration: 5000,
         lines: [
           { text: "✅  Best Carrier Match Found", bold: true, color: "#54AF3A" },
           { text: "Carrier: Shrinidhi Chemicals Pvt Ltd", mono: true },
@@ -79,7 +79,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 3200,
+        duration: 5000,
         lines: [
           { text: "✅  Route Optimized Successfully", bold: true, color: "#54AF3A" },
           { text: "Mumbai → Indore → Jaipur → Delhi", mono: true },
@@ -115,7 +115,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 3200,
+        duration: 5000,
         lines: [
           { text: "✅  Intelligence Report Ready", bold: true, color: "#54AF3A" },
           { text: "Active Shipments:    1,284", mono: true },
@@ -134,6 +134,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
   const scenario = SCENARIOS[tab] || SCENARIOS.Intelligence;
   const [stepIndex, setStepIndex] = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
+  const [progressDuration, setProgressDuration] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const lineTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -147,6 +148,14 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
   useEffect(() => {
     const step = scenario.steps[stepIndex];
     if (!step) return;
+
+    // Reset and restart progress bar
+    setProgressDuration(0);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setProgressDuration(step.duration);
+      });
+    });
 
     // Animate lines in one by one
     setVisibleLines(0);
@@ -317,6 +326,20 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
             </span>
           </div>
         )}
+      </div>
+
+      {/* Progress bar */}
+      <div style={{ height: 3, background: "var(--borderSm)", overflow: "hidden" }}>
+        <div
+          key={`${tab}-${stepIndex}`}
+          style={{
+            height: "100%",
+            width: progressDuration > 0 ? "100%" : "0%",
+            background: step.type === "result" ? "#54AF3A" : step.type === "processing" ? "#E8A838" : "#393185",
+            transition: progressDuration > 0 ? `width ${progressDuration}ms linear` : "none",
+            borderRadius: 2,
+          }}
+        />
       </div>
     </div>
   );
