@@ -210,8 +210,9 @@ export default function Hero({ dark }: { dark: boolean }) {
           <div className="mt-3 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center" style={{marginTop: '10%'}}>
             <button
               onClick={() => openDemoModal()}
-              className="w-full justify-center sm:w-auto"
+              className="group w-full justify-center sm:w-auto hero-btn-primary"
               style={{
+                position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
@@ -226,16 +227,19 @@ export default function Hero({ dark }: { dark: boolean }) {
                 cursor: "pointer",
                 letterSpacing: ".04em",
                 boxShadow: "0 4px 16px rgba(57,49,133,0.35)",
-                transition: "all .25s",
+                overflow: "hidden",
               }}
             >
-              <CalendarIcon /> Schedule Demo
+              <span className="hero-btn-shimmer" />
+              <span className="hero-btn-icon-calendar"><CalendarIcon /></span>
+              <span style={{ position: "relative", zIndex: 1 }}>Schedule Demo</span>
             </button>
 
             <button
               onClick={() => navigate("/global-grid")}
-              className="w-full justify-center sm:w-auto"
+              className="group w-full justify-center sm:w-auto hero-btn-secondary"
               style={{
+                position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
@@ -248,12 +252,13 @@ export default function Hero({ dark }: { dark: boolean }) {
                 fontSize: 13,
                 fontWeight: 600,
                 cursor: "pointer",
-                transition: "all .25s",
+                overflow: "hidden",
               }}
             >
-              <GlobeNetIcon />
-              <span>Explore Global Grid</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
+              <span className="hero-btn-shimmer-secondary" />
+              <span className="hero-btn-icon-globe"><GlobeNetIcon /></span>
+              <span style={{ position: "relative", zIndex: 1 }}>Explore Global Grid</span>
+              <svg style={{ position: "relative", zIndex: 1 }} className="hero-btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
             </button>
           </div>
         </div>

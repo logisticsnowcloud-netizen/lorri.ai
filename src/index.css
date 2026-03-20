@@ -203,3 +203,97 @@ body.light {
   from { opacity: 0; transform: scale(0.85) translateY(12px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
+
+/* Hero CTA button interactions */
+@keyframes btnShimmer {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+@keyframes btnPulseGlow {
+  0%, 100% { box-shadow: 0 4px 16px rgba(57,49,133,0.35); }
+  50% { box-shadow: 0 4px 24px rgba(57,49,133,0.55), 0 0 40px rgba(57,49,133,0.15); }
+}
+
+.hero-btn-primary {
+  transition: transform 0.2s cubic-bezier(.16,1,.3,1), box-shadow 0.3s ease;
+  animation: btnPulseGlow 3s ease-in-out infinite;
+}
+.hero-btn-primary:hover {
+  transform: scale(1.04) translateY(-1px);
+  box-shadow: 0 6px 28px rgba(57,49,133,0.5), 0 0 48px rgba(57,49,133,0.18) !important;
+}
+.hero-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.hero-btn-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: btnShimmer 3.5s ease-in-out infinite;
+}
+
+.hero-btn-icon-calendar {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+}
+.hero-btn-primary:hover .hero-btn-icon-calendar {
+  transform: rotate(12deg) scale(1.15);
+}
+
+.hero-btn-secondary {
+  transition: transform 0.2s cubic-bezier(.16,1,.3,1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.hero-btn-secondary:hover {
+  transform: scale(1.04) translateY(-1px);
+  border-color: rgba(57,49,133,0.5) !important;
+  box-shadow: 0 4px 20px rgba(57,49,133,0.15);
+  background: var(--purpleLt) !important;
+}
+.hero-btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.hero-btn-shimmer-secondary {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-btn-shimmer-secondary::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(57,49,133,0.08), transparent);
+  animation: btnShimmer 4s ease-in-out infinite 1s;
+}
+
+.hero-btn-icon-globe {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+}
+.hero-btn-secondary:hover .hero-btn-icon-globe {
+  transform: rotate(360deg);
+}
+
+.hero-btn-arrow {
+  transition: transform 0.25s cubic-bezier(.16,1,.3,1);
+}
+.hero-btn-secondary:hover .hero-btn-arrow {
+  transform: translateX(3px);
+}
