@@ -63,9 +63,10 @@ function extractCoords(item: any): [number, number][] | null {
 }
 
 export default function MapPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const initialLocation = searchParams.get("location") || "";
+  const initialLoadedRef = useRef(false);
 
   const [query, setQuery] = useState(initialLocation);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
@@ -163,7 +164,8 @@ export default function MapPage() {
   }, []);
 
   useEffect(() => {
-    if (initialLocation && !selectedLocation) {
+    if (initialLocation && !initialLoadedRef.current) {
+      initialLoadedRef.current = true;
       searchLocations(initialLocation).then((results) => {
         if (results.length > 0) {
           setSelectedLocation(results[0]);
@@ -171,7 +173,7 @@ export default function MapPage() {
         }
       });
     }
-  }, [initialLocation, selectedLocation]);
+  }, [initialLocation]);
 
   useEffect(() => {
     if (!selectedLocation) {
@@ -346,18 +348,11 @@ export default function MapPage() {
     setQuery("");
     setSuggestions([]);
     setShowSuggestions(false);
-    setSelectedLocation(null);
-    setApiData(null);
-    setExpandedTransporter(false);
     userTypedRef.current = false;
-
-    if (mapRef.current) {
-      markersLayerRef.current?.clearLayers();
-      inflowLayersRef.current?.clearLayers();
-      outflowLayersRef.current?.clearLayers();
-      mapRef.current.flyTo([22, 82], 4.5, { animate: true, duration: 1 });
-    }
-  }, []);
+    // Clear URL params so the initial-load effect doesn't re-trigger
+    setSearchParams({}, { replace: true });
+    // Keep the map and data as-is — user can type a new location
+  }, [setSearchParams]);
 
   const toggleTransporter = useCallback(() => {
     setExpandedTransporter((current) => !current);
