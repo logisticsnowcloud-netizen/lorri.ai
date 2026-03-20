@@ -149,6 +149,14 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
     const step = scenario.steps[stepIndex];
     if (!step) return;
 
+    // Reset and restart progress bar
+    setProgressDuration(0);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setProgressDuration(step.duration);
+      });
+    });
+
     // Animate lines in one by one
     setVisibleLines(0);
     let lineIdx = 0;
