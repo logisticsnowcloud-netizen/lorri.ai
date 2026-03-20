@@ -66,6 +66,7 @@ export default function MapPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const initialLocation = searchParams.get("location") || "";
+  const initialLoadedRef = useRef(false);
 
   const [query, setQuery] = useState(initialLocation);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
