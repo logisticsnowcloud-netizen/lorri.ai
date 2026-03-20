@@ -327,6 +327,20 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
           </div>
         )}
       </div>
+
+      {/* Progress bar */}
+      <div style={{ height: 3, background: "var(--borderSm)", overflow: "hidden" }}>
+        <div
+          key={`${tab}-${stepIndex}`}
+          style={{
+            height: "100%",
+            width: progressDuration > 0 ? "100%" : "0%",
+            background: step.type === "result" ? "#54AF3A" : step.type === "processing" ? "#E8A838" : "#393185",
+            transition: progressDuration > 0 ? `width ${progressDuration}ms linear` : "none",
+            borderRadius: 2,
+          }}
+        />
+      </div>
     </div>
   );
 }
