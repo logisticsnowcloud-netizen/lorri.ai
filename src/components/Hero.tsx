@@ -5,7 +5,7 @@ import { useDemoModal } from "@/hooks/use-demo-modal";
 import NetworkBg from "./NetworkBg";
 import lorriLogo from "@/assets/lorri-logo-transparent.png";
 import { searchLocations, type LocationSuggestion } from "@/lib/map-api";
-import AIDecisionLog from "./AIDecisionLog";
+import LiveSimPanel from "./LiveSimPanel";
 
 const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; stats: { v: string; l: string }[]; pts: string[]; color: string }> = {
   Intelligence: {
@@ -291,7 +291,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             </div>
           )}
 
-          <AIDecisionLog />
+          <LiveSimPanel tab={tab} />
         </div>
       </div>
 
