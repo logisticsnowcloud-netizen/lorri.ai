@@ -63,7 +63,8 @@ export default function Hero({ dark }: { dark: boolean }) {
 
   useEffect(() => {
     if (userPicked) return;
-    const t = setInterval(() => setTab((cur) => TABS[(TABS.indexOf(cur) + 1) % TABS.length]), 3200);
+    // Total simulation cycle: input(2200) + processing(2000) + result(7500) = 11700ms
+    const t = setInterval(() => setTab((cur) => TABS[(TABS.indexOf(cur) + 1) % TABS.length]), 11700);
     return () => clearInterval(t);
   }, [userPicked]);
 
