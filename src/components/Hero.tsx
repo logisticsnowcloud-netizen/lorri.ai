@@ -291,7 +291,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             </div>
           )}
 
-          <AIDecisionLog />
+          <LiveSimPanel tab={tab} />
         </div>
       </div>
 
