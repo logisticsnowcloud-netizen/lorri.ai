@@ -43,7 +43,7 @@ const SCENARIOS: Record<string, SimScenario> = {
       },
       {
         type: "result",
-        duration: 3200,
+        duration: 5000,
         lines: [
           { text: "✅  Best Carrier Match Found", bold: true, color: "#54AF3A" },
           { text: "Carrier: Shrinidhi Chemicals Pvt Ltd", mono: true },
