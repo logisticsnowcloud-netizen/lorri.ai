@@ -366,7 +366,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#393185", marginBottom: 8 }}>
           <Bot size={12} /> AI Impact Stories

@@ -116,7 +116,7 @@ function MarqueeRow({
 export default function ClientLogos() {
   return (
     <section
-      className="px-4 py-5 sm:px-6 lg:px-8"
+      className="px-4 py-3 sm:px-6 lg:px-8"
       style={{ background: "hsl(var(--bg2))", borderTop: "1px solid hsl(var(--border-subtle))" }}
     >
       <style>{`

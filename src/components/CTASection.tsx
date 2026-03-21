@@ -167,7 +167,7 @@ export default function CTASection() {
   };
 
   return (
-    <section id="cta" className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8" style={{ background: "hsl(var(--bg2))" }}>
+    <section id="cta" className="relative overflow-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8" style={{ background: "hsl(var(--bg2))" }}>
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 bg-[radial-gradient(ellipse,hsl(var(--primary)/0.12)_0%,transparent_65%)]" />
@@ -181,7 +181,7 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="mb-6 text-center"
         >
           <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--success)/0.3)] bg-[hsl(var(--success)/0.08)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[hsl(var(--success))]">
             <PulseDot /> AI-Powered Demo
