@@ -188,7 +188,7 @@ export default function AIReadinessQuiz() {
 
   return (
     <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
+      <div style={{ maxWidth: phase === "result" ? 960 : 720, margin: "0 auto", textAlign: "center", transition: "max-width 0.4s ease" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 10 }}>
           <span style={{ width: 28, height: 3, borderRadius: 2, background: "linear-gradient(90deg, #393185, #4D44A8)" }} />
           <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#4D44A8" }}>AI Diagnostic Engine</span>
@@ -287,7 +287,6 @@ export default function AIReadinessQuiz() {
                 transition={{ duration: 0.4 }}
                 style={{ textAlign: "center", padding: "20px 0" }}
               >
-                {/* Pulsing brain icon */}
                 <motion.div
                   animate={{ scale: [1, 1.08, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -326,7 +325,6 @@ export default function AIReadinessQuiz() {
                     </motion.div>
                   ))}
                 </div>
-                {/* Progress indicator */}
                 <div style={{ maxWidth: 320, margin: "16px auto 0", height: 3, borderRadius: 2, background: "var(--purpleLt)", overflow: "hidden" }}>
                   <motion.div
                     initial={{ width: "0%" }}
@@ -338,146 +336,162 @@ export default function AIReadinessQuiz() {
               </motion.div>
             )}
 
-            {/* RESULT PHASE */}
+            {/* RESULT PHASE — Two-column layout */}
             {phase === "result" && (
-              <motion.div key="result" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} style={{ textAlign: "center" }}>
-                {/* Score */}
-                <div style={{ marginBottom: 4 }}>
-                  <span style={{ fontSize: 64, fontWeight: 900, fontFamily: "Outfit, sans-serif", background: "linear-gradient(135deg, #393185, #1AA6DF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1 }}>
-                    {animatedScore}
-                  </span>
-                </div>
-                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 16, fontWeight: 700, color: "var(--text)", marginBottom: 4 }}>
-                  AI Readiness Score — {result.stage}
-                </p>
-                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, color: "#1AA6DF", fontWeight: 600, marginBottom: 20 }}>
-                  You're ahead of {result.percentile}% of logistics companies globally
-                </p>
+              <motion.div key="result" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8" style={{ textAlign: "left" }}>
+                  
+                  {/* LEFT COLUMN — Score + Breakdown */}
+                  <div className="flex flex-col items-center lg:items-center justify-center">
+                    {/* Score */}
+                    <div style={{ marginBottom: 4, textAlign: "center" }}>
+                      <span style={{ fontSize: 56, fontWeight: 900, fontFamily: "Outfit, sans-serif", background: "linear-gradient(135deg, #393185, #1AA6DF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1 }}>
+                        {animatedScore}
+                      </span>
+                    </div>
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, fontWeight: 700, color: "var(--text)", marginBottom: 4, textAlign: "center" }}>
+                      AI Readiness Score — {result.stage}
+                    </p>
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, color: "#1AA6DF", fontWeight: 600, marginBottom: 16, textAlign: "center" }}>
+                      You're ahead of {result.percentile}% of logistics companies globally
+                    </p>
 
-                {/* Breakdown Bars */}
-                <div style={{ maxWidth: 400, margin: "0 auto 20px", display: "grid", gap: 12 }}>
-                  <ScoreBar label="Cost Efficiency" value={breakdown.costEfficiency} delay={0.1} />
-                  <ScoreBar label="Visibility" value={breakdown.visibility} delay={0.2} />
-                  <ScoreBar label="Technology Maturity" value={breakdown.techMaturity} delay={0.3} />
-                  <ScoreBar label="Carrier Performance" value={breakdown.carrierPerformance} delay={0.4} />
-                </div>
+                    {/* Breakdown Bars */}
+                    <div style={{ width: "100%", maxWidth: 360, display: "grid", gap: 10 }}>
+                      <ScoreBar label="Cost Efficiency" value={breakdown.costEfficiency} delay={0.1} />
+                      <ScoreBar label="Visibility" value={breakdown.visibility} delay={0.2} />
+                      <ScoreBar label="Technology Maturity" value={breakdown.techMaturity} delay={0.3} />
+                      <ScoreBar label="Carrier Performance" value={breakdown.carrierPerformance} delay={0.4} />
+                    </div>
 
-                {/* Insights */}
-                <div style={{ maxWidth: 400, margin: "0 auto 16px", display: "grid", gap: 6, textAlign: "left" }}>
-                  {insights.map((ins, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 + i * 0.1 }}
-                      style={{
-                        fontFamily: "Outfit, sans-serif",
-                        fontSize: 12,
-                        fontWeight: 500,
-                        color: ins.type === "warning" ? "#e67e22" : "#27ae60",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 6,
-                        padding: "6px 10px",
-                        borderRadius: 8,
-                        background: ins.type === "warning" ? "rgba(230,126,34,0.08)" : "rgba(39,174,96,0.08)",
-                      }}
-                    >
-                      <span>{ins.type === "warning" ? "⚠" : "✔"}</span>
-                      {ins.text}
-                    </motion.div>
-                  ))}
-                </div>
+                    {/* Powered by */}
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 10, color: "var(--text3)", marginTop: 14, letterSpacing: ".04em", textAlign: "center" }}>
+                      Powered by LoRRI AI Agents: <span style={{ color: "#4D44A8", fontWeight: 600 }}>Procurement</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Optimization</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Intelligence</span>
+                    </p>
+                  </div>
 
-                {/* AI Recommendations */}
-                <div style={{ maxWidth: 400, margin: "0 auto 20px", textAlign: "left" }}>
-                  <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em", color: "#4D44A8", marginBottom: 8 }}>
-                    AI Recommendations
-                  </p>
-                  {recommendations.map((rec, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.9 + i * 0.12 }}
-                      style={{
-                        fontFamily: "Outfit, sans-serif",
-                        fontSize: 12,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "8px 10px",
-                        borderRadius: 8,
-                        border: "1px solid var(--borderSm)",
-                        marginBottom: 6,
-                      }}
-                    >
-                      <span style={{ color: "var(--text2)", fontWeight: 500 }}>→ {rec.text}</span>
-                      <span style={{ color: "#1AA6DF", fontWeight: 700, fontSize: 11, whiteSpace: "nowrap", marginLeft: 8 }}>{rec.saving}</span>
-                    </motion.div>
-                  ))}
-                </div>
+                  {/* RIGHT COLUMN — Insights + Recommendations + CTA */}
+                  <div className="flex flex-col justify-between" style={{ borderLeft: "none" }}>
+                    {/* Divider for lg screens */}
+                    <div className="hidden lg:block absolute left-1/2 top-[15%] bottom-[15%]" style={{ width: 1, background: "var(--borderSm)" }} />
 
-                {/* Powered by */}
-                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 10, color: "var(--text3)", marginBottom: 16, letterSpacing: ".04em" }}>
-                  Powered by LoRRI AI Agents: <span style={{ color: "#4D44A8", fontWeight: 600 }}>Procurement</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Optimization</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Intelligence</span>
-                </p>
+                    {/* Insights */}
+                    <div style={{ marginBottom: 14 }}>
+                      <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em", color: "#4D44A8", marginBottom: 8 }}>
+                        Key Insights
+                      </p>
+                      <div style={{ display: "grid", gap: 5 }}>
+                        {insights.map((ins, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.6 + i * 0.1 }}
+                            style={{
+                              fontFamily: "Outfit, sans-serif",
+                              fontSize: 12,
+                              fontWeight: 500,
+                              color: ins.type === "warning" ? "#e67e22" : "#27ae60",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 6,
+                              padding: "5px 10px",
+                              borderRadius: 8,
+                              background: ins.type === "warning" ? "rgba(230,126,34,0.08)" : "rgba(39,174,96,0.08)",
+                            }}
+                          >
+                            <span>{ins.type === "warning" ? "⚠" : "✔"}</span>
+                            {ins.text}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* CTAs */}
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                  <button
-                    onClick={() => openDemoModal()}
-                    style={{
-                      fontFamily: "Outfit, sans-serif",
-                      fontSize: 14,
-                      fontWeight: 700,
-                      padding: "12px 24px",
-                      borderRadius: 10,
-                      border: "none",
-                      background: "linear-gradient(135deg, #393185, #4D44A8)",
-                      color: "#fff",
-                      cursor: "pointer",
-                      boxShadow: "0 4px 20px rgba(57,49,133,0.4)",
-                      transition: "all .25s cubic-bezier(.16,1,.3,1)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "translateY(-2px) scale(1.03)";
-                      e.currentTarget.style.boxShadow = "0 8px 28px rgba(57,49,133,0.5)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "translateY(0) scale(1)";
-                      e.currentTarget.style.boxShadow = "0 4px 20px rgba(57,49,133,0.4)";
-                    }}
-                    onMouseDown={(e) => { e.currentTarget.style.transform = "scale(0.97)"; }}
-                    onMouseUp={(e) => { e.currentTarget.style.transform = "translateY(-2px) scale(1.03)"; }}
-                  >
-                    See Your AI-Powered Savings →
-                  </button>
-                  <button
-                    onClick={reset}
-                    style={{
-                      fontFamily: "Outfit, sans-serif",
-                      fontSize: 14,
-                      fontWeight: 600,
-                      padding: "12px 24px",
-                      borderRadius: 10,
-                      border: "1px solid var(--borderSm)",
-                      background: "transparent",
-                      color: "var(--text2)",
-                      cursor: "pointer",
-                      transition: "all .2s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(57,49,133,0.4)";
-                      e.currentTarget.style.background = "rgba(57,49,133,0.05)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "var(--borderSm)";
-                      e.currentTarget.style.background = "transparent";
-                    }}
-                  >
-                    Retake Assessment
-                  </button>
+                    {/* AI Recommendations */}
+                    <div style={{ marginBottom: 14 }}>
+                      <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em", color: "#4D44A8", marginBottom: 8 }}>
+                        AI Recommendations
+                      </p>
+                      {recommendations.map((rec, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.9 + i * 0.12 }}
+                          style={{
+                            fontFamily: "Outfit, sans-serif",
+                            fontSize: 12,
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            padding: "7px 10px",
+                            borderRadius: 8,
+                            border: "1px solid var(--borderSm)",
+                            marginBottom: 5,
+                          }}
+                        >
+                          <span style={{ color: "var(--text2)", fontWeight: 500 }}>→ {rec.text}</span>
+                          <span style={{ color: "#1AA6DF", fontWeight: 700, fontSize: 11, whiteSpace: "nowrap", marginLeft: 8 }}>{rec.saving}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                      <button
+                        onClick={() => openDemoModal()}
+                        style={{
+                          fontFamily: "Outfit, sans-serif",
+                          fontSize: 13,
+                          fontWeight: 700,
+                          padding: "10px 20px",
+                          borderRadius: 10,
+                          border: "none",
+                          background: "linear-gradient(135deg, #393185, #4D44A8)",
+                          color: "#fff",
+                          cursor: "pointer",
+                          boxShadow: "0 4px 20px rgba(57,49,133,0.4)",
+                          transition: "all .25s cubic-bezier(.16,1,.3,1)",
+                          flex: 1,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = "translateY(-2px) scale(1.03)";
+                          e.currentTarget.style.boxShadow = "0 8px 28px rgba(57,49,133,0.5)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = "translateY(0) scale(1)";
+                          e.currentTarget.style.boxShadow = "0 4px 20px rgba(57,49,133,0.4)";
+                        }}
+                      >
+                        See Your AI-Powered Savings →
+                      </button>
+                      <button
+                        onClick={reset}
+                        style={{
+                          fontFamily: "Outfit, sans-serif",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          padding: "10px 20px",
+                          borderRadius: 10,
+                          border: "1px solid var(--borderSm)",
+                          background: "transparent",
+                          color: "var(--text2)",
+                          cursor: "pointer",
+                          transition: "all .2s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = "rgba(57,49,133,0.4)";
+                          e.currentTarget.style.background = "rgba(57,49,133,0.05)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = "var(--borderSm)";
+                          e.currentTarget.style.background = "transparent";
+                        }}
+                      >
+                        Retake
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
