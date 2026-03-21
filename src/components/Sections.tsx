@@ -434,15 +434,21 @@ export function ForTransporters() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={visible ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.4 + i * 0.15, duration: 0.4 }}
-                  className="py-2.5 flex items-center justify-between"
-                  style={{ borderBottom: i < truckData.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none" }}
+                  className="py-2.5 px-2 flex items-center justify-between rounded-lg"
+                  style={{
+                    borderBottom: i < truckData.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none",
+                    ...(row.best ? { background: "rgba(84,175,58,0.06)", boxShadow: "0 0 12px rgba(84,175,58,0.1)", border: "1px solid rgba(84,175,58,0.25)" } : {}),
+                  }}
                 >
-                  <div>
+                  <div className="flex items-center gap-2">
                     <div className="text-[13px] font-semibold" style={{ color: "hsl(var(--foreground))" }}>{row.route}</div>
+                    {row.best && (
+                      <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ background: "rgba(84,175,58,0.15)", color: "#54AF3A", border: "1px solid rgba(84,175,58,0.3)" }}>Best Match</span>
+                    )}
                   </div>
                   <div className="text-right">
-                    <div className="text-[11px] font-semibold" style={{ color: row.status === "Assigned" ? "#54AF3A" : row.status === "Optimized" ? "hsl(var(--accent))" : "hsl(var(--muted-foreground))" }}>
-                      {row.status === "Assigned" ? "✔" : row.status === "Optimized" ? "✔" : "⟳"} {row.status}
+                    <div className="text-[11px] font-semibold" style={{ color: row.best ? "#54AF3A" : row.status === "Optimized" ? "hsl(var(--accent))" : row.status === "Assigned" ? "#54AF3A" : "hsl(var(--muted-foreground))" }}>
+                      {row.status === "Matching..." ? "⟳" : "✔"} {row.status}
                     </div>
                     <div className="flex items-center gap-2 justify-end mt-0.5">
                       <span className="font-mono text-[12px] font-bold" style={{ color: "hsl(var(--foreground))", filter: "blur(5px)", userSelect: "none" }}>{row.value}</span>
