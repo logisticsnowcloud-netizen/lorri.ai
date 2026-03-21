@@ -421,7 +421,7 @@ export function ForTransporters() {
                       {row.status === "Assigned" ? "✔" : row.status === "Optimized" ? "✔" : "⟳"} {row.status}
                     </div>
                     <div className="flex items-center gap-2 justify-end mt-0.5">
-                      <span className="font-mono text-[12px] font-bold" style={{ color: "hsl(var(--foreground))" }}>{row.value}</span>
+                      <span className="font-mono text-[12px] font-bold" style={{ color: "hsl(var(--foreground))", filter: "blur(5px)", userSelect: "none" }}>{row.value}</span>
                       <span className="text-[10px] font-semibold" style={{ color: "#54AF3A" }}>↓{row.saving} empty</span>
                     </div>
                   </div>
