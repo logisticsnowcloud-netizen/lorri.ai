@@ -415,7 +415,7 @@ export function ForTransporters() {
             animate={visible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="rounded-2xl p-4 sm:p-5" style={{ background: "hsl(var(--card))", border: "1.5px solid hsl(var(--border))" }}>
+            <div className="rounded-2xl p-4 sm:p-5" style={{ background: "hsl(var(--card))", border: "1.5px solid rgba(84,175,58,0.25)", boxShadow: "0 8px 40px rgba(84,175,58,0.08)" }}>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>AI Fleet Matching</span>
                 <div className="flex items-center gap-1.5">
