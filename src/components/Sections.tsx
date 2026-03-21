@@ -225,17 +225,38 @@ export function ForShippers() {
     </section>
   );
 }
-/* ─── AI Load Matching Live Panel ─── */
+/* ─── AI Load Matching Live Panel with typing effect ─── */
 const loadMatchSteps = [
-  { text: "Scanning 340+ available loads on Pune → Delhi...", delay: 0 },
-  { text: "12 loads matched to fleet capacity & route...", delay: 900 },
-  { text: "4 high-value loads shortlisted by AI...", delay: 1900 },
-  { text: "Best load assigned: ₹48,000 — Pune → Delhi (18T)", delay: 2900 },
-  { text: "✔ Deadhead reduced by 22% — fleet optimized", delay: 3700 },
+  { text: "Scanning 340+ available loads on Pune → Delhi", delay: 0 },
+  { text: "12 loads matched to fleet capacity & route", delay: 1200 },
+  { text: "4 high-value loads shortlisted by AI", delay: 2400 },
+  { text: "Best load assigned: ₹48,000 — Pune → Delhi (18T)", delay: 3800 },
+  { text: "✔ Deadhead reduced by 22% — fleet optimized", delay: 5000 },
+  { text: "⚡ Matched in 1.8 seconds", delay: 5800 },
 ];
+
+function TypingText({ text, onDone }: { text: string; onDone?: () => void }) {
+  const [displayed, setDisplayed] = useState("");
+  const idx = useRef(0);
+  useEffect(() => {
+    idx.current = 0;
+    setDisplayed("");
+    const id = setInterval(() => {
+      idx.current++;
+      setDisplayed(text.slice(0, idx.current));
+      if (idx.current >= text.length) {
+        clearInterval(id);
+        onDone?.();
+      }
+    }, 18);
+    return () => clearInterval(id);
+  }, [text]);
+  return <>{displayed}<span className="inline-block w-[2px] h-[11px] ml-0.5 align-middle animate-pulse" style={{ background: "#54AF3A" }} /></>;
+}
 
 function LoadMatchLog({ visible }: { visible: boolean }) {
   const [shownSteps, setShownSteps] = useState<number>(0);
+  const [typingDone, setTypingDone] = useState<Set<number>>(new Set());
   const started = useRef(false);
 
   useEffect(() => {
@@ -264,8 +285,12 @@ function LoadMatchLog({ visible }: { visible: boolean }) {
           className="flex items-start gap-2 text-[11px] leading-relaxed"
           style={{ color: i === shownSteps - 1 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))" }}
         >
-          <span className="mt-0.5 shrink-0" style={{ color: step.text.startsWith("✔") ? "#54AF3A" : "hsl(var(--accent))" }}>→</span>
-          <span>{step.text}</span>
+          <span className="mt-0.5 shrink-0" style={{ color: step.text.startsWith("✔") ? "#54AF3A" : step.text.startsWith("⚡") ? "#54AF3A" : "hsl(var(--accent))" }}>→</span>
+          <span>
+            {i === shownSteps - 1 && !typingDone.has(i)
+              ? <TypingText text={step.text} onDone={() => setTypingDone(prev => new Set(prev).add(i))} />
+              : step.text}
+          </span>
         </motion.div>
       ))}
     </div>
@@ -274,10 +299,10 @@ function LoadMatchLog({ visible }: { visible: boolean }) {
 
 /* ─── Fleet Matching Trucks ─── */
 const truckData = [
-  { truck: "MH12 AB 1234", route: "Pune → Delhi", status: "Assigned", value: "₹48,000", saving: "22%" },
-  { truck: "KA01 CD 5678", route: "Bangalore → Mumbai", status: "Matching...", value: "₹35,200", saving: "18%" },
-  { truck: "GJ05 EF 9012", route: "Ahmedabad → Chennai", status: "Optimized", value: "₹62,400", saving: "25%" },
-  { truck: "DL08 GH 3456", route: "Delhi → Kolkata", status: "Assigned", value: "₹54,800", saving: "20%" },
+  { route: "Pune → Delhi", status: "Best Match", value: "₹48,000", saving: "22%", best: true },
+  { route: "Bangalore → Mumbai", status: "Matching...", value: "₹35,200", saving: "18%", best: false },
+  { route: "Ahmedabad → Chennai", status: "Optimized", value: "₹62,400", saving: "25%", best: false },
+  { route: "Delhi → Kolkata", status: "Assigned", value: "₹54,800", saving: "20%", best: false },
 ];
 
 export function ForTransporters() {
@@ -329,7 +354,7 @@ export function ForTransporters() {
               <span style={{ color: "#54AF3A" }}>For Your Fleet — Instantly</span>
             </h2>
             <p className="text-sm mb-4" style={{ color: "hsl(var(--muted-foreground))", lineHeight: 1.7 }}>
-              Let AI fill your trucks with high-value loads matched by route, capacity, and reliability — reducing empty miles and maximizing earnings.
+              Let AI continuously fill your trucks with the most profitable loads — matched by route, capacity, and reliability score.
             </p>
 
             {/* Steps */}
@@ -390,7 +415,7 @@ export function ForTransporters() {
             animate={visible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="rounded-2xl p-4 sm:p-5" style={{ background: "hsl(var(--card))", border: "1.5px solid hsl(var(--border))" }}>
+            <div className="rounded-2xl p-4 sm:p-5" style={{ background: "hsl(var(--card))", border: "1.5px solid rgba(84,175,58,0.25)", boxShadow: "0 8px 40px rgba(84,175,58,0.08)" }}>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>AI Fleet Matching</span>
                 <div className="flex items-center gap-1.5">
@@ -409,15 +434,21 @@ export function ForTransporters() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={visible ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.4 + i * 0.15, duration: 0.4 }}
-                  className="py-2.5 flex items-center justify-between"
-                  style={{ borderBottom: i < truckData.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none" }}
+                  className="py-2.5 px-2 flex items-center justify-between rounded-lg"
+                  style={{
+                    borderBottom: i < truckData.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none",
+                    ...(row.best ? { background: "rgba(84,175,58,0.06)", boxShadow: "0 0 12px rgba(84,175,58,0.1)", border: "1px solid rgba(84,175,58,0.25)" } : {}),
+                  }}
                 >
-                  <div>
+                  <div className="flex items-center gap-2">
                     <div className="text-[13px] font-semibold" style={{ color: "hsl(var(--foreground))" }}>{row.route}</div>
+                    {row.best && (
+                      <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ background: "rgba(84,175,58,0.15)", color: "#54AF3A", border: "1px solid rgba(84,175,58,0.3)" }}>Best Match</span>
+                    )}
                   </div>
                   <div className="text-right">
-                    <div className="text-[11px] font-semibold" style={{ color: row.status === "Assigned" ? "#54AF3A" : row.status === "Optimized" ? "hsl(var(--accent))" : "hsl(var(--muted-foreground))" }}>
-                      {row.status === "Assigned" ? "✔" : row.status === "Optimized" ? "✔" : "⟳"} {row.status}
+                    <div className="text-[11px] font-semibold" style={{ color: row.best ? "#54AF3A" : row.status === "Optimized" ? "hsl(var(--accent))" : row.status === "Assigned" ? "#54AF3A" : "hsl(var(--muted-foreground))" }}>
+                      {row.status === "Matching..." ? "⟳" : "✔"} {row.status}
                     </div>
                     <div className="flex items-center gap-2 justify-end mt-0.5">
                       <span className="font-mono text-[12px] font-bold" style={{ color: "hsl(var(--foreground))", filter: "blur(5px)", userSelect: "none" }}>{row.value}</span>
