@@ -141,7 +141,7 @@ export default function Footer() {
       >
         <div className="mx-auto px-4 pb-3 pt-6 sm:px-6 lg:px-8" style={{ maxWidth: 1200 }}>
           {/* Grid */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-[2.2fr_1fr_1fr_1fr]" style={{ marginBottom: 32 }}>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-[2.2fr_1fr_1fr_1fr]" style={{ marginBottom: 20 }}>
             {/* Brand column */}
             <div>
               <div className="mb-4 flex items-center gap-2.5">

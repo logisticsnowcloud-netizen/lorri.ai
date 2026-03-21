@@ -64,7 +64,7 @@ const pressArticles = [
 
 export default function Newsroom() {
   return (
-    <section id="newsroom" className="relative overflow-hidden px-4 py-4 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
+    <section id="newsroom" className="relative overflow-hidden px-4 py-3 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 50% 50%, hsl(var(--primary) / 0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
 
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>

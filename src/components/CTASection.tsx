@@ -181,7 +181,7 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="mb-6 text-center"
         >
           <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--success)/0.3)] bg-[hsl(var(--success)/0.08)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[hsl(var(--success))]">
             <PulseDot /> AI-Powered Demo

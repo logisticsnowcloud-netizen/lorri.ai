@@ -187,7 +187,7 @@ export default function AIReadinessQuiz() {
   };
 
   return (
-    <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
       <div style={{ maxWidth: phase === "result" ? 960 : 720, margin: "0 auto", textAlign: "center", transition: "max-width 0.4s ease" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 10 }}>
           <span style={{ width: 28, height: 3, borderRadius: 2, background: "linear-gradient(90deg, #393185, #4D44A8)" }} />

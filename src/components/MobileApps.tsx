@@ -231,7 +231,7 @@ export default function MobileApps() {
 
   return (
     <>
-      <section className="relative overflow-hidden px-4 py-8 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
+      <section className="relative overflow-hidden px-4 py-5 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
         <div className="relative z-10 mx-auto max-w-[1200px]">
           {/* Header */}
           <motion.div

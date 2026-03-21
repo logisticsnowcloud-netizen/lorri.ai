@@ -207,7 +207,7 @@ export default function Hero({ dark }: { dark: boolean }) {
             )}
           </div>
 
-          <div className="mt-3 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center" style={{marginTop: '10%'}}>
+          <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center" style={{marginTop: '6%'}}>
             <button
               onClick={() => openDemoModal()}
               className="group w-full justify-center sm:w-auto hero-btn-primary"
