@@ -247,8 +247,9 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
       onClick={onClose}>
       <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }} />
       <div style={{
-        position: "relative", width: "100%", maxWidth: 620, maxHeight: "90vh", overflowY: "auto",
-        overflowX: "visible",
+        position: "relative", width: "100%", maxWidth: 620, maxHeight: "90vh",
+        overflowY: "auto", overflowX: "visible",
+        background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22, padding: "36px 32px",
         animation: "botPop .3s ease", boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
       }}
         onClick={e => e.stopPropagation()}>
