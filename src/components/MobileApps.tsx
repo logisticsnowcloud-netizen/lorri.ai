@@ -184,25 +184,27 @@ export default function MobileApps() {
 
                   <div className="flex gap-4">
                     {/* Phone mockup / screenshots */}
-                    <div className="hidden flex-shrink-0 sm:block" style={{ width: isLorriBiz ? 160 : 140 }}>
-                      {isLorriBiz ? (
-                        <div className="flex flex-col gap-2">
+                    <div className="hidden flex-shrink-0 sm:block" style={{ width: 160 }}>
+                      <div className="flex flex-col gap-2">
+                        {(isLorriBiz
+                          ? [
+                              { src: lorriBizScreens2, alt: "LoRRI Biz - Sign in, Registration & Analytics Dashboard" },
+                              { src: lorriBizScreens, alt: "LoRRI Biz - Enquiries & Spot Details" },
+                            ]
+                          : [
+                              { src: mylorriScreens1, alt: "MyLoRRI - Trusted Platform, Sign In & Dashboard" },
+                              { src: mylorriScreens2, alt: "MyLoRRI - Spot Enquiries, Details & Indents" },
+                            ]
+                        ).map((img) => (
                           <img
-                            src={lorriBizScreens2}
-                            alt="LoRRI Biz - Sign in, Registration & Analytics"
+                            key={img.alt}
+                            src={img.src}
+                            alt={img.alt}
                             className="w-full cursor-pointer rounded-lg transition-transform duration-200 hover:scale-[1.03]"
-                            onClick={() => setLightboxImage({ src: lorriBizScreens2, alt: "LoRRI Biz - Sign in, Registration & Analytics Dashboard" })}
+                            onClick={() => setLightboxImage(img)}
                           />
-                          <img
-                            src={lorriBizScreens}
-                            alt="LoRRI Biz - Enquiries & Spot Details"
-                            className="w-full cursor-pointer rounded-lg transition-transform duration-200 hover:scale-[1.03]"
-                            onClick={() => setLightboxImage({ src: lorriBizScreens, alt: "LoRRI Biz - Enquiries & Spot Details" })}
-                          />
-                        </div>
-                      ) : (
-                        <CompactPhone app={app} />
-                      )}
+                        ))}
+                      </div>
                     </div>
 
                     {/* Content */}
