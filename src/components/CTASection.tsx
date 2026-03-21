@@ -2,6 +2,30 @@ import { useState, useEffect, useRef } from "react";
 import { Arrow, Check } from "./Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Clock, Phone, Zap, BarChart3, Route, Brain, ArrowRight, Shield } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const API_URL = "https://production.lorri.in/api/apilorri/log";
+
+const TEAM_EMAILS = [
+  "connect@logisticsnow.in",
+  "raj@logisticsnow.in",
+  "associate@logisticsnow.in",
+  "sale@thelogisticsnow.com",
+];
+
+const CC_EMAILS = [
+  "associate@logisticsnow.in",
+  "raj@logisticsnow.in",
+  "sales@thelogisticsnow.com",
+  "smeet@thelogisticsnow.com",
+  "partner@logisticsnow.in",
+  "shaleen@lorri.in",
+];
+
+const RESTRICTED_DOMAINS = [
+  "gmail.com", "yahoo.com", "yahoo.co.in", "hotmail.com", "outlook.com",
+  "rediffmail.com", "live.com", "msn.com", "aol.com", "icloud.com",
+];
 
 /* ─── Animated counter ─── */
 function AnimatedNumber({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -52,9 +76,95 @@ const trustLogos = ["Apollo Tyres", "Saint-Gobain", "Perfetti Van Melle", "Jyoth
 
 export default function CTASection() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", type: "shipper" });
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const { toast } = useToast();
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  const validate = (): boolean => {
+    if (!form.name.trim()) {
+      toast({ title: "Name Required", description: "Please enter your name.", variant: "destructive" });
+      return false;
+    }
+    if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      toast({ title: "Invalid Email", description: "Please enter a valid email address.", variant: "destructive" });
+      return false;
+    }
+    const domain = form.email.split("@")[1]?.toLowerCase();
+    if (domain && RESTRICTED_DOMAINS.includes(domain)) {
+      toast({ title: "Company Email Required", description: "Please use your company email address.", variant: "destructive" });
+      return false;
+    }
+    if (!form.phone || !/^\+?[\d\s-]{7,15}$/.test(form.phone)) {
+      toast({ title: "Invalid Phone", description: "Please enter a valid phone number.", variant: "destructive" });
+      return false;
+    }
+    if (!form.company.trim()) {
+      toast({ title: "Company Required", description: "Please enter your company name.", variant: "destructive" });
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validate()) return;
+    setLoading(true);
+    try {
+      // Send to team emails
+      await Promise.all(
+        TEAM_EMAILS.map((toEmail) =>
+          fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              from_email: "lorri@logisticsnow.in",
+              user_type: "company",
+              subject: `Demo Request for LoRRI ( Name - ${form.name} & Company Name- ${form.company} )`,
+              to_email: toEmail,
+              content: `Demo Requested by Name - ${form.name} Company Name - ${form.company} Contact Email - ${form.email} Contact Number - ${form.phone} Type - ${form.type}`,
+              email_status: "Pending",
+              activity: "Email Request",
+            }),
+          }).catch((err) => console.error(err))
+        )
+      );
+
+      // Send meeting invite to user
+      await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "superlaunch",
+          activity: "New Enquiry Email Request",
+          mail_status: "Pending",
+          from_email: "connect@logisticsnow.in",
+          user_type: "company",
+          subject: "LoRRI Demo scheduled",
+          timestamp: new Date().toISOString(),
+          to_email: form.email,
+          cc: CC_EMAILS,
+          content: `
+            <div><span>Dear ${form.name}</span></div><br/>
+            <div><span>
+            Thank you for your interest in LoRRI! Our team will reach out within 24 hours to schedule your personalized demo.<br/><br/>
+            Join Zoom Meeting<br/>
+            <a href="https://us02web.zoom.us/j/3115035961" target="_blank">https://us02web.zoom.us/j/3115035961</a><br/>
+            Meeting ID: 3115035961<br/>
+            </span></div><br/>
+            Warm Regards,<br/>Team LoRRI.`,
+        }),
+      });
+
+      setSent(true);
+      toast({ title: "Success!", description: "Demo request sent successfully." });
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section id="cta" className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8" style={{ background: "hsl(var(--bg2))" }}>
@@ -259,11 +369,12 @@ export default function CTASection() {
                   <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => { if (form.name && form.email) setSent(true); }}
-                    className="group mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_4px_24px_hsl(var(--primary)/0.4)] transition-shadow hover:shadow-[0_6px_32px_hsl(var(--primary)/0.5)]"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                    className="group mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_4px_24px_hsl(var(--primary)/0.4)] transition-shadow hover:shadow-[0_6px_32px_hsl(var(--primary)/0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     <Sparkles className="h-4 w-4" />
-                    Show Me My Savings
+                    {loading ? "Sending..." : "Show Me My Savings"}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </motion.button>
 
