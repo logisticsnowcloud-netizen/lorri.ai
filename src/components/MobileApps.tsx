@@ -54,60 +54,61 @@ const apps = [
 ];
 
 function PhoneMockup({ app, index }: { app: typeof apps[0]; index: number }) {
+  const isLorriBiz = app.name === "LoRRI Biz";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-      className="relative mx-auto w-[180px] sm:w-[200px]"
+      className="relative mx-auto w-[200px] sm:w-[220px]"
     >
-      {/* Phone frame */}
-      <div className="rounded-[24px] border border-border-subtle bg-card p-2 shadow-xl" style={{ boxShadow: `0 20px 60px -15px ${app.accent}30` }}>
-        {/* Status bar */}
-        <div className="flex items-center justify-between rounded-t-[18px] bg-bg-deep px-3 py-1.5">
-          <span className="text-[8px] font-medium text-muted-foreground">9:41</span>
-          <div className="flex gap-1">
-            <Activity size={8} className="text-muted-foreground" />
-            <div className="h-[8px] w-[14px] rounded-sm border border-muted-foreground" style={{ borderWidth: 1 }}>
-              <div className="h-full w-[70%] rounded-sm bg-success" />
-            </div>
-          </div>
-        </div>
-
-        {/* Screen content */}
-        <div className="space-y-2 bg-bg-deep px-3 py-3">
-          {/* App header */}
-          <div className="flex items-center gap-2">
-            <img src={app.icon} alt="" className="h-5 w-5 rounded-md" />
-            <span className="text-[9px] font-bold text-foreground">{app.name}</span>
-          </div>
-
-          {/* Mini dashboard cards */}
-          {app.screenContent.map((item, i) => (
-            <div key={i} className="flex items-center justify-between rounded-lg border border-border-subtle bg-card px-2.5 py-2">
-              <div>
-                <div className="text-[7px] text-muted-foreground">{item.label}</div>
-                <div className="text-[11px] font-bold text-foreground">{item.value}</div>
+      {isLorriBiz ? (
+        <img
+          src={lorriBizScreens}
+          alt="LoRRI Biz app screenshots showing enquiries and spot details"
+          className="w-full rounded-xl"
+        />
+      ) : (
+        <div className="rounded-[24px] border border-border-subtle bg-card p-2 shadow-xl" style={{ boxShadow: `0 20px 60px -15px ${app.accent}30` }}>
+          <div className="flex items-center justify-between rounded-t-[18px] bg-bg-deep px-3 py-1.5">
+            <span className="text-[8px] font-medium text-muted-foreground">9:41</span>
+            <div className="flex gap-1">
+              <Activity size={8} className="text-muted-foreground" />
+              <div className="h-[8px] w-[14px] rounded-sm border border-muted-foreground" style={{ borderWidth: 1 }}>
+                <div className="h-full w-[70%] rounded-sm bg-success" />
               </div>
-              <span
-                className="rounded-full px-1.5 py-0.5 text-[7px] font-bold"
-                style={{
-                  background: item.change.startsWith("+") || item.change.startsWith("Top") ? "hsl(var(--success) / 0.15)" : "hsl(var(--accent) / 0.15)",
-                  color: item.change.startsWith("+") || item.change.startsWith("Top") ? "hsl(var(--success))" : "hsl(var(--accent))",
-                }}
-              >
-                {item.change}
-              </span>
             </div>
-          ))}
+          </div>
+          <div className="space-y-2 bg-bg-deep px-3 py-3">
+            <div className="flex items-center gap-2">
+              <img src={app.icon} alt="" className="h-5 w-5 rounded-md" />
+              <span className="text-[9px] font-bold text-foreground">{app.name}</span>
+            </div>
+            {app.screenContent.map((item, i) => (
+              <div key={i} className="flex items-center justify-between rounded-lg border border-border-subtle bg-card px-2.5 py-2">
+                <div>
+                  <div className="text-[7px] text-muted-foreground">{item.label}</div>
+                  <div className="text-[11px] font-bold text-foreground">{item.value}</div>
+                </div>
+                <span
+                  className="rounded-full px-1.5 py-0.5 text-[7px] font-bold"
+                  style={{
+                    background: item.change.startsWith("+") || item.change.startsWith("Top") ? "hsl(var(--success) / 0.15)" : "hsl(var(--accent) / 0.15)",
+                    color: item.change.startsWith("+") || item.change.startsWith("Top") ? "hsl(var(--success))" : "hsl(var(--accent))",
+                  }}
+                >
+                  {item.change}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center rounded-b-[18px] bg-bg-deep pb-2 pt-1">
+            <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
+          </div>
         </div>
-
-        {/* Bottom bar */}
-        <div className="flex justify-center rounded-b-[18px] bg-bg-deep pb-2 pt-1">
-          <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
-        </div>
-      </div>
+      )}
     </motion.div>
   );
 }
