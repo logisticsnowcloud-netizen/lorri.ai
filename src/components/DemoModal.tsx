@@ -247,7 +247,8 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
       onClick={onClose}>
       <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }} />
       <div style={{
-        position: "relative", width: "100%", maxWidth: 620, maxHeight: "90vh", overflowY: "auto",
+        position: "relative", width: "100%", maxWidth: 620, maxHeight: "90vh",
+        overflowY: "auto", overflowX: "visible",
         background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 22, padding: "36px 32px",
         animation: "botPop .3s ease", boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
       }}
@@ -323,7 +324,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                   }}>📅 ADD TO CALENDAR</button>
                 {calMenuOpen && (
                   <div style={{
-                    position: "absolute", bottom: "calc(100% + 8px)", left: 0, right: 0,
+                    position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0,
                     background: "var(--card)", border: "1px solid var(--border)", borderRadius: 10,
                     boxShadow: "0 8px 30px rgba(0,0,0,0.3)", overflow: "hidden", zIndex: 10,
                   }}>
