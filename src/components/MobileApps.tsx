@@ -7,6 +7,8 @@ import lorriBizIcon from "@/assets/lorri-biz-icon.png";
 import mylorriIcon from "@/assets/mylorri-icon.png";
 import lorriBizScreens from "@/assets/lorri-biz-screens.png";
 import lorriBizScreens2 from "@/assets/lorri-biz-screens-2.png";
+import mylorriScreens1 from "@/assets/mylorri-screens-1.png";
+import mylorriScreens2 from "@/assets/mylorri-screens-2.png";
 
 const apps = [
   {
