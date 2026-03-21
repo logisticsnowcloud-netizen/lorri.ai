@@ -324,7 +324,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                   }}>📅 ADD TO CALENDAR</button>
                 {calMenuOpen && (
                   <div style={{
-                    position: "absolute", bottom: "calc(100% + 8px)", left: 0, right: 0,
+                    position: "absolute", top: "calc(100% + 8px)", left: 0, right: 0,
                     background: "var(--card)", border: "1px solid var(--border)", borderRadius: 10,
                     boxShadow: "0 8px 30px rgba(0,0,0,0.3)", overflow: "hidden", zIndex: 10,
                   }}>
