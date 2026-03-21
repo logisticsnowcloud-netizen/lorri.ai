@@ -167,7 +167,7 @@ export default function CTASection() {
   };
 
   return (
-    <section id="cta" className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8" style={{ background: "hsl(var(--bg2))" }}>
+    <section id="cta" className="relative overflow-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8" style={{ background: "hsl(var(--bg2))" }}>
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 bg-[radial-gradient(ellipse,hsl(var(--primary)/0.12)_0%,transparent_65%)]" />
