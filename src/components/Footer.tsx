@@ -1,9 +1,45 @@
+import { useState, useEffect, useRef } from "react";
+import { ArrowRight, Sparkles, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { useDemoModal } from "@/hooks/use-demo-modal";
+
+/* ── Animated counter ── */
+function AnimatedNum({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          let start = 0;
+          const step = Math.max(1, Math.floor(value / 40));
+          const id = setInterval(() => {
+            start += step;
+            if (start >= value) { setCount(value); clearInterval(id); }
+            else setCount(start);
+          }, 30);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [value]);
+
+  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
+}
+
 const footerColumns = [
   {
     title: "Platform",
     links: [
-      { label: "For Shipper", href: "https://company.lorri.in" },
-      { label: "For Carrier", href: "https://transporter.lorr.in" },
+      { label: "For Shippers", href: "https://company.lorri.in" },
+      { label: "For Carriers", href: "https://transporter.lorr.in" },
+      { label: "AI Procurement", href: "#platform" },
+      { label: "Freight Benchmarking", href: "#platform" },
     ],
   },
   {
@@ -11,108 +47,221 @@ const footerColumns = [
     links: [
       { label: "About Us", href: "https://logisticsnow-redesign.vercel.app/about" },
       { label: "Vision", href: "https://logisticsnow-redesign.vercel.app/about#our-vision" },
-      { label: "Investors", href: "https://logisticsnow-redesign.vercel.app/about#investors-partners" },
       { label: "Careers", href: "https://logisticsnow-redesign.vercel.app/careers" },
-      { label: "Newsroom & Press Coverage", href: "/#newsroom" },
+      { label: "Newsroom", href: "/#newsroom" },
     ],
   },
   {
-    title: "Contact",
+    title: "Get in Touch",
     links: [
-      { label: "Request Demo" },
-      { label: "lorri@logisticsnow.in" },
-      { label: "+91-9867773508" },
-      { label: "Mulund West, Mumbai" },
+      { label: "lorri@logisticsnow.in", href: "mailto:lorri@logisticsnow.in", icon: Mail },
+      { label: "+91-9867773508", href: "tel:+919867773508", icon: Phone },
+      { label: "Mulund West, Mumbai", icon: MapPin },
     ],
   },
 ];
 
+const trustStats = [
+  { value: 2200, suffix: "+", label: "Verified Carriers" },
+  { value: 80000, suffix: "+", label: "Routes Covered" },
+  { value: 21, suffix: "M+", label: "Savings Delivered" },
+];
+
+const productTags = ["AI Procurement", "Freight Benchmarking", "Fleet Optimization", "TMS"];
+
 export default function Footer() {
+  const openDemo = useDemoModal();
+
   return (
-    <footer className="px-4 pb-3 pt-5 sm:px-6 lg:px-8" style={{ background: "var(--topBar)", borderTop: "1px solid var(--border)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-[2fr_1fr_1fr_1fr]" style={{ marginBottom: 20 }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-              <div style={{ fontWeight: 800, fontSize: 16, color: "var(--text)" }}>
-                LoRRI<span style={{ color: "#54AF3A" }}>.ai</span>
-              </div>
-            </div>
-            <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, maxWidth: 250, marginBottom: 14 }}>
-              Logistics Intelligence & Ratings Ecosystem. The Digital Backbone of India's Freight Industry.
-            </p>
-            <div style={{ fontSize: 11, color: "var(--text3)" }}>A LogisticsNow Product · Backed by Shell & Flipkart</div>
+    <footer>
+      {/* ── Final CTA strip ── */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, hsl(var(--primary) / .15) 0%, hsl(var(--bg-deep)) 50%, hsl(var(--accent) / .08) 100%)",
+          borderTop: "1px solid hsl(var(--border))",
+        }}
+      >
+        <div
+          className="mx-auto flex flex-col items-center gap-5 px-4 py-12 text-center sm:py-14"
+          style={{ maxWidth: 800 }}
+        >
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5" style={{ background: "hsl(var(--primary) / .12)", border: "1px solid hsl(var(--primary) / .25)" }}>
+            <Sparkles size={13} style={{ color: "hsl(var(--accent))" }} />
+            <span style={{ fontSize: 11, fontWeight: 600, color: "hsl(var(--accent))", letterSpacing: ".06em", textTransform: "uppercase" }}>
+              Ready to transform?
+            </span>
           </div>
 
-          {footerColumns.map((col) => (
-            <div key={col.title}>
-              <div style={{ fontSize: 10, color: "var(--text2)", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 14 }}>
-                {col.title}
+          <h3 className="text-2xl font-bold sm:text-3xl" style={{ color: "hsl(var(--foreground))", lineHeight: 1.25 }}>
+            See How AI Can Reduce Your Logistics Cost
+          </h3>
+          <p className="mx-auto" style={{ fontSize: 14, color: "hsl(var(--muted-foreground))", maxWidth: 520, lineHeight: 1.7 }}>
+            Join leading manufacturers and carriers using LoRRI's AI-powered intelligence platform to benchmark, optimize, and save.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={openDemo}
+              className="group inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold transition-all hover:scale-[1.03] active:scale-[0.97]"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))",
+                color: "hsl(var(--primary-foreground))",
+                fontSize: 14,
+                boxShadow: "0 0 24px hsl(var(--primary) / .35)",
+              }}
+            >
+              <Sparkles size={15} />
+              Show Me My Savings
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+            </button>
+            <a
+              href="#platform"
+              className="inline-flex items-center gap-2 rounded-lg border px-6 py-3 font-semibold transition-all hover:scale-[1.03]"
+              style={{
+                borderColor: "hsl(var(--border))",
+                color: "hsl(var(--foreground))",
+                fontSize: 14,
+                background: "hsl(var(--card) / .5)",
+              }}
+            >
+              See AI in Action
+              <ExternalLink size={14} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main footer ── */}
+      <div
+        style={{
+          background: "hsl(var(--bg-deep))",
+          borderTop: "1px solid hsl(var(--border-subtle))",
+        }}
+      >
+        <div className="mx-auto px-4 pb-4 pt-10 sm:px-6 lg:px-8" style={{ maxWidth: 1200 }}>
+          {/* Grid */}
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-[2.2fr_1fr_1fr_1fr]" style={{ marginBottom: 32 }}>
+            {/* Brand column */}
+            <div>
+              <div className="mb-4 flex items-center gap-2.5">
+                <span className="text-lg font-extrabold" style={{ color: "hsl(var(--foreground))" }}>
+                  LoRRI<span style={{ color: "hsl(var(--success))" }}>.ai</span>
+                </span>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                {col.links.map((link) => {
-                  const contentStyle = {
-                    fontSize: 13,
-                    color: "var(--text3)",
-                    cursor: link.href ? "pointer" : "default",
-                    transition: "color .2s",
-                    overflowWrap: "anywhere" as const,
-                    textDecoration: "none",
-                  };
+              <p className="mb-4" style={{ fontSize: 13, color: "hsl(var(--muted-foreground))", lineHeight: 1.75, maxWidth: 280 }}>
+                The AI-Powered Logistics Intelligence Platform for Global Freight.
+              </p>
 
-                  if (!link.href) {
-                    return (
-                      <span key={link.label} style={contentStyle}>
-                        {link.label}
-                      </span>
-                    );
-                  }
+              {/* Product tags */}
+              <div className="mb-5 flex flex-wrap gap-1.5">
+                {productTags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full px-2.5 py-0.5"
+                    style={{ fontSize: 10, fontWeight: 600, color: "hsl(var(--accent))", background: "hsl(var(--accent) / .08)", border: "1px solid hsl(var(--accent) / .15)" }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
 
-                  const isExternal = link.href.startsWith("http");
-
-                  return (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      style={contentStyle}
-                      onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text)")}
-                      onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text3)")}
-                    >
-                      {link.label}
-                    </a>
-                  );
-                })}
+              {/* Backing highlight */}
+              <div
+                className="inline-flex items-center gap-2 rounded-lg px-3 py-2"
+                style={{ background: "hsl(var(--primary) / .08)", border: "1px solid hsl(var(--primary) / .18)" }}
+              >
+                <Sparkles size={12} style={{ color: "hsl(var(--primary-glow))" }} />
+                <span style={{ fontSize: 11, fontWeight: 600, color: "hsl(var(--foreground))", letterSpacing: ".02em" }}>
+                  Backed by <span style={{ color: "hsl(var(--accent))" }}>Shell</span> &amp; <span style={{ color: "hsl(var(--accent))" }}>Flipkart</span>
+                </span>
               </div>
             </div>
-          ))}
-        </div>
 
-        <div className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between" style={{ borderColor: "var(--borderSm)" }}>
-          <span style={{ fontSize: 12, color: "var(--text3)" }}>© 2025 LogisticsNow Private Limited. All rights reserved.</span>
-          <div className="flex flex-wrap gap-4 sm:gap-5">
-            {[
-              {
-                label: "Privacy Policy",
-                href: "https://lntermsandconditions.blob.core.windows.net/tnc/privacypolicy.html",
-              },
-              {
-                label: "Terms of Use",
-                href: "https://lntermsandconditions.blob.core.windows.net/tnc/benchmark_tnc.html",
-              },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontSize: 12, color: "var(--text3)", cursor: "pointer", textDecoration: "none" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text3)")}
-              >
-                {link.label}
-              </a>
+            {/* Link columns */}
+            {footerColumns.map((col) => (
+              <div key={col.title}>
+                <div
+                  className="mb-4"
+                  style={{ fontSize: 10, color: "hsl(var(--muted-foreground))", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase" }}
+                >
+                  {col.title}
+                </div>
+                <div className="flex flex-col gap-2.5">
+                  {col.links.map((link) => {
+                    const Icon = (link as any).icon;
+                    const isExternal = link.href?.startsWith("http");
+
+                    if (!link.href) {
+                      return (
+                        <span key={link.label} className="flex items-center gap-2" style={{ fontSize: 13, color: "hsl(var(--muted-dim))" }}>
+                          {Icon && <Icon size={13} />}
+                          {link.label}
+                        </span>
+                      );
+                    }
+
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="group flex items-center gap-2 transition-colors"
+                        style={{ fontSize: 13, color: "hsl(var(--muted-dim))", textDecoration: "none" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--foreground))")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--muted-dim))")}
+                      >
+                        {Icon && <Icon size={13} />}
+                        {link.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
+          </div>
+
+          {/* Trust stats bar */}
+          <div
+            className="mb-6 flex flex-wrap items-center justify-center gap-6 rounded-xl px-6 py-4 sm:gap-10"
+            style={{ background: "hsl(var(--card) / .4)", border: "1px solid hsl(var(--border-subtle))" }}
+          >
+            {trustStats.map((s, i) => (
+              <div key={i} className="flex items-baseline gap-1.5 text-center">
+                <span className="font-bold" style={{ fontSize: 18, color: "hsl(var(--accent))" }}>
+                  {s.suffix.includes("M") ? "$" : ""}
+                  <AnimatedNum value={s.value} suffix={s.suffix} />
+                </span>
+                <span style={{ fontSize: 11, color: "hsl(var(--muted-foreground))" }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom bar */}
+          <div
+            className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between"
+            style={{ borderColor: "hsl(var(--border-subtle))" }}
+          >
+            <span style={{ fontSize: 12, color: "hsl(var(--muted-dim))" }}>© 2025 LogisticsNow Private Limited. All rights reserved.</span>
+            <div className="flex flex-wrap gap-4 sm:gap-5">
+              {[
+                { label: "Privacy Policy", href: "https://lntermsandconditions.blob.core.windows.net/tnc/privacypolicy.html" },
+                { label: "Terms of Use", href: "https://lntermsandconditions.blob.core.windows.net/tnc/benchmark_tnc.html" },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors"
+                  style={{ fontSize: 12, color: "hsl(var(--muted-dim))", textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--foreground))")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--muted-dim))")}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
