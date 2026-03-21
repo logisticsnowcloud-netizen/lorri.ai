@@ -299,10 +299,10 @@ function LoadMatchLog({ visible }: { visible: boolean }) {
 
 /* ─── Fleet Matching Trucks ─── */
 const truckData = [
-  { truck: "MH12 AB 1234", route: "Pune → Delhi", status: "Assigned", value: "₹48,000", saving: "22%" },
-  { truck: "KA01 CD 5678", route: "Bangalore → Mumbai", status: "Matching...", value: "₹35,200", saving: "18%" },
-  { truck: "GJ05 EF 9012", route: "Ahmedabad → Chennai", status: "Optimized", value: "₹62,400", saving: "25%" },
-  { truck: "DL08 GH 3456", route: "Delhi → Kolkata", status: "Assigned", value: "₹54,800", saving: "20%" },
+  { route: "Pune → Delhi", status: "Best Match", value: "₹48,000", saving: "22%", best: true },
+  { route: "Bangalore → Mumbai", status: "Matching...", value: "₹35,200", saving: "18%", best: false },
+  { route: "Ahmedabad → Chennai", status: "Optimized", value: "₹62,400", saving: "25%", best: false },
+  { route: "Delhi → Kolkata", status: "Assigned", value: "₹54,800", saving: "20%", best: false },
 ];
 
 export function ForTransporters() {
