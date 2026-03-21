@@ -221,7 +221,7 @@ function VideoCard({ v, featured = false }: { v: typeof videoTestimonials[0]; fe
       href={`https://www.youtube.com/watch?v=${v.videoId}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group block ${featured ? "sm:col-span-2 xl:col-span-2" : ""}`}
+      className="group block"
       style={{ textDecoration: "none" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -243,7 +243,7 @@ function VideoCard({ v, featured = false }: { v: typeof videoTestimonials[0]; fe
           transform: hovered ? "translateY(-4px)" : "translateY(0)",
         }}
       >
-        <div style={{ position: "relative", aspectRatio: featured ? "2/1" : "16/9", overflow: "hidden", background: "hsl(var(--bg-deep))" }}>
+        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "hsl(var(--bg-deep))" }}>
           <VideoThumbnail v={v} />
           <div
             style={{
