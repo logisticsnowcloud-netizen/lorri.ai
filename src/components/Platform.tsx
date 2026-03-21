@@ -78,7 +78,7 @@ export default function Platform() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section id="platform" ref={ref as any} className="px-4 py-12 sm:px-6 lg:px-8 relative" style={{ background: "hsl(var(--background))" }}>
+    <section id="platform" ref={ref as any} className="px-4 py-6 sm:px-6 lg:px-8 relative" style={{ background: "hsl(var(--background))" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Header */}
         <div className="text-center mb-6">
