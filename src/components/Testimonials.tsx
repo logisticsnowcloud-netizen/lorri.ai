@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Play } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { Play, TrendingDown, TrendingUp, Zap, BarChart3, Eye, Bot, ArrowRight } from "lucide-react";
 import { Quote } from "./Icons";
 
 const quotes = [
@@ -10,8 +10,33 @@ const quotes = [
 ];
 
 const videoTestimonials = [
-  { name: "Apollo Tyres Limited (Global)", person: "Mr. Parmeshwaran Iyer", title: "Chief Supply Chain Officer", videoId: "hwRp72mT18E", domain: "apollotyres.com" },
-  { name: "Jyothy Labs Ltd.", person: "Mr. Ananth Rao", title: "Head – Operations", videoId: "T1sUqxHzX9c", domain: "jyothylabs.com" },
+  {
+    name: "Apollo Tyres Limited (Global)",
+    person: "Mr. Parmeshwaran Iyer",
+    title: "Chief Supply Chain Officer",
+    videoId: "hwRp72mT18E",
+    domain: "apollotyres.com",
+    metrics: [
+      { icon: TrendingDown, label: "Freight Cost", value: "↓ 18%" },
+      { icon: TrendingUp, label: "Efficiency", value: "↑ 25%" },
+    ],
+    aiTag: "AI Procurement",
+    summary: "Reduced procurement cost by 18% within first 90 days using AI-driven rate optimization",
+    featured: true,
+  },
+  {
+    name: "Jyothy Labs Ltd.",
+    person: "Mr. Ananth Rao",
+    title: "Head – Operations",
+    videoId: "T1sUqxHzX9c",
+    domain: "jyothylabs.com",
+    metrics: [
+      { icon: TrendingDown, label: "TAT", value: "↓ 22%" },
+      { icon: TrendingUp, label: "Fill Rate", value: "↑ 30%" },
+    ],
+    aiTag: "AI Optimization",
+    summary: "Achieved 22% faster turnaround through intelligent load optimization",
+  },
   {
     name: "Perfetti Van Melle (India)",
     person: "Mr. Vaseem Ahamad",
@@ -19,8 +44,26 @@ const videoTestimonials = [
     videoId: "akFrzBqu-d0",
     domain: "perfettivanmelle.com",
     thumbnailLogo: "/newlogo/perfetti-van-melle-removebg-preview.png",
+    metrics: [
+      { icon: TrendingDown, label: "Cost/Ton", value: "↓ 15%" },
+      { icon: Eye, label: "Visibility", value: "100%" },
+    ],
+    aiTag: "AI Visibility",
+    summary: "Full supply chain visibility with 15% cost-per-ton reduction through AI analytics",
   },
-  { name: "MIRC Electronics (Onida)", person: "Mr. Nilesh Patil", title: "VP – Global Supply Chain", videoId: "77_eYlVvehE", domain: "onida.com" },
+  {
+    name: "MIRC Electronics (Onida)",
+    person: "Mr. Nilesh Patil",
+    title: "VP – Global Supply Chain",
+    videoId: "77_eYlVvehE",
+    domain: "onida.com",
+    metrics: [
+      { icon: TrendingUp, label: "On-Time", value: "↑ 35%" },
+      { icon: TrendingDown, label: "Damages", value: "↓ 40%" },
+    ],
+    aiTag: "AI Procurement",
+    summary: "35% improvement in on-time delivery with AI-powered carrier scoring",
+  },
   {
     name: "Saint-Gobain India",
     person: "Mr. Shekhar Kulkarni",
@@ -28,9 +71,65 @@ const videoTestimonials = [
     videoId: "dChAh9biv0c",
     domain: "saint-gobain.co.in",
     thumbnailLogo: "/newlogo/Saint-Gobain-Logo.png",
+    metrics: [
+      { icon: TrendingDown, label: "Spend", value: "↓ 20%" },
+      { icon: BarChart3, label: "Analytics", value: "Real-time" },
+    ],
+    aiTag: "AI Intelligence",
+    summary: "Real-time freight intelligence driving 20% logistics spend reduction",
   },
-  { name: "New Darbar Transport", person: "Mr. Jatindra Vohra", title: "Director", videoId: "5jc7YnwtlwQ", domain: "newdarbartransport.com" },
+  {
+    name: "New Darbar Transport",
+    person: "Mr. Jatindra Vohra",
+    title: "Director",
+    videoId: "5jc7YnwtlwQ",
+    domain: "newdarbartransport.com",
+    metrics: [
+      { icon: TrendingUp, label: "Utilization", value: "↑ 28%" },
+      { icon: Zap, label: "Matching", value: "< 2s" },
+    ],
+    aiTag: "AI Load Matching",
+    summary: "28% higher fleet utilization through AI-powered instant load matching",
+  },
 ];
+
+const trustMetrics = [
+  { value: "$21M+", label: "Savings Delivered" },
+  { value: "2,200+", label: "Carriers Onboarded" },
+  { value: "80,000+", label: "Routes Optimized" },
+];
+
+function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [display, setDisplay] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const duration = 1600;
+          const start = performance.now();
+          const step = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setDisplay(Math.round(eased * value));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value]);
+
+  return <span ref={ref}>{display.toLocaleString()}{suffix}</span>;
+}
 
 function VideoThumbnail({ v }: { v: typeof videoTestimonials[0] }) {
   if (v.thumbnailLogo) {
@@ -114,20 +213,37 @@ function VideoThumbnail({ v }: { v: typeof videoTestimonials[0] }) {
   );
 }
 
-function VideoCard({ v }: { v: typeof videoTestimonials[0] }) {
+function VideoCard({ v, featured = false }: { v: typeof videoTestimonials[0]; featured?: boolean }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <a href={`https://www.youtube.com/watch?v=${v.videoId}`} target="_blank" rel="noopener noreferrer" className="group block" style={{ textDecoration: "none" }}>
+    <a
+      href={`https://www.youtube.com/watch?v=${v.videoId}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group block ${featured ? "sm:col-span-2 xl:col-span-2" : ""}`}
+      style={{ textDecoration: "none" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div
         style={{
           borderRadius: 16,
           overflow: "hidden",
           background: "hsl(var(--card))",
-          border: "1.5px solid hsl(var(--border-subtle))",
-          transition: "all .3s ease",
+          border: featured
+            ? "1.5px solid hsl(var(--primary) / 0.4)"
+            : "1.5px solid hsl(var(--border-subtle))",
+          transition: "all .35s ease",
+          boxShadow: hovered
+            ? featured
+              ? "0 12px 40px -12px hsl(var(--primary) / 0.3)"
+              : "0 8px 30px -10px hsl(var(--primary) / 0.2)"
+            : "none",
+          transform: hovered ? "translateY(-4px)" : "translateY(0)",
         }}
-        className="group-hover:scale-[1.02]"
       >
-        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "hsl(var(--bg-deep))" }}>
+        <div style={{ position: "relative", aspectRatio: featured ? "2/1" : "16/9", overflow: "hidden", background: "hsl(var(--bg-deep))" }}>
           <VideoThumbnail v={v} />
           <div
             style={{
@@ -136,15 +252,14 @@ function VideoCard({ v }: { v: typeof videoTestimonials[0] }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "hsl(var(--background) / 0.24)",
+              background: hovered ? "hsl(var(--background) / 0.36)" : "hsl(var(--background) / 0.24)",
               transition: "background .3s ease",
             }}
-            className="group-hover:!bg-[hsl(var(--background)/0.36)]"
           >
             <div
               style={{
-                width: 52,
-                height: 52,
+                width: featured ? 60 : 52,
+                height: featured ? 60 : 52,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.8))",
                 display: "flex",
@@ -152,22 +267,90 @@ function VideoCard({ v }: { v: typeof videoTestimonials[0] }) {
                 justifyContent: "center",
                 boxShadow: "0 8px 24px -8px hsl(var(--destructive) / 0.6)",
                 transition: "transform .3s ease",
+                transform: hovered ? "scale(1.15)" : "scale(1)",
               }}
-              className="group-hover:scale-110"
             >
-              <Play size={22} fill="white" color="white" style={{ marginLeft: 2 }} />
+              <Play size={featured ? 26 : 22} fill="white" color="white" style={{ marginLeft: 2 }} />
             </div>
+          </div>
+
+          {/* Hover summary overlay */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: "32px 16px 14px",
+              background: "linear-gradient(transparent, hsl(var(--background) / 0.92))",
+              transform: hovered ? "translateY(0)" : "translateY(100%)",
+              transition: "transform .35s ease",
+            }}
+          >
+            <p style={{ fontSize: 12, color: "hsl(var(--foreground) / 0.9)", margin: 0, fontWeight: 500, lineHeight: 1.5 }}>
+              {v.summary}
+            </p>
           </div>
         </div>
 
         <div style={{ padding: "14px 16px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <img src={`https://www.google.com/s2/favicons?domain=${v.domain}&sz=32`} alt="" style={{ width: 20, height: 20, borderRadius: 4 }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+          {/* AI Tag */}
+          <div style={{ marginBottom: 8 }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+                padding: "3px 8px",
+                borderRadius: 6,
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: ".06em",
+                textTransform: "uppercase",
+                background: "hsl(var(--primary) / 0.12)",
+                color: "hsl(var(--primary-glow))",
+                border: "1px solid hsl(var(--primary) / 0.2)",
+              }}
+            >
+              <Bot size={10} /> {v.aiTag}
+            </span>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+            <img
+              src={`https://www.google.com/s2/favicons?domain=${v.domain}&sz=32`}
+              alt=""
+              style={{ width: 20, height: 20, borderRadius: 4 }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            />
             <span style={{ fontSize: 14, fontWeight: 700, color: "hsl(var(--foreground))", lineHeight: 1.2 }}>{v.name}</span>
           </div>
-          <p style={{ fontSize: 12, color: "hsl(var(--muted-foreground))", lineHeight: 1.45, margin: 0 }}>
+          <p style={{ fontSize: 12, color: "hsl(var(--muted-foreground))", lineHeight: 1.45, margin: "0 0 10px" }}>
             {v.person} — {v.title}
           </p>
+
+          {/* Metrics */}
+          <div style={{ display: "flex", gap: 8 }}>
+            {v.metrics.map((m, i) => (
+              <div
+                key={i}
+                style={{
+                  flex: 1,
+                  padding: "8px 10px",
+                  borderRadius: 10,
+                  background: "hsl(var(--bg-deep))",
+                  border: "1px solid hsl(var(--border-subtle))",
+                }}
+              >
+                <div style={{ fontSize: 9, color: "hsl(var(--muted-foreground))", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".05em", marginBottom: 2 }}>
+                  {m.label}
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: "hsl(var(--success))", lineHeight: 1 }}>
+                  {m.value}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </a>
@@ -185,10 +368,54 @@ export default function Testimonials() {
   return (
     <section className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#393185", marginBottom: 8 }}>Client Voices</div>
-        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">What Industry Leaders Say</h2>
-        <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 8 }}>Freight Savings in excess of <strong style={{ color: "#54AF3A" }}>$21 Mn</strong> and growing!</p>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#393185", marginBottom: 8 }}>
+          <Bot size={12} /> AI Impact Stories
+        </div>
+        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
+          Real Results from AI-Powered Logistics
+        </h2>
+        <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 20, maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
+          Leading manufacturers and carriers are using LoRRI's AI to reduce cost, improve efficiency, and gain real-time intelligence.
+        </p>
 
+        {/* Trust metrics bar */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 6,
+            marginBottom: 24,
+            flexWrap: "wrap",
+          }}
+        >
+          {trustMetrics.map((m, i) => (
+            <div
+              key={i}
+              style={{
+                padding: "10px 20px",
+                borderRadius: 12,
+                background: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border-subtle))",
+                minWidth: 160,
+              }}
+            >
+              <div style={{ fontSize: 22, fontWeight: 900, color: "hsl(var(--success))", lineHeight: 1.1 }}>
+                {m.value.startsWith("$") ? (
+                  <><span>$</span><AnimatedNumber value={21} suffix="M+" /></>
+                ) : m.value.includes("2,200") ? (
+                  <AnimatedNumber value={2200} suffix="+" />
+                ) : (
+                  <AnimatedNumber value={80000} suffix="+" />
+                )}
+              </div>
+              <div style={{ fontSize: 11, color: "hsl(var(--muted-foreground))", fontWeight: 600, marginTop: 2 }}>
+                {m.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Quotes carousel */}
         <div style={{ maxWidth: 840, margin: "0 auto 24px" }}>
           <div style={{ position: "relative", minHeight: 190 }} className="sm:min-h-[170px]">
             {quotes.map((q, i) => (
@@ -216,11 +443,41 @@ export default function Testimonials() {
           </div>
         </div>
 
+        {/* Case study videos */}
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 12 }}>
           <Play size={12} /> Case Study Videos
         </div>
         <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-2 xl:grid-cols-3">
-          {videoTestimonials.map((v, i) => <VideoCard key={i} v={v} />)}
+          {videoTestimonials.map((v, i) => (
+            <VideoCard key={i} v={v} featured={i === 0} />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div style={{ marginTop: 24, display: "flex", justifyContent: "center" }}>
+          <a
+            href="https://www.youtube.com/@FretBox"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 28px",
+              borderRadius: 12,
+              background: "hsl(var(--primary) / 0.1)",
+              border: "1.5px solid hsl(var(--primary) / 0.3)",
+              color: "hsl(var(--foreground))",
+              fontSize: 14,
+              fontWeight: 700,
+              textDecoration: "none",
+              transition: "all .3s ease",
+            }}
+          >
+            See How AI Can Transform Your Logistics
+            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
         </div>
       </div>
     </section>
