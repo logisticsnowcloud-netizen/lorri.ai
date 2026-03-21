@@ -83,7 +83,7 @@ export default function Footer() {
         }}
       >
         <div
-          className="mx-auto flex flex-col items-center gap-5 px-4 py-12 text-center sm:py-14"
+          className="mx-auto flex flex-col items-center gap-4 px-4 py-8 text-center sm:py-10"
           style={{ maxWidth: 800 }}
         >
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5" style={{ background: "hsl(var(--primary) / .12)", border: "1px solid hsl(var(--primary) / .25)" }}>
