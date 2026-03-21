@@ -225,17 +225,38 @@ export function ForShippers() {
     </section>
   );
 }
-/* ─── AI Load Matching Live Panel ─── */
+/* ─── AI Load Matching Live Panel with typing effect ─── */
 const loadMatchSteps = [
-  { text: "Scanning 340+ available loads on Pune → Delhi...", delay: 0 },
-  { text: "12 loads matched to fleet capacity & route...", delay: 900 },
-  { text: "4 high-value loads shortlisted by AI...", delay: 1900 },
-  { text: "Best load assigned: ₹48,000 — Pune → Delhi (18T)", delay: 2900 },
-  { text: "✔ Deadhead reduced by 22% — fleet optimized", delay: 3700 },
+  { text: "Scanning 340+ available loads on Pune → Delhi", delay: 0 },
+  { text: "12 loads matched to fleet capacity & route", delay: 1200 },
+  { text: "4 high-value loads shortlisted by AI", delay: 2400 },
+  { text: "Best load assigned: ₹48,000 — Pune → Delhi (18T)", delay: 3800 },
+  { text: "✔ Deadhead reduced by 22% — fleet optimized", delay: 5000 },
+  { text: "⚡ Matched in 1.8 seconds", delay: 5800 },
 ];
+
+function TypingText({ text, onDone }: { text: string; onDone?: () => void }) {
+  const [displayed, setDisplayed] = useState("");
+  const idx = useRef(0);
+  useEffect(() => {
+    idx.current = 0;
+    setDisplayed("");
+    const id = setInterval(() => {
+      idx.current++;
+      setDisplayed(text.slice(0, idx.current));
+      if (idx.current >= text.length) {
+        clearInterval(id);
+        onDone?.();
+      }
+    }, 18);
+    return () => clearInterval(id);
+  }, [text]);
+  return <>{displayed}<span className="inline-block w-[2px] h-[11px] ml-0.5 align-middle animate-pulse" style={{ background: "#54AF3A" }} /></>;
+}
 
 function LoadMatchLog({ visible }: { visible: boolean }) {
   const [shownSteps, setShownSteps] = useState<number>(0);
+  const [typingDone, setTypingDone] = useState<Set<number>>(new Set());
   const started = useRef(false);
 
   useEffect(() => {
@@ -264,8 +285,12 @@ function LoadMatchLog({ visible }: { visible: boolean }) {
           className="flex items-start gap-2 text-[11px] leading-relaxed"
           style={{ color: i === shownSteps - 1 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))" }}
         >
-          <span className="mt-0.5 shrink-0" style={{ color: step.text.startsWith("✔") ? "#54AF3A" : "hsl(var(--accent))" }}>→</span>
-          <span>{step.text}</span>
+          <span className="mt-0.5 shrink-0" style={{ color: step.text.startsWith("✔") ? "#54AF3A" : step.text.startsWith("⚡") ? "#54AF3A" : "hsl(var(--accent))" }}>→</span>
+          <span>
+            {i === shownSteps - 1 && !typingDone.has(i)
+              ? <TypingText text={step.text} onDone={() => setTypingDone(prev => new Set(prev).add(i))} />
+              : step.text}
+          </span>
         </motion.div>
       ))}
     </div>
