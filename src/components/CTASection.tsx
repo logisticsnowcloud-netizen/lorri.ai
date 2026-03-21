@@ -369,11 +369,12 @@ export default function CTASection() {
                   <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => { if (form.name && form.email) setSent(true); }}
-                    className="group mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_4px_24px_hsl(var(--primary)/0.4)] transition-shadow hover:shadow-[0_6px_32px_hsl(var(--primary)/0.5)]"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                    className="group mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_4px_24px_hsl(var(--primary)/0.4)] transition-shadow hover:shadow-[0_6px_32px_hsl(var(--primary)/0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     <Sparkles className="h-4 w-4" />
-                    Show Me My Savings
+                    {loading ? "Sending..." : "Show Me My Savings"}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </motion.button>
 
