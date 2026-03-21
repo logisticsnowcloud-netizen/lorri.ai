@@ -221,7 +221,7 @@ function VideoCard({ v, featured = false }: { v: typeof videoTestimonials[0]; fe
       href={`https://www.youtube.com/watch?v=${v.videoId}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group block ${featured ? "sm:col-span-2 xl:col-span-2" : ""}`}
+      className="group block"
       style={{ textDecoration: "none" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
