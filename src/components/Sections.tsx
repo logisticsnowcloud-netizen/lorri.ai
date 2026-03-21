@@ -413,8 +413,7 @@ export function ForTransporters() {
                   style={{ borderBottom: i < truckData.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none" }}
                 >
                   <div>
-                    <div className="text-[12px] font-mono font-bold" style={{ color: "hsl(var(--foreground))" }}>{row.truck}</div>
-                    <div className="text-[10px] mt-0.5" style={{ color: "hsl(var(--muted-foreground))" }}>{row.route}</div>
+                    <div className="text-[13px] font-semibold" style={{ color: "hsl(var(--foreground))" }}>{row.route}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-[11px] font-semibold" style={{ color: row.status === "Assigned" ? "#54AF3A" : row.status === "Optimized" ? "hsl(var(--accent))" : "hsl(var(--muted-foreground))" }}>
