@@ -37,13 +37,13 @@ const columns = [
     title: "Automate Freight Procurement",
     color: "hsl(105, 50%, 46%)",
     gradient: "linear-gradient(135deg, hsl(105,50%,46%), hsl(105,50%,36%))",
-    metric: { value: "2200+", label: "Active Carriers", direction: "↑" },
+    metric: { value: "2300+", label: "Active Carriers", direction: "↑" },
     highlight: true,
     points: [
       { text: "Industry first Mega RFQs — multi-company collaborative" },
       { text: "80K+ lanes, 100+ truck types, instant responses" },
     ],
-    aiAction: "Auto-runs RFQs across 2200+ carriers in seconds",
+    aiAction: "Auto-runs RFQs across 2300+ carriers in seconds",
     flowLabel: "Execution",
   },
   {

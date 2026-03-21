@@ -95,7 +95,7 @@ const videoTestimonials = [
 
 const trustMetrics = [
   { value: "$21M+", label: "Savings Delivered" },
-  { value: "2,200+", label: "Carriers Onboarded" },
+  { value: "2,300+", label: "Carriers Onboarded" },
   { value: "80,000+", label: "Routes Optimized" },
 ];
 
@@ -402,7 +402,7 @@ export default function Testimonials() {
               <div style={{ fontSize: 22, fontWeight: 900, color: "hsl(var(--success))", lineHeight: 1.1 }}>
                 {m.value.startsWith("$") ? (
                   <><span>$</span><AnimatedNumber value={21} suffix="M+" /></>
-                ) : m.value.includes("2,200") ? (
+                ) : m.value.includes("2,300") ? (
                   <AnimatedNumber value={2200} suffix="+" />
                 ) : (
                   <AnimatedNumber value={80000} suffix="+" />

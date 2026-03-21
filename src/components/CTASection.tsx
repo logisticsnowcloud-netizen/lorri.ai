@@ -42,13 +42,13 @@ const demoPreviewItems = [
 ];
 
 const demoIncludes = [
-  "See your lanes benchmarked against 2,200+ carriers",
+  "See your lanes benchmarked against 2,300+ carriers",
   "Discover cost-saving opportunities with AI",
   "Experience AI procurement live",
   "Get a custom logistics roadmap",
 ];
 
-const trustLogos = ["Apollo Tyres", "Saint-Gobain", "Perfetti Van Melle", "Thermax", "Finolex"];
+const trustLogos = ["Apollo Tyres", "Saint-Gobain", "Perfetti Van Melle", "Jyothy Labs", "Hector Beverages"];
 
 export default function CTASection() {
   const [sent, setSent] = useState(false);
@@ -268,7 +268,8 @@ export default function CTASection() {
                   </motion.button>
 
                   <p className="mt-3 text-center text-[11px] text-[hsl(var(--muted-dim))]">
-                    ⏱ Takes 30 seconds · No credit card required
+                    {/* ⏱ Takes 30 seconds  */}
+                    {/* · No credit card required */}
                   </p>
 
                   {/* Inline social proof */}
@@ -287,7 +288,7 @@ export default function CTASection() {
         </div>
 
         {/* Bottom stats bar */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -307,7 +308,7 @@ export default function CTASection() {
               <div className="text-[11px] text-[hsl(var(--muted-foreground))]">{stat.l}</div>
             </div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

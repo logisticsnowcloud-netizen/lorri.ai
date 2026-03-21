@@ -16,7 +16,7 @@ export default function IntelStats() {
         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           {[
             { v: "80,000+", l: "Routes Mapped", c: "#393185" },
-            { v: "2,200+", l: "Carriers", c: "#54AF3A" },
+            { v: "2,300+", l: "Carriers", c: "#54AF3A" },
             { v: "$500M+", l: "Spend Procured", c: "#1AA6DF" },
             { v: "$21M+", l: "Total Savings", c: "#B1D0EF" },
           ].map((s, i) => (

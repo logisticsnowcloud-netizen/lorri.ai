@@ -36,7 +36,7 @@ const SCENARIOS: Record<string, SimScenario> = {
         type: "processing",
         duration: 2000,
         lines: [
-          { text: "Scanning 2,200+ carriers...", icon: "🔍" },
+          { text: "Scanning 2,300+ carriers...", icon: "🔍" },
           { text: "Matching fleet availability...", icon: "🚛" },
           { text: "Running rate negotiation AI...", icon: "🤖" },
         ],

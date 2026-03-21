@@ -252,7 +252,7 @@ export default function MobileApps() {
               Download the app and start using AI for your logistics today
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <HeaderStat value="2,200+" label="Carriers Daily" />
+              <HeaderStat value="2,300+" label="Carriers Daily" />
               <HeaderStat value="80,000+" label="Routes Optimized" />
               <HeaderStat value="4.6★" label="App Rating" />
             </div>
@@ -397,10 +397,10 @@ export default function MobileApps() {
               Explore Platform
               <ArrowRight size={14} className="transition-transform group-hover/cta:translate-x-0.5" />
             </a>
-            <span className="text-[10px] text-muted-foreground">
-              Used by <span className="font-bold text-foreground">2,200+ carriers</span> and{" "}
+            {/* <span className="text-[10px] text-muted-foreground">
+              Used by <span className="font-bold text-foreground">2,300+ carriers</span> and{" "}
               <span className="font-bold text-foreground">global manufacturers</span> daily
-            </span>
+            </span> */}
           </motion.div>
         </div>
       </section>

@@ -20,7 +20,7 @@ const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; st
     icon: "📊",
     headline: "AI-Powered Procurement Engine",
     sub: "Guaranteed savings through automated carrier matching, tenders and intelligent bidding.",
-    stats: [{ v: "$500M+", l: "Procured" }, { v: "$21M+", l: "Saved" }, { v: "2200+", l: "Carriers" }],
+    stats: [{ v: "$500M+", l: "Procured" }, { v: "$21M+", l: "Saved" }, { v: "2300+", l: "Carriers" }],
     pts: ["Automated tender & bidding engine", "AI-matched carrier recommendations", "Real-time quote comparison", "Guaranteed cost reduction results"],
     color: "#54AF3A",
   },

@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from "react";
 
 /* ─── Live AI Activity Log ─── */
 const aiSteps = [
-  { text: "Evaluating 2,200+ carriers for Mumbai → Delhi...", delay: 0 },
+  { text: "Evaluating 2,300+ carriers for Mumbai → Delhi...", delay: 0 },
   { text: "18 carriers matched — ranking by cost & reliability...", delay: 800 },
   { text: "5 shortlisted — running bid optimization...", delay: 1800 },
   { text: "Selected: TransCorp Logistics (98% reliability)", delay: 2800 },
@@ -110,7 +110,7 @@ export function ForShippers() {
 
   const bullets = [
     { text: "Know the exact fair price before you bid", highlight: false },
-    { text: "AI ranks 2,200+ carriers by reliability & cost", highlight: true },
+    { text: "AI ranks 2,300+ carriers by reliability & cost", highlight: true },
     { text: "Auto-run tenders and select the best carrier instantly", highlight: false },
     { text: "Benchmark against ₹2.5B+ global freight data", highlight: false },
   ];
@@ -155,7 +155,7 @@ export function ForShippers() {
                 <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "hsl(var(--primary-glow))" }}>AI in Action</span>
               </div>
               <p className="text-[12px] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                Running RFQs across 2,200+ carriers and selecting the best fit — in real time, autonomously.
+                Running RFQs across 2,300+ carriers and selecting the best fit — in real time, autonomously.
               </p>
             </div>
 
@@ -405,7 +405,7 @@ export function ForTransporters() {
               Start Getting AI-Matched Loads <Arrow />
             </button>
             <p className="text-[11px] mt-2.5" style={{ color: "hsl(var(--muted-dim))" }}>
-              Join 2,200+ carriers across 80,000+ active routes
+              Join 2,300+ carriers across 80,000+ active routes
             </p>
           </motion.div>
 

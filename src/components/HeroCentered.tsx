@@ -21,7 +21,7 @@ const TAB_DATA: Record<string, { icon: string; headline: string; sub: string; st
     icon: "📊",
     headline: "AI-Powered Procurement Engine",
     sub: "Guaranteed savings through automated carrier matching, tenders and intelligent bidding.",
-    stats: [{ v: "$500M+", l: "Procured" }, { v: "$21M+", l: "Saved" }, { v: "2200+", l: "Carriers" }],
+    stats: [{ v: "$500M+", l: "Procured" }, { v: "$21M+", l: "Saved" }, { v: "2300+", l: "Carriers" }],
     pts: ["Automated tender & bidding engine", "AI-matched carrier recommendations", "Real-time quote comparison", "Guaranteed cost reduction results"],
     color: "#54AF3A",
   },
@@ -167,7 +167,7 @@ export default function HeroCentered({ dark }: { dark: boolean }) {
 
         {/* STATS STRIP */}
         <div className="fu4" style={{ display: "flex", alignItems: "center", padding: "18px 36px", background: "var(--purpleLt)", border: "1px solid var(--border)", borderRadius: 14, gap: 0, flexWrap: "wrap", justifyContent: "center", marginTop: 24 }}>
-          {[{ v: "$500M+", l: "Procured", c: "#54AF3A" }, { v: "$21M+", l: "Saved", c: "#1AA6DF" }, { v: "80K+", l: "Routes", c: "#393185" }, { v: "2,200+", l: "Carriers", c: "#B1D0EF" }].map((s, i) => (
+          {[{ v: "$500M+", l: "Procured", c: "#54AF3A" }, { v: "$21M+", l: "Saved", c: "#1AA6DF" }, { v: "80K+", l: "Routes", c: "#393185" }, { v: "2,300+", l: "Carriers", c: "#B1D0EF" }].map((s, i) => (
             <div key={i} style={{ paddingLeft: i > 0 ? 28 : 0, paddingRight: i < 3 ? 28 : 0, borderLeft: i > 0 ? "1px solid var(--border)" : "none", textAlign: "center", minWidth: 100 }}>
               <div className="font-mono" style={{ fontSize: 22, fontWeight: 700, color: s.c, lineHeight: 1 }}>{s.v}</div>
               <div style={{ fontSize: 10, color: "var(--text2)", marginTop: 5, letterSpacing: ".08em", textTransform: "uppercase" }}>{s.l}</div>
