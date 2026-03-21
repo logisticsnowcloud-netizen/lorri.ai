@@ -356,8 +356,6 @@ export function ForTransporters() {
             <p className="text-sm mb-4" style={{ color: "hsl(var(--muted-foreground))", lineHeight: 1.7 }}>
               Let AI continuously fill your trucks with the most profitable loads — matched by route, capacity, and reliability score.
             </p>
-              Let AI fill your trucks with high-value loads matched by route, capacity, and reliability — reducing empty miles and maximizing earnings.
-            </p>
 
             {/* Steps */}
             <div className="flex flex-col gap-2.5 mb-4">
