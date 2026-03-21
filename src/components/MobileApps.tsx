@@ -4,6 +4,7 @@ import appStoreBadge from "@/assets/app-store-badge.svg";
 import googlePlayBadge from "@/assets/google-play-badge.png";
 import lorriBizIcon from "@/assets/lorri-biz-icon.png";
 import mylorriIcon from "@/assets/mylorri-icon.png";
+import lorriBizScreens from "@/assets/lorri-biz-screens.png";
 
 const apps = [
   {
