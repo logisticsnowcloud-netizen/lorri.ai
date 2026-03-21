@@ -2,6 +2,30 @@ import { useState, useEffect, useRef } from "react";
 import { Arrow, Check } from "./Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Clock, Phone, Zap, BarChart3, Route, Brain, ArrowRight, Shield } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const API_URL = "https://production.lorri.in/api/apilorri/log";
+
+const TEAM_EMAILS = [
+  "connect@logisticsnow.in",
+  "raj@logisticsnow.in",
+  "associate@logisticsnow.in",
+  "sale@thelogisticsnow.com",
+];
+
+const CC_EMAILS = [
+  "associate@logisticsnow.in",
+  "raj@logisticsnow.in",
+  "sales@thelogisticsnow.com",
+  "smeet@thelogisticsnow.com",
+  "partner@logisticsnow.in",
+  "shaleen@lorri.in",
+];
+
+const RESTRICTED_DOMAINS = [
+  "gmail.com", "yahoo.com", "yahoo.co.in", "hotmail.com", "outlook.com",
+  "rediffmail.com", "live.com", "msn.com", "aol.com", "icloud.com",
+];
 
 /* ─── Animated counter ─── */
 function AnimatedNumber({ target, suffix = "" }: { target: number; suffix?: string }) {
