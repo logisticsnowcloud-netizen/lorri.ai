@@ -225,98 +225,237 @@ export function ForShippers() {
     </section>
   );
 }
-export function ForTransporters() {
-  const { ref, visible } = useInView();
+/* ─── AI Load Matching Live Panel ─── */
+const loadMatchSteps = [
+  { text: "Scanning 340+ available loads on Pune → Delhi...", delay: 0 },
+  { text: "12 loads matched to fleet capacity & route...", delay: 900 },
+  { text: "4 high-value loads shortlisted by AI...", delay: 1900 },
+  { text: "Best load assigned: ₹48,000 — Pune → Delhi (18T)", delay: 2900 },
+  { text: "✔ Deadhead reduced by 22% — fleet optimized", delay: 3700 },
+];
+
+function LoadMatchLog({ visible }: { visible: boolean }) {
+  const [shownSteps, setShownSteps] = useState<number>(0);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!visible || started.current) return;
+    started.current = true;
+    loadMatchSteps.forEach((step, i) => {
+      setTimeout(() => setShownSteps(i + 1), step.delay);
+    });
+  }, [visible]);
 
   return (
-    <section id="transporters" ref={ref as any} className="px-4 py-4 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
-      <div className="mx-auto max-w-[1200px]">
-        <div className="grid items-center gap-8 xl:grid-cols-2">
-          <div className="hidden xl:block" style={{ animation: visible ? "fadeUp .7s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {[
-                {
-                  num: "01",
-                  title: "Get Discovered",
-                  desc: "Connect with new customers, including Fortune 500 companies and global leaders. Receive business inquiries from companies in your lanes, matching your preferred truck types.",
-                  icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>,
-                },
-                {
-                  num: "02",
-                  title: "Track Your Performance",
-                  desc: "Get feedback from customers and grow your reputation on LoRRI – The Trusted Platform for Transporters. Use your ratings to attract more business and build a strong industry presence.",
-                  icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>,
-                },
-                {
-                  num: "03",
-                  title: "Take Control of Your Brand Presence",
-                  desc: "Create a standout LoRRI profile with details about your branches, fleet, and lanes. Help customers make informed decisions, leading to more business opportunities for you.",
-                  icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>,
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: "var(--card)",
-                    border: "1.5px solid var(--border)",
-                    borderRadius: 16,
-                    padding: "14px 18px",
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(84,175,58,0.5)";
-                    e.currentTarget.style.boxShadow = "0 8px 30px rgba(84,175,58,0.12)";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.boxShadow = "none";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 3, background: "linear-gradient(90deg, #54AF3A, #3D8A28)", borderRadius: "16px 16px 0 0" }} />
-                  <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                    <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(84,175,58,0.1)", border: "1px solid rgba(84,175,58,0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      {item.icon}
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                        <span style={{ fontSize: 11, fontWeight: 800, color: "#54AF3A", fontFamily: "Outfit,sans-serif", letterSpacing: ".06em" }}>{item.num}</span>
-                        <span style={{ fontSize: 15, fontWeight: 800, color: "var(--text)", fontFamily: "Outfit,sans-serif" }}>{item.title}</span>
-                      </div>
-                      <p style={{ fontSize: 12.5, color: "var(--text2)", lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className="rounded-xl p-3 mt-3 space-y-1.5" style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--border-subtle))" }}>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#54AF3A" }} />
+          <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#54AF3A" }} />
+        </span>
+        <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#54AF3A" }}>AI Load Matching — Live</span>
+      </div>
+      {loadMatchSteps.slice(0, shownSteps).map((step, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex items-start gap-2 text-[11px] leading-relaxed"
+          style={{ color: i === shownSteps - 1 ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))" }}
+        >
+          <span className="mt-0.5 shrink-0" style={{ color: step.text.startsWith("✔") ? "#54AF3A" : "hsl(var(--accent))" }}>→</span>
+          <span>{step.text}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
-          <div style={{ animation: visible ? "fadeUp .7s .2s ease both" : "none", opacity: visible ? undefined : 0 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--greenLt)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A", marginBottom: 10 }}>
+/* ─── Fleet Matching Trucks ─── */
+const truckData = [
+  { truck: "MH12 AB 1234", route: "Pune → Delhi", status: "Assigned", value: "₹48,000", saving: "22%" },
+  { truck: "KA01 CD 5678", route: "Bangalore → Mumbai", status: "Matching...", value: "₹35,200", saving: "18%" },
+  { truck: "GJ05 EF 9012", route: "Ahmedabad → Chennai", status: "Optimized", value: "₹62,400", saving: "25%" },
+  { truck: "DL08 GH 3456", route: "Delhi → Kolkata", status: "Assigned", value: "₹54,800", saving: "20%" },
+];
+
+export function ForTransporters() {
+  const openDemoModal = useDemoModal();
+  const { ref, visible } = useInView();
+
+  const steps = [
+    {
+      num: "01",
+      title: "Get Discovered by Global Shippers",
+      desc: "Your fleet is automatically matched to demand across 80,000+ routes",
+      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>,
+    },
+    {
+      num: "02",
+      title: "Improve Your Reliability Score",
+      desc: "AI tracks performance and boosts your ranking for premium loads",
+      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>,
+    },
+    {
+      num: "03",
+      title: "Maximize Fleet Utilization",
+      desc: "Reduce empty runs and increase earnings with smart load matching",
+      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54AF3A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>,
+    },
+  ];
+
+  const metrics = [
+    { label: "Load Utilization", value: "22", suffix: "%↑", color: "#54AF3A" },
+    { label: "Earnings Increase", value: "18", suffix: "%↑", color: "hsl(var(--accent))" },
+    { label: "Empty Miles Cut", value: "25", suffix: "%↓", color: "hsl(var(--primary-glow))" },
+  ];
+
+  return (
+    <section id="transporters" ref={ref as any} className="px-4 py-10 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+      <div className="mx-auto max-w-[1200px]">
+        <div className="grid items-center gap-8 lg:grid-cols-2">
+          {/* LEFT — Value Prop */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={visible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3" style={{ background: "rgba(84,175,58,0.1)", border: "1px solid rgba(84,175,58,0.3)", color: "#54AF3A" }}>
               For Carriers & Transporters
             </div>
-            <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 10 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
-              Grow Your Fleet<br />
-              <span style={{ color: "#54AF3A" }}>With Better Loads</span>
+            <h2 className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.7rem] font-black mb-2" style={{ color: "hsl(var(--foreground))", letterSpacing: "-0.03em", lineHeight: 1.15 }}>
+              Get AI-Matched Loads<br />
+              <span style={{ color: "#54AF3A" }}>For Your Fleet — Instantly</span>
             </h2>
-            <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 14 }}>
-              LoRRI helps carriers find better loads, build a verified reputation, and access freight intelligence that keeps your trucks moving profitably.
+            <p className="text-sm mb-4" style={{ color: "hsl(var(--muted-foreground))", lineHeight: 1.7 }}>
+              Let AI fill your trucks with high-value loads matched by route, capacity, and reliability — reducing empty miles and maximizing earnings.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
-              {["Build a verified carrier profile trusted by top shippers", "AI load matching for your routes, truck types and capacity", "LoRRI Reliability Score unlocks premium loads", "Market rate visibility for every lane before you bid"].map((f, i) => (
-                <div key={i} style={{ display: "flex", gap: 10, padding: "8px 12px", background: "var(--card)", border: "1px solid var(--borderSm)", borderRadius: 9 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#54AF3A", flexShrink: 0, marginTop: 7 }} />
-                  <span style={{ fontSize: 13.5, color: "var(--text2)", lineHeight: 1.6 }}>{f}</span>
-                </div>
+
+            {/* Steps */}
+            <div className="flex flex-col gap-2.5 mb-4">
+              {steps.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={visible ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.2 + i * 0.15, duration: 0.4 }}
+                  className="flex items-start gap-3 px-3 py-2.5 rounded-xl group cursor-default transition-all duration-300 hover:-translate-y-0.5"
+                  style={{ background: "hsl(var(--card))", border: "1.5px solid hsl(var(--border-subtle))" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(84,175,58,0.4)";
+                    e.currentTarget.style.boxShadow = "0 6px 24px rgba(84,175,58,0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--border-subtle))";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ background: "rgba(84,175,58,0.1)", border: "1px solid rgba(84,175,58,0.2)" }}>
+                    {item.icon}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] font-extrabold tracking-wider" style={{ color: "#54AF3A" }}>{item.num}</span>
+                      <span className="text-[13px] font-bold" style={{ color: "hsl(var(--foreground))" }}>{item.title}</span>
+                    </div>
+                    <p className="text-[11.5px] leading-relaxed m-0" style={{ color: "hsl(var(--muted-foreground))" }}>{item.desc}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
-            <button onClick={() => scrollTo("cta")} className="flex w-full items-center justify-center gap-2 sm:inline-flex sm:w-auto" style={{ background: "linear-gradient(135deg,#54AF3A,#3D8A28)", color: "#fff", border: "none", padding: "13px 24px", borderRadius: 8, fontFamily: "Outfit,sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em", textTransform: "uppercase", boxShadow: "0 4px 20px rgba(84,175,58,0.3)" }}>
-              Join as a Transporter <Arrow />
+
+            {/* AI Action Line */}
+            <div className="rounded-xl px-4 py-3 mb-5" style={{ background: "rgba(84,175,58,0.08)", border: "1px solid rgba(84,175,58,0.25)" }}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-sm">🤖</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#54AF3A" }}>AI in Action</span>
+              </div>
+              <p className="text-[12px] leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
+                Matching your fleet with high-value loads based on routes, capacity, and reliability score — in real time.
+              </p>
+            </div>
+
+            <button onClick={() => openDemoModal()} className="flex w-full items-center justify-center gap-2 sm:inline-flex sm:w-auto group transition-all duration-300 hover:-translate-y-0.5" style={{ background: "linear-gradient(135deg, #54AF3A, #3D8A28)", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 10, fontSize: 13, fontWeight: 700, cursor: "pointer", letterSpacing: ".04em", textTransform: "uppercase", boxShadow: "0 4px 20px rgba(84,175,58,0.35)" }}>
+              Start Getting AI-Matched Loads <Arrow />
             </button>
-          </div>
+            <p className="text-[11px] mt-2.5" style={{ color: "hsl(var(--muted-dim))" }}>
+              Join 2,200+ carriers across 80,000+ active routes
+            </p>
+          </motion.div>
+
+          {/* RIGHT — Live AI Load Matching Dashboard */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={visible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="rounded-2xl p-4 sm:p-5" style={{ background: "hsl(var(--card))", border: "1.5px solid hsl(var(--border))" }}>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>AI Fleet Matching</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#54AF3A" }} />
+                    <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#54AF3A" }} />
+                  </span>
+                  <span className="text-[10px] font-semibold" style={{ color: "#54AF3A" }}>Live</span>
+                </div>
+              </div>
+
+              {/* Truck rows */}
+              {truckData.map((row, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={visible ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.4 + i * 0.15, duration: 0.4 }}
+                  className="py-2.5 flex items-center justify-between"
+                  style={{ borderBottom: i < truckData.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none" }}
+                >
+                  <div>
+                    <div className="text-[12px] font-mono font-bold" style={{ color: "hsl(var(--foreground))" }}>{row.truck}</div>
+                    <div className="text-[10px] mt-0.5" style={{ color: "hsl(var(--muted-foreground))" }}>{row.route}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[11px] font-semibold" style={{ color: row.status === "Assigned" ? "#54AF3A" : row.status === "Optimized" ? "hsl(var(--accent))" : "hsl(var(--muted-foreground))" }}>
+                      {row.status === "Assigned" ? "✔" : row.status === "Optimized" ? "✔" : "⟳"} {row.status}
+                    </div>
+                    <div className="flex items-center gap-2 justify-end mt-0.5">
+                      <span className="font-mono text-[12px] font-bold" style={{ color: "hsl(var(--foreground))" }}>{row.value}</span>
+                      <span className="text-[10px] font-semibold" style={{ color: "#54AF3A" }}>↓{row.saving} empty</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Metrics */}
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                {metrics.map((m, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={visible ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 0.8 + i * 0.15, duration: 0.4 }}
+                    className="rounded-lg p-2.5 text-center"
+                    style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--border-subtle))" }}
+                  >
+                    <div className="text-sm font-bold font-mono" style={{ color: m.color }}>
+                      <CountUp target={parseInt(m.value)} suffix={m.suffix} visible={visible} />
+                    </div>
+                    <div className="text-[10px]" style={{ color: "hsl(var(--muted-foreground))" }}>{m.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Live AI Log */}
+              <LoadMatchLog visible={visible} />
+
+              {/* CTA */}
+              <button onClick={() => openDemoModal()} className="w-full mt-3 flex items-center justify-center gap-2 py-3 rounded-lg transition-all duration-300 hover:-translate-y-0.5" style={{ background: "linear-gradient(135deg, #54AF3A, #3D8A28)", border: "1px solid rgba(84,175,58,0.5)", cursor: "pointer", boxShadow: "0 4px 16px rgba(84,175,58,0.3)" }}>
+                <span className="text-[12px] text-white font-bold tracking-wide">🚛 Join & Fill Your Fleet Faster</span>
+              </button>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
