@@ -222,7 +222,7 @@ export default function Footer() {
           </div>
 
           {/* Trust stats bar */}
-          <div
+          {/* <div
             className="mb-6 flex flex-wrap items-center justify-center gap-6 rounded-xl px-6 py-4 sm:gap-10"
             style={{ background: "hsl(var(--card) / .4)", border: "1px solid hsl(var(--border-subtle))" }}
           >
@@ -235,7 +235,7 @@ export default function Footer() {
                 <span style={{ fontSize: 11, color: "hsl(var(--muted-foreground))" }}>{s.label}</span>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Bottom bar */}
           <div
