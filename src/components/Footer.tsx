@@ -83,7 +83,7 @@ export default function Footer() {
         }}
       >
         <div
-          className="mx-auto flex flex-col items-center gap-5 px-4 py-12 text-center sm:py-14"
+          className="mx-auto flex flex-col items-center gap-4 px-4 py-8 text-center sm:py-10"
           style={{ maxWidth: 800 }}
         >
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5" style={{ background: "hsl(var(--primary) / .12)", border: "1px solid hsl(var(--primary) / .25)" }}>
@@ -139,9 +139,9 @@ export default function Footer() {
           borderTop: "1px solid hsl(var(--border-subtle))",
         }}
       >
-        <div className="mx-auto px-4 pb-4 pt-10 sm:px-6 lg:px-8" style={{ maxWidth: 1200 }}>
+        <div className="mx-auto px-4 pb-3 pt-6 sm:px-6 lg:px-8" style={{ maxWidth: 1200 }}>
           {/* Grid */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-[2.2fr_1fr_1fr_1fr]" style={{ marginBottom: 32 }}>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-[2.2fr_1fr_1fr_1fr]" style={{ marginBottom: 20 }}>
             {/* Brand column */}
             <div>
               <div className="mb-4 flex items-center gap-2.5">

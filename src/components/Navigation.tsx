@@ -14,7 +14,7 @@ function TopBar({ dark, setDark }: TopBarProps) {
 
   return (
     <div
-      className="px-4 py-2 sm:px-6 lg:px-8"
+      className="px-4 py-1.5 sm:px-6 lg:px-8"
       style={{
         background: "var(--topBar)",
         borderBottom: "1px solid var(--border)",
@@ -113,7 +113,7 @@ function Nav() {
         transition: "all .3s",
       }}
     >
-      <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-12 max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <button
           type="button"
           className="flex items-center"

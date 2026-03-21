@@ -78,10 +78,10 @@ export default function Platform() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section id="platform" ref={ref as any} className="px-4 py-12 sm:px-6 lg:px-8 relative" style={{ background: "hsl(var(--background))" }}>
+    <section id="platform" ref={ref as any} className="px-4 py-6 sm:px-6 lg:px-8 relative" style={{ background: "hsl(var(--background))" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3" style={{ background: "hsl(var(--primary) / 0.15)", border: "1px solid hsl(var(--border))", color: "hsl(var(--primary-glow))" }}>
             Industry Use Cases & Innovations
           </div>
@@ -94,7 +94,7 @@ export default function Platform() {
         </div>
 
         {/* Flow connector */}
-        <div className="hidden lg:flex items-center justify-center gap-0 mb-6">
+        <div className="hidden lg:flex items-center justify-center gap-0 mb-4">
           {columns.map((col, i) => (
             <div key={i} className="flex items-center">
               <div className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold" style={{
