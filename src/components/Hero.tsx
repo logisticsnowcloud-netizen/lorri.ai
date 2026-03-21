@@ -78,7 +78,7 @@ export default function Hero({ dark }: { dark: boolean }) {
   return (
     <section
       id="hero"
-      className="relative overflow-visible px-4 pb-5 pt-3 sm:px-6 sm:pt-4 lg:px-8"
+      className="relative overflow-visible px-4 pb-3 pt-2 sm:px-6 sm:pt-3 lg:px-8"
       style={{
         minHeight: "auto",
         display: "flex",
@@ -86,7 +86,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         alignItems: "center",
         justifyContent: "center",
         background: "var(--bg)",
-        marginBottom: '5%'
+        marginBottom: '2%'
       }}
     >
       <div
