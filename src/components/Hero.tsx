@@ -292,7 +292,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           {!userPicked && (
             <div style={{ display: "flex", gap: 6, marginTop: -4 }}>
               {TABS.map((t) => (
-                <div key={t} style={{ height: 2, borderRadius: 1, background: tab === t ? "#393185" : "var(--border)", transition: "all .4s", width: tab === t ? 28 : 14 }} />
+                <div key={t} style={{ height: 2, borderRadius: 1, background: tab === t ? "#393185" : "hsl(var(--border))", transition: "all .4s", width: tab === t ? 28 : 14 }} />
               ))}
             </div>
           )}
