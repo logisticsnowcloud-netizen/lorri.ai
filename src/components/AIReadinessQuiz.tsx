@@ -484,7 +484,7 @@ export default function AIReadinessQuiz() {
                           e.currentTarget.style.background = "rgba(57,49,133,0.05)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "var(--borderSm)";
+                          e.currentTarget.style.borderColor = "hsl(var(--border-subtle))";
                           e.currentTarget.style.background = "transparent";
                         }}
                       >
