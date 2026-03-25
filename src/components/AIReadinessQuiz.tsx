@@ -473,7 +473,7 @@ export default function AIReadinessQuiz() {
                           fontWeight: 600,
                           padding: "10px 20px",
                           borderRadius: 10,
-                          border: "1px solid var(--borderSm)",
+                          border: "1px solid hsl(var(--border-subtle))",
                           background: "transparent",
                           color: "var(--text2)",
                           cursor: "pointer",
