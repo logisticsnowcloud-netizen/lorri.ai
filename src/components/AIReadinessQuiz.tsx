@@ -475,7 +475,7 @@ export default function AIReadinessQuiz() {
                           borderRadius: 10,
                           border: "1px solid hsl(var(--border-subtle))",
                           background: "transparent",
-                          color: "var(--text2)",
+                          color: "hsl(var(--muted-foreground))",
                           cursor: "pointer",
                           transition: "all .2s ease",
                         }}
