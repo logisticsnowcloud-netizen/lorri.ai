@@ -187,21 +187,21 @@ export default function AIReadinessQuiz() {
   };
 
   return (
-    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
       <div style={{ maxWidth: phase === "result" ? 960 : 720, margin: "0 auto", textAlign: "center", transition: "max-width 0.4s ease" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 10 }}>
           <span style={{ width: 28, height: 3, borderRadius: 2, background: "linear-gradient(90deg, #393185, #4D44A8)" }} />
-          <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#4D44A8" }}>AI Diagnostic Engine</span>
+          <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "hsl(var(--primary-glow))" }}>AI Diagnostic Engine</span>
         </div>
 
-        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, lineHeight: 1.15, color: "var(--text)", marginBottom: 8 }}>
+        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, lineHeight: 1.15, color: "hsl(var(--foreground))", marginBottom: 8 }}>
           Assess Your Logistics <span style={{ background: "linear-gradient(135deg, #393185, #4D44A8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Readiness</span>
         </h2>
-        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 13, color: "var(--text3)", margin: "0 auto 20px", maxWidth: 520 }}>
+        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 13, color: "hsl(var(--muted-foreground))", margin: "0 auto 20px", maxWidth: 520 }}>
           Answer {totalSteps} questions. Our AI benchmarks your logistics stack and generates a personalized analysis.
         </p>
 
-        <div style={{ background: "var(--card2)", border: "1px solid var(--borderSm)", borderRadius: 16, padding: "18px 16px 22px", minHeight: 200, position: "relative", overflow: "hidden" }} className="sm:px-6 sm:py-5">
+        <div style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border-subtle))", borderRadius: 16, padding: "18px 16px 22px", minHeight: 200, position: "relative", overflow: "hidden" }} className="sm:px-6 sm:py-5">
           {/* Progress bar */}
           {phase === "quiz" && (
             <div style={{ display: "flex", gap: 4, marginBottom: 24 }} className="sm:mb-8">
