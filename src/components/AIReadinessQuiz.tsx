@@ -115,10 +115,10 @@ function ScoreBar({ label, value, delay }: { label: string; value: number; delay
   return (
     <div style={{ textAlign: "left" }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 600, color: "var(--text2)" }}>{label}</span>
-        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, color: "var(--text)" }}>{value}</span>
+        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 600, color: "hsl(var(--muted-foreground))" }}>{label}</span>
+        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, color: "hsl(var(--foreground))" }}>{value}</span>
       </div>
-      <div style={{ height: 6, borderRadius: 3, background: "var(--purpleLt)", overflow: "hidden" }}>
+      <div style={{ height: 6, borderRadius: 3, background: "hsl(var(--primary) / 0.12)", overflow: "hidden" }}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${value}%` }}
