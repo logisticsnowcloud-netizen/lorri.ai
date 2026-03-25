@@ -214,7 +214,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
           alignItems: "center",
           gap: 8,
           padding: "8px 14px",
-          borderBottom: "1px solid var(--borderSm)",
+          borderBottom: "1px solid hsl(var(--border-subtle))",
           background: step.type === "processing"
             ? "linear-gradient(135deg, rgba(57,49,133,0.12), rgba(26,166,223,0.06))"
             : step.type === "result"
