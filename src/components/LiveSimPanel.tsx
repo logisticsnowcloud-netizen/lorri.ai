@@ -296,7 +296,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
                   fontFamily: line.mono ? "'JetBrains Mono', monospace" : "Outfit, sans-serif",
                   fontSize: line.bold ? 13 : 12,
                   fontWeight: line.bold ? 700 : 400,
-                  color: line.color || "var(--text2)",
+                  color: line.color || "hsl(var(--muted-foreground))",
                   lineHeight: 1.5,
                 }}
               >
