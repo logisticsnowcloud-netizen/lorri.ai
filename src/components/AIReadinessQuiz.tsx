@@ -231,7 +231,7 @@ export default function AIReadinessQuiz() {
             {/* QUIZ PHASE */}
             {phase === "quiz" && step < totalSteps && (
               <motion.div key={step} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.3 }}>
-                <h3 style={{ fontFamily: "Outfit, sans-serif", fontSize: 20, fontWeight: 700, color: "var(--text)", marginBottom: 20, textAlign: "left" }}>
+                <h3 style={{ fontFamily: "Outfit, sans-serif", fontSize: 20, fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: 20, textAlign: "left" }}>
                   {questions[step].question}
                 </h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
