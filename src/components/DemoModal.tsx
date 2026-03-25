@@ -288,7 +288,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
               <div>
-                <label style={{ fontSize: 11, color: "var(--text3)", marginBottom: 4, display: "block" }}>Date</label>
+                <label style={{ fontSize: 11, color: "hsl(var(--muted-foreground))", marginBottom: 4, display: "block" }}>Date</label>
                 <input type="date" value={form.date} onChange={e => set("date", e.target.value)} min={getDefaultDate()} style={inputStyle} />
               </div>
               <div>
