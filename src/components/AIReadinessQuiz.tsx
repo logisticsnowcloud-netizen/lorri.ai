@@ -365,7 +365,7 @@ export default function AIReadinessQuiz() {
                     </div>
 
                     {/* Powered by */}
-                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 10, color: "var(--text3)", marginTop: 14, letterSpacing: ".04em", textAlign: "center" }}>
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 10, color: "hsl(var(--muted-foreground))", marginTop: 14, letterSpacing: ".04em", textAlign: "center" }}>
                       Powered by LoRRI AI Agents: <span style={{ color: "#4D44A8", fontWeight: 600 }}>Procurement</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Optimization</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Intelligence</span>
                     </p>
                   </div>
