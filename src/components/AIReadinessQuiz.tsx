@@ -294,7 +294,7 @@ export default function AIReadinessQuiz() {
                 >
                   🧠
                 </motion.div>
-                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 18, fontWeight: 700, color: "var(--text)", marginBottom: 20 }}>
+                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 18, fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: 20 }}>
                   LoRRI AI analyzing your logistics network...
                 </p>
                 <div style={{ maxWidth: 320, margin: "0 auto", textAlign: "left" }}>
