@@ -338,7 +338,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                     </button>
                     <button onClick={() => handleCalendarAction(openInGoogleCalendar)} style={{
                       width: "100%", padding: "12px 16px", background: "transparent", border: "none",
-                      color: "var(--text)", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
+                      color: "hsl(var(--foreground))", fontSize: 13, fontFamily: "Outfit,sans-serif", cursor: "pointer",
                       textAlign: "left", display: "flex", alignItems: "center", gap: 10,
                     }} onMouseOver={e => (e.currentTarget.style.background = "var(--accent)")}
                       onMouseOut={e => (e.currentTarget.style.background = "transparent")}>
