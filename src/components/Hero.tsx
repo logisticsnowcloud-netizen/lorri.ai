@@ -94,7 +94,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px)",
+            "linear-gradient(hsl(var(--grid-line)) 1px,transparent 1px),linear-gradient(90deg,hsl(var(--grid-line)) 1px,transparent 1px)",
           backgroundSize: "48px 48px",
           pointerEvents: "none",
         }}
