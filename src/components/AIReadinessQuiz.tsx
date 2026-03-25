@@ -212,7 +212,7 @@ export default function AIReadinessQuiz() {
                     flex: 1,
                     height: 4,
                     borderRadius: 2,
-                    background: i <= step ? "linear-gradient(90deg, #393185, #1AA6DF)" : "var(--purpleLt)",
+                    background: i <= step ? "linear-gradient(90deg, #393185, #1AA6DF)" : "hsl(var(--primary) / 0.12)",
                     opacity: i <= step ? 1 : 0.4,
                     transition: "all .4s ease",
                   }}
