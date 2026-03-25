@@ -146,7 +146,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   background: "none",
                   border: "none",
                   outline: "none",
-                  color: "var(--text)",
+                  color: "hsl(var(--foreground))",
                   fontFamily: "Outfit,sans-serif",
                   fontSize: 15,
                   fontWeight: 400,
