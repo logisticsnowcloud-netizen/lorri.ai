@@ -237,8 +237,8 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
   if (!open) return null;
 
   const inputStyle: React.CSSProperties = {
-    width: "100%", background: "transparent", border: "1px solid var(--border)",
-    borderRadius: 8, padding: "12px 14px", color: "var(--text)", fontFamily: "Outfit,sans-serif",
+    width: "100%", background: "transparent", border: "1px solid hsl(var(--border))",
+    borderRadius: 8, padding: "12px 14px", color: "hsl(var(--foreground))", fontFamily: "Outfit,sans-serif",
     fontSize: 14, outline: "none", transition: "border-color 0.2s",
   };
 
