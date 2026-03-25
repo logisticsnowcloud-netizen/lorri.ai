@@ -49,7 +49,7 @@ function LogoCard({ n, logo, tooltipPosition = "top" }: ClientItem & { tooltipPo
       <img
         src={logo}
         alt={n}
-        className="h-16 w-16 rounded object-contain opacity-75 grayscale transition-all duration-500 ease-out group-hover:scale-[1.06] group-hover:opacity-100 group-hover:grayscale-0 sm:h-[72px] sm:w-[72px] lg:h-20 lg:w-20"
+        className="h-16 w-16 rounded object-contain opacity-80 grayscale transition-all duration-500 ease-out group-hover:scale-[1.06] group-hover:opacity-100 group-hover:grayscale-0 dark:invert dark:brightness-150 dark:opacity-90 dark:group-hover:invert-0 dark:group-hover:brightness-100 sm:h-[72px] sm:w-[72px] lg:h-20 lg:w-20"
         onError={(e) => {
           (e.target as HTMLImageElement).style.display = "none";
         }}
