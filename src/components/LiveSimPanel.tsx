@@ -232,7 +232,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 9,
-            color: "var(--text3)",
+            color: "hsl(var(--muted-foreground))",
             letterSpacing: ".08em",
             textTransform: "uppercase",
             marginLeft: 4,
