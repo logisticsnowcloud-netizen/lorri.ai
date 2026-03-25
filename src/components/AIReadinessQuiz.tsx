@@ -325,7 +325,7 @@ export default function AIReadinessQuiz() {
                     </motion.div>
                   ))}
                 </div>
-                <div style={{ maxWidth: 320, margin: "16px auto 0", height: 3, borderRadius: 2, background: "var(--purpleLt)", overflow: "hidden" }}>
+                <div style={{ maxWidth: 320, margin: "16px auto 0", height: 3, borderRadius: 2, background: "hsl(var(--primary) / 0.12)", overflow: "hidden" }}>
                   <motion.div
                     initial={{ width: "0%" }}
                     animate={{ width: `${(analysisStep / analysisSteps.length) * 100}%` }}
