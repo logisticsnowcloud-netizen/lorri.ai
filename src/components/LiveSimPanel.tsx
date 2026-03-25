@@ -341,7 +341,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
         )}
       </div>
 
-      <div style={{ height: 3, background: "var(--borderSm)", overflow: "hidden" }}>
+      <div style={{ height: 3, background: "hsl(var(--border-subtle))", overflow: "hidden" }}>
         <div
           key={progressKey}
           style={{

@@ -301,7 +301,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         </div>
       </div>
 
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,var(--bg))", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,hsl(var(--background)))", pointerEvents: "none" }} />
     </section>
   );
 }
