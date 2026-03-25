@@ -281,7 +281,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
               <input value={form.phone} onChange={e => set("phone", e.target.value)} placeholder="Contact Number" style={inputStyle} />
               <select value={form.source} onChange={e => set("source", e.target.value)}
-                style={{ ...inputStyle, color: form.source ? "var(--text)" : "var(--text3)", appearance: "none", backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236a6a8a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center" }}>
+                style={{ ...inputStyle, color: form.source ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))", appearance: "none", backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236a6a8a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center" }}>
                 <option value="" disabled>How did you hear about us?</option>
                 {sources.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
