@@ -172,7 +172,7 @@ function Nav() {
           style={{
             background: "var(--navBg)",
             backdropFilter: "blur(24px)",
-            borderTop: "1px solid var(--border)",
+            borderTop: "1px solid hsl(var(--border))",
           }}
         >
           <div className="flex flex-col gap-3">
