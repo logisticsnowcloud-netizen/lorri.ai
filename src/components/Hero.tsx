@@ -85,7 +85,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background: "var(--bg)",
+        background: "hsl(var(--background))",
         marginBottom: '2%'
       }}
     >
@@ -94,7 +94,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px)",
+            "linear-gradient(hsl(var(--grid-line)) 1px,transparent 1px),linear-gradient(90deg,hsl(var(--grid-line)) 1px,transparent 1px)",
           backgroundSize: "48px 48px",
           pointerEvents: "none",
         }}
@@ -125,15 +125,15 @@ export default function Hero({ dark }: { dark: boolean }) {
             <div
               className="flex items-center gap-3"
               style={{
-                background: focused ? "var(--card2)" : "var(--purpleLt)",
-                border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`,
+                background: focused ? "hsl(var(--card))" : "hsl(var(--primary) / 0.12)",
+                border: `1.5px solid ${focused ? "#393185" : "hsl(var(--border))"}`,
                 borderRadius: 14,
                 padding: "14px 16px",
                 transition: "all .3s",
                 boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none",
               }}
             >
-              <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
+              <SearchIcon color={focused ? "#393185" : "hsl(var(--muted-foreground))"} />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -146,7 +146,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   background: "none",
                   border: "none",
                   outline: "none",
-                  color: "var(--text)",
+                  color: "hsl(var(--foreground))",
                   fontFamily: "Outfit,sans-serif",
                   fontSize: 15,
                   fontWeight: 400,
@@ -164,17 +164,17 @@ export default function Hero({ dark }: { dark: boolean }) {
                   top: "calc(100% + 8px)",
                   left: 0,
                   right: 0,
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
+                  background: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
                   borderRadius: 12,
                   zIndex: 60,
-                  boxShadow: "0 20px 60px var(--shadow)",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
                   maxHeight: 300,
                   overflowY: "auto",
                 }}
               >
-                <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
-                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
+                <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid hsl(var(--border-subtle))" }}>
+                  <span style={{ fontSize: 10, color: "hsl(var(--muted-foreground))", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
                 </div>
                 {suggestions.map((s, i) => (
                   <div
@@ -192,15 +192,15 @@ export default function Hero({ dark }: { dark: boolean }) {
                       gap: 12,
                       cursor: "pointer",
                       transition: "background .15s",
-                      borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none",
-                      color: "var(--text)",
+                      borderBottom: i < suggestions.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none",
+                      color: "hsl(var(--foreground))",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "var(--purpleLt)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(var(--primary) / 0.08)")}
                     onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                   >
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
                     <span style={{ fontSize: 14 }}>{s.name}</span>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--muted-foreground))" strokeWidth="2" strokeLinecap="round" style={{ marginLeft: "auto" }}><path d="M9 18l6-6-6-6" /></svg>
                   </div>
                 ))}
               </div>
@@ -245,9 +245,9 @@ export default function Hero({ dark }: { dark: boolean }) {
                 gap: 8,
                 padding: "11px 22px",
                 borderRadius: 10,
-                border: "1px solid var(--border)",
-                background: "var(--card)",
-                color: "var(--text)",
+                border: "1px solid hsl(var(--border))",
+                background: "hsl(var(--card))",
+                color: "hsl(var(--foreground))",
                 fontFamily: "Outfit,sans-serif",
                 fontSize: 13,
                 fontWeight: 600,
@@ -264,7 +264,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col items-center gap-4">
-          <div className="flex w-full flex-wrap items-center justify-center gap-2" style={{ padding: 5, background: "var(--card2)", border: "1px solid var(--border)", borderRadius: 14 }}>
+          <div className="flex w-full flex-wrap items-center justify-center gap-2" style={{ padding: 5, background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 14 }}>
             {TABS.map((t) => (
               <button
                 key={t}
@@ -281,7 +281,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   letterSpacing: ".03em",
                   ...(tab === t
                     ? { background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", boxShadow: "0 4px 16px rgba(57,49,133,0.35)" }
-                    : { color: "var(--text2)", background: "transparent" }),
+                    : { color: "hsl(var(--muted-foreground))", background: "transparent" }),
                 }}
               >
                 {TAB_DATA[t].icon} {t}
@@ -292,7 +292,7 @@ export default function Hero({ dark }: { dark: boolean }) {
           {!userPicked && (
             <div style={{ display: "flex", gap: 6, marginTop: -4 }}>
               {TABS.map((t) => (
-                <div key={t} style={{ height: 2, borderRadius: 1, background: tab === t ? "#393185" : "var(--border)", transition: "all .4s", width: tab === t ? 28 : 14 }} />
+                <div key={t} style={{ height: 2, borderRadius: 1, background: tab === t ? "#393185" : "hsl(var(--border))", transition: "all .4s", width: tab === t ? 28 : 14 }} />
               ))}
             </div>
           )}
@@ -301,7 +301,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         </div>
       </div>
 
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,var(--bg))", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 70, background: "linear-gradient(transparent,hsl(var(--background)))", pointerEvents: "none" }} />
     </section>
   );
 }

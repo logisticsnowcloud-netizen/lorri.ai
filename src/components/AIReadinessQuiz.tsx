@@ -115,10 +115,10 @@ function ScoreBar({ label, value, delay }: { label: string; value: number; delay
   return (
     <div style={{ textAlign: "left" }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 600, color: "var(--text2)" }}>{label}</span>
-        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, color: "var(--text)" }}>{value}</span>
+        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 600, color: "hsl(var(--muted-foreground))" }}>{label}</span>
+        <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, color: "hsl(var(--foreground))" }}>{value}</span>
       </div>
-      <div style={{ height: 6, borderRadius: 3, background: "var(--purpleLt)", overflow: "hidden" }}>
+      <div style={{ height: 6, borderRadius: 3, background: "hsl(var(--primary) / 0.12)", overflow: "hidden" }}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${value}%` }}
@@ -187,21 +187,21 @@ export default function AIReadinessQuiz() {
   };
 
   return (
-    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
       <div style={{ maxWidth: phase === "result" ? 960 : 720, margin: "0 auto", textAlign: "center", transition: "max-width 0.4s ease" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 10 }}>
           <span style={{ width: 28, height: 3, borderRadius: 2, background: "linear-gradient(90deg, #393185, #4D44A8)" }} />
-          <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#4D44A8" }}>AI Diagnostic Engine</span>
+          <span style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "hsl(var(--primary-glow))" }}>AI Diagnostic Engine</span>
         </div>
 
-        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, lineHeight: 1.15, color: "var(--text)", marginBottom: 8 }}>
+        <h2 style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, lineHeight: 1.15, color: "hsl(var(--foreground))", marginBottom: 8 }}>
           Assess Your Logistics <span style={{ background: "linear-gradient(135deg, #393185, #4D44A8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Readiness</span>
         </h2>
-        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 13, color: "var(--text3)", margin: "0 auto 20px", maxWidth: 520 }}>
+        <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 13, color: "hsl(var(--muted-foreground))", margin: "0 auto 20px", maxWidth: 520 }}>
           Answer {totalSteps} questions. Our AI benchmarks your logistics stack and generates a personalized analysis.
         </p>
 
-        <div style={{ background: "var(--card2)", border: "1px solid var(--borderSm)", borderRadius: 16, padding: "18px 16px 22px", minHeight: 200, position: "relative", overflow: "hidden" }} className="sm:px-6 sm:py-5">
+        <div style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border-subtle))", borderRadius: 16, padding: "18px 16px 22px", minHeight: 200, position: "relative", overflow: "hidden" }} className="sm:px-6 sm:py-5">
           {/* Progress bar */}
           {phase === "quiz" && (
             <div style={{ display: "flex", gap: 4, marginBottom: 24 }} className="sm:mb-8">
@@ -212,7 +212,7 @@ export default function AIReadinessQuiz() {
                     flex: 1,
                     height: 4,
                     borderRadius: 2,
-                    background: i <= step ? "linear-gradient(90deg, #393185, #1AA6DF)" : "var(--purpleLt)",
+                    background: i <= step ? "linear-gradient(90deg, #393185, #1AA6DF)" : "hsl(var(--primary) / 0.12)",
                     opacity: i <= step ? 1 : 0.4,
                     transition: "all .4s ease",
                   }}
@@ -231,7 +231,7 @@ export default function AIReadinessQuiz() {
             {/* QUIZ PHASE */}
             {phase === "quiz" && step < totalSteps && (
               <motion.div key={step} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.3 }}>
-                <h3 style={{ fontFamily: "Outfit, sans-serif", fontSize: 20, fontWeight: 700, color: "var(--text)", marginBottom: 20, textAlign: "left" }}>
+                <h3 style={{ fontFamily: "Outfit, sans-serif", fontSize: 20, fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: 20, textAlign: "left" }}>
                   {questions[step].question}
                 </h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -246,9 +246,9 @@ export default function AIReadinessQuiz() {
                         fontWeight: 500,
                         padding: "15px 12px",
                         borderRadius: 12,
-                        border: selectedOption === idx ? "2px solid #4D44A8" : "1px solid var(--borderSm)",
+                        border: selectedOption === idx ? "2px solid #4D44A8" : "1px solid hsl(var(--border-subtle))",
                         background: selectedOption === idx ? "rgba(57, 49, 133, 0.15)" : "transparent",
-                        color: "var(--text2)",
+                        color: "hsl(var(--muted-foreground))",
                         cursor: "pointer",
                         transition: "all .2s ease",
                         textAlign: "left",
@@ -263,7 +263,7 @@ export default function AIReadinessQuiz() {
                       }}
                       onMouseLeave={(e) => {
                         if (selectedOption !== idx) {
-                          e.currentTarget.style.borderColor = "var(--borderSm)";
+                          e.currentTarget.style.borderColor = "hsl(var(--border-subtle))";
                           e.currentTarget.style.background = "transparent";
                           e.currentTarget.style.transform = "translateY(0)";
                           e.currentTarget.style.boxShadow = "none";
@@ -294,7 +294,7 @@ export default function AIReadinessQuiz() {
                 >
                   🧠
                 </motion.div>
-                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 18, fontWeight: 700, color: "var(--text)", marginBottom: 20 }}>
+                <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 18, fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: 20 }}>
                   LoRRI AI analyzing your logistics network...
                 </p>
                 <div style={{ maxWidth: 320, margin: "0 auto", textAlign: "left" }}>
@@ -311,7 +311,7 @@ export default function AIReadinessQuiz() {
                         marginBottom: 10,
                         fontFamily: "Outfit, sans-serif",
                         fontSize: 13,
-                        color: analysisStep > i ? "var(--text)" : "var(--text3)",
+                        color: analysisStep > i ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
                       }}
                     >
                       <motion.span
@@ -325,7 +325,7 @@ export default function AIReadinessQuiz() {
                     </motion.div>
                   ))}
                 </div>
-                <div style={{ maxWidth: 320, margin: "16px auto 0", height: 3, borderRadius: 2, background: "var(--purpleLt)", overflow: "hidden" }}>
+                <div style={{ maxWidth: 320, margin: "16px auto 0", height: 3, borderRadius: 2, background: "hsl(var(--primary) / 0.12)", overflow: "hidden" }}>
                   <motion.div
                     initial={{ width: "0%" }}
                     animate={{ width: `${(analysisStep / analysisSteps.length) * 100}%` }}
@@ -349,7 +349,7 @@ export default function AIReadinessQuiz() {
                         {animatedScore}
                       </span>
                     </div>
-                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, fontWeight: 700, color: "var(--text)", marginBottom: 4, textAlign: "center" }}>
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: 4, textAlign: "center" }}>
                       AI Readiness Score — {result.stage}
                     </p>
                     <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, color: "#1AA6DF", fontWeight: 600, marginBottom: 16, textAlign: "center" }}>
@@ -365,7 +365,7 @@ export default function AIReadinessQuiz() {
                     </div>
 
                     {/* Powered by */}
-                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 10, color: "var(--text3)", marginTop: 14, letterSpacing: ".04em", textAlign: "center" }}>
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 10, color: "hsl(var(--muted-foreground))", marginTop: 14, letterSpacing: ".04em", textAlign: "center" }}>
                       Powered by LoRRI AI Agents: <span style={{ color: "#4D44A8", fontWeight: 600 }}>Procurement</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Optimization</span> · <span style={{ color: "#4D44A8", fontWeight: 600 }}>Intelligence</span>
                     </p>
                   </div>
@@ -373,7 +373,7 @@ export default function AIReadinessQuiz() {
                   {/* RIGHT COLUMN — Insights + Recommendations + CTA */}
                   <div className="flex flex-col justify-between" style={{ borderLeft: "none" }}>
                     {/* Divider for lg screens */}
-                    <div className="hidden lg:block absolute left-1/2 top-[15%] bottom-[15%]" style={{ width: 1, background: "var(--borderSm)" }} />
+                    <div className="hidden lg:block absolute left-1/2 top-[15%] bottom-[15%]" style={{ width: 1, background: "hsl(var(--border-subtle))" }} />
 
                     {/* Insights */}
                     <div style={{ marginBottom: 14 }}>
@@ -426,11 +426,11 @@ export default function AIReadinessQuiz() {
                             alignItems: "center",
                             padding: "7px 10px",
                             borderRadius: 8,
-                            border: "1px solid var(--borderSm)",
+                            border: "1px solid hsl(var(--border-subtle))",
                             marginBottom: 5,
                           }}
                         >
-                          <span style={{ color: "var(--text2)", fontWeight: 500 }}>→ {rec.text}</span>
+                          <span style={{ color: "hsl(var(--muted-foreground))", fontWeight: 500 }}>→ {rec.text}</span>
                           <span style={{ color: "#1AA6DF", fontWeight: 700, fontSize: 11, whiteSpace: "nowrap", marginLeft: 8 }}>{rec.saving}</span>
                         </motion.div>
                       ))}
@@ -473,9 +473,9 @@ export default function AIReadinessQuiz() {
                           fontWeight: 600,
                           padding: "10px 20px",
                           borderRadius: 10,
-                          border: "1px solid var(--borderSm)",
+                          border: "1px solid hsl(var(--border-subtle))",
                           background: "transparent",
-                          color: "var(--text2)",
+                          color: "hsl(var(--muted-foreground))",
                           cursor: "pointer",
                           transition: "all .2s ease",
                         }}
@@ -484,7 +484,7 @@ export default function AIReadinessQuiz() {
                           e.currentTarget.style.background = "rgba(57,49,133,0.05)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "var(--borderSm)";
+                          e.currentTarget.style.borderColor = "hsl(var(--border-subtle))";
                           e.currentTarget.style.background = "transparent";
                         }}
                       >

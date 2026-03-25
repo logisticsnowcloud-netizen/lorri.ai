@@ -337,7 +337,7 @@ export function ForTransporters() {
   ];
 
   return (
-    <section id="transporters" ref={ref as any} className="px-4 py-6 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+    <section id="transporters" ref={ref as any} className="px-4 py-6 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
       <div className="mx-auto max-w-[1200px]">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           {/* LEFT — Value Prop */}

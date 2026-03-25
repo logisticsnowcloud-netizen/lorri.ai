@@ -366,15 +366,15 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "var(--bg)" }}>
+    <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#393185", marginBottom: 8 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "hsl(var(--primary) / 0.12)", border: "1px solid hsl(var(--border))", color: "hsl(var(--primary-glow))", marginBottom: 8 }}>
           <Bot size={12} /> AI Impact Stories
         </div>
-        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
+        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "hsl(var(--foreground))", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
           Real Results from AI-Powered Logistics
         </h2>
-        <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 20, maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ fontSize: 15, color: "hsl(var(--muted-foreground))", marginBottom: 20, maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
           Leading manufacturers and carriers are using LoRRI's AI to reduce cost, improve efficiency, and gain real-time intelligence.
         </p>
 
@@ -420,16 +420,16 @@ export default function Testimonials() {
           <div style={{ position: "relative", minHeight: 190 }} className="sm:min-h-[170px]">
             {quotes.map((q, i) => (
               <div key={i} style={{ position: i === active ? "relative" : "absolute", top: 0, left: 0, right: 0, opacity: i === active ? 1 : 0, transform: i === active ? "translateY(0)" : "translateY(12px)", transition: "all .5s ease", pointerEvents: i === active ? "auto" : "none" }}>
-                <div style={{ padding: "18px 18px 20px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16 }} className="sm:px-7">
-                  <div style={{ color: "#393185", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
-                  <p style={{ fontSize: 14, fontWeight: 500, color: "var(--text)", lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>
+                <div style={{ padding: "18px 18px 20px", background: "hsl(var(--card))", border: "1.5px solid hsl(var(--border))", borderRadius: 16 }} className="sm:px-7">
+                  <div style={{ color: "hsl(var(--primary))", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: "hsl(var(--foreground))", lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>
                     "{q.text}"
                   </p>
                   <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
                     <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg,#393185,#1AA6DF)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: "white", fontSize: 13 }}>{q.role[0]}</div>
                     <div className="text-center sm:text-left">
-                      <div style={{ fontWeight: 700, fontSize: 14, color: "var(--text)" }}>{q.role}</div>
-                      <div style={{ fontSize: 12, color: "#54AF3A", fontWeight: 600 }}>{q.co}</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: "hsl(var(--foreground))" }}>{q.role}</div>
+                      <div style={{ fontSize: 12, color: "hsl(var(--success))", fontWeight: 600 }}>{q.co}</div>
                     </div>
                   </div>
                 </div>
@@ -438,7 +438,7 @@ export default function Testimonials() {
           </div>
           <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 12 }}>
             {quotes.map((_, i) => (
-              <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 26 : 8, height: 8, borderRadius: 4, background: i === active ? "#393185" : "var(--border)", border: "none", cursor: "pointer", transition: "all .3s", padding: 0 }} />
+              <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 26 : 8, height: 8, borderRadius: 4, background: i === active ? "hsl(var(--primary))" : "hsl(var(--border))", border: "none", cursor: "pointer", transition: "all .3s", padding: 0 }} />
             ))}
           </div>
         </div>

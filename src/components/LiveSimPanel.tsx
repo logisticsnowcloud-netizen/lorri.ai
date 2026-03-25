@@ -201,8 +201,8 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
     <div
       style={{
         width: "100%",
-        background: "var(--card)",
-        border: "1.5px solid var(--border)",
+        background: "hsl(var(--card))",
+        border: "1.5px solid hsl(var(--border))",
         borderRadius: 14,
         overflow: "hidden",
       }}
@@ -214,7 +214,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
           alignItems: "center",
           gap: 8,
           padding: "8px 14px",
-          borderBottom: "1px solid var(--borderSm)",
+          borderBottom: "1px solid hsl(var(--border-subtle))",
           background: step.type === "processing"
             ? "linear-gradient(135deg, rgba(57,49,133,0.12), rgba(26,166,223,0.06))"
             : step.type === "result"
@@ -232,7 +232,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 9,
-            color: "var(--text3)",
+            color: "hsl(var(--muted-foreground))",
             letterSpacing: ".08em",
             textTransform: "uppercase",
             marginLeft: 4,
@@ -296,7 +296,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
                   fontFamily: line.mono ? "'JetBrains Mono', monospace" : "Outfit, sans-serif",
                   fontSize: line.bold ? 13 : 12,
                   fontWeight: line.bold ? 700 : 400,
-                  color: line.color || "var(--text2)",
+                  color: line.color || "hsl(var(--muted-foreground))",
                   lineHeight: 1.5,
                 }}
               >
@@ -341,7 +341,7 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
         )}
       </div>
 
-      <div style={{ height: 3, background: "var(--borderSm)", overflow: "hidden" }}>
+      <div style={{ height: 3, background: "hsl(var(--border-subtle))", overflow: "hidden" }}>
         <div
           key={progressKey}
           style={{

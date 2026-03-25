@@ -17,7 +17,7 @@ function TopBar({ dark, setDark }: TopBarProps) {
       className="px-4 py-1.5 sm:px-6 lg:px-8"
       style={{
         background: "var(--topBar)",
-        borderBottom: "1px solid var(--border)",
+        borderBottom: "1px solid hsl(var(--border))",
       }}
     >
       <div className="mx-auto flex max-w-[1280px] flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -41,7 +41,7 @@ function TopBar({ dark, setDark }: TopBarProps) {
               gap: 6,
               padding: "7px 12px",
               borderRadius: 20,
-              border: "1px solid var(--border)",
+              border: "1px solid hsl(var(--border))",
               background: "var(--purpleLt)",
               cursor: "pointer",
               fontFamily: "Outfit,sans-serif",
@@ -109,7 +109,7 @@ function Nav() {
         zIndex: 100,
         background: "var(--navBg)",
         backdropFilter: "blur(22px)",
-        borderBottom: `1px solid ${scrolled ? "var(--border)" : "var(--borderSm)"}`,
+        borderBottom: `1px solid ${scrolled ? "hsl(var(--border))" : "hsl(var(--border-subtle))"}`,
         transition: "all .3s",
       }}
     >
@@ -154,7 +154,7 @@ function Nav() {
           className="lg:hidden"
           style={{
             background: "none",
-            border: "1px solid var(--border)",
+            border: "1px solid hsl(var(--border))",
             borderRadius: 8,
             color: "var(--text2)",
             cursor: "pointer",
@@ -172,7 +172,7 @@ function Nav() {
           style={{
             background: "var(--navBg)",
             backdropFilter: "blur(24px)",
-            borderTop: "1px solid var(--border)",
+            borderTop: "1px solid hsl(var(--border))",
           }}
         >
           <div className="flex flex-col gap-3">
