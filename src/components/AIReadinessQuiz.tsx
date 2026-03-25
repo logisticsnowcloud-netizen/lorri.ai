@@ -349,7 +349,7 @@ export default function AIReadinessQuiz() {
                         {animatedScore}
                       </span>
                     </div>
-                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, fontWeight: 700, color: "var(--text)", marginBottom: 4, textAlign: "center" }}>
+                    <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 15, fontWeight: 700, color: "hsl(var(--foreground))", marginBottom: 4, textAlign: "center" }}>
                       AI Readiness Score — {result.stage}
                     </p>
                     <p style={{ fontFamily: "Outfit, sans-serif", fontSize: 12, color: "#1AA6DF", fontWeight: 600, marginBottom: 16, textAlign: "center" }}>
