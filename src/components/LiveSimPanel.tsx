@@ -201,8 +201,8 @@ export default function LiveSimPanel({ tab }: { tab: string }) {
     <div
       style={{
         width: "100%",
-        background: "var(--card)",
-        border: "1.5px solid var(--border)",
+        background: "hsl(var(--card))",
+        border: "1.5px solid hsl(var(--border))",
         borderRadius: 14,
         overflow: "hidden",
       }}
