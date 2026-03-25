@@ -426,7 +426,7 @@ export default function AIReadinessQuiz() {
                             alignItems: "center",
                             padding: "7px 10px",
                             borderRadius: 8,
-                            border: "1px solid var(--borderSm)",
+                            border: "1px solid hsl(var(--border-subtle))",
                             marginBottom: 5,
                           }}
                         >
