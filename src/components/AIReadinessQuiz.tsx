@@ -373,7 +373,7 @@ export default function AIReadinessQuiz() {
                   {/* RIGHT COLUMN — Insights + Recommendations + CTA */}
                   <div className="flex flex-col justify-between" style={{ borderLeft: "none" }}>
                     {/* Divider for lg screens */}
-                    <div className="hidden lg:block absolute left-1/2 top-[15%] bottom-[15%]" style={{ width: 1, background: "var(--borderSm)" }} />
+                    <div className="hidden lg:block absolute left-1/2 top-[15%] bottom-[15%]" style={{ width: 1, background: "hsl(var(--border-subtle))" }} />
 
                     {/* Insights */}
                     <div style={{ marginBottom: 14 }}>
