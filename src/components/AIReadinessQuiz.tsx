@@ -263,7 +263,7 @@ export default function AIReadinessQuiz() {
                       }}
                       onMouseLeave={(e) => {
                         if (selectedOption !== idx) {
-                          e.currentTarget.style.borderColor = "var(--borderSm)";
+                          e.currentTarget.style.borderColor = "hsl(var(--border-subtle))";
                           e.currentTarget.style.background = "transparent";
                           e.currentTarget.style.transform = "translateY(0)";
                           e.currentTarget.style.boxShadow = "none";
