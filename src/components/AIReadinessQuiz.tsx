@@ -311,7 +311,7 @@ export default function AIReadinessQuiz() {
                         marginBottom: 10,
                         fontFamily: "Outfit, sans-serif",
                         fontSize: 13,
-                        color: analysisStep > i ? "var(--text)" : "var(--text3)",
+                        color: analysisStep > i ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
                       }}
                     >
                       <motion.span
