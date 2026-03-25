@@ -261,8 +261,8 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
         {sent ? (
           <div style={{ textAlign: "center", padding: "40px 0" }}>
             <div style={{ fontSize: 50, marginBottom: 14 }}>🎉</div>
-            <h3 style={{ fontSize: 22, fontWeight: 800, color: "var(--text)", marginBottom: 10 }}>Meeting Scheduled!</h3>
-            <p style={{ fontSize: 15, color: "var(--text2)", lineHeight: 1.7 }}>Our team will confirm your demo within 24 hours.</p>
+            <h3 style={{ fontSize: 22, fontWeight: 800, color: "hsl(var(--foreground))", marginBottom: 10 }}>Meeting Scheduled!</h3>
+            <p style={{ fontSize: 15, color: "hsl(var(--muted-foreground))", lineHeight: 1.7 }}>Our team will confirm your demo within 24 hours.</p>
           </div>
         ) : (
           <>
