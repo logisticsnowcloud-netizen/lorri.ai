@@ -420,16 +420,16 @@ export default function Testimonials() {
           <div style={{ position: "relative", minHeight: 190 }} className="sm:min-h-[170px]">
             {quotes.map((q, i) => (
               <div key={i} style={{ position: i === active ? "relative" : "absolute", top: 0, left: 0, right: 0, opacity: i === active ? 1 : 0, transform: i === active ? "translateY(0)" : "translateY(12px)", transition: "all .5s ease", pointerEvents: i === active ? "auto" : "none" }}>
-                <div style={{ padding: "18px 18px 20px", background: "var(--card)", border: "1.5px solid var(--border)", borderRadius: 16 }} className="sm:px-7">
-                  <div style={{ color: "#393185", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
-                  <p style={{ fontSize: 14, fontWeight: 500, color: "var(--text)", lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>
+                <div style={{ padding: "18px 18px 20px", background: "hsl(var(--card))", border: "1.5px solid hsl(var(--border))", borderRadius: 16 }} className="sm:px-7">
+                  <div style={{ color: "hsl(var(--primary))", marginBottom: 14, opacity: 0.4, display: "flex", justifyContent: "flex-start" }}><Quote /></div>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: "hsl(var(--foreground))", lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>
                     "{q.text}"
                   </p>
                   <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
                     <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg,#393185,#1AA6DF)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, color: "white", fontSize: 13 }}>{q.role[0]}</div>
                     <div className="text-center sm:text-left">
-                      <div style={{ fontWeight: 700, fontSize: 14, color: "var(--text)" }}>{q.role}</div>
-                      <div style={{ fontSize: 12, color: "#54AF3A", fontWeight: 600 }}>{q.co}</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: "hsl(var(--foreground))" }}>{q.role}</div>
+                      <div style={{ fontSize: 12, color: "hsl(var(--success))", fontWeight: 600 }}>{q.co}</div>
                     </div>
                   </div>
                 </div>
