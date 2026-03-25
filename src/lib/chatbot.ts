@@ -10,7 +10,7 @@ const BOT_KNOWLEDGE: Record<string, string> = {
   "what does lorri do": "LoRRI helps teams benchmark freight rates, discover reliable carriers, automate procurement, and manage shipments end to end.",
   products: "LogisticsNow offers LoRRI for freight intelligence, benchmarking, carrier discovery, procurement workflows, and transport management support.",
   savings: "Customers typically unlock meaningful cost savings through better benchmarking, smarter procurement, and improved lane-level visibility.",
-  carriers: "LoRRI connects businesses with a large network of verified carriers and transport partners, helping improve reliability and service quality.",
+  carriers: "LoRRI connects businesses with a large network of 120+ verified carriers and 2300+ transport partners, helping improve reliability and service quality.",
   routes: "The platform tracks freight intelligence across thousands of routes, helping teams compare rates and make better lane decisions.",
   procurement: "LoRRI streamlines freight procurement with automated tendering, carrier discovery, and data-backed decision support.",
   tms: "LoRRI's TMS capabilities support shipment visibility, coordination, and operational control across the transport lifecycle.",

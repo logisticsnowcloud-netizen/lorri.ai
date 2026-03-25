@@ -403,7 +403,7 @@ export default function Testimonials() {
                 {m.value.startsWith("$") ? (
                   <><span>$</span><AnimatedNumber value={21} suffix="M+" /></>
                 ) : m.value.includes("2,300") ? (
-                  <AnimatedNumber value={2200} suffix="+" />
+                  <AnimatedNumber value={2300} suffix="+" />
                 ) : (
                   <AnimatedNumber value={80000} suffix="+" />
                 )}

@@ -62,7 +62,7 @@ const footerColumns = [
 ];
 
 const trustStats = [
-  { value: 2200, suffix: "+", label: "Verified Carriers" },
+  { value: 2300, suffix: "+", label: "Verified Carriers" },
   { value: 80000, suffix: "+", label: "Routes Covered" },
   { value: 21, suffix: "M+", label: "Savings Delivered" },
 ];

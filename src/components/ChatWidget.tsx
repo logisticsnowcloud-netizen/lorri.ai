@@ -19,7 +19,7 @@ interface Message {
 
 const initialMessage: Message = {
   role: "bot",
-  text: "Hi — I'm the LogisticsNow assistant. Ask about LoRRI, freight intelligence, pricing, carrier discovery, or booking a demo.",
+  text: "Hi — I'm the LoRRI Assit. Ask about LoRRI, freight intelligence, pricing, carrier discovery, or booking a demo.",
   time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
   intent: "general",
 };
@@ -234,7 +234,7 @@ const ChatWidget = () => {
             </ScrollArea>
 
             <div className="border-t border-border-subtle bg-background/50 px-3 py-3 backdrop-blur">
-              <div className="mb-3 grid grid-cols-2 gap-2">
+              {/* <div className="mb-3 grid grid-cols-2 gap-2">
                 {QUICK_REPLY_CATEGORIES.map((category) => (
                   <Button
                     key={category.label}
@@ -255,7 +255,7 @@ const ChatWidget = () => {
                     </span>
                   </Button>
                 ))}
-              </div>
+              </div> */}
 
               {messages.length <= 2 && !isLoading && (
                 <div className="mb-3 flex flex-wrap gap-2">
