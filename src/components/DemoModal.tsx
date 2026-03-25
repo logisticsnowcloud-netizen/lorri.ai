@@ -255,7 +255,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
         onClick={e => e.stopPropagation()}>
         <button onClick={onClose} style={{
           position: "absolute", top: 16, right: 16, background: "none", border: "none",
-          color: "var(--text3)", fontSize: 22, cursor: "pointer", lineHeight: 1,
+          color: "hsl(var(--muted-foreground))", fontSize: 22, cursor: "pointer", lineHeight: 1,
         }}>✕</button>
 
         {sent ? (
