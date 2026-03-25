@@ -368,13 +368,13 @@ export default function Testimonials() {
   return (
     <section className="px-4 py-3 sm:px-6 lg:px-8" style={{ background: "hsl(var(--background))" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "var(--purpleLt)", border: "1px solid var(--border)", color: "#393185", marginBottom: 8 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 20, fontSize: 10, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", background: "hsl(var(--primary) / 0.12)", border: "1px solid hsl(var(--border))", color: "hsl(var(--primary-glow))", marginBottom: 8 }}>
           <Bot size={12} /> AI Impact Stories
         </div>
-        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text)", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
+        <h2 style={{ fontSize: "1.6rem", fontWeight: 900, color: "hsl(var(--foreground))", letterSpacing: "-0.03em", marginBottom: 6 }} className="text-[1.4rem] sm:text-[1.5rem] lg:text-[1.6rem]">
           Real Results from AI-Powered Logistics
         </h2>
-        <p style={{ fontSize: 15, color: "var(--text2)", marginBottom: 20, maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ fontSize: 15, color: "hsl(var(--muted-foreground))", marginBottom: 20, maxWidth: 640, marginLeft: "auto", marginRight: "auto" }}>
           Leading manufacturers and carriers are using LoRRI's AI to reduce cost, improve efficiency, and gain real-time intelligence.
         </p>
 
