@@ -281,7 +281,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                   letterSpacing: ".03em",
                   ...(tab === t
                     ? { background: "linear-gradient(135deg,#393185,#4D44A8)", color: "#fff", boxShadow: "0 4px 16px rgba(57,49,133,0.35)" }
-                    : { color: "var(--text2)", background: "transparent" }),
+                    : { color: "hsl(var(--muted-foreground))", background: "transparent" }),
                 }}
               >
                 {TAB_DATA[t].icon} {t}
