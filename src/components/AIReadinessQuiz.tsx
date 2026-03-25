@@ -430,7 +430,7 @@ export default function AIReadinessQuiz() {
                             marginBottom: 5,
                           }}
                         >
-                          <span style={{ color: "var(--text2)", fontWeight: 500 }}>→ {rec.text}</span>
+                          <span style={{ color: "hsl(var(--muted-foreground))", fontWeight: 500 }}>→ {rec.text}</span>
                           <span style={{ color: "#1AA6DF", fontWeight: 700, fontSize: 11, whiteSpace: "nowrap", marginLeft: 8 }}>{rec.saving}</span>
                         </motion.div>
                       ))}
