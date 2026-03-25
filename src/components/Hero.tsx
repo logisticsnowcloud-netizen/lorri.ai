@@ -195,7 +195,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                       borderBottom: i < suggestions.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none",
                       color: "hsl(var(--foreground))",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "var(--purpleLt)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(var(--primary) / 0.08)")}
                     onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                   >
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1AA6DF" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="10" r="3" /><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z" /></svg>
