@@ -264,7 +264,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col items-center gap-4">
-          <div className="flex w-full flex-wrap items-center justify-center gap-2" style={{ padding: 5, background: "var(--card2)", border: "1px solid var(--border)", borderRadius: 14 }}>
+          <div className="flex w-full flex-wrap items-center justify-center gap-2" style={{ padding: 5, background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 14 }}>
             {TABS.map((t) => (
               <button
                 key={t}
