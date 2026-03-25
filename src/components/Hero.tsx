@@ -133,7 +133,7 @@ export default function Hero({ dark }: { dark: boolean }) {
                 boxShadow: focused ? "0 0 0 4px rgba(57,49,133,0.1),0 12px 40px rgba(57,49,133,0.18)" : "none",
               }}
             >
-              <SearchIcon color={focused ? "#393185" : "var(--text3)"} />
+              <SearchIcon color={focused ? "#393185" : "hsl(var(--muted-foreground))"} />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
