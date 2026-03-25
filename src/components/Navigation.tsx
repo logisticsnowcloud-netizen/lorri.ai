@@ -109,7 +109,7 @@ function Nav() {
         zIndex: 100,
         background: "var(--navBg)",
         backdropFilter: "blur(22px)",
-        borderBottom: `1px solid ${scrolled ? "var(--border)" : "var(--borderSm)"}`,
+        borderBottom: `1px solid ${scrolled ? "hsl(var(--border))" : "hsl(var(--border-subtle))"}`,
         transition: "all .3s",
       }}
     >
