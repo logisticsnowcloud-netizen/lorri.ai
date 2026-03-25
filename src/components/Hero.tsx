@@ -125,8 +125,8 @@ export default function Hero({ dark }: { dark: boolean }) {
             <div
               className="flex items-center gap-3"
               style={{
-                background: focused ? "var(--card2)" : "var(--purpleLt)",
-                border: `1.5px solid ${focused ? "#393185" : "var(--border)"}`,
+                background: focused ? "hsl(var(--card))" : "hsl(var(--primary) / 0.12)",
+                border: `1.5px solid ${focused ? "#393185" : "hsl(var(--border))"}`,
                 borderRadius: 14,
                 padding: "14px 16px",
                 transition: "all .3s",
