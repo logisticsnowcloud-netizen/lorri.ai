@@ -41,7 +41,7 @@ function TopBar({ dark, setDark }: TopBarProps) {
               gap: 6,
               padding: "7px 12px",
               borderRadius: 20,
-              border: "1px solid var(--border)",
+              border: "1px solid hsl(var(--border))",
               background: "var(--purpleLt)",
               cursor: "pointer",
               fontFamily: "Outfit,sans-serif",
