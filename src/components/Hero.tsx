@@ -192,8 +192,8 @@ export default function Hero({ dark }: { dark: boolean }) {
                       gap: 12,
                       cursor: "pointer",
                       transition: "background .15s",
-                      borderBottom: i < suggestions.length - 1 ? "1px solid var(--borderSm)" : "none",
-                      color: "var(--text)",
+                      borderBottom: i < suggestions.length - 1 ? "1px solid hsl(var(--border-subtle))" : "none",
+                      color: "hsl(var(--foreground))",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.background = "var(--purpleLt)")}
                     onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
