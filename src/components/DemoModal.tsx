@@ -317,8 +317,8 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                   onClick={() => setCalMenuOpen(prev => !prev)}
                   disabled={loading}
                   style={{
-                    width: "100%", padding: "14px 20px", background: "transparent", color: "var(--text2)",
-                    border: "1px solid var(--border)", borderRadius: 8, fontFamily: "Outfit,sans-serif",
+                    width: "100%", padding: "14px 20px", background: "transparent", color: "hsl(var(--muted-foreground))",
+                    border: "1px solid hsl(var(--border))", borderRadius: 8, fontFamily: "Outfit,sans-serif",
                     fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: ".05em",
                     textTransform: "uppercase" as const, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
                   }}>📅 ADD TO CALENDAR</button>
