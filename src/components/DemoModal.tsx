@@ -300,7 +300,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
             <label style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 22, cursor: "pointer" }}>
               <input type="checkbox" checked={form.updates} onChange={e => set("updates", e.target.checked)}
                 style={{ width: 16, height: 16, accentColor: "#393185" }} />
-              <span style={{ fontSize: 13, color: "var(--text3)" }}>I would like to receive updates on latest modules and news from LoRRI.</span>
+              <span style={{ fontSize: 13, color: "hsl(var(--muted-foreground))" }}>I would like to receive updates on latest modules and news from LoRRI.</span>
             </label>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
