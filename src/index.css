@@ -108,13 +108,11 @@ body.dark {
   --text3: #6a6a8a;
   --card2: rgba(20, 18, 48, 0.85);
   --purpleLt: rgba(57, 49, 133, 0.12);
-  --border: rgba(57, 49, 133, 0.35);
   --borderSm: rgba(57, 49, 133, 0.15);
   --shadow: rgba(0, 0, 0, 0.5);
   --navBg: rgba(10, 10, 26, 0.95);
   --topBar: #060612;
   --blue: #1AA6DF;
-  --card: rgba(18, 16, 42, 0.9);
 }
 
 body.dark .nav-logo {
