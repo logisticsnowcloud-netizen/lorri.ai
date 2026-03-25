@@ -257,7 +257,7 @@ body.light {
   transform: scale(1.04) translateY(-1px);
   border-color: rgba(57,49,133,0.5) !important;
   box-shadow: 0 4px 20px rgba(57,49,133,0.15);
-  background: var(--purpleLt) !important;
+  background: hsl(var(--primary) / 0.08) !important;
 }
 .hero-btn-secondary:active {
   transform: scale(0.97);
