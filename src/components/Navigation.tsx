@@ -154,7 +154,7 @@ function Nav() {
           className="lg:hidden"
           style={{
             background: "none",
-            border: "1px solid var(--border)",
+            border: "1px solid hsl(var(--border))",
             borderRadius: 8,
             color: "var(--text2)",
             cursor: "pointer",
