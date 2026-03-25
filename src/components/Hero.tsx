@@ -85,7 +85,7 @@ export default function Hero({ dark }: { dark: boolean }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background: "var(--bg)",
+        background: "hsl(var(--background))",
         marginBottom: '2%'
       }}
     >
