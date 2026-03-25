@@ -173,8 +173,8 @@ export default function Hero({ dark }: { dark: boolean }) {
                   overflowY: "auto",
                 }}
               >
-                <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid var(--borderSm)" }}>
-                  <span style={{ fontSize: 10, color: "var(--text3)", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
+                <div style={{ padding: "8px 18px 6px", borderBottom: "1px solid hsl(var(--border-subtle))" }}>
+                  <span style={{ fontSize: 10, color: "hsl(var(--muted-foreground))", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>Suggestions</span>
                 </div>
                 {suggestions.map((s, i) => (
                   <div
