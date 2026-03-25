@@ -292,7 +292,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
                 <input type="date" value={form.date} onChange={e => set("date", e.target.value)} min={getDefaultDate()} style={inputStyle} />
               </div>
               <div>
-                <label style={{ fontSize: 11, color: "var(--text3)", marginBottom: 4, display: "block" }}>Time</label>
+                <label style={{ fontSize: 11, color: "hsl(var(--muted-foreground))", marginBottom: 4, display: "block" }}>Time</label>
                 <input type="time" value={form.time} onChange={e => set("time", e.target.value)} style={inputStyle} />
               </div>
             </div>
